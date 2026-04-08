@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AkariLab — 灯す、整える、役立つ</title>
+  <meta name="description" content="現場から生まれたプロダクトを作っています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-card: #1a1a1a;
+      --bg-card-hover: #222;
+      --text: #e8e4df;
+      --text-dim: #8a8580;
+      --accent-moyalog: #2D6B5E;
+      --accent-kirokuru: #4A6FA5;
+      --accent-repimemo: #8B5E3C;
+      --border: rgba(255,255,255,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(45,107,94,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(74,111,165,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 90%, rgba(139,94,60,0.05) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .logo {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+
+    .logo span {
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    .hero .tagline {
+      font-size: 1rem;
+      color: var(--text-dim);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero .description {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      line-height: 2;
+    }
+
+    /* ===== Products ===== */
+    .products {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+    }
+
+    .product-card.moyalog::before { background: var(--accent-moyalog); }
+    .product-card.kirokuru::before { background: var(--accent-kirokuru); }
+    .product-card.repimemo::before { background: var(--accent-repimemo); }
+
+    .product-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .moyalog .product-icon { background: rgba(45,107,94,0.2); }
+    .kirokuru .product-icon { background: rgba(74,111,165,0.2); }
+    .repimemo .product-icon { background: rgba(139,94,60,0.2); }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info h3 {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .product-info .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 0.8rem;
+    }
+
+    .product-info p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .product-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-top: 0.8rem;
+      font-weight: 500;
+    }
+
+    .moyalog .product-tag {
+      background: rgba(45,107,94,0.2);
+      color: #5db8a3;
+    }
+
+    .kirokuru .product-tag {
+      background: rgba(74,111,165,0.2);
+      color: #7ba3d4;
+    }
+
+    .repimemo .product-tag {
+      background: rgba(139,94,60,0.2);
+      color: #c49a6c;
+    }
+
+    .arrow {
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      align-self: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* ===== About ===== */
+    .about {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .about h2 {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .about p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .logo { font-size: 2rem; }
+      .product-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+      .arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1 class="logo">Akari<span>Lab</span></h1>
+    <p class="tagline">灯す、整える、役立つ</p>
+    <p class="description">
+      現場で感じた「あったらいいのに」を<br>
+      小さく作って、静かに届ける。
+    </p>
+  </div>
+
+  <!-- Products -->
+  <div class="products">
+    <p class="section-title">Products</p>
+
+    <!-- もやログ -->
+    <a href="https://makokoid-eng.github.io/moyalog-site/" class="product-card moyalog">
+      <div class="product-icon">🌿</div>
+      <div class="product-info">
+        <h3>もやログ</h3>
+        <p class="subtitle">気持ちをそのまま置いていい場所</p>
+        <p>
+          タップ1回。3秒。今の気分を置いていくだけのLINE Bot。
+          理由は聞かない。評価もしない。
+          続けていると、自分のパターンが見えてくる。
+        </p>
+        <span class="product-tag">LINE Bot ・ 個人向け ・ 公開中</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <!-- キロクル -->
+    <div class="product-card kirokuru">
+      <div class="product-icon">📋</div>
+      <div class="product-info">
+        <h3>キロクル</h3>
+        <p class="subtitle">店舗運営をLINEでシンプルに</p>
+        <p>
+          飲食店向けの店舗運営支援LINE Bot。
+          監査チェック・マニュアル検索・トラブル診断・多言語翻訳。
+          現場スタッフが日常的に使える実務ツール。
+        </p>
+        <span class="product-tag">LINE Bot ・ 法人向け ・ 社内運用中</span>
+      </div>
+    </div>
+
+    <!-- リピメモ -->
+    <div class="product-card repimemo">
+      <div class="product-icon">💬</div>
+      <div class="product-info">
+        <h3>リピメモ</h3>
+        <p class="subtitle">お客さまとの会話を、接客の力に</p>
+        <p>
+          接客メモを記録し、お客さまの文体を学習。
+          次の接客メッセージの下書きを自動生成するLINE Bot。
+          リピーターとの関係を深める接客支援ツール。
+        </p>
+        <span class="product-tag">LINE Bot ・ 店舗向け ・ 開発中</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="about">
+    <h2>AkariLabについて</h2>
+    <p>
+      AkariLabは、現場で働く人たちの「困った」から生まれたプロダクトを作っています。
+    </p>
+    <p>
+      大きなシステムではなく、LINEの中で完結する小さなツール。
+      使う人が意識しなくても、そこにあるだけで少し楽になる。
+      そういうものを、ひとつずつ。
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 AkariLab</p>
+  </footer>
+
+</body>
+</html>
