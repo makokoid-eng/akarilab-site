@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AkariLab — 灯す、整える、役立つ</title>
-  <meta name="description" content="AkariLabは、現場の「困った」から生まれたプロダクトを作っています。LINEの中で完結する小さなツール。">
+  <meta name="description" content="AkariLabは、現場の「困った」から生まれたプロダクトを作っています。LINEの中で完結する小さなツール。業務改善コンサルもココナラで受付中。">
   <meta property="og:title" content="AkariLab — 灯す、整える、役立つ">
   <meta property="og:description" content="現場で感じた「あったらいいのに」を、小さく作って、静かに届ける。">
   <meta property="og:type" content="website">
@@ -103,6 +103,95 @@
       font-size: 14px;
     }
 
+    /* Services（業務改善コンサル） */
+    .services {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .services h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .services .lead {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-orange);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .service-card .price {
+      font-size: 13px;
+      color: var(--accent-orange);
+      margin-bottom: 16px;
+    }
+    .service-card .block-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 4px 0;
+    }
+    .service-card ul li {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.9;
+      padding-left: 16px;
+      position: relative;
+    }
+    .service-card ul li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+    .service-card .note {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-top: 8px;
+    }
+    .service-card .cta-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .service-card .cta-primary {
+      display: inline-block;
+      background: var(--accent-orange);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .service-card .cta-primary:hover { opacity: 0.85; }
+    .service-card .cta-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      align-self: center;
+    }
+
     /* About */
     .about {
       max-width: 720px;
@@ -173,12 +262,12 @@
           算数・数学が苦手な子のためのAI家庭教師LINE Bot。<br>
           つまずきに自然と立ち戻り、「できた！」を積み重ねる。
         </p>
-        <span class="meta">LINE Bot ・ 小中学生向け ・ 開発中</span>
+        <span class="meta">LINE Bot ・ 小中学生向け ・ β版モニター募集中</span>
         <span class="arrow">→</span>
       </a>
 
       <!-- もやログ -->
-      <a href="https://makokoid-eng.github.io/moyalog-site/" class="product-card green">
+      <a href="https://lin.ee/q1k7v8F" class="product-card green" target="_blank" rel="noopener noreferrer">
         <div class="emoji">🌿</div>
         <h3>もやログ</h3>
         <p class="desc">
@@ -187,9 +276,22 @@
           理由は聞かない。評価もしない。<br>
           続けていると、自分のパターンが見えてくる。
         </p>
-        <span class="meta">LINE Bot ・ 個人向け ・ 公開中</span>
+        <span class="meta">LINE Bot ・ 個人向け ・ 公開中（友だち追加可）</span>
         <span class="arrow">→</span>
       </a>
+
+      <!-- りぴメモ -->
+      <div class="product-card brown">
+        <div class="emoji">💬</div>
+        <h3>りぴメモ</h3>
+        <p class="desc">
+          お客さまとの会話を、接客の力に。<br>
+          接客メモを記録し、お客さまの文体を学習。<br>
+          次の接客メッセージの下書きを自動生成するLINE Bot。<br>
+          リピーターとの関係を深める接客支援ツール。
+        </p>
+        <span class="meta">LINE Bot ・ 接客スタッフ／店舗向け ・ 開発中</span>
+      </div>
 
       <!-- 店舗運営支援Bot -->
       <div class="product-card blue">
@@ -204,19 +306,63 @@
         <span class="meta">LINE Bot ・ 法人向け ・ 社内運用中</span>
       </div>
 
-      <!-- リピメモ -->
-      <div class="product-card brown">
-        <div class="emoji">💬</div>
-        <h3>リピメモ</h3>
-        <p class="desc">
-          お客さまとの会話を、接客の力に。<br>
-          接客メモを記録し、お客さまの文体を学習。<br>
-          次の接客メッセージの下書きを自動生成するLINE Bot。<br>
-          リピーターとの関係を深める接客支援ツール。
-        </p>
-        <span class="meta">LINE Bot ・ 店舗向け ・ 開発中</span>
-      </div>
+    </div>
+  </div>
 
+  <div class="services">
+    <h2>Services</h2>
+    <p class="lead">
+      AkariLabで作っているLINE Botの設計ノウハウを、業務改善の相談として個別にお受けします。<br>
+      「うちの店舗・会社の業務はLINE Botで楽になるのか？」を、現役の店長／エリアマネージャーかつ開発者の視点で切り分けます。
+    </p>
+
+    <div class="service-card">
+      <h3>業務改善LINE Bot 30分相談</h3>
+      <p class="price">5,000円 / オンライン30分 ・ ココナラ経由</p>
+
+      <p class="block-title">30分で持ち帰れること</p>
+      <ul>
+        <li>自社のどの業務がLINE Botで効率化できるか</li>
+        <li>「やった方がいいこと」と「やらない方がいいこと」の優先順位</li>
+        <li>A4 1〜2枚の相談メモを当日中に送付（社内提案にそのまま使える形）</li>
+      </ul>
+
+      <p class="block-title">こういう方に向いています</p>
+      <ul>
+        <li>LINEで連絡はできているが、シフト・集計・報告がまだ手作業で残っている</li>
+        <li>LINE Botを検討しているが、何から手を付ければよいかわからない</li>
+        <li>すでにBotはあるが、作りっぱなしで運用が回っていない</li>
+        <li>外食・小売・サービス業の現場担当者・経営者・業務改善担当者</li>
+      </ul>
+
+      <p class="block-title">運用開始後のランニングコスト目安</p>
+      <ul>
+        <li>単純な業務Bot（チェック・報告・通知のみ）：月1,000〜3,000円程度</li>
+        <li>AI応答を組み込む業務Bot：月3,000〜15,000円程度</li>
+      </ul>
+      <p class="note">
+        内訳はLINE Messaging API、Cloud Run、Firestore、AI API、ドメイン費。<br>
+        「毎月いくらで運用が続くか」まで含めて、相談メモに概算で記載します。
+      </p>
+
+      <p class="block-title">進め方</p>
+      <ul>
+        <li>ご購入 → ヒアリングシート送付（24時間以内）</li>
+        <li>シート確認後に日程調整 → オンライン30分相談（録画なし）</li>
+        <li>当日中にA4 1〜2枚の相談メモを送付</li>
+      </ul>
+
+      <p class="block-title">このサービスで扱わないこと</p>
+      <ul>
+        <li>個別Botの実装（別途お見積もり：目安8〜15万円／2週間〜）</li>
+        <li>LINE公式アカウントのマーケティング運用</li>
+        <li>NDA案件の詳細設計</li>
+      </ul>
+
+      <div class="cta-row">
+        <a href="https://coconala.com/services/4214161" class="cta-primary" target="_blank" rel="noopener noreferrer">ココナラで詳細を見る →</a>
+        <span class="cta-sub">決済・連絡はすべてココナラ経由</span>
+      </div>
     </div>
   </div>
 
@@ -230,13 +376,17 @@
       使う人が意識しなくても、そこにあるだけで少し楽になる。<br>
       そういうものを、ひとつずつ。
     </p>
+    <p style="margin-top: 16px;">
+      作っているのは、外食チェーンで21年現場に立ち続けている店長／エリアマネージャーです。<br>
+      机上のシステムではなく、「現場で本当に使われるもの」だけを残す——その姿勢で、プロダクトもコンサルもやっています。
+    </p>
   </div>
 
   <footer>
     <div class="links">
       <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
       <a href="hidamari.html">ひだまり</a>
-      <a href="https://makokoid-eng.github.io/moyalog-site/">もやログ</a>
+      <a href="https://lin.ee/q1k7v8F">もやログ</a>
     </div>
     <div class="links" style="margin-bottom: 8px;">
       <a href="terms-of-service.html">利用規約</a>
