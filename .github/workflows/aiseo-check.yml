@@ -1,0 +1,278 @@
+# AISEO Check (Phase 1)
+#
+# 設計正本: docs/aiseo/phase_1_design.md 「CI（aiseo-check.yml）方針」
+#
+# Phase 1 の検査は「fail で止める」検査と「warning（ログのみ）」検査を
+# 明確に分離する。Phase 2 以降で warning 群は段階的に fail へ昇格する。
+#
+# Phase 2 以降で fail に昇格する予定:
+#   - JSON-LD 検証（Phase 2 から fail）
+#   - og:image / og:type / Twitter Cards / canonical / meta description / favicon（Phase 2 から、新規ページに対して fail）
+#   - 画像 width / height 属性（Phase 4 から fail）
+
+name: AISEO Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  aiseo-check:
+    name: AISEO Check (Phase 1)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        # html5validator: HTML5 バリデーション（fail 系）
+        # beautifulsoup4: 画像 alt / width-height / meta 検査用パーサ（fail + warning）
+        # pyld: JSON-LD 検証用（Phase 1 は warning、Phase 2 以降 fail）。
+        #       Phase 1 では検査対象がゼロでもインストールしておく。
+        run: |
+          python -m pip install --upgrade pip
+          pip install html5validator beautifulsoup4 pyld
+
+      # ============================================================
+      # FAIL 系検査（Phase 1 から fail で止める）
+      # ============================================================
+
+      - name: "[fail] build_pages.py --check (partial include 整合)"
+        # 並列エージェントBが scripts/build_pages.py を作成中。
+        # --check で現状ファイルが build 結果と一致しなければ non-zero exit。
+        run: python scripts/build_pages.py --check
+
+      - name: "[fail] HTML5 validation (html5validator)"
+        # 既存6ページ＋将来の新規ページすべてを対象に HTML5 構文を検査。
+        # assets/partials/ は単体 HTML 素片（<head> や <footer> の中身のみ）で
+        # 完全な HTML5 文書ではないため検査対象から除外。docs/ も同様。
+        run: |
+          html5validator \
+            --root . \
+            --match "*.html" \
+            --ignore-re "Attribute .* not allowed on element" \
+            --blacklist assets docs scripts .github \
+            --show-warnings
+
+      - name: "[fail] Internal link check (lychee, --offline)"
+        # 外部 URL はレート制限のため Phase 1 では除外。
+        # --offline で外部解決を完全に止め、内部リンクのみ検証する。
+        # assets/partials/ は HTML 素片で fragment-only リンクや placeholder を持つため除外。
+        # docs/ scripts/ も検査対象外。
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --offline
+            --include-fragments
+            --exclude-mail
+            --exclude-path
+            assets/partials/
+            --exclude-path
+            docs/
+            --exclude-path
+            scripts/
+            './**/*.html'
+          fail: true
+
+      - name: "[fail] Image alt attribute check"
+        # <img> 要素を全件走査し、alt 属性なしを fail。
+        # decorative（aria-hidden="true"）は除外。
+        run: python scripts/aiseo_check_alt.py
+
+      - name: "[fail] sitemap.xml ↔ 実ファイル整合"
+        # sitemap.xml に列挙された URL と repo 内の実ファイル（index.html を
+        # 持つディレクトリも含む）の双方向突合。
+        run: python scripts/aiseo_check_sitemap.py
+
+      # ============================================================
+      # WARNING 系検査（Phase 1 はログのみ、CI を fail させない）
+      # Phase 2 以降で fail に昇格する。continue-on-error: true で
+      # ジョブ全体は緑のまま、結果は GitHub Actions のステップログに残る。
+      # ============================================================
+
+      - name: "[warn] JSON-LD validation (Phase 2 で fail 昇格予定)"
+        # <script type="application/ld+json"> が存在する場合のみ検査。
+        # Phase 1 時点では既存6ページに JSON-LD は無いため検査対象ゼロ想定。
+        # pyld で抽出 → JSON 構文検証 → @id 参照先存在チェック。
+        continue-on-error: true
+        run: |
+          python <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          from bs4 import BeautifulSoup
+          from pyld import jsonld  # noqa: F401 (Phase 2 以降で展開検査に使用)
+
+          REPO_ROOT = Path(".").resolve()
+          EXCLUDED_TOP = {"assets", "docs", "scripts", ".github", ".git", "node_modules"}
+
+          html_files = [
+              p for p in REPO_ROOT.rglob("*.html")
+              if not any(part in EXCLUDED_TOP for part in p.relative_to(REPO_ROOT).parts[:-1])
+          ]
+
+          collected_ids: set[str] = set()
+          referenced_ids: set[str] = set()
+          warnings: list[str] = []
+
+          def walk(node, ids_out, refs_out):
+              if isinstance(node, dict):
+                  if "@id" in node and isinstance(node["@id"], str):
+                      ids_out.add(node["@id"])
+                  for k, v in node.items():
+                      if k == "@id":
+                          continue
+                      if isinstance(v, str) and v.startswith(("http://", "https://", "#")):
+                          # @id 以外の文字列値のうち URL/フラグメント参照を「参照」とみなす
+                          # （厳密には @id 専用フィールドのみ拾うべきだが Phase 1 は緩めに）
+                          if k in {"sameAs", "url", "mainEntityOfPage", "isBasedOn", "about"}:
+                              refs_out.add(v)
+                  for v in node.values():
+                      walk(v, ids_out, refs_out)
+              elif isinstance(node, list):
+                  for item in node:
+                      walk(item, ids_out, refs_out)
+
+          target_count = 0
+          for path in html_files:
+              soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+              for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+                  target_count += 1
+                  raw = script.string or ""
+                  try:
+                      data = json.loads(raw)
+                  except json.JSONDecodeError as e:
+                      warnings.append(f"[JSON-LD] {path}: 構文エラー {e}")
+                      continue
+                  walk(data, collected_ids, referenced_ids)
+
+          dangling = [r for r in referenced_ids if r.startswith("#") and r[1:] not in {i.split("#",1)[-1] for i in collected_ids}]
+          if dangling:
+              for d in dangling:
+                  warnings.append(f"[JSON-LD] dangling @id 参照: {d}")
+
+          if target_count == 0:
+              print("JSON-LD: 検査対象ゼロ（Phase 1 想定どおり）")
+          else:
+              print(f"JSON-LD: 検査対象 {target_count} ブロック")
+
+          if warnings:
+              print("::group::JSON-LD warnings")
+              for w in warnings:
+                  print(f"::warning::{w}")
+              print("::endgroup::")
+              # Phase 1 は warning 扱い：exit 0 で抜ける
+              sys.exit(0)
+          else:
+              print("JSON-LD: warning なし")
+          PY
+
+      - name: "[warn] Image width/height 属性 (Phase 4 で fail 昇格予定)"
+        # 既存6ページは width/height 未設定の可能性が高いため Phase 1 は warning。
+        # Phase 4（LP 画像追加）で fail に昇格する。
+        continue-on-error: true
+        run: |
+          python <<'PY'
+          import sys
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+
+          REPO_ROOT = Path(".").resolve()
+          EXCLUDED_TOP = {"assets", "docs", "scripts", ".github", ".git", "node_modules"}
+
+          html_files = [
+              p for p in REPO_ROOT.rglob("*.html")
+              if not any(part in EXCLUDED_TOP for part in p.relative_to(REPO_ROOT).parts[:-1])
+          ]
+
+          missing: list[str] = []
+          for path in html_files:
+              soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+              for img in soup.find_all("img"):
+                  if img.get("aria-hidden") == "true":
+                      continue
+                  if not img.get("width") or not img.get("height"):
+                      src = img.get("src", "(no src)")
+                      missing.append(f"{path}: <img src=\"{src}\"> に width/height 未設定")
+
+          if missing:
+              print("::group::image width/height warnings")
+              for m in missing:
+                  print(f"::warning::{m}")
+              print("::endgroup::")
+              print(f"width/height 未設定: {len(missing)} 件（Phase 1 は warning）")
+          else:
+              print("width/height: 全 <img> に設定済み")
+          sys.exit(0)
+          PY
+
+      - name: "[warn] og/twitter/canonical/meta description/favicon (Phase 2 で新規ページは fail 昇格予定)"
+        # 既存ページの未設定は warning。Phase 2 以降の新規ページについては
+        # 各 Phase の CI 拡張で fail に昇格する（本ワークフローは Phase 1 範囲）。
+        continue-on-error: true
+        run: |
+          python <<'PY'
+          import sys
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+
+          REPO_ROOT = Path(".").resolve()
+          EXCLUDED_TOP = {"assets", "docs", "scripts", ".github", ".git", "node_modules"}
+
+          html_files = [
+              p for p in REPO_ROOT.rglob("*.html")
+              if not any(part in EXCLUDED_TOP for part in p.relative_to(REPO_ROOT).parts[:-1])
+          ]
+
+          REQUIRED_META = {
+              "og:image": ('meta', {"property": "og:image"}),
+              "og:type": ('meta', {"property": "og:type"}),
+              "twitter:card": ('meta', {"name": "twitter:card"}),
+              "description": ('meta', {"name": "description"}),
+          }
+          warnings: list[str] = []
+
+          for path in html_files:
+              soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+              rel = path.relative_to(REPO_ROOT)
+
+              for label, (tag, attrs) in REQUIRED_META.items():
+                  if not soup.find(tag, attrs=attrs):
+                      warnings.append(f"{rel}: {label} 未設定")
+
+              if not soup.find("link", attrs={"rel": "canonical"}):
+                  warnings.append(f"{rel}: canonical 未設定")
+
+              # favicon: rel="icon" or rel="shortcut icon"
+              has_favicon = any(
+                  soup.find("link", attrs={"rel": rel_value})
+                  for rel_value in ("icon", "shortcut icon")
+              )
+              if not has_favicon:
+                  warnings.append(f"{rel}: favicon 未設定")
+
+          if warnings:
+              print("::group::og/twitter/canonical/description/favicon warnings")
+              for w in warnings:
+                  print(f"::warning::{w}")
+              print("::endgroup::")
+              print(f"meta 未設定: {len(warnings)} 件（Phase 1 は warning）")
+          else:
+              print("og/twitter/canonical/description/favicon: 全ページ設定済み")
+          sys.exit(0)
+          PY

@@ -1,0 +1,13 @@
+# AkariLab
+
+> 現場の「困った」から生まれた LINE Bot 群を運営するブランド。
+> 個別プロダクト（ひだまり／もやログ／りぴメモ）はそれぞれ独立した世界観で運営される。
+
+## Brand
+- /                    AkariLab トップ
+- /hidamari.html       ひだまり（学習 Bot、開発中）
+
+## Articles
+- https://note.com/akarilab  note メディア
+
+(Phase 2 以降で /akarilab/ /makoto/ /moyalog/ /repimemo/ /articles/ を追記)

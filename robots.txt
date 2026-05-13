@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# OpenAI（学習系）
+User-agent: GPTBot
+Allow: /
+
+# OpenAI（ChatGPT 検索系・AISEO の本命）
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic（学習系）
+User-agent: ClaudeBot
+Allow: /
+
+# Anthropic（Claude 検索系・AISEO の本命）
+User-agent: Claude-SearchBot
+Allow: /
+
+# Anthropic（Claude ユーザー要求型）
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google（生成 AI への学習許可）
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl（多くの LLM の学習素材源）
+User-agent: CCBot
+Allow: /
+
+# Apple（Apple Intelligence 学習許可）
+User-agent: Applebot-Extended
+Allow: /
+
+# ByteDance（注：robots.txt 尊重に疑義あり、低信頼）
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://akarilab.org/sitemap.xml

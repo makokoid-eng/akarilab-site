@@ -1,0 +1,30 @@
+:root {
+  --bg: #0e0e0e;
+  --bg-card: #161616;
+  --text: #e0e0e0;
+  --text-dim: #999;
+  --border: #222;
+  --accent: #4CAF7D;
+  --accent-text: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
