@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>AkariLab — 現場の「困った」から生まれた LINE Bot 群</title>
+<meta name="description" content="AkariLab は、現場の「困った」から生まれた LINE Bot 群を運営するブランド。ひだまり・もやログ・りぴメモの3本を、それぞれ独立した世界観で運営している。">
+<link rel="canonical" href="https://akarilab.org/akarilab/">
+<meta property="og:title" content="AkariLab — 現場の「困った」から生まれた LINE Bot 群">
+<meta property="og:description" content="LINE Bot 群を独立した世界観で運営するブランド。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/akarilab/">
+<meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<!-- include: assets/partials/jsonld/organization.html -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://akarilab.org/#org",
+  "name": "AkariLab",
+  "url": "https://akarilab.org/",
+  "description": "現場の「困った」から生まれた LINE Bot 群を運営するブランド。",
+  "founder": { "@id": "https://akarilab.org/makoto/#person" },
+  "sameAs": [
+    "https://note.com/akarilab",
+    "https://www.instagram.com/akarilab_jp/",
+    "https://github.com/makokoid-eng"
+  ]
+}
+</script>
+
+<!-- include-end: assets/partials/jsonld/organization.html -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "AkariLab", "item": "https://akarilab.org/akarilab/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="/">← AkariLab トップへ</a></nav>
+
+<section class="hero">
+  <h1>AkariLab</h1>
+  <p class="tagline">現場の「困った」から生まれた LINE Bot 群</p>
+  <p class="description">
+    AkariLab は、現場の「困った」から生まれた LINE Bot 群を運営するブランド。<br>
+    ひだまり・もやログ・りぴメモという3本のプロダクトを、それぞれ独立した世界観で運営している。<br>
+    note ではメディア「AkariLab」を並行して書いている。
+  </p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">運営しているプロダクト</h2>
+  <ul class="product-list">
+    <li><a href="/hidamari.html">ひだまり</a> — 算数・数学が苦手な子のための AI 家庭教師 LINE Bot（開発中）</li>
+    <li><a href="https://lin.ee/q1k7v8F">もやログ</a> — 気持ちをそのまま置いていく感情ログ LINE Bot</li>
+    <li><a href="https://lin.ee/HbV7Ehv">りぴメモ</a> — 接客の記憶を次の接客の力にする LINE Bot</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2 class="section-title">メディア</h2>
+  <p><a href="https://note.com/akarilab">note.com/akarilab</a> に、開発と運用の記録を書いている。2026-05-17 から連載「触り始めて9ヶ月の記録」が始まる。</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">運営者</h2>
+  <p>ブランドの設計と実装は <a href="/makoto/">運営者プロフィール</a> ページから確認できる。</p>
+</section>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

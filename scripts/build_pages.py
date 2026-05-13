@@ -36,8 +36,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 MAX_INCLUDE_DEPTH = 5
 
 # 処理対象 HTML（リポ root からの相対パス）。
-# Phase 1 時点では空。include 形式で書かれた新規ページは Phase 2 以降で追記する。
-TARGETS: list[str] = []
+# include 形式で書かれた新規ページは Phase 単位で追記する。
+TARGETS: list[str] = [
+    # Phase 2: AkariLab Organization と /makoto/ プロフィール 5 ページ
+    "akarilab/index.html",
+    "makoto/index.html",
+    "makoto/profile/index.html",
+    "makoto/timeline/index.html",
+    "makoto/contact/index.html",
+]
 
 # <!-- include: foo/bar.html --> ... <!-- include-end: foo/bar.html -->
 PARTIAL_PATTERN = re.compile(
@@ -68,19 +75,26 @@ def is_safe_partial_path(rel_path: str) -> bool:
     return True
 
 
-# 未処理 include マーカー残存検出用（CODEX コードレビュー指摘 4 反映）
-UNPROCESSED_MARKER_PATTERN = re.compile(r"<!--\s*include(-end)?:")
+# include / include-end の片割れ残存検出用（CODEX コードレビュー指摘 4 反映）。
+# 冪等性のため include / include-end マーカー自体は render 後も残る仕様なので、
+# 「マーカーが残っているか」ではなく「ペアが揃っているか（数と名前の一致）」で判定する。
+INCLUDE_START_PATTERN = re.compile(r"<!--\s*include:\s*([^\s]+)\s*-->")
+INCLUDE_END_PATTERN = re.compile(r"<!--\s*include-end:\s*([^\s]+)\s*-->")
 
 
 def assert_no_unprocessed_marker(rendered: str, source_path: Path) -> None:
-    """render 後の出力に処理されなかった include マーカーが残っていれば fail。
+    """include / include-end のペアが揃っているか確認。
 
-    片割れだけの marker（include だけで include-end が無い等）を見逃すのを防ぐ。
+    片割れだけの marker（include だけで include-end が無い等）や、
+    両方あるが partial 名が一致しないケースを fail とする。
+    冪等性のため両者ペアで残っているのは正常。
     """
-    if UNPROCESSED_MARKER_PATTERN.search(rendered):
+    starts = sorted(INCLUDE_START_PATTERN.findall(rendered))
+    ends = sorted(INCLUDE_END_PATTERN.findall(rendered))
+    if starts != ends:
         raise RuntimeError(
-            f"unprocessed include marker remains in {source_path}: "
-            f"片方の include / include-end のみが残っているか、partial 名が一致していません"
+            f"include / include-end mismatch in {source_path}: "
+            f"include={starts}, include-end={ends}"
         )
 
 

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>まこと — AkariLab 運営者</title>
+<meta name="description" content="まことは AkariLab の運営者。店舗運営21年の現場経験と、2024年夏から始めた個人開発を並行で続けている。経歴・タイムライン・連絡先はこのページから辿れる。">
+<link rel="canonical" href="https://akarilab.org/makoto/">
+<meta property="og:title" content="まこと — AkariLab 運営者">
+<meta property="og:description" content="店舗運営21年と個人開発の並行。AkariLab を運営している。">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://akarilab.org/makoto/">
+<meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<!-- include: assets/partials/jsonld/person.html -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://akarilab.org/makoto/#person",
+  "name": "まこと",
+  "url": "https://akarilab.org/makoto/",
+  "jobTitle": "店舗運営マネージャー / 個人開発者",
+  "description": "外食業で21年の現場経験を持ち、店長賞を3年連続受賞（2022地方店舗賞・2023優秀店長賞・2024最優秀店長賞）。並行して AkariLab を運営し、LINE Bot 群を個人開発している。",
+  "knowsAbout": [
+    "LINE Bot 設計",
+    "店舗運営",
+    "外食業オペレーション",
+    "教育AI",
+    "個人開発",
+    "Cloud Functions",
+    "Firestore",
+    "業務改善"
+  ],
+  "award": [
+    "店長賞 地方店舗賞 (2022)",
+    "店長賞 優秀店長賞 (2023)",
+    "店長賞 最優秀店長賞 (2024)"
+  ],
+  "sameAs": [
+    "https://github.com/makokoid-eng"
+  ]
+}
+</script>
+
+<!-- include-end: assets/partials/jsonld/person.html -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "まこと", "item": "https://akarilab.org/makoto/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="/">← AkariLab トップへ</a></nav>
+
+<section class="hero">
+  <h1>まこと</h1>
+  <p class="tagline">AkariLab 運営者</p>
+</section>
+
+<section class="section">
+  <p>
+    店舗運営の現場で21年、いまは店舗運営マネージャー（4店舗統括・年商4億6,000万円規模）として働いている。
+    店長賞を3年連続受賞している（2022 地方店舗賞・2023 優秀店長賞・2024 最優秀店長賞）。
+  </p>
+  <p>
+    2024年夏に生成 AI を本格的に使い始めて、2025年10月に最初のコードを Git に保存した。
+    2026年5月時点で <a href="/akarilab/">AkariLab</a> というブランドを運営し、LINE Bot を5本並行で動かしている。
+  </p>
+  <p>
+    このページは、その記録を集めた個人ハブの入口。
+  </p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">このハブの中身</h2>
+  <ul>
+    <li><a href="/makoto/profile/">経歴の事実塊</a></li>
+    <li><a href="/makoto/timeline/">AI 利用タイムライン</a></li>
+    <li><a href="/makoto/contact/">連絡先</a></li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2 class="section-title">書いているもの</h2>
+  <p>
+    note メディア「<a href="https://note.com/akarilab">AkariLab</a>」に、開発と運用の記録を書いている。
+    2026-05-17 から連載「触り始めて9ヶ月の記録」が始まる。
+  </p>
+</section>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>
