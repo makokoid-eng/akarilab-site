@@ -10,7 +10,7 @@
 - /makoto/profile/     経歴詳細＋FAQ
 - /makoto/timeline/    AI 利用タイムライン
 - /makoto/contact/     連絡先（ココナラ／note／IG／GitHub）
-- /hidamari.html       ひだまり（学習 Bot、開発中）
+- /hidamari/           ひだまり（学習 Bot、開発中）
 
 ## Articles
 - https://note.com/akarilab  note メディア

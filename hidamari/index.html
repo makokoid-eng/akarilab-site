@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひだまり — AI家庭教師 | AkariLab</title>
+  <meta name="description" content="ひだまりは、算数・数学が苦手な子のためのAI家庭教師LINE Bot。つまずきに自然と立ち戻り、「できた！」を積み重ねる。">
+  <link rel="canonical" href="https://akarilab.org/hidamari/">
+  <meta property="og:title" content="ひだまり — AI家庭教師 | AkariLab">
+  <meta property="og:description" content="算数・数学が苦手な子のためのAI家庭教師LINE Bot。つまずきに自然と立ち戻り、「できた！」を積み重ねる。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://akarilab.org/hidamari/">
+  <meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo/hidamari_icon_128.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    :root{--bg:#0f0f0f;--bg-card:#1a1a1a;--text:#e8e4df;--text-dim:#8a8580;--accent:#E8913A;--accent-light:rgba(232,145,58,0.2);--accent-text:#f0a850;--border:rgba(255,255,255,0.06)}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.header{padding:1.5rem 2rem;max-width:800px;margin:0 auto}.header a{color:var(--text-dim);font-size:.85rem}.hero{max-width:800px;margin:0 auto;padding:4rem 2rem 3rem;text-align:center;position:relative}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(232,145,58,0.08) 0%,transparent 60%);pointer-events:none}.hero-emoji{font-size:3rem;margin-bottom:1rem}.hero-logo{display:block;max-width:400px;width:80%;height:auto;margin:0 auto 1rem}.hero h1{font-family:'Zen Maru Gothic',sans-serif;font-size:2.5rem;font-weight:700;color:var(--accent);margin-bottom:.5rem}.hero .tagline{font-size:1rem;color:var(--text-dim);font-weight:300;letter-spacing:.1em;margin-bottom:2rem}.hero .description{font-size:.9rem;color:var(--text-dim);line-height:2;max-width:500px;margin:0 auto}.status-badge{display:inline-block;background:var(--accent-light);color:var(--accent-text);font-size:.75rem;padding:.3rem 1rem;border-radius:20px;margin-top:1.5rem;font-weight:500}.section{max-width:800px;margin:0 auto;padding:2rem 2rem 3rem}.section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;text-align:center}.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media(max-width:600px){.feature-grid{grid-template-columns:1fr}}.feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden}.feature-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent)}.feature-card h3{font-size:.95rem;font-weight:700;color:var(--accent-text);margin-bottom:.5rem}.feature-card p{font-size:.8rem;color:var(--text-dim);line-height:1.7}.steps{max-width:500px;margin:0 auto}.step{display:flex;gap:1rem;margin-bottom:1.5rem}.step-num{flex-shrink:0;width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700}.step-content h4{font-size:.9rem;font-weight:700;margin-bottom:.2rem}.step-content p{font-size:.8rem;color:var(--text-dim)}.teachers-sub{font-size:.85rem;color:var(--text-dim);text-align:center;margin-bottom:1.5rem}.teacher-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:500px;margin:0 auto}@media(max-width:600px){.teacher-grid{grid-template-columns:1fr}}.teacher-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center}.teacher-card .emoji{font-size:2rem;margin-bottom:.5rem}.teacher-card h3{font-family:'Zen Maru Gothic',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.2rem}.teacher-card .type{font-size:.75rem;color:var(--accent-text);margin-bottom:.8rem}.teacher-card p{font-size:.8rem;color:var(--text-dim);line-height:1.6}.cta{max-width:800px;margin:0 auto;padding:2rem 2rem 4rem;text-align:center}.cta p{font-size:.85rem;color:var(--text-dim);margin-bottom:.3rem}.cta .follow{font-size:1rem;color:var(--accent);font-weight:700}.monitor{max-width:600px;margin:0 auto;padding:3rem 2rem 1rem;text-align:center}.monitor h2{font-family:'Zen Maru Gothic',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--accent-text)}.monitor p{font-size:.85rem;color:var(--text-dim);line-height:2;margin-bottom:1.8rem}.monitor-button{display:inline-block;background:var(--accent);color:#fff;padding:.9rem 2.4rem;border-radius:32px;font-size:.9rem;font-weight:700;text-decoration:none;transition:opacity .2s}.monitor-button:hover{opacity:.85;text-decoration:none}footer{text-align:center;padding:2rem;color:var(--text-dim);font-size:.75rem;border-top:1px solid var(--border);max-width:800px;margin:0 auto}footer a{color:var(--text-dim);margin:0 .5rem}@media(max-width:480px){.hero h1{font-size:2rem}}
+  </style>
+  <!-- include: assets/partials/jsonld/software-application-hidamari.html -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://akarilab.org/hidamari/#app",
+  "name": "ひだまり",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "LINE",
+  "description": "算数・数学が苦手な小中学生のための、つまずき遡行型 AI 家庭教師 LINE Bot。",
+  "producer": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "url": "https://akarilab.org/hidamari/",
+  "featureList": [
+    "つまずき遡行",
+    "答えを教えないソクラテス対話",
+    "先生選択（そうま・かいと）",
+    "実力チェック診断"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "student"
+  }
+}
+</script>
+
+<!-- include-end: assets/partials/jsonld/software-application-hidamari.html -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+      { "@type": "ListItem", "position": 2, "name": "ひだまり", "item": "https://akarilab.org/hidamari/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="header"><a href="/">← AkariLab トップへ</a></div>
+  <section class="hero">
+    <img src="/assets/logo/hidamari_logo_typo_800w.png" alt="ひだまり" class="hero-logo">
+    <p class="tagline">その子の「ここなら大丈夫」と思える場所</p>
+    <p class="description">算数・数学が苦手な子のための、AI家庭教師LINE Bot。<br>つまずきに自然と立ち戻り、<br>小さな「できた！」を積み重ねる。<br>勉強が怖いから、楽しいへ。</p>
+    <span class="status-badge">🔜 開発中 — 2026年リリース予定</span>
+  </section>
+  <div class="section">
+    <h2 class="section-title">ひだまりの特徴</h2>
+    <div class="feature-grid">
+      <div class="feature-card"><h3>つまずき遡行</h3><p>わからない原因を対話の中で見つけ、自然に前の単元へ。「戻されている」と気づかせない設計。</p></div>
+      <div class="feature-card"><h3>「できた！」の積み上げ</h3><p>小さなステップをクリアするたびに、先生が一緒に喜ぶ。自信が少しずつ育つ。</p></div>
+      <div class="feature-card"><h3>答えを教えない</h3><p>ヒントと問いかけで導く、ソクラテス式の対話。「自分で解けた」体験を生む。</p></div>
+      <div class="feature-card"><h3>その子のペースで</h3><p>塾のように進度を合わせる必要なし。必要なら小1まで戻る。必要なければ先取りもできる。</p></div>
+    </div>
+  </div>
+  <div class="section">
+    <h2 class="section-title">使い方</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h4>友だち追加 & 先生を選ぶ</h4><p>LINE Botを友だち追加。自分に合った先生を選ぶ。</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h4>実力チェック</h4><p>短い診断テストで、今の理解度を確認。結果は先生だけが見る。</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h4>先生と一緒に学ぶ</h4><p>対話しながら問題に取り組む。つまずいたら、先生が自然にヒントをくれる。</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h4>「できた！」を積み重ねる</h4><p>復習が終わったら予習へ。気づいたら、勉強が少し楽しくなっている。</p></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <h2 class="section-title">先生を選べる</h2>
+    <p class="teachers-sub">自分に合った先生を選んで、いつでも変更OK</p>
+    <div class="teacher-grid">
+      <div class="teacher-card"><div class="emoji">🧑‍🏫</div><h3>そうま</h3><div class="type">日常の例えで教えるタイプ</div><p>「これさ、お菓子分けるときと同じだよ」が口癖。身近なものに置き換える天才。</p></div>
+      <div class="teacher-card"><div class="emoji">🎮</div><h3>かいと</h3><div class="type">ゲーム感覚で進めるタイプ</div><p>「次のステージいこう！」問題をミッション化。達成感の演出が上手い。</p></div>
+    </div>
+  </div>
+  <section class="monitor">
+    <h2>β版モニター募集中</h2>
+    <p>ひだまりは現在β版テスト中です。<br>5〜10名のお子さまに、実際に使いながら<br>育てるご協力をお願いしています。</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVPXLX4VNbpUNcXB2VbUeISehx0OBs24G_RpfpsCM00XzLJg/viewform?usp=pp_url&entry.548486916=lp_hidamari" class="monitor-button" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
+  </section>
+  <div class="cta">
+    <p>リリース情報はInstagramとXで発信中</p>
+    <p class="follow">@akarilab_jp をフォロー</p>
+  </div>
+  <div class="footer">
+    <div><a href="/">AkariLab トップ</a></div>
+    <div style="margin-top: 8px;">
+      <a href="/terms-of-service.html">利用規約</a> ·
+      <a href="/privacy-policy.html">プライバシーポリシー</a> ·
+      <a href="/billing-policy.html">課金・解約ポリシー</a> ·
+      <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+    </div>
+    <div style="margin-top: 8px;"><a href="https://makokoid-eng.github.io/moyalog-site/">🌿 もやログ</a></div>
+    <p class="copy">© 2026 AkariLab</p>
+  </div>
+  <script>
+    // LP訪問時の ?src=xxx を CTAボタンのフォームURLに引き継ぐ。
+    // 許可リストにない値は無視（src 汚染防止）。デフォルトは lp_hidamari。
+    (function () {
+      var ALLOWED = ['lp_hidamari', 'note_akarilab', 'x_akarilab', 'x_makochinta1', 'x_moyalog', 'x_repimemo'];
+      var params = new URLSearchParams(window.location.search);
+      var src = params.get('src');
+      if (!src || ALLOWED.indexOf(src) === -1) return;
+      var button = document.querySelector('.monitor-button');
+      if (!button) return;
+      button.href = button.href.replace(/entry\.548486916=[^&]*/, 'entry.548486916=' + encodeURIComponent(src));
+    })();
+  </script>
+</body>
+</html>
