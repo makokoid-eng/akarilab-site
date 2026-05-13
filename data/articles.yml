@@ -1,0 +1,36 @@
+# articles.yml — note 記事メタの単一情報源
+#
+# Phase 5（C:/Users/user/akarilab-site/docs/aiseo/phase_5_design.md）
+#
+# 構造：
+#   series:
+#     {series-slug}:
+#       title:        連載タイトル
+#       description:  連載趣旨（abstract に流用）
+#       started_at:   連載開始日（ISO-8601）
+#       articles:
+#         - slug:         URL スラッグ（articles/{series-slug}/{slug}.html）
+#           title:        個別記事タイトル
+#           match_title:  RSS fallback 用、note 記事タイトルとの部分一致キー
+#           published:    公開日（ISO-8601）
+#           note_url:     note 原文 URL（未確定時は PLACEHOLDER）
+#           summary:      要約 500 字以内
+#           position:     連載内の話数（hasPart 順序）
+#
+# プレースホルダー判定：note_url が "PLACEHOLDER" を含む slot は
+# sync_note_articles.py が経路 A / 経路 B のいずれかで上書きする。
+# 既に確定済み（PLACEHOLDER を含まない）slot は経路 B では上書きしない（二重起票防止）。
+
+series:
+  ai-9months:
+    title: "触り始めて9ヶ月の記録"
+    description: "44歳でほぼ未経験から個人開発を始めた人間が、最初の9ヶ月で何に触れて、何に詰まって、何を作ったかを時系列で残す連載。"
+    started_at: "2026-05-17"
+    articles:
+      - slug: dev-log-01
+        title: "（第1話、2026-05-17 公開予定）"
+        match_title: "触り始めて9ヶ月の記録"
+        published: "2026-05-17"
+        note_url: "https://note.com/akarilab/n/PLACEHOLDER_TBD_AFTER_PUBLISH"
+        summary: "（連載第1話。2026-05-17 公開予定。本番公開後に sync_note_articles.py が要約を取得して更新する。）"
+        position: 1

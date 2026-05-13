@@ -52,6 +52,10 @@ TARGETS: list[str] = [
     "repimemo/index.html",
     "repimemo/store/index.html",
     "repimemo/voices/index.html",
+    # Phase 5: /articles/ 連載ハブ＋第1話プレースホルダー
+    "articles/index.html",
+    "articles/ai-9months/index.html",
+    "articles/ai-9months/dev-log-01.html",
 ]
 
 # <!-- include: foo/bar.html --> ... <!-- include-end: foo/bar.html -->

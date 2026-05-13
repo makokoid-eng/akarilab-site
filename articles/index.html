@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>note 記事のまとめ — AkariLab</title>
+<meta name="description" content="AkariLab メディア（note.com/akarilab）の主要記事を構造化して並べた索引ページ。連載「触り始めて9ヶ月の記録」を起点に、開発と運用の記録を辿れる。">
+<link rel="canonical" href="https://akarilab.org/articles/">
+<meta property="og:title" content="note 記事のまとめ — AkariLab">
+<meta property="og:description" content="AkariLab メディアの主要記事を構造化して並べた索引ページ。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/articles/">
+<meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "AkariLab note 記事のまとめ",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "触り始めて9ヶ月の記録",
+      "url": "https://akarilab.org/articles/ai-9months/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="/">← AkariLab トップへ</a></nav>
+
+<section class="hero">
+  <h1>note 記事のまとめ</h1>
+  <p class="tagline">AkariLab メディアの主要記事</p>
+  <p class="description">
+    AkariLab は note.com/akarilab で開発と運用の記録を書いている。<br>
+    このページは、連載と単発記事のうち主要なものを構造化して並べた索引。
+  </p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">連載</h2>
+  <ul>
+    <li>
+      <a href="/articles/ai-9months/">触り始めて9ヶ月の記録</a>
+      — 2026-05-17 開始。44歳でほぼ未経験から個人開発を始めた9ヶ月の時系列記録。
+    </li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2 class="section-title">単発記事</h2>
+  <p>準備中。主要な単発記事は順次このページに追加していく。</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">note 本体</h2>
+  <p>すべての記事は <a href="https://note.com/akarilab">note.com/akarilab</a> に公開している。</p>
+</section>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

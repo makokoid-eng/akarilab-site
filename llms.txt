@@ -20,6 +20,7 @@
 - /repimemo/voices/    りぴメモ 体験談
 
 ## Articles
-- https://note.com/akarilab  note メディア
-
-(Phase 5 以降で /articles/ /articles/ai-9months/ を追記)
+- /articles/                     note 記事のまとめ（AkariLab メディア索引）
+- /articles/ai-9months/          連載「触り始めて9ヶ月の記録」（2026-05-17 開始）
+- /articles/ai-9months/dev-log-01.html  連載第1話（2026-05-17 公開予定）
+- https://note.com/akarilab      note メディア本体
