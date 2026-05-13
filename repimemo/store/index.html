@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>店舗で使うりぴメモ — 予約・電話・出勤・店舗管理</title>
+  <meta name="description" content="店舗で使うりぴメモ。予約ハブ・電話検索・出勤退勤・店舗管理を、同じ LINE の中で扱える。店舗の中で道具を一つにまとめたい人のための機能ページ。">
+  <link rel="canonical" href="https://akarilab.org/repimemo/store/">
+  <meta property="og:title" content="店舗で使うりぴメモ">
+  <meta property="og:description" content="予約ハブ・電話検索・出勤退勤・店舗管理を、同じ LINE で。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://akarilab.org/repimemo/store/">
+  <meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo/hidamari_icon_128.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    :root{--bg:#0f0d0c;--bg-card:#1a1614;--text:#ece6df;--text-dim:#8d8278;--accent:#C2693A;--accent-light:rgba(194,105,58,0.18);--accent-text:#e08a55;--border:rgba(255,255,255,0.06)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;min-height:100vh}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .header{padding:1.5rem 2rem;max-width:800px;margin:0 auto;font-size:.85rem}
+    .header a{color:var(--text-dim)}
+    .hero{max-width:800px;margin:0 auto;padding:3rem 2rem 2rem;text-align:center;position:relative}
+    .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(194,105,58,0.08) 0%,transparent 60%);pointer-events:none}
+    .hero h1{font-family:'Zen Maru Gothic',sans-serif;font-size:2rem;font-weight:700;color:var(--accent-text);margin-bottom:.8rem;line-height:1.4}
+    .hero .lead{font-size:.9rem;color:var(--text-dim);line-height:2;max-width:540px;margin:0 auto}
+    .section{max-width:800px;margin:0 auto;padding:2.5rem 2rem}
+    .section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;text-align:center;color:var(--text)}
+    .feature-list{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:600px){.feature-list{grid-template-columns:1fr}}
+    .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.4rem}
+    .feature-card h3{font-size:1rem;font-weight:700;color:var(--accent-text);margin-bottom:.6rem}
+    .feature-card p{font-size:.82rem;color:var(--text-dim);line-height:1.75}
+    .price-box{max-width:520px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-align:center}
+    .price-box h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem}
+    .price-box p{font-size:.85rem;color:var(--text-dim);line-height:1.85}
+    .cta{max-width:600px;margin:0 auto;padding:2.5rem 2rem 1rem;text-align:center}
+    .cta p{font-size:.85rem;color:var(--text-dim);line-height:2;margin-bottom:1.5rem}
+    .cta-button{display:inline-block;background:var(--accent);color:#fff;padding:.9rem 2.4rem;border-radius:30px;font-size:.9rem;font-weight:700;text-decoration:none;transition:opacity .2s}
+    .cta-button:hover{opacity:.85;text-decoration:none}
+    footer{text-align:center;padding:2.5rem 2rem;color:var(--text-dim);font-size:.75rem;border-top:1px solid var(--border);max-width:800px;margin:3rem auto 0}
+    @media(max-width:480px){.hero h1{font-size:1.6rem}}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://akarilab.org/repimemo/store/#app",
+    "name": "りぴメモ（店舗向け）",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "LINE",
+    "url": "https://akarilab.org/repimemo/store/",
+    "description": "店舗で使うりぴメモ。予約ハブ・電話検索・出勤退勤・店舗管理を同じ LINE で扱える。",
+    "producer": { "@id": "https://akarilab.org/#org" },
+    "offers": { "@type": "Offer", "price": "TBD", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+      { "@type": "ListItem", "position": 2, "name": "りぴメモ", "item": "https://akarilab.org/repimemo/" },
+      { "@type": "ListItem", "position": 3, "name": "店舗向け", "item": "https://akarilab.org/repimemo/store/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <section class="hero">
+    <h1>店舗で使うりぴメモ</h1>
+    <p class="lead">
+      予約ハブ・電話検索・出勤退勤・店舗管理を、同じ LINE の中で扱えます。<br>
+      店舗の中で道具をひとつにまとめたい人のためのページです。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">4つの柱</h2>
+    <div class="feature-list">
+      <div class="feature-card">
+        <h3>予約ハブ</h3>
+        <p>媒体の予約情報をテキストで貼ると、該当する人に通知が飛びます。過去履歴と NG情報も合わせて表示されます。媒体ごとに開いて回らなくていい状態を目指しています。</p>
+      </div>
+      <div class="feature-card">
+        <h3>電話検索</h3>
+        <p>登録された連絡先の中から、着信番号を検索できます。誰からの電話かを取り違えにくくなります。</p>
+      </div>
+      <div class="feature-card">
+        <h3>出勤退勤</h3>
+        <p>シフトの登録と打刻を、同じ LINE の中で扱えます。月末にまとめて手書きで集計する手間が減ります。</p>
+      </div>
+      <div class="feature-card">
+        <h3>店舗管理</h3>
+        <p>NG情報・引き継ぎメモ・指名履歴を、店舗単位で共有できます。共有範囲は店舗の中だけで、外には出ません。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">料金</h2>
+    <div class="price-box">
+      <h3>準備中</h3>
+      <p>店舗向け機能の料金は、現在準備中です。<br>導入を検討中の方は、下の案内から相談を受け付けています。</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <p>店舗向けの相談・問い合わせは LINE で受け付けています。</p>
+    <a href="https://lin.ee/HbV7Ehv" class="cta-button" target="_blank" rel="noopener noreferrer">LINE で問い合わせ</a>
+  </section>
+
+  <footer>
+    &copy; 2026 AkariLab
+  </footer>
+</body>
+</html>

@@ -12,7 +12,14 @@
 - /makoto/contact/     連絡先（ココナラ／note／IG／GitHub）
 - /hidamari/           ひだまり（学習 Bot、開発中）
 
+## Products
+- /moyalog/            もやログ（感情ログ Bot）
+- /moyalog/voices/     もやログ 体験談
+- /repimemo/           りぴメモ（接客メモ Bot、個人モード）
+- /repimemo/store/     りぴメモ 店舗向け
+- /repimemo/voices/    りぴメモ 体験談
+
 ## Articles
 - https://note.com/akarilab  note メディア
 
-(Phase 4 以降で /moyalog/ /repimemo/ /articles/ を追記)
+(Phase 5 以降で /articles/ /articles/ai-9months/ を追記)

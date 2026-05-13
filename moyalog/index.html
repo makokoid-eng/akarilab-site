@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>もやログ — 気持ちをそのまま置いていい場所</title>
+  <meta name="description" content="気持ちをそのまま置いていける LINE Bot。タップ1回で今の気分を記録、自分のパターンが見えてくる。">
+  <link rel="canonical" href="https://akarilab.org/moyalog/">
+  <meta property="og:title" content="もやログ — 気持ちをそのまま置いていい場所">
+  <meta property="og:description" content="気持ちをそのまま置いていける LINE Bot。タップ1回で今の気分を記録、自分のパターンが見えてくる。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://akarilab.org/moyalog/">
+  <meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo/hidamari_icon_128.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    :root{--bg:#0f1218;--bg-card:#181c25;--text:#e6e8ee;--text-dim:#8a8f9c;--accent:#5B8CCC;--accent-light:rgba(91,140,204,0.18);--accent-text:#7aa6dc;--border:rgba(255,255,255,0.06)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;min-height:100vh}
+    a{color:var(--accent-text);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .hero{max-width:760px;margin:0 auto;padding:5rem 1.5rem 3rem;text-align:center;position:relative}
+    .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(91,140,204,0.07) 0%,transparent 65%);pointer-events:none}
+    .hero h1{font-family:'Zen Maru Gothic',sans-serif;font-size:2.1rem;font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.5}
+    @media(max-width:480px){.hero h1{font-size:1.7rem}}
+    .hero .lead{font-size:.95rem;color:var(--text-dim);line-height:2;max-width:520px;margin:0 auto}
+    .section{max-width:760px;margin:0 auto;padding:2.5rem 1.5rem}
+    .section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:1.15rem;font-weight:700;color:var(--accent-text);margin-bottom:1.5rem;text-align:center}
+    .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+    @media(max-width:600px){.feature-grid{grid-template-columns:1fr}}
+    .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;position:relative;overflow:hidden}
+    .feature-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+    .feature-card h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+    .feature-card p{font-size:.82rem;color:var(--text-dim);line-height:1.75}
+    .scenes{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+    .scene{padding:1rem 1.2rem;border-left:2px solid var(--accent-light);background:rgba(91,140,204,0.04);border-radius:0 8px 8px 0}
+    .scene .when{font-size:.78rem;color:var(--accent-text);margin-bottom:.2rem}
+    .scene .what{font-size:.85rem;color:var(--text-dim);line-height:1.7}
+    .voice-excerpt{max-width:600px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.6rem}
+    .voice-excerpt .meta{font-size:.75rem;color:var(--text-dim);margin-bottom:.6rem}
+    .voice-excerpt blockquote{font-size:.9rem;color:var(--text);line-height:1.9;font-style:normal;margin:0}
+    .voice-link{text-align:center;margin-top:1rem;font-size:.82rem}
+    .faq-list{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:.7rem}
+    .faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem}
+    .faq-item summary{font-size:.88rem;font-weight:500;color:var(--text);cursor:pointer;list-style:none;position:relative;padding-right:1.5rem}
+    .faq-item summary::after{content:'+';position:absolute;right:0;top:0;color:var(--accent-text);font-weight:300;font-size:1.1rem}
+    .faq-item[open] summary::after{content:'−'}
+    .faq-item .answer{font-size:.82rem;color:var(--text-dim);line-height:1.85;margin-top:.7rem;padding-top:.7rem;border-top:1px solid var(--border)}
+    .cta{max-width:560px;margin:0 auto;padding:3rem 1.5rem 4rem;text-align:center}
+    .cta p{font-size:.85rem;color:var(--text-dim);margin-bottom:1.4rem;line-height:1.9}
+    .cta-button{display:inline-block;background:var(--accent);color:#fff;padding:.95rem 2.6rem;border-radius:32px;font-size:.95rem;font-weight:500;text-decoration:none;transition:opacity .2s}
+    .cta-button:hover{opacity:.85;text-decoration:none;color:#fff}
+    .footer{text-align:center;padding:2rem 1.5rem;color:var(--text-dim);font-size:.72rem;border-top:1px solid var(--border);max-width:760px;margin:0 auto}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://akarilab.org/moyalog/#app",
+    "name": "もやログ",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "LINE",
+    "url": "https://akarilab.org/moyalog/",
+    "description": "気持ちをそのまま置いていける LINE Bot。タップ1回で今の気分を記録、自分のパターンが見えてくる。",
+    "producer": { "@id": "https://akarilab.org/#org" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+    "potentialAction": {
+      "@type": "SubscribeAction",
+      "target": "https://lin.ee/q1k7v8F"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "無料で使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "無料で使えます。今のところ課金機能はありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "記録したデータはどう扱われますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "記録は本人だけが見られる形で保管しています。第三者への提供や広告利用はしていません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "LINE 以外でも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "今は LINE のみで動いています。Web 版・アプリ版の予定はまだありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "やめたいときはどうしたらいいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LINE のブロックでいつでも止められます。記録の削除依頼にも対応します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "他の感情記録アプリと違う点は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "理由を聞かれない、評価されない、続けなくていい。タップ1回で置いて、終わり。それだけの場所として作っています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "毎日書かないと続かないですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "続けなくて大丈夫です。書きたい日に書く、書かない日は通知も来ません。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+      { "@type": "ListItem", "position": 2, "name": "もやログ", "item": "https://akarilab.org/moyalog/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <section class="hero">
+    <h1>気持ちをそのまま<br>置いていい場所</h1>
+    <p class="lead">タップ1回、3秒で記録できる LINE Bot。<br>理由は聞かれない、評価もされない。<br>書いたあとに、何もしなくていい場所です。</p>
+  </section>
+
+  <div class="section">
+    <h2 class="section-title">できること</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>気分を1タップで残す</h3>
+        <p>絵文字を選ぶだけ。今の気持ちをそのまま置いていける。</p>
+      </div>
+      <div class="feature-card">
+        <h3>週に1回のふりかえり</h3>
+        <p>その週の気分の流れを、静かにまとめて届けます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>もう少し書きたい日</h3>
+        <p>気が向いたら、対話モードで深掘りもできます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>身体を整える小さな提案</h3>
+        <p>気分が重い日に、3分でできる動きを提案します。やらなくていい。</p>
+      </div>
+      <div class="feature-card">
+        <h3>自分との約束</h3>
+        <p>「明日の朝、白湯を飲む」みたいな小さな約束を残せます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>招待コードで誰かに渡す</h3>
+        <p>使ってよかったら、招待コードで身近な人にそっと渡せます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">こういう日に</h2>
+    <div class="scenes">
+      <div class="scene"><div class="when">仕事終わりの帰り道</div><div class="what">なんでこんなに疲れたんだろう、と思いながら歩いているとき。</div></div>
+      <div class="scene"><div class="when">日曜の夜</div><div class="what">明日からまた始まる、と思って気持ちが沈んでいるとき。</div></div>
+      <div class="scene"><div class="when">喧嘩のあと</div><div class="what">怒りなのか悲しみなのか、自分でもよくわからないとき。</div></div>
+      <div class="scene"><div class="when">泣いたあと</div><div class="what">理由は誰にも言わなくていい、ただ置いておきたいだけのとき。</div></div>
+      <div class="scene"><div class="when">何もない日</div><div class="what">特に何もなかった、を残しておくのも記録です。</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">使っている人の声</h2>
+    <div class="voice-excerpt">
+      <div class="meta">30代女性 / 利用2ヶ月</div>
+      <blockquote>「今日もしんどかった、しか書いてないけど、それを置けるだけで違う気がします」</blockquote>
+    </div>
+    <p class="voice-link"><a href="/moyalog/voices/">使っている人の声 →</a></p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">よくある質問</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>無料で使えますか？</summary>
+        <div class="answer">無料で使えます。今のところ課金機能はありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>記録したデータはどう扱われますか？</summary>
+        <div class="answer">記録は本人だけが見られる形で保管しています。第三者への提供や広告利用はしていません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>LINE 以外でも使えますか？</summary>
+        <div class="answer">今は LINE のみで動いています。Web 版・アプリ版の予定はまだありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>やめたいときはどうしたらいいですか？</summary>
+        <div class="answer">LINE のブロックでいつでも止められます。記録の削除依頼にも対応します。</div>
+      </details>
+      <details class="faq-item">
+        <summary>他の感情記録アプリと違う点は？</summary>
+        <div class="answer">理由を聞かれない、評価されない、続けなくていい。タップ1回で置いて、終わり。それだけの場所として作っています。</div>
+      </details>
+      <details class="faq-item">
+        <summary>毎日書かないと続かないですか？</summary>
+        <div class="answer">続けなくて大丈夫です。書きたい日に書く、書かない日は通知も来ません。</div>
+      </details>
+    </div>
+  </div>
+
+  <section class="cta">
+    <p>友だち追加すると、すぐに使い始められます。<br>登録のためのメールや電話番号は要りません。</p>
+    <a href="https://lin.ee/q1k7v8F" class="cta-button" target="_blank" rel="noopener noreferrer">LINE で友だち追加</a>
+  </section>
+
+  <div class="footer">
+    <p>© 2026 AkariLab</p>
+  </div>
+</body>
+</html>

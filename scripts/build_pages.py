@@ -46,6 +46,12 @@ TARGETS: list[str] = [
     "makoto/contact/index.html",
     # Phase 3: ひだまり LP の /hidamari/ 移設
     "hidamari/index.html",
+    # Phase 4: もやログ・りぴメモ本格 LP
+    "moyalog/index.html",
+    "moyalog/voices/index.html",
+    "repimemo/index.html",
+    "repimemo/store/index.html",
+    "repimemo/voices/index.html",
 ]
 
 # <!-- include: foo/bar.html --> ... <!-- include-end: foo/bar.html -->
