@@ -27,10 +27,3 @@ series:
     description: "44歳でほぼ未経験から個人開発を始めた人間が、最初の9ヶ月で何に触れて、何に詰まって、何を作ったかを時系列で残す連載。"
     started_at: "2026-05-17"
     articles:
-      - slug: dev-log-01
-        title: "（第1話、2026-05-17 公開予定）"
-        match_title: "触り始めて9ヶ月の記録"
-        published: "2026-05-17"
-        note_url: "https://note.com/akarilab/n/PLACEHOLDER_TBD_AFTER_PUBLISH"
-        summary: "（連載第1話。2026-05-17 公開予定。本番公開後に sync_note_articles.py が要約を取得して更新する。）"
-        position: 1

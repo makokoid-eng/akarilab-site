@@ -52,12 +52,12 @@ TARGETS: list[str] = [
     "repimemo/index.html",
     "repimemo/store/index.html",
     "repimemo/voices/index.html",
-    # Phase 5: /articles/ 連載ハブ＋第1話プレースホルダー
+    # Phase 5: /articles/ 連載ハブ
     "articles/index.html",
     "articles/ai-9months/index.html",
-    "articles/ai-9months/dev-log-01/index.html",
     # Phase 6: note エクスポート一括移行（2026-05-15）
-    # 連載 dev-log-02..14（XML 出現順、5/13公開+本文3000字以上）
+    # 連載 14話（drafts/2026-05-13/dev-log-NN.md 順）
+    # 第1話=44歳台風, 第2話=3時11分, ..., 第14話=9ヶ月後の手紙
     "articles/ai-9months/44歳台風のホテルで生成AIという言葉を初めて聞いた夜/index.html",
     "articles/ai-9months/3時11分コードを書く前にやっていたこと/index.html",
     "articles/ai-9months/23時41分AIに内省を手伝ってもらった夜/index.html",
@@ -67,10 +67,11 @@ TARGETS: list[str] = [
     "articles/ai-9months/食改善Botが動いた10月ようやく開発者の道具を揃えた/index.html",
     "articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/index.html",
     "articles/ai-9months/9時9分から22時44分まで20回pushを繰り返した日/index.html",
+    "articles/ai-9months/1月26日AIが嘘をつかないようにコードを書いた日/index.html",
     "articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/index.html",
     "articles/ai-9months/18日間で4つのプロダクトを立ち上げた4月/index.html",
-    "articles/ai-9months/9ヶ月後の自分が台風の夜の自分に書く手紙/index.html",
     "articles/ai-9months/17時43分フォームからLINEまで初めて自動で流れた日/index.html",
+    "articles/ai-9months/9ヶ月後の自分が台風の夜の自分に書く手紙/index.html",
     # 雑記 48 本（XML 出現順、YYYY/MM/{guid}/index.html）
     "articles/2026/04/1年半前の4行が今夜のスキルになった/index.html",
     "articles/2026/04/2本目はタグを入れるために書いている/index.html",
@@ -119,7 +120,6 @@ TARGETS: list[str] = [
     "articles/2026/05/職場でサンタクロースになった夜から行きつけのカフェで涙が溢れた日まで/index.html",
     "articles/2026/05/5時半の始発と誕生日の朝の解釈/index.html",
     "articles/2026/05/23時52分元カノを大切な存在と書いた夜/index.html",
-    "articles/2026/05/1月26日AIが嘘をつかないようにコードを書いた日/index.html",
 ]
 
 # <!-- include: foo/bar.html --> ... <!-- include-end: foo/bar.html -->
