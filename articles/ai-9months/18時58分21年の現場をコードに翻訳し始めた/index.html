@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>18時58分、21年の現場をコードに翻訳し始めた — AkariLab</title>
+<meta name="description" content="連載「触り始めて9ヶ月の記録」第11話 第10話で書いた「AIが嘘をつかないようにコードを書いた日」（2026年1月26日）から、ちょうど7日後の話。 2026年2月2日、18時58分。 自分は新しいリポジトリを切って、人生で2つ目のプロダ…">
+<link rel="canonical" href="https://akarilab.org/articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/">
+<meta property="og:title" content="18時58分、21年の現場をコードに翻訳し始めた — AkariLab">
+<meta property="og:description" content="連載「触り始めて9ヶ月の記録」第11話 第10話で書いた「AIが嘘をつかないようにコードを書いた日」（2026年1月26日）から、ちょうど7日後の話。 2026年2月2日、18時58分。 自分は新しいリポジトリを切って、人生で2つ目のプロダ…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/">
+<meta property="og:image" content="https://akarilab.org/articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/img/n86f97cf8b9e3_f99de0e0efb19f131f7ddd595d54a1de.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/#article",
+  "headline": "18時58分、21年の現場をコードに翻訳し始めた",
+  "datePublished": "2026-05-13T19:07:58+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "isPartOf": { "@id": "https://akarilab.org/articles/ai-9months/#series" },"mainEntityOfPage": "https://akarilab.org/articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/",
+  "sameAs": ["https://note.com/akarilab/n/n86f97cf8b9e3"],
+  "abstract": "連載「触り始めて9ヶ月の記録」第11話 第10話で書いた「AIが嘘をつかないようにコードを書いた日」（2026年1月26日）から、ちょうど7日後の話。 2026年2月2日、18時58分。 自分は新しいリポジトリを切って、人生で2つ目のプロダ…"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "触り始めて9ヶ月の記録", "item": "https://akarilab.org/articles/ai-9months/" },
+    { "@type": "ListItem", "position": 4, "name": "18時58分、21年の現場をコードに翻訳し始めた", "item": "https://akarilab.org/articles/ai-9months/18時58分21年の現場をコードに翻訳し始めた/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/ai-9months/">← 触り始めて9ヶ月の記録へ</a></nav>
+
+<article class="article-body">
+<h1>18時58分、21年の現場をコードに翻訳し始めた</h1>
+<p class="article-meta">2026-05-13 · <a href="https://note.com/akarilab/n/n86f97cf8b9e3" target="_blank" rel="noopener">note 原文</a></p>
+
+<figure><img src="img/n86f97cf8b9e3_f99de0e0efb19f131f7ddd595d54a1de.jpg"><figcaption></figcaption></figure><p>連載「触り始めて9ヶ月の記録」第11話</p>
+<hr>
+<p>第10話で書いた「AIが嘘をつかないようにコードを書いた日」（2026年1月26日）から、ちょうど7日後の話。</p>
+<p>2026年2月2日、18時58分。</p>
+<p>自分は新しいリポジトリを切って、人生で2つ目のプロダクトの初回コミットを打った。</p>
+<blockquote>
+<p>2026-02-02 18:58 Initial commit</p>
+</blockquote>
+<p>このプロダクトの名前は VAC （Value Action Check）。</p>
+<p>本業はある外食チェーンの店舗運営で、合計21年。そのうち、店長として毎月やってきた QSC 監査──Q（=料理の品質）・S（=サービス）・C（=クレンリネス、つまり店舗の清潔さ）の評価──を紙のチェックシートで続けてきた期間が、約20年。その作業をコードに翻訳するためのツールだった。</p>
+<p>repimemo は「夜の店舗で働く人のための LINE Bot」だった。</p>
+<p>VAC は「自分の本業の現場で、自分が20年やってきた仕事のための LINE Bot」だった。</p>
+<p>つまり、自分にしか作れないものを、初めて自分の手で作り始めた夜だった。</p>
+<p><code>&lt;!-- ここから先は有料 --&gt;</code></p>
+<h2>8時間で MVP に到達した</h2>
+<p>最初の Initial commit から、翌日2月3日の02時54分まで、約8時間。</p>
+<p>その間の8コミットを並べると、こうなる。</p>
+<blockquote>
+<p>2026-02-02 18:58 Initial commit
+2026-02-02 19:21 add: stores master with storecd
+2026-02-02 19:27 add: template items (trial 5)
+2026-02-02 19:51 chore: rename categories (no abbreviations)
+2026-02-03 01:15 feat: add minimal line webhook server
+2026-02-03 01:30 fix: normalize package.json for cloud run
+2026-02-03 02:43 chore: update ui labels (cleanliness -&gt; クレンリネス)
+2026-02-03 02:54 feat: full 5-step QSC flow with evidence rule and scoring</p>
+</blockquote>
+<p><code>stores master with storecd</code> というのは、自分の担当している4店舗のマスタデータ（店舗コード付き）を最初に入れた、ということ。</p>
+<p>これが、第6話で書いた echo を返した日と、決定的に違うところだった。</p>
+<p>echo を返したときは、ChatGPT に「動くだけの最小のBot」のコードをもらって、何も知らないまま動かした。</p>
+<p>VAC は違った。</p>
+<p>「店舗マスタ」「店舗コード」「QSC」「クレンリネス」「監査」「証拠（エビデンス）」。</p>
+<p>これらの単語は、エンジニアの世界では「ドメイン用語」と呼ばれる、特定の業界に固有の言葉だった。</p>
+<p>そして、これらの単語の意味を、自分は20年かけて、現場で覚えていた。</p>
+<p>ChatGPT に「ドメインモデルを作って」と頼めば、ChatGPT は汎用的な「店舗管理システム」を作ってくれる。</p>
+<p>でも、自分は「店舗マスタ」と「店舗コード」が、実務でどう紐づいているか、知っていた。</p>
+<p>その知識を、ChatGPT に渡しながら、コードを組み立てていった。</p>
+<h2>「cleanliness -&gt; クレンリネス」のリネーム</h2>
+<p>8コミット目のひとつ前、02時43分のコミットが、いま振り返るといちばん象徴的だった。</p>
+<blockquote>
+<p>02:43 chore: update ui labels (cleanliness -&gt; クレンリネス)</p>
+</blockquote>
+<p>UI のラベルを「cleanliness」から「クレンリネス」に変更した、というコミット。</p>
+<p>ChatGPT に最初にコードを書かせたとき、品質評価の3項目は英語で「Quality / Service / Cleanliness」になっていた。</p>
+<p>エンジニア的には、それでよかった。</p>
+<p>でも、自分の現場では、20年間ずっと、店長も社員もアルバイトも、「クレンリネス」というカタカナで呼んでいた。</p>
+<p>「英語で『Cleanliness』と書いてあるシステムは、現場では使われない」</p>
+<p>これは、エンジニアではない自分が、現場で20年積み上げた直感だった。</p>
+<p>だから02時43分、ラベルを「クレンリネス」に直した。</p>
+<p>ChatGPT は「Cleanliness の方が正しい英語表記です」と言ったかもしれない。でも、自分は「いや、クレンリネスでいい」と返した。</p>
+<p>これが、自分のプロダクトに、自分の現場の言葉を残す、最初の操作だった。</p>
+<h2>5-step QSC flow with evidence rule and scoring</h2>
+<p>その日の最後のコミット、02時54分。</p>
+<blockquote>
+<p>02:54 feat: full 5-step QSC flow with evidence rule and scoring</p>
+</blockquote>
+<p>「5ステップの QSC フロー、証拠ルール、採点ロジック込み」。</p>
+<p>これがその夜の MVP（=動く最小の本番版）だった。</p>
+<p>5ステップというのは、QSC 監査を5つの段階に分けた構造のこと。</p>
+<p>「料理の温度を確認する → 店内の動線を見る → クレンリネスをチェックする → スタッフの応対を観察する → 売場の整え方を見る」のような流れを、5つの場面に切り分けて、それぞれで質問に答えていく、という形式。</p>
+<p>これは、自分が紙のチェックシートで20年やってきた作業の構造を、そのままコードに写したものだった。</p>
+<p>「証拠ルール」というのは、評価項目には必ず写真エビデンスをセットで残す、というルール。</p>
+<p>これも、現場で「言ったもの勝ち」「主観でしか採点できない」という問題に20年苦しんできた結果、自分が辿り着いた工夫だった。</p>
+<p>「採点ロジック」は、各項目に重み付けをつけて、店舗全体のスコアを出す仕組み。</p>
+<p>これも、20年で何度も改良してきた、自分の頭の中にしかなかった採点方式だった。</p>
+<p>8時間で MVP に到達したのは、コードを書く速度が速かったからじゃなかった。</p>
+<p>頭の中にすでに「設計」が20年分あって、それを ChatGPT に翻訳しながら打ち込んでいただけだった。</p>
+<h2>自分が両側に立てたこと</h2>
+<p>もし、これを、エンジニアに頼んで作ってもらおうとしたら、何が起きていたか。</p>
+<p>エンジニアは「店舗管理システム」「QSC アプリ」「監査ワークフロー」みたいな汎用語で要件を聞いてくる。</p>
+<p>そして、「クレンリネスって何ですか？英語だと cleanliness ですよね？」と確認する。</p>
+<p>「いえ、現場では『クレンリネス』とカタカナで呼んでます」と答える。</p>
+<p>「では UI にもカタカナで『クレンリネス』と入れますか？」と確認する。</p>
+<p>「はい」と答える。</p>
+<p>「ドキュメントには cleanliness、UI にはクレンリネス、で良いですか？」と確認する。</p>
+<p>このやり取りが、何ターンも続く。</p>
+<p>その時間が、自分にはなかった。</p>
+<p>自分の中では「クレンリネスはクレンリネスだ」が当たり前だった。エンジニアにとっては当たり前じゃない、ということ自体が、自分の中で言語化されていなかった。</p>
+<p>これは、エンジニアが悪いんじゃない。</p>
+<p>ドメインの中で20年生きてきた人と、ドメインの外から見ている人で、「当たり前」が違うのは、当たり前のことだった。</p>
+<p>VAC は、その「当たり前の違い」を、自分が両方の側に立つことで、一気に消した結果だった。</p>
+<p>44歳のエリアマネージャーが、自分の手でコードを触れるようになって、初めて作れる種類のものだった。</p>
+<h2>ここから3ヶ月</h2>
+<p>VAC は、この夜の MVP から、3月、4月にかけて急速に育っていった。</p>
+<p>3月2日には prod と beta の環境を切り分け、3月3日には Firestore に監査結果を保存するようになり、その後、本部Bot と店舗Bot の2系統に分かれ、PWA 化（=モバイルでアプリのように使える形式に）された。</p>
+<p>そしていま、VAC は自分の担当4店舗で、実際に毎月の QSC 監査に使われている。</p>
+<p>その話の続きは、第12話以降で書く。</p>
+<h2>もし、いまこれから始めるなら</h2>
+<p>ここからは、いまの自分が、当時の自分に伝えたいことを書く。</p>
+<p>自分が「素人」の業界に手を出すのではなくて、自分が一番詳しい業界のために、最初のプロダクトを作る。</p>
+<p>これが、ノンエンジニアの最大の強みだった。</p>
+<p>エンジニアは、技術が強い。</p>
+<p>でも、エンジニアは、ふだん自分が働いていない業界のドメイン用語を、深くは知らない。</p>
+<p>自分は、技術は弱い。</p>
+<p>でも、自分が20年いた現場の用語と、その用語の裏にある実務の流れを、深く知っていた。</p>
+<p>その差分が、VAC を MVP まで8時間で到達させた。</p>
+<p>これから個人開発を始めたい人に伝えたいのは、最初の1本は、自分が一番詳しい業界のために作る、ということ。</p>
+<p>技術的に新しいことをやろうとしない。</p>
+<p>自分が現場で20年使ってきた言葉を、そのままコードに翻訳する。</p>
+<p>それが、エンジニアには真似できない種類の価値を、自分のプロダクトに乗せる、いちばん速いやり方だった。</p>
+<p>「クレンリネスはクレンリネスでいい」</p>
+<p>この一行を、ChatGPT の提案を超えて、自分の判断で書ける。</p>
+<p>それが、ノンエンジニアの個人開発の、たぶん核心だった。</p>
+<hr>
+<p>次回は2026年4月、19日のあいだに4つのプロダクトを立ち上げた話を予定しています。</p>
+<p><code>#44歳から始める個人開発</code> <code>#ドメイン知識</code> <code>#現場のコード化</code> <code>#VAC</code> <code>#QSC</code></p>
+
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

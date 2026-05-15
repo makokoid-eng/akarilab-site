@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>『騙されたと思って継続』と書いた夜から、評価しないAIを設計するまで — AkariLab</title>
+<meta name="description" content="2024年9月2日、夜の熊本のビジネスホテルでノートを開いた。15時にチェックインして、心地よい時間を過ごしていた。「瞑想を始めてみる」と書いた。5分が、思いの外早く感じた。 今日の現場 2026年4月2日、モヤログv2の設計書を確定した。…">
+<link rel="canonical" href="https://akarilab.org/articles/2026/05/騙されたと思って継続と書いた夜から評価しないAIを設計するまで/">
+<meta property="og:title" content="『騙されたと思って継続』と書いた夜から、評価しないAIを設計するまで — AkariLab">
+<meta property="og:description" content="2024年9月2日、夜の熊本のビジネスホテルでノートを開いた。15時にチェックインして、心地よい時間を過ごしていた。「瞑想を始めてみる」と書いた。5分が、思いの外早く感じた。 今日の現場 2026年4月2日、モヤログv2の設計書を確定した。…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/05/騙されたと思って継続と書いた夜から評価しないAIを設計するまで/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/05/騙されたと思って継続と書いた夜から評価しないAIを設計するまで/img/n95dd9856f74d_c4e8e017364e6b0ad0951ad649412b3e.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/05/騙されたと思って継続と書いた夜から評価しないAIを設計するまで/#article",
+  "headline": "『騙されたと思って継続』と書いた夜から、評価しないAIを設計するまで",
+  "datePublished": "2026-05-12T20:33:02+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/05/騙されたと思って継続と書いた夜から評価しないAIを設計するまで/",
+  "sameAs": ["https://note.com/akarilab/n/n95dd9856f74d"],
+  "abstract": "2024年9月2日、夜の熊本のビジネスホテルでノートを開いた。15時にチェックインして、心地よい時間を過ごしていた。「瞑想を始めてみる」と書いた。5分が、思いの外早く感じた。 今日の現場 2026年4月2日、モヤログv2の設計書を確定した。…"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "『騙されたと思って継続』と書いた夜から、評価しないAIを設計するまで", "item": "https://akarilab.org/articles/2026/05/騙されたと思って継続と書いた夜から評価しないAIを設計するまで/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>『騙されたと思って継続』と書いた夜から、評価しないAIを設計するまで</h1>
+<p class="article-meta">2026-05-12 · <a href="https://note.com/akarilab/n/n95dd9856f74d" target="_blank" rel="noopener">note 原文</a></p>
+
+<figure><img src="img/n95dd9856f74d_c4e8e017364e6b0ad0951ad649412b3e.jpg"><figcaption></figcaption></figure><p>2024年9月2日、夜の熊本のビジネスホテルでノートを開いた。15時にチェックインして、心地よい時間を過ごしていた。「瞑想を始めてみる」と書いた。5分が、思いの外早く感じた。</p><h2>今日の現場</h2><p>2026年4月2日、モヤログv2の設計書を確定した。LINEで動く、感情の鏡。</p><p>ユーザーが6つの感情から1つを選ぶ。「しんどい」「イライラ」「モヤモヤ」「自分がイヤ」「疲れた」「理由がわからないけどしんどい」。AIはそれを評価しない、励まさない。ただ映し返す。</p><p>設計書には「使わない言葉」のリストも書いた。「大丈夫」「頑張って」「なんで」「当然」「普通は」。共感を演じない、というのが核にある。</p><p>ゴールは、自分を責める人が、自分で何でもできると思えるようになること。手放せるほど自立した状態を、「卒業」と呼ぶことにした。卒業がプロダクトの成功指標で、それ以外は全部おまけだ。</p><p>通知で迫らない。メニューにそっと置く。売るのではなく、気づかせる。設計書の最後の方にそう書いた。</p><h2>あの頃と今</h2><p>1年7ヶ月前のノートに戻る。</p><p>その日は朝から電話対応に追われ、休日なのに職場に顔も出した。昼は焼肉ライクで1290円、ご飯おかわりつき。夜は惣菜とサラダで300グラムの野菜を取った。dラボでAI担当の方の講座を聞いて、愛されキャラだなと笑った。日常の具体は、たぶん何でもない一日だった。</p><p>その夜、ノートにこう書いている。</p><p>「もう少し客観的に物事を考えるようになるといいなと思う」「やはり元カノに執着してしまう面が垣間見える」「改善しなきゃ」「セルフトークも最近失っていたなと反省」「瞑想を始めてみる」「5分が思いの外早く感じた」「呼吸に意識を向けながらも余計なことも考えてしまうが、それも客観視できる感覚はある」「騙されたと思って継続することが大切」「何が大切なのか見失わないこと」</p><p>その夜の私は、自分の執着を「改善しなきゃ」と書いた。書いて、5分の呼吸に置いた。誰も評価しなかった。誰も「大丈夫」と言わなかった。</p><h2>頭の中</h2><p>もやログのAIは「大丈夫」と言わない。「頑張って」とも言わない。あの夜の私が一番欲しくなかった言葉だからだ。「客観視できる感覚」だけが、続けるための一本の糸だった。励まされたら、その糸が逆に切れる気がしていた。</p><p>別の見方もある。本当に「鏡」だけで人は卒業まで辿り着けるのか。誰かに「大丈夫」と言ってほしい瞬間も、たぶんある。それでもAIにはそれをさせない、という設計を、今は選んでいる。間違っているかもしれない。</p><p>それでも、あの夜の私のような人が、5分の呼吸に置けるだけの場所を、ひとつ用意したい。</p><h2>まだ途中のこと</h2><p>「騙されたと思って継続することが大切」と1年7ヶ月前の私が書いた。今そのノートを開けて、笑いそうになった。同じことを今、別のかたちでやっている。</p><p>設計書には「卒業」を最大の成功指標と書いたが、卒業した人はもうこのアプリを開かない。それでいいと書きながら、本当にいいのかなと思っている自分もいる。</p><p>自分を責める誰かのために、こういう場所を作っています。</p><hr><p>#日記 #ジャーナリング #瞑想 #個人開発 #AkariLab</p>
+
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

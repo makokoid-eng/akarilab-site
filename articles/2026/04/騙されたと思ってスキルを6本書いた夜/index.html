@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>騙されたと思って、スキルを6本書いた夜 — AkariLab</title>
+<meta name="description" content="2026-04-21、ひだまり（LINEの子ども学習Bot）のリリース前に、2日で10個ほど機能を積んだ。 今日の現場 AI自由対話から選択式クイズへ全面置換した。採点はサーバ側で決定的にやるように変えた 中1数学38単元のunit_map…">
+<link rel="canonical" href="https://akarilab.org/articles/2026/04/騙されたと思ってスキルを6本書いた夜/">
+<meta property="og:title" content="騙されたと思って、スキルを6本書いた夜 — AkariLab">
+<meta property="og:description" content="2026-04-21、ひだまり（LINEの子ども学習Bot）のリリース前に、2日で10個ほど機能を積んだ。 今日の現場 AI自由対話から選択式クイズへ全面置換した。採点はサーバ側で決定的にやるように変えた 中1数学38単元のunit_map…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/04/騙されたと思ってスキルを6本書いた夜/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/04/騙されたと思ってスキルを6本書いた夜/img/n02a0bab79bb1_6c0751325bac82453719d73ec49fe815.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/04/騙されたと思ってスキルを6本書いた夜/#article",
+  "headline": "騙されたと思って、スキルを6本書いた夜",
+  "datePublished": "2026-04-21T10:08:23+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/04/騙されたと思ってスキルを6本書いた夜/",
+  "sameAs": ["https://note.com/akarilab/n/n02a0bab79bb1"],
+  "abstract": "2026-04-21、ひだまり（LINEの子ども学習Bot）のリリース前に、2日で10個ほど機能を積んだ。 今日の現場 AI自由対話から選択式クイズへ全面置換した。採点はサーバ側で決定的にやるように変えた 中1数学38単元のunit_map…"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "騙されたと思って、スキルを6本書いた夜", "item": "https://akarilab.org/articles/2026/04/騙されたと思ってスキルを6本書いた夜/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>騙されたと思って、スキルを6本書いた夜</h1>
+<p class="article-meta">2026-04-21 · <a href="https://note.com/akarilab/n/n02a0bab79bb1" target="_blank" rel="noopener">note 原文</a></p>
+
+<figure><img src="img/n02a0bab79bb1_6c0751325bac82453719d73ec49fe815.jpg"><figcaption></figcaption></figure><p>2026-04-21、ひだまり（LINEの子ども学習Bot）のリリース前に、2日で10個ほど機能を積んだ。</p><h2>今日の現場</h2><ul><li><p>AI自由対話から選択式クイズへ全面置換した。採点はサーバ側で決定的にやるように変えた</p></li><li><p>中1数学38単元のunit_mapを入れて、つまずいた単元から前提単元へ遡るロジックを足した</p></li><li><p>「わからない」を7回押してもエスカレーションが進まないバグを直した</p></li><li><p>プロジェクト固有のスキル6本（教え方・キャラ・子どもUX・親・構成・教科）をまとめて書いた</p></li><li><p>全スキルの末尾に「自己成長ルール」を書き加えた。バグを直したら該当スキルに追記、と運用を決めた</p></li><li><p>gcloud deployでenv_varsを全置換して消してしまい、シークレットを標準出力に漏らした</p></li></ul><p>リッチメニューの画像が1MB上限で弾かれたり、くわしくモードの対話がサーバー検算と衝突したり、「やってみて初めてわかる仕様」に何度も足を取られた。</p><h2>あの頃と今</h2><p>2024年9月2日の夜、日記に「元カノに執着してしまう面が垣間見える、改善しなきゃ」と書いて、瞑想を始めた。「客観的に物事を考えられるようになりたい」「騙されたと思って継続することが大切」と自分に言い聞かせた日だった。仕組みで自分を縛る、という行為の最初の一歩だったと思う。</p><p>あの頃は「自分を変えたくて」仕組みに手を伸ばした。1年半経った今、「未来の自分を信用したくないから」仕組みを書いている。同じ仕組み化なのに、エネルギーの向きが逆転している。</p><h2>頭の中</h2><p>自己成長ルール（バグを直したら該当スキルに追記する、という運用）を入れた動機は、同じバグを二度踏みたくなかったから。未来の自分は面倒くさがって、また同じ失敗をする。だから信用しない代わりに、仕組みで縛る。</p><p>ただ、本当にそうだろうか。仕組みで縛るつもりが「縛り切れない自分を許す装置」として書かれているだけかもしれない。「ルールを書いた」という事実で安心して、実際には追記されない──deadなルールになる、というのは十分ありうる。</p><h2>まだ途中のこと</h2><p>2日で10個積んだ満足感はあるけど、肝心の「子どもが実際に触って続くか」はまだ誰にも試されていない。机上の整合性で止まっていないか、betaのまま動かし続けるのか、いつmain本番に切り替えるのか──基準はまだ言葉になっていない。</p><p>騙されたと思って、しばらく続ける。あの夜と同じ言い方で。</p><hr>
+
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

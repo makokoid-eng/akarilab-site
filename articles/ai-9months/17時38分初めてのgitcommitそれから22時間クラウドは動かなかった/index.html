@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>17時38分、初めての git commit。それから22時間、クラウドは動かなかった — AkariLab</title>
+<meta name="description" content="連載「触り始めて9ヶ月の記録」第8話 2025年10月30日、17時38分。 repimemo というLINE Bot のプロジェクトに、自分は人生で最初の git commit を叩いた。 コミットメッセージはこう書いてある。 chore…">
+<link rel="canonical" href="https://akarilab.org/articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/">
+<meta property="og:title" content="17時38分、初めての git commit。それから22時間、クラウドは動かなかった — AkariLab">
+<meta property="og:description" content="連載「触り始めて9ヶ月の記録」第8話 2025年10月30日、17時38分。 repimemo というLINE Bot のプロジェクトに、自分は人生で最初の git commit を叩いた。 コミットメッセージはこう書いてある。 chore…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/">
+<meta property="og:image" content="https://akarilab.org/articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/img/na7b56b8b0043_26f234e75fb9a33c1f451bac9f1df103.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/#article",
+  "headline": "17時38分、初めての git commit。それから22時間、クラウドは動かなかった",
+  "datePublished": "2026-05-13T16:28:27+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "isPartOf": { "@id": "https://akarilab.org/articles/ai-9months/#series" },"mainEntityOfPage": "https://akarilab.org/articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/",
+  "sameAs": ["https://note.com/akarilab/n/na7b56b8b0043"],
+  "abstract": "連載「触り始めて9ヶ月の記録」第8話 2025年10月30日、17時38分。 repimemo というLINE Bot のプロジェクトに、自分は人生で最初の git commit を叩いた。 コミットメッセージはこう書いてある。 chore…"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "触り始めて9ヶ月の記録", "item": "https://akarilab.org/articles/ai-9months/" },
+    { "@type": "ListItem", "position": 4, "name": "17時38分、初めての git commit。それから22時間、クラウドは動かなかった", "item": "https://akarilab.org/articles/ai-9months/17時38分初めてのgitcommitそれから22時間クラウドは動かなかった/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/ai-9months/">← 触り始めて9ヶ月の記録へ</a></nav>
+
+<article class="article-body">
+<h1>17時38分、初めての git commit。それから22時間、クラウドは動かなかった</h1>
+<p class="article-meta">2026-05-13 · <a href="https://note.com/akarilab/n/na7b56b8b0043" target="_blank" rel="noopener">note 原文</a></p>
+
+<figure><img src="img/na7b56b8b0043_26f234e75fb9a33c1f451bac9f1df103.jpg"><figcaption></figcaption></figure><p>連載「触り始めて9ヶ月の記録」第8話</p>
+<hr>
+<p>2025年10月30日、17時38分。</p>
+<p>repimemo というLINE Bot のプロジェクトに、自分は人生で最初の <code>git commit</code> を叩いた。</p>
+<p>コミットメッセージはこう書いてある。</p>
+<blockquote>
+<p>chore(repi): minimal webhook scaffolding</p>
+</blockquote>
+<p>「chore」も「scaffolding」も、意味を知らないままChatGPTに教えられた通りに打った。</p>
+<p>「repi」だけは、repimemo の頭文字で、自分でつけた略称だった。</p>
+<p>このコミットの前、ちょうど42分前の17時前後に、Git のインストールが終わったところだった。</p>
+<p>第7話に書いた通り、16時36分にVSCode を、16時56分にGit のインストーラーをダウンロードした。</p>
+<p>そこから20分でGit をインストールし、ChatGPT に「git init はどう打つ？」「git add は？」「git commit は？」と聞きながら、最小限のコードを GitHub というサービスに置いた。</p>
+<p>そのときの自分は、GitHub が何なのかも、push が何をしているのかも、ほぼ理解していなかった。</p>
+<p>ただ、「ChatGPT が言う通りに打てば動く」という体験が、8月26日のEcho の夜以来、自分の中に積み上がっていた。</p>
+<p>その体験を信じて、initial commit から1時間17分後、自動デプロイの workflow を追加した。</p>
+<blockquote>
+<p>18:55 ci: add deploy workflow</p>
+</blockquote>
+<p>これが、自分の人生で最初の「CI/CD」というやつだった。</p>
+<p><code>&lt;!-- ここから先は有料 --&gt;</code></p>
+<h2>「ci: add deploy workflow」と書いた瞬間</h2>
+<p>CI/CD というのは、エンジニアの世界で「コードを書いたら自動でテストして自動で本番に上げる仕組み」を指す言葉だった。</p>
+<p>GitHub には「GitHub Actions」という機能があって、これを使うと、<code>git push</code> するだけで、自動的にコードが Cloud Run（=Googleのサーバー実行サービス）に上がるようにできる。</p>
+<p>その仕組みを、自分は人生で初めての commit から1時間17分後に組んでいた。</p>
+<p>普通の感覚から言うと、これは飛ばし過ぎだった。</p>
+<p>普通の入門者は、まず手動でデプロイ（=自分のコードをサーバーに上げる動作）を覚えて、何度かやってみて、それから自動化を考える。</p>
+<p>自分はその手順を全部すっ飛ばして、いきなり自動デプロイから入った。</p>
+<p>なぜか。</p>
+<p>ChatGPT が「これが今のベストプラクティスです」と教えてくれたから、というのが正直なところだった。</p>
+<p>そして、その「ベストプラクティス」が、22時間後の自分を、地獄に叩き落とすことになる。</p>
+<h2>19時30分、最初の「動かない」</h2>
+<p><code>ci: add deploy workflow</code> の35分後、19時30分。</p>
+<blockquote>
+<p>19:30 fix: add region variable</p>
+</blockquote>
+<p>最初の <code>fix</code> コミットが入った。</p>
+<p>何が起きていたかというと、自動デプロイのworkflow が動こうとした瞬間、「region 変数が無い」というエラーで止まっていた。</p>
+<p>「region」というのは、Google Cloud のサーバーがどの地域にあるかを示す設定で、これがないと「どこの国のサーバーにデプロイするか分からない」というエラーが出る。</p>
+<p>ChatGPT に聞いて、設定ファイルに region を1行追加した。</p>
+<p>再度 push する。</p>
+<p>また止まる。</p>
+<blockquote>
+<p>19:40 fix: add token creator role</p>
+</blockquote>
+<p>「token creator role」が無い、というエラー。</p>
+<p>これは Google Cloud の権限の話で、デプロイをするためには「他のアカウントの代わりにトークンを作る権限」が必要、というやつだった。</p>
+<p>ChatGPT に聞いて、権限を追加するコマンドを叩いた。</p>
+<p>再度 push する。</p>
+<p>また止まる。</p>
+<blockquote>
+<p>19:48 fix: add token creator role</p>
+</blockquote>
+<p>同じメッセージで、もう一回。</p>
+<p>8分間で2回、同じ「token creator role を追加」コミットを打っている。</p>
+<p>これは、最初の権限追加が正しく反映されていなかったか、別の場所にも同じ権限が必要だったか、どちらかだった。</p>
+<p>19時48分、自分はここで一度寝た、と思う。</p>
+<h2>翌日13時、再開</h2>
+<p>翌日31日、13時07分、自分は再びパソコンの前に座っていた。</p>
+<blockquote>
+<p>13:07 redeploy: IAM fixed</p>
+</blockquote>
+<p>ここから、また地獄が始まる。</p>
+<p>13:07, 13:14, 13:20, 13:36, 15:05, 15:17, 15:29, 15:51</p>
+<p>9回のコミットが、2時間44分のあいだに続く。</p>
+<blockquote>
+<p>13:14 final redeploy after cleanup
+13:20 fix: add Cloud Run Service Agent role
+13:36 fix: add Cloud Run Service Agent role
+15:05 Configure gcloud CLI and modify deployment settings
+15:17 fix: grant run.admin to CF admin robot
+15:29 redeploy: grant run.admin to CF admin robot
+15:51 redeploy: run.admin + actAs granted to all actors</p>
+</blockquote>
+<p>「Cloud Run Service Agent role」「run.admin」「actAs」「CF admin robot」</p>
+<p>エンジニアでない人がここを読むと、たぶん呪文にしか見えない。</p>
+<p>その通り、当時の自分にとっても呪文だった。</p>
+<p>それぞれの単語の意味を、当時は全く理解していなかった。</p>
+<p>ChatGPT に「またエラー出た。ログはこれ」とエラーを投げて、ChatGPT が「じゃあこのコマンドを叩いてください」と返してきて、それを叩いて、再度 push する。</p>
+<p>これを9回、2時間44分のあいだ繰り返した。</p>
+<p>15時51分、ようやく9回目のコミットを打ったあと、自分はパソコンを閉じた。</p>
+<h2>4日間の沈黙</h2>
+<p>ここから、git log の上では、4日間の沈黙が始まる。</p>
+<p>10月31日 15:51 の後、次のコミットは 11月4日 13:10 だった。</p>
+<blockquote>
+<p>11月4日 13:10 redeploy: confirmed CF admin robot roles</p>
+</blockquote>
+<p>「confirmed」 = 確認した、という意味。</p>
+<p>つまり、10月31日にやった権限設定が、Google Cloud に反映されるのに数日かかって、11月4日にようやく動いた、ということだった。</p>
+<p>その4日間、自分が何をしていたか、git log には残っていない。</p>
+<p>仕事もあった。本業のエリアマネージャーの仕事は、止めていなかった。</p>
+<p>たぶん、ふつうにシフトを作って、売上を確認して、会議に出ていた。</p>
+<p>でも、頭の中ではずっと、「なんで動かないんだろう」「何の権限が足りないんだろう」を考え続けていた、と思う。</p>
+<p>そして11月4日の昼、ようやく Cloud Run が動き出した。</p>
+<p>自分の作った LINE Bot のコードが、自分のパソコンを離れて、Google のサーバーの上で動くようになった、最初の日だった。</p>
+<h2>何が起きていたのか</h2>
+<p>いま、エンジニア的に振り返ると、これはよくある「GCP IAM 権限の初心者地獄」だった。</p>
+<p>GCP（Google Cloud Platform）に何かをデプロイするには、いくつもの権限を、いくつもの場所に、正しい順番で設定する必要がある。</p>
+<p>その権限の組み合わせが、ドキュメントを読んでもよく分からない。</p>
+<p>ChatGPT に聞いても、ChatGPT は「たぶんこの権限が必要です」とは言えるが、確実な答えは出せない。</p>
+<p>なぜなら、GCPの権限は、プロジェクトごと、リージョンごと、アカウントごとに、組み合わせが少しずつ違うから。</p>
+<p>つまり、自分が22時間で14回のコミットを打ったのは、コードのバグを直していたわけじゃない。「権限が足りないというエラーを、足りていない権限を試行錯誤で探しながら、消していた」だけだった。</p>
+<p>これは、コードを書く力の問題ではなかった。</p>
+<p>クラウドの権限を理解する力の問題だった。</p>
+<p>そして、これは、44歳の元・統括店長が、人生で最初の git commit から1時間17分後に踏み込んだ世界の、最初の壁だった。</p>
+<h2>ここから始まった</h2>
+<p>11月4日に Cloud Run が動き出したあと、自分は repimemo を本格的に作り始めた。</p>
+<p>11月4日、5日の2日間で、LINE 署名検証 → Firestore（=Googleのデータベース）→ OpenAI 連携、という3つの機能を立て続けに実装した話は、次回（第9話）に書く。</p>
+<p>ここで書いておきたいのは、10月30日17時38分の最初の git commit から、11月4日13時10分の「ようやく動いた」までの、約5日と19時間が、自分にとっての「最初のクラウドの壁」だった、ということ。</p>
+<p>その壁の中では、コードの話ではなく、権限の話で詰まっていた。</p>
+<p>その壁を越えた経験は、いま振り返ると、いちばん大事なステップだった。</p>
+<h2>もし、いまこれから始めるなら</h2>
+<p>ここからは、いまの自分が、当時の自分に伝えたいことを書く。</p>
+<p>最初の git commit から、自動デプロイまでを1日でやろうとしない。</p>
+<p>これは、自分の最大の失敗だった。</p>
+<p>普通の手順は、こうだ。</p>
+<ol>
+<li>ローカル（=自分のパソコン）でコードを書いて動かす。</li>
+<li>それを GitHub に push する。</li>
+<li>手動で1回、サーバーにデプロイする。</li>
+<li>手動で動くのを確認する。</li>
+<li>何度か手動デプロイを繰り返す。</li>
+<li>ようやく、自動デプロイを組む。</li>
+</ol>
+<p>自分はこの中の 3, 4, 5 を全部すっ飛ばして、2 のすぐ後に 6 を組んだ。</p>
+<p>その結果、コードのバグなのか、デプロイの設定の問題なのか、権限の問題なのか、何が原因か分からないまま、22時間 fix を打ち続けた。</p>
+<p>もしいまから始めるなら、最初は手動デプロイで十分。</p>
+<p>自動デプロイは、手動でデプロイの仕組みを完全に理解してから組む。</p>
+<p>そうすれば、エラーが出たとき、「どこで詰まっているか」が見えるようになる。</p>
+<p>10月30日17時38分から11月4日13時10分まで、5日と19時間。</p>
+<p>その間、自分は「赤ちゃん開発者」として、クラウドの壁に体ごとぶつかっていた。</p>
+<p>その経験は、いま振り返ると貴重だった、と素直に言える。</p>
+<p>でも、もう一度やるとしたら、もう少し賢くやる、と思う。</p>
+<p>最初は、手動で。</p>
+<hr>
+<p>次回は2025年11月4日と5日、ようやく Cloud Run が動き出したあと、LINE と Firestore と OpenAI を1日で繋いだ話を予定しています。</p>
+<p><code>#44歳から始める個人開発</code> <code>#Git</code> <code>#Cloud Run</code> <code>#GCP IAM</code> <code>#触り始めの壁</code></p>
+
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>Codexに叱られる夜、40代未経験がLINE Botを作る — AkariLab</title>
+<meta name="description" content="2025年10月17日の夜、開発で詰まっていた。 その日はCodex（GPTによるコード生成）を使って、Google Cloud Functions にLINE Webhookをつなぐ作業をしていた。 5時間くらいキーボードを叩いたけれど、…">
+<link rel="canonical" href="https://akarilab.org/articles/2026/04/Codexに叱られる夜40代未経験がLINEBotを作る/">
+<meta property="og:title" content="Codexに叱られる夜、40代未経験がLINE Botを作る — AkariLab">
+<meta property="og:description" content="2025年10月17日の夜、開発で詰まっていた。 その日はCodex（GPTによるコード生成）を使って、Google Cloud Functions にLINE Webhookをつなぐ作業をしていた。 5時間くらいキーボードを叩いたけれど、…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/04/Codexに叱られる夜40代未経験がLINEBotを作る/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/04/Codexに叱られる夜40代未経験がLINEBotを作る/img/n0e8915d4ee71_b987fdc19671f3b9ff88831212ce0448.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/04/Codexに叱られる夜40代未経験がLINEBotを作る/#article",
+  "headline": "Codexに叱られる夜、40代未経験がLINE Botを作る",
+  "datePublished": "2026-04-22T20:52:33+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/04/Codexに叱られる夜40代未経験がLINEBotを作る/",
+  "sameAs": ["https://note.com/akarilab/n/n0e8915d4ee71"],
+  "abstract": "2025年10月17日の夜、開発で詰まっていた。 その日はCodex（GPTによるコード生成）を使って、Google Cloud Functions にLINE Webhookをつなぐ作業をしていた。 5時間くらいキーボードを叩いたけれど、…"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "Codexに叱られる夜、40代未経験がLINE Botを作る", "item": "https://akarilab.org/articles/2026/04/Codexに叱られる夜40代未経験がLINEBotを作る/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>Codexに叱られる夜、40代未経験がLINE Botを作る</h1>
+<p class="article-meta">2026-04-22 · <a href="https://note.com/akarilab/n/n0e8915d4ee71" target="_blank" rel="noopener">note 原文</a></p>
+
+<figure><img src="img/n0e8915d4ee71_b987fdc19671f3b9ff88831212ce0448.jpg"><figcaption></figcaption></figure><p>2025年10月17日の夜、開発で詰まっていた。</p><p>その日はCodex（GPTによるコード生成）を使って、Google Cloud Functions にLINE Webhookをつなぐ作業をしていた。 5時間くらいキーボードを叩いたけれど、進捗という進捗はなかった。</p><p>その夜の日記に、こう書いている。</p><figure><blockquote><p>んー。今日は開発業務もう少し進むと思ったのにな 結局5時間くらいはやっていたのか。。 成果という成果は。。。うーんあまり目には見えないけど やっぱ一筋縄ではいかないな</p></blockquote><figcaption></figcaption></figure><p>40代、開発未経験。 Codexを過信して、一発で動くコードが出てくると思っていた。</p><h2>「最後うまくいったと思ったらエラー」</h2><p>その日は、最小構成のGCFデプロイ→LINE Webhook接続→Codex投入の流れでやっていた。</p><ul><li><p>最小構成のGCFデプロイ → 成功</p></li><li><p>LINE Webhook にURL登録 → イベント受信確認済</p></li><li><p>Codexで生成したコードを流し込んだら → エラー発生</p></li></ul><p>最後にうまくいったと思った瞬間、足元がヌルッといく。 開発者誰しも一度は迷子になる、GCPの森コース。</p><p>GPTに「Codexぶっこむ前の状態に完全に戻すのって難しい？」と聞いたら、「わりと難しい」と返ってきた。 Codexは複数ファイルにまたがって書き換えを提案してくるので、記憶だけで復元しようとすると、どこかで必ずこぼれる。</p><h2>「まだそんなレベルなのか」</h2><p>Codexの使い方をGPTに聞いた。</p><figure><blockquote><p>❌ NG：「LINE BotのWebhook全部書いて」 ✅ OK：「このファイルのこの関数だけを、こう修正して」</p></blockquote><figcaption></figcaption></figure><p>丸投げじゃなく、部分依頼で使う。 前提として、自分がコードの構造を把握していないと使いこなせない。</p><p>それを読んで、僕はこう返した。</p><figure><blockquote><p>まだそんなレベルなのか。。過信しすぎたなー</p></blockquote><figcaption></figcaption></figure><p>Codexは神じゃない。補助輪付きの開発者だった。 補助輪付きに頼り切ると、こちらが転ぶ。</p><h2>過信しないと、最初の一歩が出ない</h2><p>でも、と、今の僕は思う。</p><p>最初から「Codexは補助輪付き」と理解していたら、飛び込めただろうか。</p><p>過信しないと、未経験の領域には飛び込めない。 飛び込んでから、「なんだ、補助輪付きか」と気づく。その気づきが、次の一歩の燃料になる。</p><p>40代で未経験の開発領域に入った者としては、 過信して飛び込んで、叱られて、少しずつ補助輪を外していくしかない。</p><h2>「何してたかわからない日」から掘り出せること</h2><p>5時間やって、成果が見えなかった日。 何をしていたのか自分でもわからなかった。</p><p>でもGPTと会話しながら、こう整理できた。</p><ul><li><p>課題を言語化する時間</p></li><li><p>自分の手札を確認する時間</p></li><li><p>失敗のデバッグ時間</p></li><li><p>次の一歩の設計時間</p></li></ul><p>何もしていないように見える時間の中身を、言葉にすると、確かに動いていた。</p><p>開発に詰まった日の価値を、ゼロにしないこと。 これも、40代未経験者が持てる数少ない武器かもしれない。</p><h2>未経験を経験に変える、その時間の中身</h2><p>あの夜から半年。 もやログもRepiMEMOも、ひだまりも、コードは動くところまで来ている。</p><p>毎回「なんとか動いた」みたいな進捗だけど、 今日のエラーログが、明日の自分にとって手がかりになる。 自分が詰まった場所を書いておけば、同じ場所で詰まっている誰かの道標になる。</p><p>未経験が、経験になる。 それは一晩では起きないけれど、5時間を繰り返した先に起きる。</p><hr><p>個人開発の記録は、<a href="https://x.com/makochinta1" target="_blank" rel="nofollow noopener">AkariLab X（@makochinta1）</a> でほぼ毎日書いています。</p>
+
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

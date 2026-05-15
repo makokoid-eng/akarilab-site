@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>8月26日、LINE Bot が echo を返した夜 — AkariLab</title>
+<meta name="description" content="連載「触り始めて9ヶ月の記録」第6話 2025年8月26日。 その日、自分はChatGPTで新しいスレッドを立てた。 スレッドのタイトル（後から見るとそう書いてある）は、「LINEボット実装手順」。 それまでのChatGPTスレッドはすべて…">
+<link rel="canonical" href="https://akarilab.org/articles/ai-9months/8月26日LINEBotがechoを返した夜/">
+<meta property="og:title" content="8月26日、LINE Bot が echo を返した夜 — AkariLab">
+<meta property="og:description" content="連載「触り始めて9ヶ月の記録」第6話 2025年8月26日。 その日、自分はChatGPTで新しいスレッドを立てた。 スレッドのタイトル（後から見るとそう書いてある）は、「LINEボット実装手順」。 それまでのChatGPTスレッドはすべて…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/ai-9months/8月26日LINEBotがechoを返した夜/">
+<meta property="og:image" content="https://akarilab.org/articles/ai-9months/8月26日LINEBotがechoを返した夜/img/n08b7d2716bbe_539f5da0858f3cf061100ef80aac8871.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/ai-9months/8月26日LINEBotがechoを返した夜/#article",
+  "headline": "8月26日、LINE Bot が echo を返した夜",
+  "datePublished": "2026-05-13T16:10:02+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "isPartOf": { "@id": "https://akarilab.org/articles/ai-9months/#series" },"mainEntityOfPage": "https://akarilab.org/articles/ai-9months/8月26日LINEBotがechoを返した夜/",
+  "sameAs": ["https://note.com/akarilab/n/n08b7d2716bbe"],
+  "abstract": "連載「触り始めて9ヶ月の記録」第6話 2025年8月26日。 その日、自分はChatGPTで新しいスレッドを立てた。 スレッドのタイトル（後から見るとそう書いてある）は、「LINEボット実装手順」。 それまでのChatGPTスレッドはすべて…"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "触り始めて9ヶ月の記録", "item": "https://akarilab.org/articles/ai-9months/" },
+    { "@type": "ListItem", "position": 4, "name": "8月26日、LINE Bot が echo を返した夜", "item": "https://akarilab.org/articles/ai-9months/8月26日LINEBotがechoを返した夜/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/ai-9months/">← 触り始めて9ヶ月の記録へ</a></nav>
+
+<article class="article-body">
+<h1>8月26日、LINE Bot が echo を返した夜</h1>
+<p class="article-meta">2026-05-13 · <a href="https://note.com/akarilab/n/n08b7d2716bbe" target="_blank" rel="noopener">note 原文</a></p>
+
+<figure><img src="img/n08b7d2716bbe_539f5da0858f3cf061100ef80aac8871.jpg"><figcaption></figcaption></figure><p>連載「触り始めて9ヶ月の記録」第6話</p>
+<hr>
+<p>2025年8月26日。</p>
+<p>その日、自分はChatGPTで新しいスレッドを立てた。</p>
+<p>スレッドのタイトル（後から見るとそう書いてある）は、「LINEボット実装手順」。</p>
+<p>それまでのChatGPTスレッドはすべて、感情整理か転職活動か日々の整えのためのものだった。</p>
+<p>「実装手順」という言葉を、自分の文脈で初めて使った日だった。</p>
+<p>スレッドの冒頭で、ChatGPTがこう書き始めていた。</p>
+<blockquote>
+<p>了解👌 じゃあ「公式LINE × AI活用」について、必要なとこだけ整理して"引き継ぎ資料"っぽくまとめるね。</p>
+
+<h2>1. 全体像</h2>
+<p>LINE公式アカウントを「入り口」にして、ユーザーからのメッセージをAIに渡して返す仕組み。
+実装は Messaging API を通じて行う。
+基本フロー：
+① ユーザーがLINEにメッセージ送信
+② LINEがWebhookでプログラムに通知
+③ プログラムがAI（ChatGPT等）に投げる
+④ AIの返答をLINEに返す</p>
+</blockquote>
+<p>「Messaging API」も「Webhook」も、その日初めて見る単語だった。</p>
+<p>そして、ChatGPTはこう続けていた。</p>
+<blockquote>
+<h2>2. 技術要素（最小構成）</h2>
+<p>Google Apps Script (GAS) を使うと無料＆簡単
+- Webhook受け → メッセージ処理 → LINEへ返信
+- LLM呼び出しは UrlFetchApp で OpenAI API 叩く</p>
+</blockquote>
+<p>「GAS」も「UrlFetchApp」も「OpenAI API 叩く」も、初めて見る言葉だった。</p>
+<p>それでも、なぜかその夜、自分はやってみることにした。</p>
+<p><code>&lt;!-- ここから先は有料 --&gt;</code></p>
+<h2>「GASどうやって使い始めるの？」</h2>
+<p>スレッドを少し読み進むと、自分のメッセージが残っている。</p>
+<blockquote>
+<p>GASどうやって使い始めるの？</p>
+</blockquote>
+<p>これが、自分の人生で最初の「コードを書くための質問」だった、と思う。</p>
+<p>その前まで、ChatGPTにコードを書かせたことは何度もあった。Excelの関数、SQL風のクエリ、Pythonのスニペット。でも、それらは全部「コードをくれ」と頼んで、もらったものを誰かに見せるか、Excelに貼って終わりだった。</p>
+<p>「自分がそれを動かす」「自分の手で何かをデプロイする」というイメージは、ずっと持っていなかった。</p>
+<p>8月26日は違った。</p>
+<p>「GASをどうやって使い始めるのか」を、自分の手で動かす前提で聞いていた。</p>
+<p>ChatGPTは丁寧に答えてくれた。Googleアカウントでscript.google.comに行って、新規プロジェクトを作って、コードを貼り付けて、デプロイして、Webhook URLをLINE Developersに登録する、という手順を、一つずつ。</p>
+<p>その通りにやってみた。</p>
+<p>最初は、何も動かなかった。</p>
+<h2>「試したけど上手くいかなくて同じエラー出てくる」</h2>
+<p>スレッドにこう書いてある。</p>
+<blockquote>
+<p>試したけど上手くいかなくて同じエラー出てくる</p>
+</blockquote>
+<p>ChatGPTがコードを直してくれる。
+それを貼り付ける。デプロイする。
+LINEに「テスト」と送る。
+返事が返ってこない。</p>
+<p>エラーログを見せる。ChatGPTがまた直す。貼り付ける。デプロイする。LINEに送る。返事が返ってこない。</p>
+<p>これを、何回も繰り返した。</p>
+<p>スレッドにはこう書いてある。</p>
+<blockquote>
+<p>GASデプロイのコード再度送って</p>
+</blockquote>
+<p>何度も「再度送って」と頼んでいる。</p>
+<p>そのうち、自分のメッセージがちょっとイラ立ってくる。</p>
+<blockquote>
+<p>同じことやって何も変わらないのなら何かしら問題あるでしょ？</p>
+</blockquote>
+<p>44歳の人間が、ChatGPTに対して、若干キレている。</p>
+<p>でも、不思議と、止めようとは思わなかった。</p>
+<p>「諦めて寝る」という選択肢が、その夜の自分にはなかった。</p>
+<p>スレッドの後半に、転機が訪れる。</p>
+<h2>Echoが返ってきた</h2>
+<p>スレッドにはこう書いてある。</p>
+<blockquote>
+<p>Echoは返ってくるようになった</p>
+</blockquote>
+<p>何が起きていたのかというと、最も単純な「送ったメッセージをそのまま返す Bot（=echo bot）」が、ようやく動いた、ということだった。</p>
+<p>自分がLINEに「テスト」と送る。
+LINE Bot が「テスト」と返す。</p>
+<p>それだけ。</p>
+<p>それだけのことに、たぶん、3時間か4時間かかっていた。</p>
+<p>でも、その「テスト」が「テスト」になって返ってきた瞬間、自分の世界の見え方は、本気で変わった。</p>
+<p>人生で初めて、自分が書いたコード（正確には、ChatGPTが書いて自分が貼り付けたコード）が、自分のスマホの中で動いていた。</p>
+<p>「ChatGPTにコードを書いてもらう」と、「自分のLINEに自分のBotが返事を返してくる」は、ぜんぜん違うことだった。</p>
+<p>前者は、テキストが画面に出ているだけだった。
+後者は、自分の手のひらのスマホの中で、自分の作った何かが応答していた。</p>
+<p>それは、コードがどうこうの話ではなく、「世界に対して何かを動かした」という感覚の話だった。</p>
+<h2>「完全にAIチャット」</h2>
+<p>Echo が返ってきたあと、スレッドはさらに進む。</p>
+<p>ChatGPTのコードを少し書き換えて、受け取ったメッセージを OpenAI API に投げて、その返事を LINE に返す、というところまで行った。</p>
+<p>つまり、自分のLINEに「今日の夕食何にしよう」と送ると、自分の作ったBotがChatGPTに聞いて、「今日の冷蔵庫の中身を踏まえると」みたいな返事を返してくる、ということができるようになった。</p>
+<p>スレッドにはこう書いてある。</p>
+<blockquote>
+<p>完全にAIチャット</p>
+</blockquote>
+<p>「完全にAIチャット」と本人が書いた瞬間、それはもう、彼にとっては「自分のAIサービス」になっていた。</p>
+<p>商用の質ではなかった。バグだらけだった。エラーも頻発した。</p>
+<p>でも、「自分の作ったAIが、自分のLINEで動いている」という事実が、44歳の人間の中で、確実に何かを変えた。</p>
+<h2>この日の意味</h2>
+<p>この日、コードに触ったことはあった、と前話までで何度か書いた。</p>
+<p>ChatGPTにコードを書かせて、Excelに貼ったり、Slack風のチャットボットを作ってみたり、ペライチでLPを作ったり、ということは、もっと前からやっていた。</p>
+<p>でも、それらは全部、「コードを使う」ことの話だった。</p>
+<p>8月26日は違った。</p>
+<p>その日、自分は「コードを動かす」側に立った。</p>
+<p>LINE Messaging API という名前を初めて知り、Webhookという概念を初めて知り、GASというツールを初めて触り、UrlFetchApp という関数を初めて使い、OpenAI API のキーを初めて発行し、それらを組み合わせて、自分のスマホで動く何かを作った。</p>
+<p>技術書は1冊も読んでいない。プログラミングスクールにも行っていない。GitもNode.jsもまだ知らない。</p>
+<p>それでも、Echo は返ってきた。</p>
+<p>「コードが書ける」という言葉の意味は、たぶん人によって違う。</p>
+<p>ある人にとっては「アルゴリズムが書ける」ことだろうし、別の人にとっては「フレームワークが使える」ことだろうし、別の人にとっては「設計ができる」ことだろう。</p>
+<p>44歳の自分にとっての「コードが書ける」の最初の定義は、「自分のスマホで自分の作ったBotが動く」だった。</p>
+<p>その定義は、8月26日の夜に決まった。</p>
+<h2>ここから2ヶ月</h2>
+<p>ここからGitに最初のコミットをするまで、ちょうど2ヶ月かかる。</p>
+<p>その2ヶ月のあいだに、もう少しBotを改造して、食改善Botという名前の自分のプロダクトを完成させ、ChatGPTに「もう少し本格的にやるにはどうすればいい？」と聞いて、Node.jsとVSCodeとGitのインストーラーをダウンロードする日がやってくる。</p>
+<p>その話は次回（第7話）にとっておく。</p>
+<p>ここで書いておきたいのは、8月26日の夜の「Echoが返ってきた」体験が、その後の全ての土台になった、ということだった。</p>
+<p>連載第1話で、台風のホテルで「生成AI」という言葉を初めて知ってから、362日後。</p>
+<p>ようやく、自分が「コードを動かす側」になった夜だった。</p>
+<h2>もし、いまこれから始めるなら</h2>
+<p>ここからは、いまの自分が、当時の自分に伝えたいことを書く。</p>
+<p>最初に動かすコードは、echo bot でいい。</p>
+<p>「送ったメッセージをそのまま返す」だけのBot。</p>
+<p>何の機能もない、何の価値もない、誰の役にも立たない、ただ自分のスマホに自分のメッセージを返してくるだけのBot。</p>
+<p>それでいい。</p>
+<p>そのBot が動いた瞬間、世界の見え方が変わる。</p>
+<p>「コードが書ける」「コードが動く」「コードがインターネットを介してスマホに届く」という3つを、最小の構成で、自分の手で体験する。</p>
+<p>これさえやっておけば、その後の Git やら Cloud Run やら Firestore やらの話は、全部「もう一度別のレイヤーで同じことをやる」だけになる。</p>
+<p>最初の echo を、自分の手で動かす。</p>
+<p>それが、コードを書ける人生と、書けない人生を分ける、たぶん一番大事な一夜だった、と振り返って思う。</p>
+<p>8月26日、LINE に「テスト」と送って「テスト」が返ってきた瞬間が、自分の人生で「コードを書く側」になった、初めての日だった。</p>
+<hr>
+<p>次回は2025年10月、食改善Bot を完成させて、Git と Node.js と VSCode のインストーラーを落とした日の話を予定しています。</p>
+<p><code>#44歳から始める個人開発</code> <code>#LINE Bot</code> <code>#GAS</code> <code>#触り始め</code> <code>#echo bot</code></p>
+
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>
