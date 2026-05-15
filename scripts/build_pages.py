@@ -55,7 +55,7 @@ TARGETS: list[str] = [
     # Phase 5: /articles/ 連載ハブ＋第1話プレースホルダー
     "articles/index.html",
     "articles/ai-9months/index.html",
-    "articles/ai-9months/dev-log-01.html",
+    "articles/ai-9months/dev-log-01/index.html",
     # Phase 6: note エクスポート一括移行（2026-05-15）
     # 連載 dev-log-02..14（XML 出現順、5/13公開+本文3000字以上）
     "articles/ai-9months/44歳台風のホテルで生成AIという言葉を初めて聞いた夜/index.html",

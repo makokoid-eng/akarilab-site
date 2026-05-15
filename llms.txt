@@ -22,7 +22,7 @@
 ## Articles
 - /articles/                     note 記事のまとめ（AkariLab メディア索引）
 - /articles/ai-9months/          連載「触り始めて9ヶ月の記録」（2026-05-17 開始）
-- /articles/ai-9months/dev-log-01.html  連載第1話（2026-05-17 公開予定）
+- /articles/ai-9months/dev-log-01/  連載第1話（2026-05-17 公開予定）
 - https://note.com/akarilab      note メディア本体
 
 ### 連載「触り始めて9ヶ月の記録」各話
