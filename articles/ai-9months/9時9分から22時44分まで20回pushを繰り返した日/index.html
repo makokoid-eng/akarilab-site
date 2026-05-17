@@ -36,7 +36,6 @@
   "author": { "@id": "https://akarilab.org/#org" },
   "publisher": { "@id": "https://akarilab.org/#org" },
   "isPartOf": { "@id": "https://akarilab.org/articles/ai-9months/#series" },"mainEntityOfPage": "https://akarilab.org/articles/ai-9months/9時9分から22時44分まで20回pushを繰り返した日/",
-  "sameAs": ["https://note.com/akarilab/n/n6250a2a7d1fc"],
   "abstract": "連載「触り始めて9ヶ月の記録」第9話 2025年11月5日、9時9分。 前日（11月4日）の昼に、ようやくクラウドの権限地獄を抜けて、自動デプロイが動き出した、と第8話で書いた。 11月5日の朝、その続きをやっていた。 git log には…"
 }
 </script>
@@ -58,7 +57,7 @@
 
 <article class="article-body">
 <h1>9時9分から22時44分まで、20回 push を繰り返した日</h1>
-<p class="article-meta">2026-05-13 · <a href="https://note.com/akarilab/n/n6250a2a7d1fc" target="_blank" rel="noopener">note 掲載版</a></p>
+<p class="article-meta">2026-05-13</p>
 
 <figure><img alt="9時9分から22時44分まで、20回 push を繰り返した日" src="img/n6250a2a7d1fc_8023cbae8bd14ff1d1fc8466c938d9a2.jpg"><figcaption></figcaption></figure><p>連載「触り始めて9ヶ月の記録」第9話</p>
 <hr>
@@ -78,100 +77,12 @@
 <p>朝9時から夜22時45分まで、ほぼ14時間。</p>
 <p>その間に、自分は20回近くの <code>git push</code> を打っていた。</p>
 <p>何をしていたかというと、LINE Bot を「動くだけ」から「ちゃんとしたサービス」にまで仕上げていた。</p>
-<p><code>&lt;!-- ここから先は有料 --&gt;</code></p>
-<h2>朝、step1 → step2 → step3 の機能爆発</h2>
-<p>朝の作業は、ある明確な順序で進んでいた。</p>
-<blockquote>
-<p>09:09 feat: move line.js into repi-webhook and update webhook modules
-13:47 feat(step2): Firestore learning &amp; draft saving + line helper
-14:37 feat(step3): OpenAI summaryDraft generation + firestore update</p>
-</blockquote>
-<p>「step2」「step3」と書かれているとおり、ChatGPT に「LINE Bot を本格的にやるための3段階」を教えてもらいながら、それを1日で全部実装していた。</p>
-<p>step1（朝9時の作業）は、LINE からのメッセージを安全に受け取るための「署名検証」だった。LINE のサーバーから来たメッセージなのか、第三者の偽メッセージなのかを、暗号で確認する仕組み。</p>
-<p>step2（13時47分）は、Firestore（=Googleが提供するデータベース）への保存だった。LINE で受け取ったメッセージを、ユーザーごとに保存する。</p>
-<p>step3（14時37分）は、OpenAI API を呼び出して、保存したメッセージを要約する機能だった。</p>
-<p>つまり、午前9時から午後2時37分までの5時間半で、「受け取る → 保存する → AIで処理する」というBotの基本機能を、3つとも実装し終わっていた。</p>
-<p>5時間半。</p>
-<p>8月26日に初めて echo を返した日から、ちょうど71日後だった。</p>
-<h2>午後、CI まわりの修正連打</h2>
-<p>step3 が動いた20分後、コミット履歴の様子が変わる。</p>
-<blockquote>
-<p>14:56 fix: add OPENAI_API_KEY env for Cloud Functions deploy
-15:20 fix: add package-lock.json for CI
-17:47 ci: add OPENAI key to deploy workflow + auth debug
-18:10 chore(ci): remove jq write step; use setup-gcloud service_account_key
-18:14 explicitly activate GCP service account for deploy
-18:54 ci: SA user binding added
-19:12 ci: trigger workflow run
-19:20 ci: switch to google-github-actions/auth (no key.json echo)</p>
-</blockquote>
-<p>午後3時から夜7時20分まで、ほぼ4時間半、CI（自動デプロイ）まわりの修正が連続している。</p>
-<p>「OPENAI_API_KEY env」「package-lock.json」「service_account_key」「SA user binding」「github-actions/auth」</p>
-<p>第8話で書いた「GCP IAM 権限地獄」の余韻だった。</p>
-<p>step3 で OpenAI API を呼ぶようにしたら、今度は「OpenAI のキーが本番環境にない」というエラーが出て、それを直したら別の権限エラーが出て、というのが繰り返されていた。</p>
-<p>ただ、第8話のときと違ったのは、エラーが出るたびに「何が起きているか」が少しずつ見えるようになっていたことだった。</p>
-<p>「key.json echo」というメッセージで、自分でも「あ、Google Cloud のサービスアカウントの認証方式が古いから新しい方に切り替えよう」と判断できるレベルには、たった1週間で達していた。</p>
-<p>これは、5日前の自分（10月30日の「token creator role」を意味も分からず打っていた自分）と比べると、本当に別人だった。</p>
-<h2>夜、UX を作り始める</h2>
-<p>19時20分以降、コミットのテーマがまた変わる。</p>
-<blockquote>
-<p>20:07 feat: welcome (follow), help command, and draft saved replies
-20:25 feat: immediate reply + push summary message
-20:42 feat: immediate reply + push; tolerant draft command; help &amp; welcome; debug log
-20:52 fix: never abort on reply failure; save-then-reply; push fallback
-21:58 feat: quick-reply menu + postback + session mode (draft)
-22:17 feat: quick replies everywhere + safeReply + tolerant draft + async push
-22:44 feat: full version with quick replies, safeReply, tolerant draft, summary test</p>
-</blockquote>
-<p>「welcome」「help」「quick reply」「safeReply」「tolerant draft」</p>
-<p>これらは、ユーザーが Bot と対話するときの体験を作る部分だった。</p>
-<p>友だち追加されたら自動で挨拶する。help と打ったらメニューを返す。クイック返信（=タップで選べる選択肢ボタン）を出す。返信に失敗してもアプリが落ちないようにする。</p>
-<p>ここに自分の現場の経験が、たぶん効いていた。</p>
-<p>21年間、店舗運営をやってきた人間にとって、「お客様が初めて入ってきたとき、いきなり『何ですか』と返さない」というのは、染みついた習慣だった。</p>
-<p>LINE Bot に friend 追加された瞬間に welcome メッセージが出る、というのは、エンジニア的な発想じゃなくて、店舗運営の発想だった。</p>
-<p>夜の3時間で、その「店舗運営の発想」を、コードに翻訳していた。</p>
-<h2>なぜ20回 push できたか</h2>
-<p>ChatGPT との対話だけで、こんなことができたわけじゃない。</p>
-<p>11月5日のあの1日、自分が ChatGPT と話していた頻度は、おそらく1時間あたり数十回。</p>
-<p>「このエラー出た」と貼り付けて、「コードを修正して」と頼んで、貼り付け直して、デプロイして、エラーが出て、また貼り付けて、を1日中やっていた。</p>
-<p>その繰り返しの中で、自分の中に何が積み上がっていったか。</p>
-<p>「これくらいの修正なら自分でできる」という感覚だった。</p>
-<p>朝9時の時点では、ChatGPT に書いてもらわないと何も触れなかった。</p>
-<p>夜22時の時点では、ちょっとした fix なら「あ、これは多分この行を変えればいい」と自分で見つけられるようになっていた。</p>
-<p>たった13時間で。</p>
-<p>これは、たぶん、コードを「読む」のではなく、「触る」回数が、その日に20回近くあったからだった。</p>
-<p>20回 push して、20回エラーを見て、20回修正をしたら、コードの一部は自分の手に馴染んでくる、ということが、その日に分かった。</p>
-<h2>ここから始まった3週間</h2>
-<p>11月5日のこの「20コミットの日」のあと、自分は1週間ほど repimemo の調整を続けて、それからしばらく開発の手を止める。</p>
-<p>そのあとの12月は、本業のエリアマネージャーの仕事が年末で忙しくなって、コードはほとんど触れなかった。</p>
-<p>repimemo を「人に使ってもらえる」状態にまで持っていくのは、年が明けて2026年1月の話だった。</p>
-<p>その話は次回（第10話）にとっておくが、ここで書いておきたいのは、11月5日の20コミットの日が、自分にとって「コードに馴染んだ」最初の日だった、ということ。</p>
-<p>その日まで、自分はコードを「外側から触る人」だった。</p>
-<p>その日から、コードを「中まで入って触る人」になった。</p>
-<h2>もし、いまこれから始めるなら</h2>
-<p>ここからは、いまの自分が、当時の自分に伝えたいことを書く。</p>
-<p>完璧なコードを1回でコミットしようとしない。</p>
-<p>これは、当時の自分が ChatGPT に教わって、いちばん効いた習慣だった。</p>
-<p>「小さく区切って」「頻繁にコミットして」「頻繁にデプロイして」「何が壊れたか早く見つける」。</p>
-<p>1日に20回 push してもいい。むしろ、それくらい push したほうが、コードに早く馴染める。</p>
-<p>そして、自動デプロイを組んでおくと、push した瞬間に本番でエラーが見える。本番で動かしながら直す、という乱暴なやり方が、最初のうちは一番学べる。</p>
-<p>これは、エンジニア界の作法としては、たぶん少し荒い。ふつうは、ローカルでテストして、ステージング環境で確認して、それから本番、というのが筋。</p>
-<p>でも、44歳の触り始めの人間にとっては、「動くものを毎時間更新する」という荒さが、たぶん一番効いた。</p>
-<p>その荒さの中で、コードと自分の距離が縮まる。</p>
-<p>20回 push の1日を、たぶん月に1回でいいから、自分に課してほしい。</p>
-<p>それが、コードを「読む側」から「触る側」に移るための、いちばん速いやり方だった、と振り返って思う。</p>
-<p>そして、もうひとつ、当時の自分が ChatGPT と20回近く往復したことから、学んだことがある。</p>
-<p>AI は「代わりに書いてくれる存在」ではなかった。</p>
-<p>「試行回数を増やしてくれる存在」だった。</p>
-<p>44歳の自分が、エンジニアのバックグラウンドがないまま、1日に20回 push できたのは、AI が代わりに書いてくれたからじゃない。AI が一緒に試行回数を増やしてくれたから、自分の頭でも理解する速度が、ふつうの1日の何倍にもなっていた。</p>
-<p>これは、AI を「コードを生成する道具」だと思っているうちは、たぶん手に入らない感覚だった。</p>
-<p>AI を「試行回数の相棒」だと思った瞬間に、自分の学習速度が桁違いに変わった。</p>
-<p>11月5日の朝9時9分から夜22時44分まで、13時間35分。</p>
-<p>その13時間で、自分は人生で初めて「コードに馴染んだ」と感じた。</p>
 <hr>
-<p>次回は2026年1月、repimemo を「人に使ってもらえる」状態にまで仕上げた話を予定しています。</p>
-<p><code>#44歳から始める個人開発</code> <code>#Git push</code> <code>#LINE Bot</code> <code>#コードに馴染む</code> <code>#CI/CD</code></p>
-
+<aside class="paywall-cta">
+  <p>──ここまで、試し読みです。お読みいただき、ありがとうございました。</p>
+  <p>本編は note でお読みいただけます。</p>
+  <p><a href="https://note.com/akarilab/n/n6250a2a7d1fc" target="_blank" rel="noopener">note で続きを読む →</a></p>
+</aside>
 </article>
 
 <!-- include: assets/partials/footer-common.html -->
