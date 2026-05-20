@@ -122,6 +122,16 @@ TARGETS: list[str] = [
     "articles/2026/05/職場でサンタクロースになった夜から行きつけのカフェで涙が溢れた日まで/index.html",
     "articles/2026/05/5時半の始発と誕生日の朝の解釈/index.html",
     "articles/2026/05/23時52分元カノを大切な存在と書いた夜/index.html",
+    "articles/2026/05/手をぶつけてもその手を合わせて前に進みたいと伝えた夜-1-3/index.html",
+    "articles/2026/05/二十人が受け取らなくてもその後ろに六人いるかもしれない-2/index.html",
+    "articles/2026/05/意志が弱かったで片付けなかった決壊の日の記録-3/index.html",
+    "articles/2026/05/朝の内省で感情の蓋が開いたまま現場に出てしまった日-4/index.html",
+    "articles/2026/05/マクドナルドで隣のご婦人にハンバーガー券を渡した日-5/index.html",
+    "articles/2026/05/大好きを言わなかった夜明日その人の面接試験が来る-6/index.html",
+    "articles/2026/05/売れることを目的にせずに有料の記事を置いた日-7/index.html",
+    "articles/2026/05/走れる人には休め歩けない人には歩けと返した夜-8/index.html",
+    "articles/2026/05/方向転換という言葉が焦りの逃げ場として出てきた昼-9/index.html",
+    "articles/2026/05/野菜食べられないと書きながらほうれん草を2束茹でていた夜-10/index.html",
 ]
 
 # <!-- include: foo/bar.html --> ... <!-- include-end: foo/bar.html -->
