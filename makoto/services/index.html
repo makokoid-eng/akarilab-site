@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>まこと の提供サービス — AkariLab</title>
+<meta name="description" content="まこと（店舗運営マネージャー／個人開発者）が、ココナラと BrAIN で公開している支援サービス3件。組織監査制度の型診断、LINE Bot 業務改善 30分相談、店舗運営20年マネージャーの AI 実用例20選。">
+<link rel="canonical" href="https://akarilab.org/makoto/services/">
+<meta property="og:title" content="まこと の提供サービス">
+<meta property="og:description" content="ココナラと BrAIN で公開している支援サービス3件。組織監査制度の型診断、LINE Bot 業務改善相談、AI 実用例20選。">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://akarilab.org/makoto/services/">
+<meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "まこと", "item": "https://akarilab.org/makoto/" },
+    { "@type": "ListItem", "position": 3, "name": "提供サービス", "item": "https://akarilab.org/makoto/services/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "まこと の提供サービス",
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": 3,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Service",
+        "name": "現役マネジャーが組織の評価監査制度を型診断します",
+        "url": "https://coconala.com/services/4227512",
+        "description": "監査表を回しているのに現場の質が変わらない組織向けに、3層連携メソッド（自己評価×ピア観察×本部監査）をベースに「型」を診断する。質問票10問でA4 1〜2枚のPDFレポートと30分面談を提供。",
+        "serviceType": "業務改善・BPRコンサルティング",
+        "areaServed": "JP",
+        "provider": { "@id": "https://akarilab.org/makoto/#person" },
+        "offers": {
+          "@type": "Offer",
+          "price": "4000",
+          "priceCurrency": "JPY",
+          "availability": "https://schema.org/InStock",
+          "url": "https://coconala.com/services/4227512"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Service",
+        "name": "中小企業の業務をLINE Botで改善｜30分ヒアリング相談",
+        "url": "https://coconala.com/services/4214161",
+        "description": "LINE Bot を業務に組み込みたい中小企業向けに、ヒアリングから設計の入口までを30分で扱う。実装範囲・運用負荷・既存ツール連携の判断材料を提供。",
+        "serviceType": "業務改善コンサルティング",
+        "areaServed": "JP",
+        "provider": { "@id": "https://akarilab.org/makoto/#person" },
+        "offers": {
+          "@type": "Offer",
+          "price": "6000",
+          "priceCurrency": "JPY",
+          "availability": "https://schema.org/InStock",
+          "url": "https://coconala.com/services/4214161"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Service",
+        "name": "1on1・報告書・朝礼が半分の時間で動く 店舗運営20年マネージャーのAI実用例20選",
+        "url": "https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY",
+        "description": "1on1・報告書・朝礼の時間を半減させた、店舗運営マネージャーの AI 実用例20件＋プロンプト集10個。人事・育成／数値・分析／コミュニケーション／戦略・意思決定の4カテゴリ各5例。",
+        "serviceType": "業務改善ノウハウ（テキスト買い切り）",
+        "areaServed": "JP",
+        "provider": { "@id": "https://akarilab.org/makoto/#person" },
+        "offers": {
+          "@type": "Offer",
+          "price": "4980",
+          "priceCurrency": "JPY",
+          "availability": "https://schema.org/InStock",
+          "url": "https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY"
+        }
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="/makoto/">← まこと トップへ</a></nav>
+
+<section class="hero">
+  <h1>提供サービス</h1>
+  <p class="tagline">ココナラと BrAIN で公開している支援サービス</p>
+</section>
+
+<section class="section">
+  <p>
+    店舗運営の現場で21年、いまは複数店舗を統括する店舗運営マネージャーをしている。
+    並行して個人開発で <a href="/akarilab/">AkariLab</a> を運営し、LINE Bot を5本動かしている。
+  </p>
+  <p>
+    そのなかで現場と開発の両方から見えてきた「型」と「実用例」を、3つのサービスで外に出している。
+    どれもオンライン完結で、外食業以外の業種でも使えるように汎用化してある。
+  </p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">サービス一覧</h2>
+
+  <article class="card">
+    <h3>1. 現役マネジャーが組織の評価監査制度を型診断します</h3>
+    <ul>
+      <li>価格：4,000円</li>
+      <li>提供時間：30分（ビデオチャット面談）＋ A4 1〜2枚 PDF レポート</li>
+      <li>媒体：ココナラ（コンサルティング・士業 / 業務改善・BPRコンサル）</li>
+    </ul>
+    <p>
+      監査表を回しているのに現場の質が変わらない、評価制度はあるのにスタッフの定着につながらない、
+      店長・現場リーダーの評価目線にバラつきがある——こうした組織向けに、
+      3層連携メソッド（自己評価×ピア観察×本部監査）をベースに、いまの組織が4つの型のどこにあるかを診断する。
+    </p>
+    <p>
+      質問票10問に回答してもらい、A4 1〜2枚のPDFレポート（現状の長所と注意点・複数視点の仮説3つ・
+      次の一歩3案）と30分の面談を返す。業種は問わない。
+    </p>
+    <p><a href="https://coconala.com/services/4227512">ココナラで見る</a></p>
+  </article>
+
+  <article class="card">
+    <h3>2. 中小企業の業務をLINE Botで改善｜30分ヒアリング相談</h3>
+    <ul>
+      <li>価格：通常 6,000円 ／ モニター 4,000円</li>
+      <li>提供時間：30分（ビデオチャット）</li>
+      <li>媒体：ココナラ（コンサルティング・士業 / 業務改善）</li>
+    </ul>
+    <p>
+      LINE Bot を業務に組み込みたい中小企業向けの30分ヒアリング。
+      実装範囲、運用負荷、既存ツールとの連携、内製と外注の分岐——導入前の判断に必要な材料を、
+      現場で動いている Bot を作ってきた目線から整理する。
+    </p>
+    <p>
+      「現場で動く Bot」の話に絞っている。テンプレ通信販売的な設計提案はしない。
+    </p>
+    <p><a href="https://coconala.com/services/4214161">ココナラで見る</a></p>
+  </article>
+
+  <article class="card">
+    <h3>3. 1on1・報告書・朝礼が半分の時間で動く 店舗運営20年マネージャーのAI実用例20選</h3>
+    <ul>
+      <li>価格：4,980円（買い切り）</li>
+      <li>形式：BrAIN ノウハウ（テキスト）</li>
+      <li>媒体：BrAIN</li>
+    </ul>
+    <p>
+      1on1・報告書・朝礼の時間を半減させた、店舗運営マネージャーの AI 実用例20件と、
+      そのまま使えるプロンプト集10個。
+    </p>
+    <p>
+      カテゴリは4つ：人事・育成／数値・分析／コミュニケーション／戦略・意思決定。
+      各5例ずつで合計20例。生成AIを業務に組み込む段階の人向けに書いている。
+    </p>
+    <p><a href="https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY">BrAIN で見る</a></p>
+  </article>
+</section>
+
+<section class="section">
+  <h2 class="section-title">問い合わせの入口</h2>
+  <p>
+    上記サービス以外の相談（業種特化版、継続伴走、カスタム実装など）は、
+    <a href="/makoto/contact/">連絡先</a> から個別にやりとりしている。
+    ココナラの「見積もり相談」からでも受け付けている。
+  </p>
+</section>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

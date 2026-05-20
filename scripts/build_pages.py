@@ -44,6 +44,8 @@ TARGETS: list[str] = [
     "makoto/profile/index.html",
     "makoto/timeline/index.html",
     "makoto/contact/index.html",
+    # Phase 2 追補 (2026-05-20): /makoto/services/ 提供サービス集約ハブ
+    "makoto/services/index.html",
     # Phase 3: ひだまり LP の /hidamari/ 移設
     "hidamari/index.html",
     # Phase 4: もやログ・りぴメモ本格 LP
