@@ -1,10 +1,22 @@
+/*
+  AkariLab site.css (2026-05-20 拡張)
+  - トップ index.html の黒背景カード調と統一感のあるベース
+  - /makoto/* 配下、各プロダクト LP、articles/* 配下が暗色ベースで整う
+  - トップ index.html はインライン <style> を持つため影響を受けない（インラインが勝つ）
+  - !important は使わない
+*/
+
 :root {
   --bg: #0e0e0e;
   --bg-card: #161616;
+  --bg-card-hover: #1a1a1a;
   --text: #e0e0e0;
   --text-dim: #999;
+  --text-muted: #666;
   --border: #222;
   --accent: #4CAF7D;
+  --accent-orange: #E8913A;
+  --accent-blue: #5B8CCC;
   --accent-text: #ffffff;
 }
 
@@ -14,10 +26,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
+  font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -27,4 +45,299 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* 戻るリンク（ページ上部の nav） */
+nav.header {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+}
+nav.header a {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+nav.header a:hover {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+/* Hero（ページ上部の見出し） */
+.hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 24px 32px;
+}
+.hero h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.hero .tagline {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* Description（ハブの説明文） */
+.description {
+  max-width: 720px;
+  margin: 0 auto 16px;
+  padding: 0 24px;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 2;
+}
+
+/* Section（汎用セクション） */
+.section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 24px;
+}
+.section p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 2;
+  margin-bottom: 12px;
+}
+.section ul,
+.section ol,
+.section dl {
+  margin-left: 0;
+  padding-left: 0;
+}
+.section ul,
+.section ol {
+  list-style: none;
+}
+.section ul li,
+.section ol li {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.9;
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: 4px;
+}
+.section ul li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+.section ol {
+  counter-reset: ol-counter;
+}
+.section ol li {
+  counter-increment: ol-counter;
+}
+.section ol li::before {
+  content: counter(ol-counter) ".";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+.section dl dt {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+.section dl dd {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.9;
+  margin-bottom: 8px;
+  margin-left: 0;
+  padding-left: 16px;
+  position: relative;
+}
+.section dl dd::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  top: 2px;
+}
+.section-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.section-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+.section .section-subtitle {
+  padding: 0;
+  max-width: none;
+}
+.section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* Card（汎用カード：services 一覧で使用） */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+.card:hover {
+  background: var(--bg-card-hover);
+}
+.card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.card ul {
+  margin-bottom: 12px;
+}
+.card ul li {
+  font-size: 13px;
+}
+.card p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.card a {
+  color: var(--accent);
+}
+
+/* Article（記事本文ページ） */
+.article-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 24px;
+}
+.article-body h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.article-body h2 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.article-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.article-body p {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 2;
+  margin-bottom: 16px;
+}
+.article-body blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 16px;
+  margin: 16px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.article-body ul,
+.article-body ol {
+  margin: 12px 0 16px 0;
+  padding-left: 24px;
+}
+.article-body ul li,
+.article-body ol li {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.9;
+  margin-bottom: 4px;
+}
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+.article-body a {
+  color: var(--accent);
+}
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+.article-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.article-meta a {
+  color: var(--text-dim);
+}
+
+/* Footer（共通フッター） */
+footer {
+  max-width: 720px;
+  margin: 40px auto 0;
+  padding: 24px 24px 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+footer .links {
+  margin-bottom: 8px;
+}
+footer .links a {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0 12px;
+}
+footer .links a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* レスポンシブ */
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 24px; }
+  .hero h1 { font-size: 24px; }
+  .section { padding: 20px 16px; }
+  .section-subtitle { padding: 0 16px; }
+  .description { padding: 0 16px; }
+  .article-body { padding: 24px 16px; }
+  .article-body h1 { font-size: 20px; }
+  .article-body h2 { font-size: 17px; }
+  .card { padding: 16px; }
+  nav.header { padding: 16px 16px 0; }
+  footer { padding: 16px 16px 24px; }
 }

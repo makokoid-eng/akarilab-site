@@ -191,6 +191,46 @@
       color: var(--text-muted);
       align-self: center;
     }
+    /* Services ハブ誘導カード */
+    .service-hub-link {
+      display: block;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .service-hub-link:hover { background: #1a1a1a; }
+    .service-hub-link:focus-visible {
+      outline: 2px solid var(--accent-orange);
+      outline-offset: 3px;
+    }
+    .service-hub-link h3 { font-size: 17px; margin-bottom: 6px; }
+    .service-hub-link .hub-lead {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+    .service-hub-link .hub-item {
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+    }
+    .service-hub-link .hub-item:first-of-type {
+      border-top: none;
+      padding-top: 4px;
+    }
+    .service-hub-link .hub-item-title {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .service-hub-link .hub-item-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .service-hub-link .hub-cta {
+      font-size: 13px;
+      color: var(--accent-orange);
+      margin-top: 14px;
+      text-align: right;
+    }
 
     /* About */
     .about {
@@ -375,58 +415,31 @@
   <div class="services">
     <h2>Services</h2>
     <p class="lead">
-      AkariLabで作っているLINE Botの設計ノウハウを、業務改善の相談として個別にお受けします。<br>
-      「うちの店舗・会社の業務はLINE Botで楽になるのか？」を、現役の店長／エリアマネージャーかつ開発者の視点で切り分けます。
+      AkariLabで作っているLINE Botの設計ノウハウと、外食現場21年で蓄えた組織運営の型を、3つのサービスで外に出しています。<br>
+      決済・連絡はそれぞれの媒体（ココナラ／BrAIN）経由です。
     </p>
 
-    <div class="service-card">
-      <h3>業務改善LINE Bot 30分相談</h3>
-      <p class="price">5,000円 / オンライン30分 ・ ココナラ経由</p>
+    <a href="/makoto/services/" class="service-card service-hub-link">
+      <h3>提供サービス一覧 →</h3>
+      <p class="hub-lead">現役の店舗運営マネージャー／個人開発者が提供している3サービス。</p>
 
-      <p class="block-title">30分で持ち帰れること</p>
-      <ul>
-        <li>自社のどの業務がLINE Botで効率化できるか</li>
-        <li>「やった方がいいこと」と「やらない方がいいこと」の優先順位</li>
-        <li>A4 1〜2枚の相談メモを当日中に送付（社内提案にそのまま使える形）</li>
-      </ul>
-
-      <p class="block-title">こういう方に向いています</p>
-      <ul>
-        <li>LINEで連絡はできているが、シフト・集計・報告がまだ手作業で残っている</li>
-        <li>LINE Botを検討しているが、何から手を付ければよいかわからない</li>
-        <li>すでにBotはあるが、作りっぱなしで運用が回っていない</li>
-        <li>外食・小売・サービス業の現場担当者・経営者・業務改善担当者</li>
-      </ul>
-
-      <p class="block-title">運用開始後のランニングコスト目安</p>
-      <ul>
-        <li>単純な業務Bot（チェック・報告・通知のみ）：月1,000〜3,000円程度</li>
-        <li>AI応答を組み込む業務Bot：月3,000〜15,000円程度</li>
-      </ul>
-      <p class="note">
-        内訳はLINE Messaging API、Cloud Run、Firestore、AI API、ドメイン費。<br>
-        「毎月いくらで運用が続くか」まで含めて、相談メモに概算で記載します。
-      </p>
-
-      <p class="block-title">進め方</p>
-      <ul>
-        <li>ご購入 → ヒアリングシート送付（24時間以内）</li>
-        <li>シート確認後に日程調整 → オンライン30分相談（録画なし）</li>
-        <li>当日中にA4 1〜2枚の相談メモを送付</li>
-      </ul>
-
-      <p class="block-title">このサービスで扱わないこと</p>
-      <ul>
-        <li>個別Botの実装（別途お見積もり：目安8〜15万円／2週間〜）</li>
-        <li>LINE公式アカウントのマーケティング運用</li>
-        <li>NDA案件の詳細設計</li>
-      </ul>
-
-      <div class="cta-row">
-        <a href="https://coconala.com/services/4214161" class="cta-primary" target="_blank" rel="noopener noreferrer">ココナラで詳細を見る →</a>
-        <span class="cta-sub">決済・連絡はすべてココナラ経由</span>
+      <div class="hub-item">
+        <p class="hub-item-title">組織の評価監査制度を型診断します</p>
+        <p class="hub-item-meta">ココナラ ・ 4,000円 / 30分 ＋ A4 PDFレポート</p>
       </div>
-    </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">中小企業の業務をLINE Botで改善｜30分ヒアリング相談</p>
+        <p class="hub-item-meta">ココナラ ・ 通常 6,000円 / モニター 4,000円 / 30分</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">店舗運営20年マネージャーのAI実用例20選</p>
+        <p class="hub-item-meta">BrAIN ・ 4,980円 / 買い切り</p>
+      </div>
+
+      <p class="hub-cta">/makoto/services/ で詳細を見る →</p>
+    </a>
   </div>
 
   <div class="about">
@@ -446,6 +459,11 @@
   </div>
 
   <footer>
+    <div class="links">
+      <a href="/makoto/">運営者プロフィール</a>
+      <a href="/makoto/services/">提供サービス</a>
+      <a href="/articles/">記事</a>
+    </div>
     <div class="links">
       <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
       <a href="https://note.com/akarilab">note</a>
