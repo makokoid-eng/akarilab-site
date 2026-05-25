@@ -16,10 +16,10 @@
 
 <!-- include-end: assets/partials/head-common.html -->
 <title>まこと の提供サービス — AkariLab</title>
-<meta name="description" content="まこと（店舗運営マネージャー／個人開発者）が、ココナラと BrAIN で公開している支援サービス3件。組織監査制度の型診断、現場の作業LINE自動化の30分診断設計、店舗運営20年マネージャーの AI 実用例20選。">
+<meta name="description" content="まこと（店舗運営マネージャー／個人開発者）が、ココナラと BrAIN で公開している支援サービス4件。組織監査制度の型診断、現場の作業LINE自動化の30分診断設計＋PoC実装、店舗運営20年マネージャーの AI 実用例20選。">
 <link rel="canonical" href="https://akarilab.org/makoto/services/">
 <meta property="og:title" content="まこと の提供サービス">
-<meta property="og:description" content="ココナラと BrAIN で公開している支援サービス3件。組織監査制度の型診断、現場の作業LINE自動化の診断設計、AI 実用例20選。">
+<meta property="og:description" content="ココナラと BrAIN で公開している支援サービス4件。組織監査制度の型診断、現場の作業LINE自動化の診断設計＋PoC実装、AI 実用例20選。">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://akarilab.org/makoto/services/">
 <meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
@@ -43,7 +43,7 @@
   "@type": "ItemList",
   "name": "まこと の提供サービス",
   "itemListOrder": "https://schema.org/ItemListOrderAscending",
-  "numberOfItems": 3,
+  "numberOfItems": 4,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -103,6 +103,27 @@
           "priceCurrency": "JPY",
           "availability": "https://schema.org/InStock",
           "url": "https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Service",
+        "name": "現場の業務1フローを1週間でLINEBot化します",
+        "url": "https://coconala.com/services/4236833",
+        "description": "現場の業務1フローに絞って1週間でLINE Bot化し、1ヶ月の伴走を付けて納品。30分相談で見えた業務を、実際に動く形に。シフト報告・マニュアル参照・店舗チェック・FAQ自動返信などに対応。",
+        "serviceType": "業務改善・LINE Bot 実装",
+        "areaServed": "JP",
+        "provider": { "@id": "https://akarilab.org/makoto/#person" },
+        "offers": {
+          "@type": "Offer",
+          "price": "80000",
+          "priceCurrency": "JPY",
+          "availability": "https://schema.org/InStock",
+          "url": "https://coconala.com/services/4236833",
+          "description": "通常80,000円 / モニター60,000円（先着3社）"
         }
       }
     }
@@ -167,7 +188,7 @@
       「現場で動く Bot」の話に絞っている。テンプレ通信販売的な設計提案はしない。
     </p>
     <ul>
-      <li>相談後の選択肢：PoC実装 80,000円・1週間〜（業務1フローを実際にLINE Bot化）</li>
+      <li>相談後の選択肢：<a href="https://coconala.com/services/4236833">PoC実装 80,000円・1週間〜</a>（業務1フローを実際にLINE Bot化）</li>
       <li>保守付きBot改善：初期50,000円＋月15,000円（PoC終了後の別契約）</li>
     </ul>
     <p>30分相談で現状を整理したあと、ご希望に応じてPoC実装、その後の保守付き改善へ進めます。</p>
@@ -190,6 +211,31 @@
       各5例ずつで合計20例。生成AIを業務に組み込む段階の人向けに書いている。
     </p>
     <p><a href="https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY">BrAIN で見る</a></p>
+  </article>
+
+  <article class="card">
+    <h3>4. 現場の業務1フローを1週間でLINEBot化します</h3>
+    <ul>
+      <li>価格：通常 80,000円 ／ モニター 60,000円（先着3社）</li>
+      <li>納期：1週間（要相談）＋ 1ヶ月伴走</li>
+      <li>媒体：ココナラ（ビジネス代行・事務代行）</li>
+    </ul>
+    <p>
+      30分の診断設計で見えた業務1フローを、1週間で動く LINE Bot の形にして納品する。
+      要件定義（ビデオチャット60分）から実装、公開準備、1ヶ月の伴走までを含む。
+    </p>
+    <p>
+      対象業務の例：シフト報告（LINE申請→Sheets/Notion集計）／マニュアル参照（AI連携可）／
+      店舗チェック（写真→チェックリスト）／FAQ・予約問い合わせの自動返信。
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 20px 0;">
+      <img src="/assets/images/services/poc/01_cover.png" alt="現場の業務をLINE Botに置き換える象徴イメージ。スマホとLINE風吹き出し、書類とペン。" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #222;">
+      <img src="/assets/images/services/poc/02_shift_report.png" alt="シフト報告フローのLINE Bot UI 例。事業本部選択から出勤スタッフ数入力、Sheets連動完了まで。" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #222;">
+      <img src="/assets/images/services/poc/03_manual_qa.png" alt="マニュアル参照とAI質問応答のLINE Bot UI 例。質問に応じてマニュアル該当ページとSheets連携の手順を返答。" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #222;">
+      <img src="/assets/images/services/poc/04_store_check.png" alt="店舗チェック自動集計のLINE Bot UI 例。写真送信からチェック結果（総合 8/10 80%）の集計まで。" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #222;">
+      <img src="/assets/images/services/poc/05_followup.png" alt="1ヶ月伴走と保守付き契約フォローのLINE Bot UI 例。PoC公開後の動作確認と保守継続の案内。" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #222;">
+    </div>
+    <p><a href="https://coconala.com/services/4236833">ココナラで見る</a></p>
   </article>
 </section>
 
