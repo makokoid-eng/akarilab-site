@@ -1,0 +1,9 @@
+# Phase 9 (redirect-metrics) で使う OAuth トークン
+# scripts/setup_ga4_full.py が初回 OAuth 後にここに保存する。
+# 機密情報なので絶対にコミットしない。
+scripts/.ga4_token.json
+
+# Python のキャッシュ
+scripts/__pycache__/
+__pycache__/
+*.pyc
