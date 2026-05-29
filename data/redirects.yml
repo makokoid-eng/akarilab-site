@@ -62,3 +62,17 @@ redirects:
     category: line_bot
     dest_domain: lin.ee
     active: true
+
+  - slug: line-repimemo
+    dest_url: https://lin.ee/HbV7Ehv
+    label: りぴメモを友だち追加
+    category: line_bot
+    dest_domain: lin.ee
+    active: true
+
+  - slug: hidamari-monitor-form
+    dest_url: https://docs.google.com/forms/d/e/1FAIpQLSfVPXLX4VNbpUNcXB2VbUeISehx0OBs24G_RpfpsCM00XzLJg/viewform
+    label: ひだまりβ版モニター応募フォーム
+    category: form
+    dest_domain: docs.google.com
+    active: true
