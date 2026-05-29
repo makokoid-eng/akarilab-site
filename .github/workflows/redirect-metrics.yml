@@ -5,11 +5,9 @@ name: redirect-metrics
 # 設計: docs/aiseo/phase_9_redirects_design.md §自動観察
 
 on:
-  # 週次cron は一時停止 (2026-05-29)：
-  # GA4 サービスアカウントの追加が GA4 UI / gcloud OAuth とも障害で
-  # 解決保留。SA 認証が解決したら cron を再開する。
-  # schedule:
-  #   - cron: '0 0 * * 1'  # 毎週月曜 09:00 JST
+  schedule:
+    # 毎週月曜 09:00 JST = 月曜 00:00 UTC
+    - cron: '0 0 * * 1'
   workflow_dispatch:
     inputs:
       days:
