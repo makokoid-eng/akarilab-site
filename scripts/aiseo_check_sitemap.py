@@ -12,7 +12,7 @@ from __future__ import annotations
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SITEMAP = REPO_ROOT / "sitemap.xml"
@@ -34,7 +34,7 @@ def find_html_files() -> set[Path]:
 
 def url_to_local_path(url: str) -> Path | None:
     parsed = urlparse(url)
-    path = parsed.path.lstrip("/")
+    path = unquote(parsed.path).lstrip("/")
     if path == "" or path.endswith("/"):
         candidate = REPO_ROOT / path / "index.html"
     else:
