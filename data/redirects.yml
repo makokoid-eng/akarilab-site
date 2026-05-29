@@ -28,6 +28,22 @@ redirects:
     dest_domain: brain-market.com
     active: true
 
+  # X 専用バリアント（makochinta1 から送客）
+  # v1 は note 経由と違い割引コードなし、v2 は free_pass パス付き
+  - slug: brain-1on1-x
+    dest_url: https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY
+    label: 1on1・報告書・朝礼AI実用例20選（X送客版、割引なし）
+    category: brain
+    dest_domain: brain-market.com
+    active: true
+
+  - slug: brain-mendan-x
+    dest_url: https://brain-market.com/u/akarilab/a/bykTO5QjMgoTZsNWa0JXY?free_pass=pyHJUkreYV2JOor6eiqRAw
+    label: 面談まわりAI圧縮テンプレ20本（X送客版、free_pass付き）
+    category: brain
+    dest_domain: brain-market.com
+    active: true
+
   - slug: coconala-line-shindan
     dest_url: https://coconala.com/services/4214161
     label: 現場の作業LINEで自動化できるか診断設計（30分）
