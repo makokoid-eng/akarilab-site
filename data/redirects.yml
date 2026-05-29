@@ -86,6 +86,14 @@ redirects:
     dest_domain: lin.ee
     active: true
 
+  # X プロフィール Website 欄経由（Bio クリック計測）
+  - slug: services-hub-x
+    dest_url: https://akarilab.org/makoto/services/
+    label: 提供サービス集約ハブ（X プロフィール経由）
+    category: hub
+    dest_domain: akarilab.org
+    active: true
+
   - slug: hidamari-monitor-form
     dest_url: https://docs.google.com/forms/d/e/1FAIpQLSfVPXLX4VNbpUNcXB2VbUeISehx0OBs24G_RpfpsCM00XzLJg/viewform
     label: ひだまりβ版モニター応募フォーム
