@@ -65,8 +65,7 @@ jobs:
           html5validator \
             --root . \
             --match "*.html" \
-            --ignore-re "Attribute .* not allowed on element" \
-            --ignore-re "Section lacks heading" \
+            --ignore-re "(Attribute .* not allowed on element|Section lacks heading)" \
             --blacklist assets docs scripts .github \
             --show-warnings
 
