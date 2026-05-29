@@ -1,0 +1,40 @@
+name: setup-ga4-dimensions
+
+# GA4 のカスタムディメンション6件を一括登録するワンショット workflow。
+# 設計: docs/aiseo/phase_9_redirects_design.md
+#
+# 【前提】
+#   - Secrets に GA4_PROPERTY_ID と GA4_SERVICE_ACCOUNT_KEY を登録済み
+#   - サービスアカウントを GA4 プロパティに「編集者」で参加させている
+#     （実行後に「閲覧者」へ降格して構わない）
+#
+# 【実行方法】
+#   GitHub UI → Actions → setup-ga4-dimensions → Run workflow
+#   冪等なので何度実行しても安全（既存はスキップ）
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Google Analytics Admin SDK
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-analytics-admin
+
+      - name: Create custom dimensions
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
+        run: python scripts/setup_ga4_dimensions.py
