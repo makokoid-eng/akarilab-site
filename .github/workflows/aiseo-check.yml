@@ -80,6 +80,8 @@ jobs:
             --no-progress
             --offline
             --include-fragments
+            --root-dir
+            ${{ github.workspace }}
             --exclude-path
             assets/partials/
             --exclude-path
