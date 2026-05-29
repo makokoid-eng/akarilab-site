@@ -107,15 +107,18 @@ def main() -> int:
         return 2
 
     try:
-        from google.analytics.admin import AnalyticsAdminServiceClient
-        from google.analytics.admin_v1beta.types import (
+        # AccessBinding は v1alpha にしかなく、CustomDimension は両方にある。
+        # 統一して v1alpha を使う。
+        from google.analytics.admin_v1alpha import AnalyticsAdminServiceClient
+        from google.analytics.admin_v1alpha.types import (
             AccessBinding,
             CreateAccessBindingRequest,
             CustomDimension,
         )
     except ImportError as exc:
         print(
-            "ERROR: missing package. Run: pip install google-analytics-admin google-auth-oauthlib",
+            f"ERROR: import failed: {exc}\n"
+            "Run: pip install google-analytics-admin google-auth-oauthlib",
             file=sys.stderr,
         )
         raise SystemExit(2) from exc
