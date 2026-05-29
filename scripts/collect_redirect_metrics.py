@@ -90,6 +90,8 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
             Dimension(name="customEvent:dest_domain"),
             Dimension(name="customEvent:category"),
             Dimension(name="date"),
+            Dimension(name="hour"),
+            Dimension(name="dayOfWeek"),
         ],
         metrics=[Metric(name="eventCount")],
         date_ranges=[DateRange(start_date=start_date, end_date=end_date)],
@@ -113,6 +115,8 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
                 "dest_domain": row.dimension_values[4].value or "(none)",
                 "category": row.dimension_values[5].value or "(none)",
                 "date": row.dimension_values[6].value or "(none)",
+                "hour": row.dimension_values[7].value or "(none)",
+                "day_of_week": row.dimension_values[8].value or "(none)",
                 "clicks": int(row.metric_values[0].value or 0),
             }
         )
@@ -150,6 +154,8 @@ def aggregate(rows: list[dict]) -> dict:
     by_from_valid: dict[str, int] = {"true": 0, "false": 0, "other": 0}
     by_channel: dict[str, int] = {}
     by_date: dict[str, int] = {}
+    by_hour: dict[str, int] = {}
+    by_dow: dict[str, int] = {}
     total = 0
     for r in rows:
         by_slug[r["slug"]] = by_slug.get(r["slug"], 0) + r["clicks"]
@@ -164,6 +170,9 @@ def aggregate(rows: list[dict]) -> dict:
             by_from_valid["other"] += r["clicks"]
         by_channel[r["channel"]] = by_channel.get(r["channel"], 0) + r["clicks"]
         by_date[r["date"]] = by_date.get(r["date"], 0) + r["clicks"]
+        # 配信タイミング最適化用（GA4 hour は UTC 0-23、dayOfWeek は 0=日曜〜6=土曜）
+        by_hour[r.get("hour", "(none)")] = by_hour.get(r.get("hour", "(none)"), 0) + r["clicks"]
+        by_dow[r.get("day_of_week", "(none)")] = by_dow.get(r.get("day_of_week", "(none)"), 0) + r["clicks"]
         total += r["clicks"]
     return {
         "total": total,
@@ -172,6 +181,8 @@ def aggregate(rows: list[dict]) -> dict:
         "by_from_valid": by_from_valid,
         "by_channel": by_channel,
         "by_date": by_date,
+        "by_hour": by_hour,
+        "by_dow": by_dow,
     }
 
 
@@ -305,6 +316,55 @@ def render_report(
     for date_str in sorted(agg["by_date"].keys()):
         lines.append(f"- {date_str}: {agg['by_date'][date_str]}")
     if not agg["by_date"]:
+        lines.append("- データなし")
+    lines.append("")
+    # 配信タイミング最適化：時間帯（UTC→JST 変換して表示）
+    lines.append("## 時間帯別クリック数 (JST)")
+    lines.append("")
+    by_hour_jst: dict[int, int] = {}
+    for h_str, n in agg.get("by_hour", {}).items():
+        try:
+            h_utc = int(h_str)
+            h_jst = (h_utc + 9) % 24
+            by_hour_jst[h_jst] = by_hour_jst.get(h_jst, 0) + n
+        except ValueError:
+            continue
+    if by_hour_jst:
+        lines.append("| 時間帯(JST) | クリック数 |")
+        lines.append("| --- | --- |")
+        for h in sorted(by_hour_jst.keys()):
+            bar = "█" * min(by_hour_jst[h], 30)
+            lines.append(f"| {h:02d}時台 | {by_hour_jst[h]} {bar} |")
+        # 上位3時間帯を推奨投稿時刻として明示
+        top3 = sorted(by_hour_jst.items(), key=lambda x: x[1], reverse=True)[:3]
+        if top3 and top3[0][1] > 0:
+            lines.append("")
+            lines.append("**配信タイミング推奨（クリック数 上位3時間帯）:**")
+            for h, n in top3:
+                lines.append(f"- {h:02d}時台 ({n} クリック)")
+    else:
+        lines.append("- データなし")
+    lines.append("")
+    # 曜日別（GA4 dayOfWeek は 0=日曜〜6=土曜）
+    lines.append("## 曜日別クリック数")
+    lines.append("")
+    dow_label = ["日", "月", "火", "水", "木", "金", "土"]
+    by_dow_int: dict[int, int] = {}
+    for d_str, n in agg.get("by_dow", {}).items():
+        try:
+            d = int(d_str)
+            if 0 <= d <= 6:
+                by_dow_int[d] = by_dow_int.get(d, 0) + n
+        except ValueError:
+            continue
+    if by_dow_int:
+        lines.append("| 曜日 | クリック数 |")
+        lines.append("| --- | --- |")
+        for d in range(7):
+            n = by_dow_int.get(d, 0)
+            bar = "█" * min(n, 30)
+            lines.append(f"| {dow_label[d]} | {n} {bar} |")
+    else:
         lines.append("- データなし")
     lines.append("")
     lines.append("---")
