@@ -1,0 +1,64 @@
+# redirects.yml — 中継ページ（/r/<slug>/）の単一情報源
+#
+# 設計: docs/aiseo/phase_9_redirects_design.md
+# 承認プラン: ~/.claude/plans/cryptic-sniffing-cerf.md
+#
+# 1エントリ = 1中継ページ = /r/{slug}/index.html を build_redirects.py が生成。
+# sitemap.xml / llms.txt には載せない（noindex / nofollow の中継ページ）。
+# robots.txt の Disallow: /r/ は入れない（CODEX レビュー反映、noindex を読めなくする事故防止）。
+#
+# 公開後の slug は immutable。dest_url を変えたい場合は新 slug を切る。
+# 旧 slug は active: false にして物理削除しない（既存被リンクからの 404 防止）。
+#
+# category: brain | coconala | line_bot
+# active: false にすると build_redirects.py は HTML を新規生成しない（既存ファイルは保持）
+
+redirects:
+  - slug: brain-1on1
+    dest_url: https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY?discount_code=8b74
+    label: 1on1・報告書・朝礼が半分の時間で動く 店舗運営20年マネージャーのAI実用例20選
+    category: brain
+    dest_domain: brain-market.com
+    active: true
+
+  - slug: brain-mendan-template
+    dest_url: https://brain-market.com/u/akarilab/a/bykTO5QjMgoTZsNWa0JXY?discount_code=9311
+    label: 1人で動くコンサル・コーチの「面談まわり3時間」を1.5時間に圧縮する実践テンプレ集
+    category: brain
+    dest_domain: brain-market.com
+    active: true
+
+  - slug: coconala-line-shindan
+    dest_url: https://coconala.com/services/4214161
+    label: 現場の作業LINEで自動化できるか診断設計（30分）
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  - slug: coconala-soshiki-shindan
+    dest_url: https://coconala.com/services/4227512
+    label: 組織の評価監査制度を型診断（30分）
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  - slug: coconala-poc-1week
+    dest_url: https://coconala.com/services/4236833
+    label: 現場の業務1フローを1週間でLINE Bot化
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  - slug: line-moyalog
+    dest_url: https://lin.ee/q1k7v8F
+    label: もやログを友だち追加
+    category: line_bot
+    dest_domain: lin.ee
+    active: true
+
+  - slug: line-hidamari
+    dest_url: https://lin.ee/wr8V234
+    label: ひだまりを友だち追加
+    category: line_bot
+    dest_domain: lin.ee
+    active: true

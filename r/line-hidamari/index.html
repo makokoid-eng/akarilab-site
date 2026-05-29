@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>移動中… — AkariLab</title>
+<meta http-equiv="refresh" content="2;url=https://lin.ee/wr8V234">
+<!-- head-common.html (inlined by scripts/build_redirects.py) -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+<!-- /head-common.html -->
+<script>
+(function() {
+  var FROM_RE = /^[a-z0-9][a-z0-9_-]{0,80}$/;
+  var CH_WHITELIST = ['note','cocon','akari','x','other'];
+  var qs = new URLSearchParams(window.location.search);
+  var rawFrom = qs.get('from') || '';
+  var rawCh = qs.get('ch') || '';
+  var fromValid = FROM_RE.test(rawFrom);
+  var from = fromValid ? rawFrom : 'unknown';
+  var channel = CH_WHITELIST.indexOf(rawCh) >= 0 ? rawCh : 'unknown';
+  var dest = "https://lin.ee/wr8V234";
+  var sent = false;
+  function go() { if (sent) return; sent = true; window.location.replace(dest); }
+  setTimeout(go, 500);
+  if (typeof gtag === 'function') {
+    gtag('event', 'redirect_click', {
+      slug: "line-hidamari",
+      from: from,
+      from_valid: fromValid,
+      channel: channel,
+      dest_domain: "lin.ee",
+      category: "line_bot",
+      transport_type: 'beacon',
+      event_callback: go
+    });
+  } else { go(); }
+})();
+</script>
+</head>
+<body>
+<main style="font-family:sans-serif;padding:40px;text-align:center;">
+  <p>移動中です…</p>
+  <noscript><p>自動で移動しない場合は、<a href="https://lin.ee/wr8V234" rel="nofollow noopener">こちらをクリック</a>してください。</p></noscript>
+  <p style="color:#888;font-size:12px;margin-top:40px;">リンク先: ひだまりを友だち追加</p>
+</main>
+</body>
+</html>

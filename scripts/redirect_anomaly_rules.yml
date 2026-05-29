@@ -1,0 +1,46 @@
+# redirect_anomaly_rules.yml — 計測中継ページの異常検知閾値
+#
+# 設計: docs/aiseo/phase_9_redirects_design.md §自動観察
+# collect_redirect_metrics.py が本ファイルを読んで週次レポートに警告を出す。
+#
+# false positive が多すぎたら閾値を緩める（Week 4 で初回チューニング想定）。
+
+rules:
+  # 3週連続クリック0 の slug は「導線が機能していない」警告
+  zero_click_streak:
+    enabled: true
+    weeks: 3
+    severity: high
+    message: "{weeks}週連続でクリック0です。記事内のCTA直前に置けているか、note側の貼り方を見直してください。"
+
+  # from_valid=false の比率が一定以上 → 命名規則崩壊またはスクレイピング流入
+  from_valid_low_ratio:
+    enabled: true
+    threshold_pct: 15
+    min_samples: 10
+    severity: medium
+    message: "from_valid=false の比率が {ratio_pct}% を超えました（{min_samples} サンプル以上）。記事側の ?from= 命名 typo か、外部からの想定外流入の可能性。"
+
+  # 前週比 -50% 以上の急減 → 導線破壊の疑い
+  week_over_week_drop:
+    enabled: true
+    drop_pct: 50
+    min_prev_clicks: 5
+    severity: high
+    message: "前週比 -{drop_pct}% の急減。記事URL差し替え漏れ・dest_url 切り替え失敗・元記事削除の可能性。"
+
+  # channel 間 CTR 乖離（note vs akari）→ 特定チャネルの貼り方再考
+  channel_ctr_skew:
+    enabled: true
+    # ある slug について、note のクリック数が akari の N倍以下なら警告
+    # （note の方が母集団も大きいはずなので、低すぎたら note の貼り方を疑う）
+    skew_ratio: 0.5
+    min_total_clicks: 10
+    severity: medium
+    message: "slug={slug} のチャネル間 CTR 乖離。note のクリックが akari の {skew_ratio} 倍以下です。note 記事側の貼り位置を見直してください。"
+
+  # active=true なのに今週 0 クリック の slug 一覧（情報レベル、警告ではない）
+  active_zero_this_week:
+    enabled: true
+    severity: info
+    message: "今週クリック0でした。Day 4 以前なら正常。"
