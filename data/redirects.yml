@@ -49,21 +49,6 @@ redirects:
     dest_domain: coconala.com
     active: true
 
-  # ココナラ有料ブログ版（Brain と同じ内容を別販路で販売）
-  - slug: cocon-blog-1on1
-    dest_url: https://coconala.com/contents_market/articles/cmpi7urfl01gr830ipdqikdn8
-    label: 1on1・報告書・朝礼が半分の時間で動く 店舗運営20年マネージャーのAI実用例20選（ココナラ有料ブログ版）
-    category: coconala_blog
-    dest_domain: coconala.com
-    active: true
-
-  - slug: cocon-blog-mendan-template
-    dest_url: https://coconala.com/contents_market/articles/cmpnorcqe045a850hv3r7qocf
-    label: 1人で動く相談業向け 面談まわりAI圧縮テンプレ20本（ココナラ有料ブログ版）
-    category: coconala_blog
-    dest_domain: coconala.com
-    active: true
-
   - slug: line-moyalog
     dest_url: https://lin.ee/q1k7v8F
     label: もやログを友だち追加
