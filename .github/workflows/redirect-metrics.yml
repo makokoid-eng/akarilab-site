@@ -84,6 +84,16 @@ jobs:
             git push
           fi
 
+      - name: Ensure issue label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create redirect-report \
+            --color FBCA04 \
+            --description "週次リダイレクト計測レポート" \
+            -R ${{ github.repository }} \
+            || echo "label already exists"
+
       - name: Create issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -93,6 +103,7 @@ jobs:
             --title "$ISSUE_TITLE" \
             --body-file /tmp/report.md \
             --label "redirect-report"
+        continue-on-error: true
 
       # Phase 10: sales tracker への自動転記
       # SALES_TRACKER_SHEET_ID Secret が未設定なら script が ERROR で終了するが、
