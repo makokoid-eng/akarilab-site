@@ -76,9 +76,17 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
             "Run: pip install google-analytics-data google-auth"
         ) from exc
 
-    credentials = service_account.Credentials.from_service_account_info(
-        json.loads(sa_key_json)
-    )
+    try:
+        sa_info = json.loads(sa_key_json)
+    except json.JSONDecodeError as exc:
+        head = sa_key_json[:30].replace("\n", "\\n") if sa_key_json else "(empty)"
+        tail = sa_key_json[-20:].replace("\n", "\\n") if len(sa_key_json) > 30 else ""
+        raise RuntimeError(
+            f"GA4_SERVICE_ACCOUNT_KEY is not valid JSON: {exc}. "
+            f"Length={len(sa_key_json)}, head={head!r}, tail={tail!r}. "
+            "Re-register the secret with the full SA key JSON file content."
+        ) from exc
+    credentials = service_account.Credentials.from_service_account_info(sa_info)
     client = BetaAnalyticsDataClient(credentials=credentials)
     request = RunReportRequest(
         property=f"properties/{property_id}",
