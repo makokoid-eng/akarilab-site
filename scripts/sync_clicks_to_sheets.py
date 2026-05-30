@@ -52,7 +52,7 @@ def fetch_ga4_aggregated(property_id: str, sa_key_json: str, start: str, end: st
     from google.analytics.data_v1beta.types import (
         DateRange,
         Dimension,
-        DimensionFilterExpression,
+        FilterExpression,
         Filter,
         Metric,
         RunReportRequest,
@@ -72,7 +72,7 @@ def fetch_ga4_aggregated(property_id: str, sa_key_json: str, start: str, end: st
         ],
         metrics=[Metric(name="eventCount")],
         date_ranges=[DateRange(start_date=start, end_date=end)],
-        dimension_filter=DimensionFilterExpression(
+        dimension_filter=FilterExpression(
             filter=Filter(
                 field_name="eventName",
                 string_filter=Filter.StringFilter(value="redirect_click"),

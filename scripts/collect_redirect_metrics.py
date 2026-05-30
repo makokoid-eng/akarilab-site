@@ -64,7 +64,7 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
         from google.analytics.data_v1beta.types import (
             DateRange,
             Dimension,
-            DimensionFilterExpression,
+            FilterExpression,
             Filter,
             Metric,
             RunReportRequest,
@@ -95,7 +95,7 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
         ],
         metrics=[Metric(name="eventCount")],
         date_ranges=[DateRange(start_date=start_date, end_date=end_date)],
-        dimension_filter=DimensionFilterExpression(
+        dimension_filter=FilterExpression(
             filter=Filter(
                 field_name="eventName",
                 string_filter=Filter.StringFilter(value="redirect_click"),
