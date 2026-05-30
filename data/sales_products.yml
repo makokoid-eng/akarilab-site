@@ -1,0 +1,66 @@
+# sales_products.yml — Phase 10 商品マスタの初期データ
+#
+# setup_sales_tracker.py が読み込み、Sheets の「商品マスタ」シートに
+# 自動投入する。手入力時の VLOOKUP 参照元になる。
+#
+# slug は redirects.yml と一致させる（クリック数と売上を JOIN するため）。
+# 売上が発生しない slug（LINE Bot友だち追加、フォーム応募、ハブ）も
+# 「(売上なし)」として並べておくと、ドロップダウン選択時に区別しやすい。
+
+products:
+  # Brain 2作品（note経由 / X経由でURLが違うが商品自体は同じ）
+  - slug: brain-1on1
+    name: Brain 1on1・報告書・朝礼AI実用例20選（note経由 8b74）
+    standard_price: 4980
+
+  - slug: brain-1on1-x
+    name: Brain 1on1・報告書・朝礼AI実用例20選（X経由 割引なし）
+    standard_price: 4980
+
+  - slug: brain-mendan-template
+    name: Brain 面談まわり3時間→1.5時間 テンプレ20本（note経由 9311）
+    standard_price: 4980
+
+  - slug: brain-mendan-x
+    name: Brain 面談まわり3時間→1.5時間 テンプレ20本（X経由 free_pass）
+    standard_price: 4980
+
+  # ココナラ 3サービス
+  - slug: coconala-line-shindan
+    name: ココナラ 30分相談：現場LINE自動化判定
+    standard_price: 5000
+
+  - slug: coconala-soshiki-shindan
+    name: ココナラ 30分相談：評価制度型診断
+    standard_price: 5000
+
+  - slug: coconala-poc-1week
+    name: ココナラ 1週間PoC：業務LINE Bot化
+    standard_price: 80000
+
+  # LINE Bot 3つ（売上なし、参照用）
+  - slug: line-moyalog
+    name: もやログ 友だち追加（売上なし）
+    standard_price: 0
+
+  - slug: line-hidamari
+    name: ひだまり 友だち追加（売上なし）
+    standard_price: 0
+
+  - slug: line-repimemo
+    name: りぴメモ 友だち追加（売上なし）
+    standard_price: 0
+
+  # フォーム / ハブ（売上なし、参照用）
+  - slug: hidamari-monitor-form
+    name: ひだまり β版モニター応募フォーム（売上なし）
+    standard_price: 0
+
+  - slug: services-hub-x
+    name: 提供サービス集約ハブ（売上なし、Bio経由）
+    standard_price: 0
+
+  # クリック計測されない直接販売用（オフライン相談、紹介、note有料記事など）
+  - slug: (none)
+    name: 直接販売（slugなし）
+    standard_price: 0
