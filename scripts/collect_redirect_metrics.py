@@ -90,13 +90,14 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
     client = BetaAnalyticsDataClient(credentials=credentials)
     request = RunReportRequest(
         property=f"properties/{property_id}",
+        # GA4 API は 1 リクエスト 9 dimensions が上限。eventName filter も 1
+        # 数えるので、ここでは 7 dimensions に絞る。dest_domain と category は
+        # slug から redirects.yml で復元できるので集計から外す。
         dimensions=[
             Dimension(name="customEvent:slug"),
             Dimension(name="customEvent:from"),
             Dimension(name="customEvent:from_valid"),
             Dimension(name="customEvent:channel"),
-            Dimension(name="customEvent:dest_domain"),
-            Dimension(name="customEvent:category"),
             Dimension(name="date"),
             Dimension(name="hour"),
             Dimension(name="dayOfWeek"),
@@ -120,11 +121,9 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
                 "from": row.dimension_values[1].value or "(none)",
                 "from_valid": row.dimension_values[2].value or "(none)",
                 "channel": row.dimension_values[3].value or "(none)",
-                "dest_domain": row.dimension_values[4].value or "(none)",
-                "category": row.dimension_values[5].value or "(none)",
-                "date": row.dimension_values[6].value or "(none)",
-                "hour": row.dimension_values[7].value or "(none)",
-                "day_of_week": row.dimension_values[8].value or "(none)",
+                "date": row.dimension_values[4].value or "(none)",
+                "hour": row.dimension_values[5].value or "(none)",
+                "day_of_week": row.dimension_values[6].value or "(none)",
                 "clicks": int(row.metric_values[0].value or 0),
             }
         )
