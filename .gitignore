@@ -2,6 +2,7 @@
 # scripts/setup_ga4_full.py が初回 OAuth 後にここに保存する。
 # 機密情報なので絶対にコミットしない。
 scripts/.ga4_token.json
+scripts/.sales_tracker_token.json
 scripts/.sales_tracker_id.txt
 
 # Python のキャッシュ

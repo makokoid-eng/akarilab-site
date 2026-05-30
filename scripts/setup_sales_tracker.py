@@ -43,7 +43,8 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-TOKEN_PATH = REPO_ROOT / "scripts" / ".ga4_token.json"  # 既存 Phase 9 のトークンを流用
+# Phase 9 と Phase 10 でスコープが違うのでトークンを分離
+TOKEN_PATH = REPO_ROOT / "scripts" / ".sales_tracker_token.json"
 SHEET_ID_FILE = REPO_ROOT / "scripts" / ".sales_tracker_id.txt"
 
 SCOPES = [
@@ -90,7 +91,7 @@ SHEET_DEFS = {
 
 
 def get_credentials(client_secrets_path: str):
-    """Phase 9 と同じトークンキャッシュを共用。"""
+    """Phase 10 専用トークンキャッシュ。スコープ不一致なら再認証。"""
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
@@ -98,17 +99,24 @@ def get_credentials(client_secrets_path: str):
     creds = None
     if TOKEN_PATH.is_file():
         try:
-            # 既存トークンのスコープを確認、Phase 10 のスコープが足りなければ再認証
             creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), SCOPES)
             if not creds.has_scopes(SCOPES):
+                print("  → スコープ不一致、再認証します")
                 creds = None
         except Exception:
             creds = None
 
     if not creds or not creds.valid:
+        need_new_flow = True
         if creds and creds.expired and creds.refresh_token and creds.has_scopes(SCOPES):
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+                need_new_flow = False
+            except Exception as exc:
+                print(f"  → refresh 失敗 ({exc.__class__.__name__})、新規認証に切り替え")
+                creds = None
+
+        if need_new_flow:
             print("  → OAuth flow 起動（ブラウザで承認）")
             flow = InstalledAppFlow.from_client_secrets_file(client_secrets_path, SCOPES)
             creds = flow.run_local_server(port=0, open_browser=True)
