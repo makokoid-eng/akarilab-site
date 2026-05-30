@@ -8,7 +8,63 @@ Phase 10 設計に従って Google Sheets を作成し、Phase 9 cron からの�
 
 ---
 
-## ① Google Sheets を新規作成
+## 🚀 自動セットアップ（推奨）
+
+`scripts/setup_sales_tracker.py` を使えば、以下が**全部自動**で終わります：
+
+- 新規 Google Sheets 作成
+- 4 シート（sales_log / clicks_log / cvr_summary / monthly_summary）追加
+- ヘッダ列・数式の埋め込み
+- Service Account に「編集者」権限付与
+
+### 実行手順（PowerShell）
+
+#### 1. Google Sheets API + Drive API を有効化
+
+```powershell
+gcloud services enable sheets.googleapis.com drive.googleapis.com --project=akarilab
+```
+
+#### 2. パッケージインストール（Phase 9 で入れたなら不要）
+
+```powershell
+pip install google-api-python-client google-auth-oauthlib
+```
+
+#### 3. 環境変数セットして実行
+
+```powershell
+cd C:\Users\user\akarilab-site
+$env:GA4_CLIENT_SECRETS = "C:\Users\user\Downloads\client_secret_29449035683-70t8fc4p06a6calp63nvra377vc96nud.apps.googleusercontent.com.json"
+$env:SALES_TRACKER_SA_EMAIL = "akarilab-ga4-reader@akarilab.iam.gserviceaccount.com"
+python scripts/setup_sales_tracker.py
+```
+
+ブラウザでOAuth認証 → 完了後、出力に **Sheets ID** と **Sheets URL** が出ます。
+
+#### 4. Sheets ID を Secrets に登録
+
+スクリプトが出した Sheets ID をコピーして：
+
+**A. gh CLI で自動登録**
+```powershell
+gh secret set SALES_TRACKER_SHEET_ID -R makokoid-eng/akarilab-site -b "コピーしたID"
+```
+
+**B. ブラウザで手作業**
+[https://github.com/makokoid-eng/akarilab-site/settings/secrets/actions](https://github.com/makokoid-eng/akarilab-site/settings/secrets/actions) → 「New repository secret」→ Name: `SALES_TRACKER_SHEET_ID`、Value: コピーしたID
+
+#### 5. workflow_dispatch で動作確認
+
+[https://github.com/makokoid-eng/akarilab-site/actions/workflows/redirect-metrics.yml](https://github.com/makokoid-eng/akarilab-site/actions/workflows/redirect-metrics.yml) → 「Run workflow」
+
+実行ログで `Sync clicks to sales tracker sheet` ステップ成功 → Sheets の `clicks_log` にデータが入っていれば完成。
+
+---
+
+## ⚙️ 手動セットアップ（自動化が動かない場合のフォールバック）
+
+### ① Google Sheets を新規作成
 
 [https://sheets.google.com/](https://sheets.google.com/) → 「空白」をクリック
 
