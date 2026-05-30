@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyyaml google-analytics-data
+          pip install pyyaml google-analytics-data google-api-python-client google-auth
 
       - name: Compute week label
         id: week
@@ -87,3 +87,14 @@ jobs:
             --title "$ISSUE_TITLE" \
             --body-file /tmp/report.md \
             --label "redirect-report"
+
+      # Phase 10: sales tracker への自動転記
+      # SALES_TRACKER_SHEET_ID Secret が未設定なら script が ERROR で終了するが、
+      # continue-on-error で workflow 全体は失敗しない（Sheets 未準備でも動く）
+      - name: Sync clicks to sales tracker sheet
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
+          SALES_TRACKER_SHEET_ID: ${{ secrets.SALES_TRACKER_SHEET_ID }}
+        run: python scripts/sync_clicks_to_sheets.py
+        continue-on-error: true
