@@ -64,7 +64,6 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
         from google.analytics.data_v1beta.types import (
             DateRange,
             Dimension,
-            DimensionFilter,
             DimensionFilterExpression,
             Filter,
             Metric,
