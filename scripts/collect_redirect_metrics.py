@@ -73,7 +73,8 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
         from google.oauth2 import service_account
     except ImportError as exc:
         raise RuntimeError(
-            "Required packages not installed. Run: pip install google-analytics-data"
+            f"Required packages not installed: {exc}. "
+            "Run: pip install google-analytics-data google-auth"
         ) from exc
 
     credentials = service_account.Credentials.from_service_account_info(

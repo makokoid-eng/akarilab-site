@@ -37,7 +37,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyyaml google-analytics-data google-api-python-client google-auth
+          pip install pyyaml google-analytics-data google-api-python-client google-auth google-auth-oauthlib
+          echo "--- installed Google packages ---"
+          pip list | grep -i google || echo "(no google packages found)"
+          echo "--- python sanity check ---"
+          python -c "from google.analytics.data_v1beta import BetaAnalyticsDataClient; print('google.analytics.data_v1beta OK')"
+          python -c "from google.oauth2 import service_account; print('google.oauth2 OK')"
+          python -c "from googleapiclient.discovery import build; print('googleapiclient OK')"
 
       - name: Compute week label
         id: week
