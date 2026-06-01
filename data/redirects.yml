@@ -73,7 +73,7 @@ redirects:
     active: true
 
   - slug: line-hidamari
-    dest_url: https://lin.ee/wr8V234
+    dest_url: https://lin.ee/6o2IcFf
     label: ひだまりを友だち追加
     category: line_bot
     dest_domain: lin.ee
