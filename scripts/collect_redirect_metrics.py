@@ -38,6 +38,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 REDIRECTS_YML = REPO_ROOT / "data" / "redirects.yml"
 RULES_YML = REPO_ROOT / "scripts" / "redirect_anomaly_rules.yml"
 REPORTS_DIR = REPO_ROOT / "docs" / "redirect-reports"
+# 当週の送客投稿本数のデータ源（ローカル実行時のみ存在。GHA 上では読めないので "-" 表示）
+POST_HISTORY_JSON = REPO_ROOT.parent / "makochinta1-poster" / "logs" / "post_history.json"
 
 JST = timezone(timedelta(hours=9))
 
@@ -133,7 +135,9 @@ def fetch_ga4_rows(property_id: str, sa_key_json: str, start_date: str, end_date
 def load_prev_week_clicks() -> dict[str, int]:
     """過去のレポート Markdown から「slug別合計クリック数」を回収する簡易ローダ。
 
-    現状は厳密なパースを諦め、最新ファイルから '| slug | clicks |' 行を grep。
+    現状は厳密なパースを諦め、最新ファイルの「## slug別 クリック数」セクション内の
+    '| slug | clicks |' 行だけを grep（channel × slug マトリクスを誤読しないよう
+    セクションで区切る）。
     実運用で精度が必要になったら、レポートと同時に JSON を吐く形に変更する。
     """
     if not REPORTS_DIR.is_dir():
@@ -143,16 +147,59 @@ def load_prev_week_clicks() -> dict[str, int]:
         return {}
     text = candidates[0].read_text(encoding="utf-8")
     result: dict[str, int] = {}
+    in_section = False
     for line in text.splitlines():
+        if line.startswith("## "):
+            in_section = line.startswith("## slug別 クリック数")
+            continue
+        if not in_section:
+            continue
         if not line.startswith("| ") or " | " not in line:
             continue
         cols = [c.strip() for c in line.strip("|").split("|")]
         if len(cols) >= 2 and cols[0] not in ("slug", "---"):
+            slug = cols[0].split()[0] if cols[0] else cols[0]  # "⚠️yml未定義" 等の注記を除去
             try:
-                result[cols[0]] = int(cols[1])
+                result[slug] = int(cols[1])
             except ValueError:
                 continue
     return result
+
+
+def count_promo_posts(start_date, end_date) -> int | None:
+    """期間内（JST 日付、両端含む）の送客投稿本数を post_history.json から数える。
+
+    対象は makochinta1 の L1（layer == 'L1' または post_type == 'promotion'）。
+    ファイルが読めない環境（GitHub Actions 等）では None を返し、レポートでは
+    '-' 表示にする（cron を壊さない）。read-only。
+    """
+    path_str = os.environ.get("MAKOCHINTA1_POST_HISTORY", "").strip()
+    path = Path(path_str) if path_str else POST_HISTORY_JSON
+    try:
+        entries = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError):
+        return None
+    if not isinstance(entries, list):
+        return None
+    count = 0
+    for e in entries:
+        if not isinstance(e, dict):
+            continue
+        if e.get("layer") != "L1" and e.get("post_type") != "promotion":
+            continue
+        ts = e.get("posted_at")
+        if not isinstance(ts, str):
+            continue
+        try:
+            dt = datetime.fromisoformat(ts)
+        except ValueError:
+            continue
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        d = dt.astimezone(JST).date()
+        if start_date <= d <= end_date:
+            count += 1
+    return count
 
 
 def aggregate(rows: list[dict]) -> dict:
@@ -269,14 +316,27 @@ def detect_anomalies(
 
 
 def render_report(
-    week_label: str, period: str, agg: dict, warnings: list[dict], active_slugs: list[str]
+    week_label: str,
+    period: str,
+    agg: dict,
+    warnings: list[dict],
+    active_slugs: list[str],
+    promo_posts: int | None = None,
 ) -> str:
     severity_emoji = {"high": "🔴", "medium": "🟡", "info": "ℹ️"}
+    # redirects.yml の active slug は必ず表に出す（クリック0でも0行）。
+    # さらに GA4 側に現れたが yml に無い slug も落とさず末尾に出す（取りこぼし防止）。
+    extra_slugs = sorted(
+        s for s in agg["by_slug"] if s not in active_slugs and agg["by_slug"][s] > 0
+    )
+    table_slugs = list(active_slugs) + extra_slugs
+    promo_str = str(promo_posts) if promo_posts is not None else "-"
     lines = [
         f"# Redirect Metrics Report — {week_label}",
         "",
         f"対象期間: {period}",
         f"総クリック数: **{agg['total']}**",
+        f"当週の送客投稿本数 (makochinta1 L1/promotion): **{promo_str}**",
         "",
     ]
     if warnings:
@@ -293,9 +353,10 @@ def render_report(
     lines.append("")
     lines.append("| slug | clicks |")
     lines.append("| --- | --- |")
-    for slug in active_slugs:
+    for slug in table_slugs:
         clicks = agg["by_slug"].get(slug, 0)
-        lines.append(f"| {slug} | {clicks} |")
+        marker = "" if slug in active_slugs else " ⚠️yml未定義"
+        lines.append(f"| {slug}{marker} | {clicks} |")
     lines.append("")
     lines.append("## channel × slug マトリクス")
     lines.append("")
@@ -304,7 +365,7 @@ def render_report(
     sep = "| --- | " + " | ".join("---" for _ in channels) + " | --- |"
     lines.append(header)
     lines.append(sep)
-    for slug in active_slugs:
+    for slug in table_slugs:
         cells = [str(agg["by_slug_channel"].get((slug, ch), 0)) for ch in channels]
         total = sum(agg["by_slug_channel"].get((slug, ch), 0) for ch in channels)
         lines.append(f"| {slug} | " + " | ".join(cells) + f" | {total} |")
@@ -383,7 +444,12 @@ def render_report(
 
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
-    parser.add_argument("--days", type=int, default=7, help="集計期間（日数、既定7）")
+    parser.add_argument(
+        "--days",
+        type=int,
+        default=7,
+        help="集計期間（日数、既定7）。終端は常に直近の完了した日曜に固定され、そこから遡る",
+    )
     parser.add_argument(
         "--out", type=str, default=None, help="レポート出力先（既定: docs/redirect-reports/{YYYY-WW}.md）"
     )
@@ -402,9 +468,14 @@ def main(argv: list[str]) -> int:
     rules = load_yaml(RULES_YML)
 
     now = datetime.now(JST)
-    end = now.date()
-    start = end - timedelta(days=args.days)
-    period = f"{start.isoformat()} 〜 {(end - timedelta(days=1)).isoformat()} (JST)"
+    today = now.date()
+    # 週境界はカレンダー週に固定する：終端 = 直近の完了した日曜（月曜実行なら昨日）。
+    # 旧実装の「実行日から遡って N 日」は、月曜以外の手動実行で前後の週次レポートと
+    # 期間が重複した（W22: 5/23-29 と W23: 5/25-31 で 5/29 が二重掲載）。
+    # この方式なら同じ ISO 週内の何曜日に実行しても「前週月曜〜日曜」に揃い、冪等。
+    end_incl = today - timedelta(days=today.weekday() + 1)  # 直近の日曜（含む）
+    start = end_incl - timedelta(days=args.days - 1)        # days=7 なら前週月曜
+    period = f"{start.isoformat()} 〜 {end_incl.isoformat()} (JST)"
     week_label = iso_week_label(now)
 
     if args.no_fetch:
@@ -421,7 +492,7 @@ def main(argv: list[str]) -> int:
                 property_id,
                 sa_key,
                 start.isoformat(),
-                (end - timedelta(days=1)).isoformat(),
+                end_incl.isoformat(),
             )
         except Exception as exc:
             print(f"ERROR: GA4 fetch failed: {exc}", file=sys.stderr)
@@ -430,8 +501,9 @@ def main(argv: list[str]) -> int:
     agg = aggregate(rows)
     prev_week_clicks = load_prev_week_clicks()
     warnings = detect_anomalies(agg, rules, prev_week_clicks, active_slugs)
+    promo_posts = count_promo_posts(start, end_incl)
 
-    report = render_report(week_label, period, agg, warnings, active_slugs)
+    report = render_report(week_label, period, agg, warnings, active_slugs, promo_posts)
 
     if args.out:
         out_path = Path(args.out)

@@ -44,6 +44,13 @@ redirects:
     dest_domain: brain-market.com
     active: true
 
+  - slug: brain-tenpo-jidoka-x
+    dest_url: https://brain-market.com/u/akarilab/a/byADMyUjMgoTZsNWa0JXY
+    label: 店長が「数字を集める係」をやめた日（多店舗をAIで仕組み化する実例4つ・X送客版）
+    category: brain
+    dest_domain: brain-market.com
+    active: true
+
   - slug: coconala-line-shindan
     dest_url: https://coconala.com/services/4214161
     label: 現場の作業LINEで自動化できるか診断設計（30分）
