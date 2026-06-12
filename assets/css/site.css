@@ -1,23 +1,32 @@
 /*
-  AkariLab site.css (2026-05-20 拡張)
+  AkariLab site.css (2026-06-12 editorial 洗練)
   - トップ index.html の黒背景カード調と統一感のあるベース
   - /makoto/* 配下、各プロダクト LP、articles/* 配下が暗色ベースで整う
   - トップ index.html はインライン <style> を持つため影響を受けない（インラインが勝つ）
+  - awesome-design「editorial」を暗色に移植：見出しはセリフ、小見出しラベルは等幅大文字、8ptグリッド
   - !important は使わない
 */
+
+/* editorial: 見出し=Gelasio/Noto Serif JP、ラベル=Ubuntu Mono、本文=Noto Sans JP */
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap');
 
 :root {
   --bg: #0e0e0e;
   --bg-card: #161616;
-  --bg-card-hover: #1a1a1a;
-  --text: #e0e0e0;
-  --text-dim: #999;
-  --text-muted: #666;
-  --border: #222;
+  --bg-card-hover: #1c1c1c;
+  --text: #ededed;
+  --text-dim: #a3a3a3;
+  --text-muted: #6b6b6b;
+  --border: #242424;
   --accent: #4CAF7D;
   --accent-orange: #E8913A;
   --accent-blue: #5B8CCC;
   --accent-text: #ffffff;
+
+  /* editorial タイポグラフィ・トークン */
+  --font-serif: 'Gelasio', 'Noto Serif JP', Georgia, 'Yu Mincho', serif;
+  --font-sans: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+  --font-mono: 'Ubuntu Mono', 'SFMono-Regular', Consolas, monospace;
 }
 
 * {
@@ -31,8 +40,11 @@ html {
 }
 
 body {
-  font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
-  background: var(--bg);
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(120% 55% at 50% -8%, rgba(76,175,125,0.08), rgba(76,175,125,0) 60%),
+    linear-gradient(180deg, #101110 0%, #0c0c0c 45%, #0a0a0a 100%);
+  background-attachment: fixed;
   color: var(--text);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
@@ -66,16 +78,22 @@ nav.header a:hover {
 .hero {
   max-width: 720px;
   margin: 0 auto;
-  padding: 60px 24px 32px;
+  padding: 72px 24px 32px;
 }
 .hero h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 8px;
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 12px;
   color: var(--text);
 }
 .hero .tagline {
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--text-dim);
 }
 
@@ -163,15 +181,17 @@ nav.header a:hover {
   top: 2px;
 }
 .section-title {
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   margin-bottom: 16px;
   text-transform: uppercase;
 }
 .section-subtitle {
-  font-size: 15px;
+  font-family: var(--font-serif);
+  font-size: 17px;
   font-weight: 600;
   color: var(--text);
   margin-top: 24px;
@@ -186,7 +206,8 @@ nav.header a:hover {
   max-width: none;
 }
 .section h3 {
-  font-size: 16px;
+  font-family: var(--font-serif);
+  font-size: 18px;
   font-weight: 600;
   margin-top: 12px;
   margin-bottom: 8px;
@@ -195,19 +216,23 @@ nav.header a:hover {
 
 /* Card（汎用カード：services 一覧で使用） */
 .card {
-  background: var(--bg-card);
+  background: linear-gradient(180deg, #181818 0%, #131313 100%);
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px;
   margin-bottom: 16px;
-  transition: background 0.2s;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 8px 24px rgba(0,0,0,0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 .card:hover {
-  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  border-color: #2e2e2e;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(76,175,125,0.12);
 }
 .card h3 {
-  font-size: 17px;
+  font-family: var(--font-serif);
+  font-size: 19px;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 12px;
@@ -234,21 +259,25 @@ nav.header a:hover {
   padding: 40px 24px 24px;
 }
 .article-body h1 {
-  font-size: 24px;
+  font-family: var(--font-serif);
+  font-size: 30px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 .article-body h2 {
-  font-size: 19px;
+  font-family: var(--font-serif);
+  font-size: 22px;
   font-weight: 600;
-  margin-top: 32px;
+  margin-top: 40px;
   margin-bottom: 12px;
   color: var(--text);
 }
 .article-body h3 {
-  font-size: 16px;
+  font-family: var(--font-serif);
+  font-size: 18px;
   font-weight: 600;
   margin-top: 24px;
   margin-bottom: 8px;

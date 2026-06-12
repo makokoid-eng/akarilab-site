@@ -16,44 +16,148 @@
   <meta property="og:title" content="AkariLab — 灯す、整える、役立つ">
   <meta property="og:description" content="現場で感じた「あったらいいのに」を、小さく作って、静かに届ける。">
   <meta property="og:type" content="website">
+  <!-- editorial: 見出し=Gelasio/Noto Serif JP、ラベル=Ubuntu Mono、本文=Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
   <style>
     :root {
       --bg: #0e0e0e;
       --bg-card: #161616;
-      --text: #e0e0e0;
-      --text-dim: #999;
-      --text-muted: #666;
-      --border: #222;
+      --text: #ededed;
+      --text-dim: #a3a3a3;
+      --text-muted: #6b6b6b;
+      --border: #242424;
       --accent-green: #4CAF7D;
       --accent-blue: #5B8CCC;
       --accent-brown: #A67C52;
       --accent-orange: #E8913A;
+      /* editorial タイポグラフィ・トークン */
+      --font-serif: 'Gelasio', 'Noto Serif JP', Georgia, 'Yu Mincho', serif;
+      --font-sans: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+      --font-mono: 'Ubuntu Mono', 'SFMono-Regular', Consolas, monospace;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
-      background: var(--bg);
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(120% 60% at 50% -10%, rgba(76,175,125,0.10), rgba(76,175,125,0) 60%),
+        linear-gradient(180deg, #101110 0%, #0c0c0c 40%, #0a0a0a 100%);
+      background-attachment: fixed;
       color: var(--text);
       line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
+
+    /* Masthead（誌面の柱：最上部の細い帯） */
+    .masthead {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .masthead .rule-line {
+      max-width: 720px;
+      margin: 12px auto 0;
+      padding: 0 24px;
+    }
+    .masthead .rule-line::after {
+      content: "";
+      display: block;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Eyebrow（番号付き見出し：01 —— PRODUCTS） */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .eyebrow-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-green);
+      letter-spacing: 0.1em;
+    }
+    .eyebrow-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .eyebrow-rule {
+      flex: 1;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Pull quote（誌面の大きな引用） */
+    .pullquote {
+      max-width: 720px;
+      margin: 24px auto;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pullquote p {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--text);
+      letter-spacing: -0.005em;
+    }
+    .pullquote .attr {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
 
     /* Hero */
     .hero {
       max-width: 720px;
       margin: 0 auto;
-      padding: 100px 24px 60px;
+      padding: 72px 24px 56px;
       text-align: center;
     }
+    .hero .kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      margin-bottom: 20px;
+    }
     .hero h1 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 8px;
+      font-family: var(--font-serif);
+      font-size: 52px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 14px;
     }
     .hero .tagline {
-      font-size: 16px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
       color: var(--text-dim);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .hero .sub {
       font-size: 14px;
@@ -68,10 +172,12 @@
       padding: 40px 24px;
     }
     .products h2 {
-      font-size: 14px;
-      font-weight: 500;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
       color: var(--text-muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       margin-bottom: 24px;
     }
     .product-list {
@@ -81,20 +187,26 @@
     }
     .product-card {
       display: block;
-      background: var(--bg-card);
+      position: relative;
+      background: linear-gradient(180deg, #181818 0%, #131313 100%);
       border: 1px solid var(--border);
       border-left: 3px solid var(--accent-green);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 24px;
-      transition: background 0.2s;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 8px 24px rgba(0,0,0,0.35);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
-    .product-card:hover { background: #1a1a1a; }
+    .product-card:hover {
+      transform: translateY(-2px);
+      border-color: #2e2e2e;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(76,175,125,0.12);
+    }
     .product-card.orange { border-left-color: var(--accent-orange); }
     .product-card.blue { border-left-color: var(--accent-blue); }
     .product-card.brown { border-left-color: var(--accent-brown); }
     .product-card.green { border-left-color: var(--accent-green); }
     .product-card .emoji { font-size: 20px; margin-bottom: 8px; }
-    .product-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .product-card h3 { font-family: var(--font-serif); font-size: 21px; font-weight: 600; margin-bottom: 6px; }
     .product-card .desc {
       font-size: 14px;
       color: var(--text-dim);
@@ -118,10 +230,12 @@
       padding: 40px 24px;
     }
     .services h2 {
-      font-size: 14px;
-      font-weight: 500;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
       color: var(--text-muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
     .services .lead {
@@ -131,14 +245,16 @@
       margin-bottom: 20px;
     }
     .service-card {
-      background: var(--bg-card);
+      background: linear-gradient(180deg, #181818 0%, #131313 100%);
       border: 1px solid var(--border);
       border-left: 3px solid var(--accent-orange);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 24px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 8px 24px rgba(0,0,0,0.35);
     }
     .service-card h3 {
-      font-size: 18px;
+      font-family: var(--font-serif);
+      font-size: 21px;
       font-weight: 600;
       margin-bottom: 4px;
     }
@@ -210,7 +326,7 @@
       outline: 2px solid var(--accent-orange);
       outline-offset: 3px;
     }
-    .service-hub-link h3 { font-size: 17px; margin-bottom: 6px; }
+    .service-hub-link h3 { font-family: var(--font-serif); font-size: 20px; margin-bottom: 6px; }
     .service-hub-link .hub-lead {
       font-size: 13px;
       color: var(--text-dim);
@@ -247,7 +363,8 @@
       padding: 40px 24px 60px;
     }
     .about h2 {
-      font-size: 18px;
+      font-family: var(--font-serif);
+      font-size: 24px;
       font-weight: 600;
       margin-bottom: 16px;
     }
@@ -280,9 +397,13 @@
     footer .links a:hover { color: var(--text); }
 
     @media (max-width: 480px) {
-      .hero { padding: 60px 16px 40px; }
-      .hero h1 { font-size: 28px; }
-      .products, .about { padding: 24px 16px; }
+      .masthead { padding: 16px 16px 0; font-size: 10px; letter-spacing: 0.12em; }
+      .masthead .rule-line { padding: 0 16px; }
+      .hero { padding: 48px 16px 36px; }
+      .hero h1 { font-size: 38px; }
+      .products, .about, .services { padding: 24px 16px; }
+      .pullquote { margin: 16px auto; padding: 28px 16px; }
+      .pullquote p { font-size: 20px; }
     }
   </style>
   <script type="application/ld+json">
@@ -331,7 +452,14 @@
 </head>
 <body>
 
+  <div class="masthead">
+    <span>AkariLab</span>
+    <span>Solo Dev Studio ・ Est. 2024</span>
+  </div>
+  <div class="masthead rule-line"></div>
+
   <div class="hero">
+    <p class="kicker">現場発・ひとりで作るLINEプロダクト</p>
     <h1>AkariLab</h1>
     <p class="tagline">灯す、整える、役立つ</p>
     <p class="sub">
@@ -340,8 +468,17 @@
     </p>
   </div>
 
+  <div class="pullquote">
+    <p>机上のシステムではなく、現場で本当に使われるものだけを残す。</p>
+    <p class="attr">— AkariLab がつくるときの基準</p>
+  </div>
+
   <div class="products">
-    <h2>Products</h2>
+    <div class="eyebrow">
+      <span class="eyebrow-num">01</span>
+      <span class="eyebrow-label">Products</span>
+      <span class="eyebrow-rule"></span>
+    </div>
     <div class="product-list">
 
       <!-- ひだまり（最優先プロダクト） -->
@@ -402,7 +539,11 @@
 
   <!-- Articles: 連載集客 + /articles/ ハブへの内部導線 -->
   <div class="products">
-    <h2>Articles</h2>
+    <div class="eyebrow">
+      <span class="eyebrow-num">02</span>
+      <span class="eyebrow-label">Articles</span>
+      <span class="eyebrow-rule"></span>
+    </div>
     <div class="product-list">
 
       <a href="/articles/ai-9months/" class="product-card blue">
@@ -421,7 +562,11 @@
   </div>
 
   <div class="services">
-    <h2>Services</h2>
+    <div class="eyebrow">
+      <span class="eyebrow-num">03</span>
+      <span class="eyebrow-label">Services</span>
+      <span class="eyebrow-rule"></span>
+    </div>
     <p class="lead">
       AkariLabで作っているLINE Botの設計ノウハウと、外食現場21年で蓄えた組織運営の型を、3つのサービスで外に出しています。<br>
       決済・連絡はそれぞれの媒体（ココナラ／BrAIN）経由です。
@@ -451,6 +596,11 @@
   </div>
 
   <div class="about">
+    <div class="eyebrow">
+      <span class="eyebrow-num">04</span>
+      <span class="eyebrow-label">About</span>
+      <span class="eyebrow-rule"></span>
+    </div>
     <h2>AkariLabについて</h2>
     <p>
       AkariLabは、現場で働く人たちの「困った」から生まれたプロダクトを作っています。
