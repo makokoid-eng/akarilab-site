@@ -61,24 +61,48 @@ redirects:
 
   - slug: coconala-line-shindan
     dest_url: https://coconala.com/services/4214161
-    label: 現場の作業LINEで自動化できるか診断設計（30分）
+    label: 業務の自動化を現場目線で相談（30分）
     category: coconala
     dest_domain: coconala.com
     active: true
 
-  - slug: coconala-soshiki-shindan
-    dest_url: https://coconala.com/services/4227512
-    label: 組織の評価監査制度を型診断（30分）
+  # 2026-06-26 ココナラ出品刷新で追加（Excel/VBA 自動化・AI伴走・LINEBot設計）
+  - slug: coconala-excel
+    dest_url: https://coconala.com/services/4244110
+    label: 現役マネージャーがExcel自動化（VBA）
     category: coconala
     dest_domain: coconala.com
     active: true
+
+  - slug: coconala-ai-tool
+    dest_url: https://coconala.com/services/4286326
+    label: AI業務ツールをビデオ伴走で一緒に作る（90分）
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  - slug: coconala-linebot
+    dest_url: https://coconala.com/services/4286336
+    label: 現場で回るLINEBot設計から導入
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  # 2026-06-26 ココナラ側で廃止・非公開。slug は immutable のため物理削除せず active:false。
+  # 既存被リンクからの 404 防止のため /r/ 中継ページ自体は残す（dest はそのまま）。
+  - slug: coconala-soshiki-shindan
+    dest_url: https://coconala.com/services/4227512
+    label: 組織の評価監査制度を型診断（30分）【提供終了】
+    category: coconala
+    dest_domain: coconala.com
+    active: false
 
   - slug: coconala-poc-1week
     dest_url: https://coconala.com/services/4236833
-    label: 現場の業務1フローを1週間でLINE Bot化
+    label: 現場の業務1フローを1週間でLINE Bot化【提供終了】
     category: coconala
     dest_domain: coconala.com
-    active: true
+    active: false
 
   - slug: line-moyalog
     dest_url: https://lin.ee/q1k7v8F

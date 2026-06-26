@@ -25,17 +25,30 @@ products:
     name: Brain 面談まわり3時間→1.5時間 テンプレ20本（X経由 free_pass）
     standard_price: 4980
 
-  # ココナラ 3サービス
+  # ココナラ（2026-06-26 出品刷新）
   - slug: coconala-line-shindan
-    name: ココナラ 30分相談：現場LINE自動化判定
-    standard_price: 5000
+    name: ココナラ 30分相談：業務自動化の現場目線相談
+    standard_price: 4000
 
+  - slug: coconala-excel
+    name: ココナラ：現役マネージャーがExcel自動化（VBA）
+    standard_price: 20000
+
+  - slug: coconala-ai-tool
+    name: ココナラ：AI業務ツールをビデオ伴走で制作
+    standard_price: 34000
+
+  - slug: coconala-linebot
+    name: ココナラ：現場で回るLINEBot設計から導入
+    standard_price: 70000
+
+  # 2026-06-26 提供終了（売上履歴 JOIN のため slug は残す）
   - slug: coconala-soshiki-shindan
-    name: ココナラ 30分相談：評価制度型診断
+    name: ココナラ 30分相談：評価制度型診断（提供終了）
     standard_price: 5000
 
   - slug: coconala-poc-1week
-    name: ココナラ 1週間PoC：業務LINE Bot化
+    name: ココナラ 1週間PoC：業務LINE Bot化（提供終了）
     standard_price: 80000
 
   # LINE Bot 3つ（売上なし、参照用）
