@@ -61,11 +61,19 @@ jobs:
         # 完全な HTML5 文書ではないため検査対象から除外。docs/ も同様。
         # "Section lacks heading" は既存LPで意図的に <section> を装飾的に
         # 使っているため info warning 扱いで除外（h2/h3 強制は別Phaseで議論）。
+        #
+        # CSS 系の除外（Nu HTML Checker の CSS バリデータが古く、モダンCSSを誤検知する）:
+        #   - Property "inset" doesn't exist … `inset` は 2021年〜の正当な短縮プロパティ
+        #     だが vnu が未対応。実ブラウザでは問題なし。
+        #   - is not a "color-stop" value / is an incorrect operator …
+        #     `linear-gradient(..., var(--x) 70%)` のようにグラデーション内で CSS変数
+        #     `var()` を使うと vnu が色を解決できず誤検知する。
+        #   いずれも HTML5 構文検査の対象外の誤検知であり、CSS の妥当性はブラウザ側で担保する。
         run: |
           html5validator \
             --root . \
             --match "*.html" \
-            --ignore-re "(Attribute .* not allowed on element|Section lacks heading)" \
+            --ignore-re "(Attribute .* not allowed on element|Section lacks heading|Property \"inset\" doesn't exist|is not a \"color-stop\" value|is an incorrect operator)" \
             --blacklist assets docs scripts .github \
             --show-warnings
 
