@@ -41,8 +41,9 @@
     body {
       font-family: var(--font-sans);
       background:
-        radial-gradient(120% 60% at 50% -10%, rgba(76,175,125,0.10), rgba(76,175,125,0) 60%),
-        linear-gradient(180deg, #101110 0%, #0c0c0c 40%, #0a0a0a 100%);
+        radial-gradient(120% 60% at 50% -10%, rgba(76,175,125,0.22), rgba(76,175,125,0) 60%),
+        radial-gradient(90% 50% at 15% 85%, rgba(76,175,125,0.08), transparent 70%),
+        linear-gradient(180deg, #1a201c 0%, #161a17 40%, #131614 100%);
       background-attachment: fixed;
       color: var(--text);
       line-height: 1.8;
@@ -59,7 +60,7 @@
       inset: -20%;
       z-index: -1;
       pointer-events: none;
-      background: radial-gradient(50% 38% at 50% 6%, rgba(76,175,125,0.09), rgba(76,175,125,0) 70%);
+      background: radial-gradient(50% 38% at 50% 6%, rgba(76,175,125,0.16), rgba(76,175,125,0) 70%);
       animation: lantern-drift 26s ease-in-out infinite alternate;
       will-change: transform, opacity;
     }

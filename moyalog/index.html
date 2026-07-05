@@ -24,19 +24,19 @@
     html{scroll-behavior:smooth}
     body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;min-height:100vh}
     /* --- 背景の空気（もやログ：青系の霧・低彩度） --- */
-    body{background:linear-gradient(175deg,#0f1420 0%,#0f1218 34%,#101522 68%,#0e1116 100%) fixed;position:relative;isolation:isolate}
+    body{background:linear-gradient(175deg,#121a2e 0%,#101522 34%,#131a30 68%,#0e1218 100%) fixed;position:relative;isolation:isolate}
     body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
       background:
-        radial-gradient(58% 42% at 18% 22%,rgba(91,140,204,0.075) 0%,transparent 70%),
-        radial-gradient(52% 40% at 82% 58%,rgba(122,166,220,0.055) 0%,transparent 70%),
-        radial-gradient(70% 48% at 45% 92%,rgba(70,105,160,0.06) 0%,transparent 72%);
+        radial-gradient(58% 42% at 18% 22%,rgba(91,140,204,0.20) 0%,transparent 70%),
+        radial-gradient(52% 40% at 82% 58%,rgba(122,166,220,0.15) 0%,transparent 70%),
+        radial-gradient(70% 48% at 45% 92%,rgba(70,105,160,0.16) 0%,transparent 72%);
       filter:blur(2px)}
-    body::after{content:'';position:fixed;left:-20%;top:-10%;width:140%;height:120%;z-index:-1;pointer-events:none;opacity:.5;
+    body::after{content:'';position:fixed;left:-20%;top:-10%;width:140%;height:120%;z-index:-1;pointer-events:none;opacity:.85;
       background:
-        radial-gradient(40% 26% at 30% 35%,rgba(140,170,210,0.05) 0%,transparent 68%),
-        radial-gradient(34% 24% at 70% 65%,rgba(91,140,204,0.045) 0%,transparent 66%);
-      filter:blur(10px);
-      animation:moya-drift 46s ease-in-out infinite alternate}
+        radial-gradient(40% 26% at 30% 35%,rgba(140,170,210,0.14) 0%,transparent 68%),
+        radial-gradient(34% 24% at 70% 65%,rgba(91,140,204,0.12) 0%,transparent 66%);
+      filter:blur(14px);
+      animation:moya-drift 30s ease-in-out infinite alternate}
     @keyframes moya-drift{
       0%{transform:translate3d(-2.5%,-1.5%,0) scale(1)}
       50%{transform:translate3d(2%,1.2%,0) scale(1.04)}
