@@ -42,12 +42,36 @@ html {
 body {
   font-family: var(--font-sans);
   background:
-    radial-gradient(120% 55% at 50% -8%, rgba(76,175,125,0.08), rgba(76,175,125,0) 60%),
-    linear-gradient(180deg, #101110 0%, #0c0c0c 45%, #0a0a0a 100%);
+    radial-gradient(120% 55% at 50% -8%, rgba(76,175,125,0.20), rgba(76,175,125,0) 60%),
+    radial-gradient(90% 50% at 15% 90%, rgba(76,175,125,0.07), transparent 70%),
+    linear-gradient(180deg, #1a201c 0%, #161a17 45%, #131614 100%);
   background-attachment: fixed;
   color: var(--text);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  isolation: isolate;
+}
+
+/* 灯の揺らぎ：site.css を使う全ページ共通の背景レイヤー */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -15%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(45% 35% at 50% 8%, rgba(76,175,125,0.10), rgba(76,175,125,0) 70%);
+  animation: akari-drift 28s ease-in-out infinite alternate;
+}
+
+@keyframes akari-drift {
+  from { transform: translate(-1%, 0) scale(1); opacity: 0.75; }
+  to   { transform: translate(1.2%, 0.8%) scale(1.04); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body::before { animation: none; opacity: 0.9; }
 }
 
 a {
