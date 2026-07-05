@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ここら — 自分だけの地図を育てる</title>
+<meta name="description" content="気に入った場所を写真とメモで記録して、自分だけの地図を育てるアプリ。カフェ巡り、神社、温泉宿、パン屋。ジャンルは自由。星も口コミもありません。">
+<link rel="canonical" href="https://akarilab.org/kokora/">
+<meta property="og:title" content="ここら — 自分だけの地図を育てる">
+<meta property="og:description" content="気に入った場所を写真とメモで記録して、自分だけの地図を育てるアプリ。星も口コミもありません。">
+<meta property="og:url" content="https://akarilab.org/kokora/">
+<meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/logo/hidamari_icon_256.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://akarilab.org/kokora/#app",
+      "name": "ここら",
+      "alternateName": "Kokora",
+      "url": "https://akarilab.org/kokora/",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web",
+      "description": "気に入った場所を写真とメモで記録して、自分だけの地図を育てる個人向けアプリ。ジャンルタグで自由に整理でき、星や口コミの機能を持たない。",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+      "producer": { "@id": "https://akarilab.org/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://akarilab.org/kokora/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "無料で使えますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "はい。現在は無料で使えます。Web版はブラウザからそのまま利用できます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "お店の評価やレビューはできますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "できません。ここらには星や口コミの機能がありません。記録するのは自分のための写真とメモだけです。" }
+        },
+        {
+          "@type": "Question",
+          "name": "記録した場所は他の人に見られますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "初期設定は非公開です。公開に切り替えた場所だけが、あなたの公開URLで閲覧できるようになります。" }
+        },
+        {
+          "@type": "Question",
+          "name": "スマホアプリはありますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Android版とiOS版を準備中です。現在Androidはクローズドテストを実施中で、Web版はスマホのブラウザからも利用できます。" }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://akarilab.org/kokora/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+        { "@type": "ListItem", "position": 2, "name": "ここら", "item": "https://akarilab.org/kokora/" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{--bg:#10160f;--bg-card:#1a221a;--text:#e7e9e2;--text-dim:#9aa294;--accent:#7ba05b;--accent-deep:#4d6b3c;--accent-text:#a3c47e;--sand:#d9c9a3;--clay:#c2926a;--border:rgba(233,238,225,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.85;min-height:100vh;position:relative;isolation:isolate;
+  background:
+    radial-gradient(ellipse 65% 45% at 20% 6%,rgba(123,160,91,0.16) 0%,transparent 70%),
+    radial-gradient(ellipse 55% 40% at 85% 30%,rgba(217,201,163,0.07) 0%,transparent 70%),
+    radial-gradient(ellipse 70% 50% at 45% 98%,rgba(77,107,60,0.14) 0%,transparent 72%),
+    linear-gradient(180deg,#141c12 0%,#10160f 30%,#0e130d 100%)}
+/* 等高線（紙の地図の空気）：淡い同心円を左上と右下に */
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background:
+    repeating-radial-gradient(circle at 12% 18%,transparent 0 46px,rgba(217,201,163,0.05) 46px 47px),
+    repeating-radial-gradient(circle at 88% 82%,transparent 0 60px,rgba(123,160,91,0.05) 60px 61px)}
+/* 木漏れ日がゆっくり動く */
+body::after{content:'';position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle 380px at 70% 15%,rgba(217,201,163,0.10) 0%,transparent 70%),
+    radial-gradient(circle 300px at 25% 70%,rgba(123,160,91,0.09) 0%,transparent 70%);
+  filter:blur(8px);
+  animation:komorebi 22s ease-in-out infinite alternate}
+@keyframes komorebi{
+  from{transform:translate3d(-1.5%,-1%,0) scale(1);opacity:.8}
+  to{transform:translate3d(1.5%,1.2%,0) scale(1.05);opacity:1}
+}
+a{color:var(--accent-text);text-decoration:none}
+a:hover{text-decoration:underline}
+.header{padding:1.5rem 2rem;max-width:800px;margin:0 auto}
+.header a{color:var(--text-dim);font-size:.85rem}
+.hero{max-width:800px;margin:0 auto;padding:4.5rem 2rem 3rem;text-align:center;position:relative}
+.hero h1{font-family:'Zen Maru Gothic',sans-serif;font-size:2.6rem;font-weight:700;color:var(--accent-text);margin-bottom:.6rem}
+.hero .tagline{font-family:'Zen Maru Gothic',sans-serif;font-size:1.15rem;color:var(--text);margin-bottom:1.6rem}
+.hero .description{font-size:.9rem;color:var(--text-dim);line-height:2.1;max-width:540px;margin:0 auto}
+.status-badge{display:inline-block;background:rgba(123,160,91,0.16);color:var(--accent-text);font-size:.75rem;padding:.3rem 1rem;border-radius:20px;margin-top:1.6rem;font-weight:500}
+.section{max-width:800px;margin:0 auto;padding:2.2rem 2rem 3rem}
+.section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:1.6rem;text-align:center;position:relative;padding-bottom:.9rem}
+.section-title::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:2.4rem;height:2px;background:var(--accent);opacity:.85;transition:width 1s cubic-bezier(.22,1,.36,1)}
+.section-title.rule-wait::after{width:0}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.feature-grid{grid-template-columns:1fr}}
+.feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s ease}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent)}
+.feature-card:hover{transform:translateY(-2px);border-color:rgba(123,160,91,0.4)}
+.feature-card h3{font-size:.95rem;font-weight:700;color:var(--accent-text);margin-bottom:.5rem}
+.feature-card p{font-size:.8rem;color:var(--text-dim);line-height:1.75}
+.list-examples{max-width:600px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.list-chip{font-size:.8rem;color:var(--sand);border:1px solid rgba(217,201,163,0.28);border-radius:18px;padding:.28rem .95rem;background:rgba(217,201,163,0.05);transition:transform .3s ease,border-color .3s ease}
+.list-chip:hover{transform:translateY(-2px);border-color:rgba(217,201,163,0.55)}
+.quiet{max-width:560px;margin:0 auto;text-align:center}
+.quiet p{font-size:.88rem;color:var(--text-dim);line-height:2.1}
+.quiet strong{color:var(--text);font-weight:500}
+/* updates timeline */
+.updates-list{max-width:560px;margin:0 auto;position:relative;padding-left:1.1rem;border-left:1px solid var(--border)}
+.update-item{position:relative;padding:0 0 1.8rem 1.2rem}
+.update-item:last-child{padding-bottom:.2rem}
+.update-item::before{content:'';position:absolute;left:-1.1rem;top:.55rem;width:7px;height:7px;margin-left:-4px;border-radius:50%;background:var(--accent);opacity:.9}
+.update-date{font-family:'Ubuntu Mono',ui-monospace,monospace;font-size:.75rem;color:var(--accent-text);letter-spacing:.08em;display:block;margin-bottom:.25rem}
+.update-item h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.update-item p{font-size:.8rem;color:var(--text-dim);line-height:1.8}
+@media(max-width:480px){.updates-list{padding-left:.9rem}.update-item{padding-left:1rem}.update-item::before{left:-.9rem}}
+.faq{max-width:620px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:1.1rem 0}
+.faq-item h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.faq-item p{font-size:.82rem;color:var(--text-dim);line-height:1.9}
+.cta{max-width:800px;margin:0 auto;padding:2.5rem 2rem 4rem;text-align:center}
+.cta p{font-size:.85rem;color:var(--text-dim);margin-bottom:1.4rem}
+.cta-button{display:inline-block;background:var(--accent-deep);color:#f0f3ea;padding:.95rem 2.6rem;border-radius:32px;font-size:.95rem;font-weight:700;text-decoration:none;transition:opacity .2s,transform .3s cubic-bezier(.22,1,.36,1)}
+.cta-button:hover{opacity:.88;transform:translateY(-2px);text-decoration:none;color:#f0f3ea}
+.cta .note{font-size:.75rem;color:var(--text-dim);margin-top:1.1rem;margin-bottom:0}
+footer{text-align:center;padding:2rem;color:var(--text-dim);font-size:.75rem;border-top:1px solid var(--border);max-width:800px;margin:0 auto}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.is-visible{opacity:1;transform:none}
+html:not(.js) .reveal{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body::after{animation:none;opacity:.9}
+  .reveal{opacity:1;transform:none;transition:none}
+  .section-title::after,.section-title.rule-wait::after{width:2.4rem;transition:none}
+  .feature-card,.list-chip,.cta-button{transition:none}
+  .feature-card:hover,.list-chip:hover,.cta-button:hover{transform:none}
+}
+@media(max-width:480px){.hero h1{font-size:2rem}}
+</style>
+</head>
+<body>
+<div class="header"><a href="/">← トップへ</a></div>
+
+<div class="hero">
+  <h1>ここら</h1>
+  <p class="tagline">自分だけの地図を、育てる。</p>
+  <p class="description">
+    気に入った場所を、写真とメモで残していく。<br>
+    カフェでも、神社でも、温泉宿でも、パン屋でも。<br>
+    ジャンルは自由。あなたの「ここら辺、いいんだよね」を集めた地図ができていきます。
+  </p>
+  <span class="status-badge">Web版 公開中 ／ Android・iOS版 準備中</span>
+</div>
+
+<div class="section">
+  <h2 class="section-title rule-wait">できること</h2>
+  <div class="feature-grid">
+    <div class="feature-card reveal">
+      <h3>場所を記録する</h3>
+      <p>地図の上でピンを打つか、住所検索で登録。写真は最大5枚、メモも自由に残せます。</p>
+    </div>
+    <div class="feature-card reveal">
+      <h3>タグで整理する</h3>
+      <p>ジャンルタグは自由入力。「カフェ」「御朱印」「サウナ」「植物」— あなたの分類がそのまま地図の索引になります。</p>
+    </div>
+    <div class="feature-card reveal">
+      <h3>地図とリストで見返す</h3>
+      <p>ピンの散らばりを地図で眺めるのも、登録日やタグで並べたリストで辿るのも、どちらもできます。</p>
+    </div>
+    <div class="feature-card reveal">
+      <h3>公開するかは自分で決める</h3>
+      <p>初期設定は非公開。公開に切り替えた場所だけ、専用URLで人に見せられます。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title rule-wait">たとえば、こんな地図</h2>
+  <div class="list-examples">
+    <span class="list-chip reveal">静かに読書できるカフェ</span>
+    <span class="list-chip reveal">御朱印をいただいた神社</span>
+    <span class="list-chip reveal">もう一度泊まりたい温泉宿</span>
+    <span class="list-chip reveal">推しのパン屋</span>
+    <span class="list-chip reveal">景色のいい散歩道</span>
+    <span class="list-chip reveal">植物が買えるお店</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title rule-wait">星も、口コミも、ありません</h2>
+  <div class="quiet reveal">
+    <p>
+      ここらには、お店を評価する機能がありません。<br>
+      残るのは<strong>自分のための写真とメモ</strong>だけ。<br>
+      誰かの点数ではなく、自分の記憶で場所を選び直せる地図です。
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title rule-wait">アップデート</h2>
+  <div class="updates-list">
+    <div class="update-item reveal">
+      <span class="update-date">2026-07</span>
+      <h3>Androidのクローズドテストを開始</h3>
+      <p>Android版のクローズドテストを始めました。テスターの方に実際に使ってもらいながら、公開に向けた最終調整を進めています。</p>
+    </div>
+    <div class="update-item reveal">
+      <span class="update-date">2026-06</span>
+      <h3>場所検索を強化</h3>
+      <p>スポット登録時の場所検索で、地元のお店がより見つかりやすくなりました。</p>
+    </div>
+    <div class="update-item reveal">
+      <span class="update-date">2026-06</span>
+      <h3>日本語・英語の2言語に対応</h3>
+      <p>画面表示とお知らせメールを日本語・英語で出し分けるようにしました。</p>
+    </div>
+    <div class="update-item reveal">
+      <span class="update-date">2026-06</span>
+      <h3>アカウント削除機能を追加</h3>
+      <p>写真・記録・アカウントをまとめて削除できるようになりました。やめたくなったら、きれいにやめられます。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title rule-wait">よくある質問</h2>
+  <div class="faq">
+    <div class="faq-item reveal">
+      <h3>無料で使えますか？</h3>
+      <p>はい。現在は無料で使えます。Web版はブラウザからそのまま利用できます。</p>
+    </div>
+    <div class="faq-item reveal">
+      <h3>お店の評価やレビューはできますか？</h3>
+      <p>できません。ここらには星や口コミの機能がありません。記録するのは自分のための写真とメモだけです。</p>
+    </div>
+    <div class="faq-item reveal">
+      <h3>記録した場所は他の人に見られますか？</h3>
+      <p>初期設定は非公開です。公開に切り替えた場所だけが、あなたの公開URLで閲覧できるようになります。</p>
+    </div>
+    <div class="faq-item reveal">
+      <h3>スマホアプリはありますか？</h3>
+      <p>Android版とiOS版を準備中です。現在Androidはクローズドテストを実施中で、Web版はスマホのブラウザからも利用できます。</p>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <p>ブラウザからすぐに始められます。</p>
+  <a class="cta-button" href="https://mymap-260625-22054.web.app" rel="noopener">Web版を開く</a>
+  <p class="note">アカウント登録は Google またはメールアドレスで。</p>
+</div>
+
+<footer>© 2026 AkariLab</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var titles = document.querySelectorAll('.section-title.rule-wait');
+  var reveals = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('is-visible'); });
+    titles.forEach(function(el){ el.classList.remove('rule-wait'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      if (el.classList.contains('rule-wait')) el.classList.remove('rule-wait');
+      else el.classList.add('is-visible');
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(function(el, i){ el.style.transitionDelay = (i % 6) * 60 + 'ms'; io.observe(el); });
+  titles.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

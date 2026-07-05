@@ -19,6 +19,7 @@
 - /repimemo/           りぴメモ（接客メモ Bot、個人モード）
 - /repimemo/store/     りぴメモ 店舗向け
 - /repimemo/voices/    りぴメモ 体験談
+- /kokora/             ここら（地図記録アプリ。Web版公開中、Android/iOS準備中）
 
 ## Articles
 - /articles/                     note 記事のまとめ（AkariLab メディア索引）
