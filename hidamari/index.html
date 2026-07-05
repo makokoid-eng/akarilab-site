@@ -20,6 +20,53 @@
   <link rel="stylesheet" href="/assets/css/site.css">
   <style>
     :root{--bg:#0f0f0f;--bg-card:#1a1a1a;--text:#e8e4df;--text-dim:#8a8580;--accent:#E8913A;--accent-light:rgba(232,145,58,0.2);--accent-text:#f0a850;--border:rgba(255,255,255,0.06)}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.header{padding:1.5rem 2rem;max-width:800px;margin:0 auto}.header a{color:var(--text-dim);font-size:.85rem}.hero{max-width:800px;margin:0 auto;padding:4rem 2rem 3rem;text-align:center;position:relative}.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(232,145,58,0.08) 0%,transparent 60%);pointer-events:none}.hero-emoji{font-size:3rem;margin-bottom:1rem}.hero-logo{display:block;max-width:400px;width:80%;height:auto;margin:0 auto 1rem}.hero h1{font-family:'Zen Maru Gothic',sans-serif;font-size:2.5rem;font-weight:700;color:var(--accent);margin-bottom:.5rem}.hero .tagline{font-size:1rem;color:var(--text-dim);font-weight:300;letter-spacing:.1em;margin-bottom:2rem}.hero .description{font-size:.9rem;color:var(--text-dim);line-height:2;max-width:500px;margin:0 auto}.status-badge{display:inline-block;background:var(--accent-light);color:var(--accent-text);font-size:.75rem;padding:.3rem 1rem;border-radius:20px;margin-top:1.5rem;font-weight:500}.section{max-width:800px;margin:0 auto;padding:2rem 2rem 3rem}.section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;text-align:center}.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media(max-width:600px){.feature-grid{grid-template-columns:1fr}}.feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden}.feature-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent)}.feature-card h3{font-size:.95rem;font-weight:700;color:var(--accent-text);margin-bottom:.5rem}.feature-card p{font-size:.8rem;color:var(--text-dim);line-height:1.7}.steps{max-width:500px;margin:0 auto}.step{display:flex;gap:1rem;margin-bottom:1.5rem}.step-num{flex-shrink:0;width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700}.step-content h4{font-size:.9rem;font-weight:700;margin-bottom:.2rem}.step-content p{font-size:.8rem;color:var(--text-dim)}.teachers-sub{font-size:.85rem;color:var(--text-dim);text-align:center;margin-bottom:1.5rem}.teacher-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:500px;margin:0 auto}@media(max-width:600px){.teacher-grid{grid-template-columns:1fr}}.teacher-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center}.teacher-card .emoji{font-size:2rem;margin-bottom:.5rem}.teacher-card h3{font-family:'Zen Maru Gothic',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.2rem}.teacher-card .type{font-size:.75rem;color:var(--accent-text);margin-bottom:.8rem}.teacher-card p{font-size:.8rem;color:var(--text-dim);line-height:1.6}.cta{max-width:800px;margin:0 auto;padding:2rem 2rem 4rem;text-align:center}.cta p{font-size:.85rem;color:var(--text-dim);margin-bottom:.3rem}.cta .follow{font-size:1rem;color:var(--accent);font-weight:700}.monitor{max-width:600px;margin:0 auto;padding:3rem 2rem 1rem;text-align:center}.monitor h2{font-family:'Zen Maru Gothic',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--accent-text)}.monitor p{font-size:.85rem;color:var(--text-dim);line-height:2;margin-bottom:1.8rem}.monitor-button{display:inline-block;background:var(--accent);color:#fff;padding:.9rem 2.4rem;border-radius:32px;font-size:.9rem;font-weight:700;text-decoration:none;transition:opacity .2s}.monitor-button:hover{opacity:.85;text-decoration:none}.line-button{display:inline-block;background:#06C755;color:#fff;padding:.9rem 2.4rem;border-radius:32px;font-size:.95rem;font-weight:700;text-decoration:none;transition:opacity .2s}.line-button:hover{opacity:.85;text-decoration:none;color:#fff}footer{text-align:center;padding:2rem;color:var(--text-dim);font-size:.75rem;border-top:1px solid var(--border);max-width:800px;margin:0 auto}footer a{color:var(--text-dim);margin:0 .5rem}@media(max-width:480px){.hero h1{font-size:2rem}}
+    /* --- editorial polish additions --- */
+    .section-title{position:relative;padding-bottom:.9rem}
+    .section-title::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:2.4rem;height:2px;background:var(--accent);opacity:.85;transform-origin:center;transition:width 1s cubic-bezier(.22,1,.36,1)}
+    .section-title.rule-wait::after{width:0}
+    .feature-card,.teacher-card{transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s ease,background .35s ease}
+    .feature-card:hover,.teacher-card:hover{transform:translateY(-2px);border-color:var(--accent-light);background:#1e1c19}
+    .monitor-button,.line-button{transition:opacity .2s,transform .3s cubic-bezier(.22,1,.36,1)}
+    .monitor-button:hover,.line-button:hover{transform:translateY(-2px)}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+    .reveal.is-visible{opacity:1;transform:none}
+    /* Updates timeline */
+    .updates-list{max-width:560px;margin:0 auto;position:relative;padding-left:1.1rem;border-left:1px solid var(--border)}
+    .update-item{position:relative;padding:0 0 1.8rem 1.2rem}
+    .update-item:last-child{padding-bottom:.2rem}
+    .update-item::before{content:'';position:absolute;left:-1.1rem;top:.55rem;width:7px;height:7px;margin-left:-4px;border-radius:50%;background:var(--accent);opacity:.9}
+    .update-date{font-family:'Ubuntu Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.75rem;color:var(--accent-text);letter-spacing:.08em;display:block;margin-bottom:.25rem}
+    .update-item h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+    .update-item p{font-size:.8rem;color:var(--text-dim);line-height:1.8}
+    @media(max-width:480px){.updates-list{padding-left:.9rem}.update-item{padding-left:1rem}.update-item::before{left:-.9rem}}
+    /* --- ambient background: 日だまりの光 --- */
+    body{position:relative;isolation:isolate}
+    body::before{
+      content:'';position:fixed;top:-22vh;left:50%;transform:translateX(-50%);
+      width:130vw;height:78vh;pointer-events:none;z-index:-1;
+      background:
+        radial-gradient(ellipse 62% 55% at 38% 22%,rgba(232,145,58,0.13) 0%,transparent 68%),
+        radial-gradient(ellipse 50% 45% at 68% 12%,rgba(245,196,102,0.10) 0%,transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,224,150,0.05) 0%,transparent 75%);
+      filter:blur(24px);
+      animation:hidamari-breathe 14s ease-in-out infinite alternate;
+    }
+    body::after{
+      content:'';position:fixed;left:0;right:0;bottom:0;height:30vh;pointer-events:none;z-index:-1;
+      background:linear-gradient(to top,rgba(232,145,58,0.03),transparent);
+    }
+    @keyframes hidamari-breathe{
+      from{opacity:.75;transform:translateX(-50%) scale(1)}
+      to{opacity:1;transform:translateX(-52%) scale(1.06)}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      body::before{animation:none;opacity:.9}
+      .reveal{opacity:1;transform:none;transition:none}
+      .section-title::after,.section-title.rule-wait::after{width:2.4rem;transition:none}
+      .feature-card,.teacher-card,.monitor-button,.line-button{transition:none}
+      .feature-card:hover,.teacher-card:hover,.monitor-button:hover,.line-button:hover{transform:none}
+    }
   </style>
   <!-- include: assets/partials/jsonld/software-application-hidamari.html -->
 <script type="application/ld+json">
@@ -97,6 +144,41 @@
       <div class="teacher-card"><div class="emoji">🎮</div><h3>かいと</h3><div class="type">ゲーム感覚で進めるタイプ</div><p>「次のステージいこう！」問題をミッション化。達成感の演出が上手い。</p></div>
     </div>
   </div>
+  <div class="section">
+    <h2 class="section-title">アップデート</h2>
+    <div class="updates-list">
+      <div class="update-item">
+        <span class="update-date">2026-06</span>
+        <h3>対応範囲が小1〜中3の算数・数学の全範囲に</h3>
+        <p>教えられる範囲を学習指導要領（小1〜中3の算数・数学）の全範囲に広げました。低学年には学年に合わない難しい問題が出ないよう、出題の上限も学年ごとに調整しています。</p>
+      </div>
+      <div class="update-item">
+        <span class="update-date">2026-06</span>
+        <h3>図形問題をウェブ画面で見られるように</h3>
+        <p>LINEのトーク内から開ける図形ビューアを追加しました。角度や平行線などの図形問題を、文章だけでなく実際の図を見ながら解けます。図と問題文と答えが食い違わないよう表示の仕組みも改善しました。</p>
+      </div>
+      <div class="update-item">
+        <span class="update-date">2026-06</span>
+        <h3>親子で1台のスマホを共用できるモードを追加</h3>
+        <p>登録時に「親子で1台を使う」使い方を選べるようになりました。登録後でも「使い方をかえる」からモードを切り替えられます。</p>
+      </div>
+      <div class="update-item">
+        <span class="update-date">2026-06</span>
+        <h3>機種変更・端末故障に備えるアカウント引き継ぎ機能</h3>
+        <p>端末が壊れたり買い替えたりしても、学習の記録や親子連携をそのまま新しい端末に引き継げるようになりました。</p>
+      </div>
+      <div class="update-item">
+        <span class="update-date">2026-05</span>
+        <h3>クローズドテスト（モニター）を実施中</h3>
+        <p>β版のモニター募集と応募受付の体制を整え、実際の利用者からのフィードバックをもとに改善を続けています。</p>
+      </div>
+      <div class="update-item">
+        <span class="update-date">2026-04</span>
+        <h3>実力テストで一人ひとりの開始位置を自動決定</h3>
+        <p>診断テストを導入しました。学年に関係なく、いまの実力に合った単元から学習を始められます。単元を自分で選べるメニューも追加しました。</p>
+      </div>
+    </div>
+  </div>
   <section class="monitor">
     <h2>ひだまりを始める</h2>
     <p>LINE公式アカウント（認証済み）から、<br>すぐに友だち追加して使い始められます。<br>メールや電話番号の登録は要りません。</p>
@@ -133,6 +215,31 @@
       var button = document.querySelector('.monitor-button');
       if (!button) return;
       button.href = button.href.replace(/entry\.548486916=[^&]*/, 'entry.548486916=' + encodeURIComponent(src));
+    })();
+  </script>
+  <script>
+    // スクロールリビール＋見出し罫線アニメーション（装飾のみ、reduced-motion 尊重）
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced || !('IntersectionObserver' in window)) return;
+      var targets = [].slice.call(document.querySelectorAll(
+        '.feature-card, .step, .teacher-card, .update-item, .monitor, .cta'
+      ));
+      targets.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = (Math.min(i % 6, 4) * 60) + 'ms';
+      });
+      var titles = [].slice.call(document.querySelectorAll('.section-title'));
+      titles.forEach(function (el) { el.classList.add('rule-wait'); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          entry.target.classList.remove('rule-wait');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+      targets.concat(titles).forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>

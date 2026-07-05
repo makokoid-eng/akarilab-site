@@ -63,6 +63,132 @@
   ]
 }
 </script>
+<style>
+/* ---- page enhancements (akarilab brand page) ---- */
+
+/* eyebrow: 番号付きセクション見出し */
+.section-title .sec-num {
+  color: var(--accent);
+  margin-right: 10px;
+}
+.section-title {
+  position: relative;
+  padding-bottom: 10px;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--border) 70%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+.section-title.is-inview::after {
+  transform: scaleX(1);
+}
+
+/* スクロールリビール */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-inview {
+  opacity: 1;
+  transform: none;
+}
+
+/* プロダクトリンクのホバー微アニメーション */
+.product-list li {
+  border-left: 2px solid var(--border);
+  padding-left: 14px;
+  margin-bottom: 10px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.product-list li::before {
+  content: none;
+}
+.product-list li:hover {
+  border-left-color: var(--accent);
+  transform: translateY(-2px);
+}
+.section a {
+  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+.section a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+
+/* Updates タイムライン */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border);
+}
+.timeline li {
+  position: relative;
+  padding: 0 0 24px 22px;
+  margin: 0;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  transition: background 0.25s ease;
+}
+.timeline li:hover::before {
+  background: var(--accent);
+}
+.timeline .tl-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 2px;
+}
+.timeline h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+.timeline p {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .section-title::after,
+  .product-list li {
+    transition: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .section-title::after {
+    transform: scaleX(1);
+  }
+}
+</style>
 </head>
 <body>
 <nav class="header"><a href="/">← AkariLab トップへ</a></nav>
@@ -77,8 +203,8 @@
   </p>
 </section>
 
-<section class="section">
-  <h2 class="section-title">運営しているプロダクト</h2>
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">01</span>運営しているプロダクト</h2>
   <ul class="product-list">
     <li><a href="/hidamari.html">ひだまり</a> — 算数・数学が苦手な子のための AI 家庭教師 LINE Bot（開発中）</li>
     <li><a href="https://akarilab.org/r/line-moyalog/?from=lp-akarilab&ch=akari">もやログ</a> — 気持ちをそのまま置いていく感情ログ LINE Bot</li>
@@ -86,14 +212,45 @@
   </ul>
 </section>
 
-<section class="section">
-  <h2 class="section-title">メディア</h2>
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">02</span>メディア</h2>
   <p><a href="https://note.com/akarilab">note.com/akarilab</a> に、開発と運用の記録を書いている。2026-05-17 から連載「触り始めて9ヶ月の記録」が始まる。</p>
 </section>
 
-<section class="section">
-  <h2 class="section-title">運営者</h2>
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">03</span>運営者</h2>
   <p>ブランドの設計と実装は <a href="/makoto/">運営者プロフィール</a> ページから確認できる。</p>
+</section>
+
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">04</span>Updates</h2>
+  <ul class="timeline">
+    <li class="reveal">
+      <span class="tl-date">2026-07</span>
+      <h3>地図アプリ「ここら」がAndroidのクローズドテスト段階に</h3>
+      <p>新しい地図アプリ「ここら」の開発を進めています。お気に入りの場所の記録、リスト作成、ルート提案、日英2言語表示に対応し、現在はAndroidのクローズドテストとしてテスターに使ってもらう段階です。利用規約・プライバシーポリシー・アカウント削除の案内ページも整えました。</p>
+    </li>
+    <li class="reveal">
+      <span class="tl-date">2026-06</span>
+      <h3>ひだまりが小1〜中3の算数・数学の全範囲に対応</h3>
+      <p>学習支援サービス「ひだまり」の対応範囲を学習指導要領の小1〜中3の全範囲に広げました。図形問題をLINEから開ける図形ビューア、親子で1台を共用するモード、端末の機種変更に備えるアカウント引き継ぎも追加しています。</p>
+    </li>
+    <li class="reveal">
+      <span class="tl-date">2026-06</span>
+      <h3>りぴメモが店舗単位の利用に対応</h3>
+      <p>「りぴメモ」を個人利用に加えて店舗単位でも使えるようにしました。店舗登録、招待コードによるスタッフ追加、役割ごとのメニュー切り替え、予約ハブ、店舗ごとに顧客情報の公開範囲を決めるポリシー機能を追加しています。</p>
+    </li>
+    <li class="reveal">
+      <span class="tl-date">2026-06</span>
+      <h3>もやログのAI応答を「受け取るだけ」に見直し</h3>
+      <p>「もやログ」で、書いた内容に対してAIが助言や解釈を返さず、まず受け取ることを優先する方針に見直しました。自分との約束機能や週次のふり返り提案も加えています。</p>
+    </li>
+    <li class="reveal">
+      <span class="tl-date">2026-05</span>
+      <h3>ひだまりのクローズドテストを実施中</h3>
+      <p>ひだまりでβ版のモニター募集と応募受付の体制を整え、実際の利用者からのフィードバックをもとに改善を続けています。</p>
+    </li>
+  </ul>
 </section>
 
 <!-- include: assets/partials/footer-common.html -->
@@ -121,5 +278,24 @@
 </footer>
 
 <!-- include-end: assets/partials/footer-common.html -->
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var targets = document.querySelectorAll('.reveal, .section-title');
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach(function (el) { el.classList.add('is-inview'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-inview');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  targets.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>

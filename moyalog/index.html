@@ -23,6 +23,25 @@
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;min-height:100vh}
+    /* --- 背景の空気（もやログ：青系の霧・低彩度） --- */
+    body{background:linear-gradient(175deg,#0f1420 0%,#0f1218 34%,#101522 68%,#0e1116 100%) fixed;position:relative;isolation:isolate}
+    body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+      background:
+        radial-gradient(58% 42% at 18% 22%,rgba(91,140,204,0.075) 0%,transparent 70%),
+        radial-gradient(52% 40% at 82% 58%,rgba(122,166,220,0.055) 0%,transparent 70%),
+        radial-gradient(70% 48% at 45% 92%,rgba(70,105,160,0.06) 0%,transparent 72%);
+      filter:blur(2px)}
+    body::after{content:'';position:fixed;left:-20%;top:-10%;width:140%;height:120%;z-index:-1;pointer-events:none;opacity:.5;
+      background:
+        radial-gradient(40% 26% at 30% 35%,rgba(140,170,210,0.05) 0%,transparent 68%),
+        radial-gradient(34% 24% at 70% 65%,rgba(91,140,204,0.045) 0%,transparent 66%);
+      filter:blur(10px);
+      animation:moya-drift 46s ease-in-out infinite alternate}
+    @keyframes moya-drift{
+      0%{transform:translate3d(-2.5%,-1.5%,0) scale(1)}
+      50%{transform:translate3d(2%,1.2%,0) scale(1.04)}
+      100%{transform:translate3d(-1%,2%,0) scale(1.02)}
+    }
     a{color:var(--accent-text);text-decoration:none}
     a:hover{text-decoration:underline}
     .hero{max-width:760px;margin:0 auto;padding:5rem 1.5rem 3rem;text-align:center;position:relative}
@@ -57,6 +76,34 @@
     .cta-button{display:inline-block;background:var(--accent);color:#fff;padding:.95rem 2.6rem;border-radius:32px;font-size:.95rem;font-weight:500;text-decoration:none;transition:opacity .2s}
     .cta-button:hover{opacity:.85;text-decoration:none;color:#fff}
     .footer{text-align:center;padding:2rem 1.5rem;color:var(--text-dim);font-size:.72rem;border-top:1px solid var(--border);max-width:760px;margin:0 auto}
+    /* --- 動的演出（装飾のみ・reduced-motion 尊重） --- */
+    .feature-card,.faq-item,.voice-excerpt,.scene{transition:border-color .35s ease,transform .35s ease,background-color .35s ease}
+    .feature-card:hover,.voice-excerpt:hover{border-color:rgba(122,166,220,.35);transform:translateY(-2px)}
+    .faq-item:hover{border-color:rgba(122,166,220,.3)}
+    .scene:hover{border-left-color:var(--accent);background:rgba(91,140,204,.07)}
+    .cta-button{transition:opacity .2s,transform .25s ease}
+    .cta-button:hover{transform:translateY(-2px)}
+    .section-title{position:relative;padding-bottom:.85rem}
+    .section-title::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:1px;width:2.4rem;background:var(--accent);opacity:.65;transition:width 1.1s cubic-bezier(.22,.61,.36,1)}
+    .js .section-title:not(.line-in)::after{width:0}
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+    .js .reveal.in{opacity:1;transform:none}
+    /* --- Updates タイムライン --- */
+    .updates{max-width:640px;margin:0 auto;position:relative;padding-left:1.1rem;border-left:1px solid var(--border)}
+    .update-item{position:relative;padding:0 0 1.6rem 1rem}
+    .update-item:last-child{padding-bottom:.2rem}
+    .update-item::before{content:'';position:absolute;left:-1.1rem;top:.55em;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:var(--accent);opacity:.8}
+    .update-item .date{font-family:'Ubuntu Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;color:var(--accent-text);letter-spacing:.06em;margin-bottom:.25rem}
+    .update-item h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+    .update-item p{font-size:.82rem;color:var(--text-dim);line-height:1.8}
+    @media(prefers-reduced-motion:reduce){
+      .js .reveal{opacity:1;transform:none;transition:none}
+      .js .section-title:not(.line-in)::after{width:2.4rem}
+      .feature-card,.faq-item,.voice-excerpt,.scene,.cta-button{transition:none}
+      .feature-card:hover,.voice-excerpt:hover,.cta-button:hover{transform:none}
+      html{scroll-behavior:auto}
+      body::after{animation:none;transform:none}
+    }
   </style>
 
   <script type="application/ld+json">
@@ -232,6 +279,42 @@
     </div>
   </div>
 
+  <div class="section">
+    <h2 class="section-title">最近の更新</h2>
+    <div class="updates">
+      <div class="update-item reveal">
+        <div class="date">2026-06</div>
+        <h3>約束を達成したあとの流れを改善</h3>
+        <p>約束を達成したあとも、記録のふり返り（あしあと）に自然につながるよう導線を整えました。</p>
+      </div>
+      <div class="update-item reveal">
+        <div class="date">2026-04</div>
+        <h3>AIの応答を「受け取るだけ」に全面見直し</h3>
+        <p>書いた内容に対してAIが勝手に助言や解釈を返さないよう、応答方針を全面的に見直しました。まず受け取ることを優先しています。</p>
+      </div>
+      <div class="update-item reveal">
+        <div class="date">2026-04</div>
+        <h3>「自分との約束」機能を追加</h3>
+        <p>もやもやを書いたあとに、自分と小さな約束を交わせる機能を追加しました。時間の締め切りは設けず、できたときに報告するかたちです。</p>
+      </div>
+      <div class="update-item reveal">
+        <div class="date">2026-04</div>
+        <h3>言葉にできないときの「身体ルート」を追加</h3>
+        <p>もやもやをうまく言葉にできないとき、体の感覚から入る別のルートを用意しました。書けない日でも使えます。</p>
+      </div>
+      <div class="update-item reveal">
+        <div class="date">2026-04</div>
+        <h3>週次サマリーの提案を追加</h3>
+        <p>記録の流れが一区切りしたタイミングで、1週間分のふり返りサマリーを提案するようになりました。</p>
+      </div>
+      <div class="update-item reveal">
+        <div class="date">2026-04</div>
+        <h3>日替わりの声かけと「あしあと」を追加</h3>
+        <p>開いたときの声かけが日替わりになり、しばらく間があいたときの検知や、続けた記録が見える「あしあと」も入りました。</p>
+      </div>
+    </div>
+  </div>
+
   <section class="cta">
     <p>友だち追加すると、すぐに使い始められます。<br>登録のためのメールや電話番号は要りません。</p>
     <a href="https://akarilab.org/r/line-moyalog/?from=lp-moyalog&ch=akari" class="cta-button" target="_blank" rel="noopener noreferrer">LINE で友だち追加</a>
@@ -240,5 +323,35 @@
   <div class="footer">
     <p>© 2026 AkariLab</p>
   </div>
+
+  <script>
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!('IntersectionObserver' in window) || reduce) return;
+    document.documentElement.classList.add('js');
+    document.querySelectorAll('.feature-card,.scene,.voice-excerpt,.faq-item,.update-item,.hero .lead').forEach(function(el){
+      el.classList.add('reveal');
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function(el, i){
+      el.style.transitionDelay = Math.min(i % 6, 4) * 60 + 'ms';
+      io.observe(el);
+    });
+    var lineIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add('line-in');
+        lineIo.unobserve(e.target);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.section-title').forEach(function(el){ lineIo.observe(el); });
+  })();
+  </script>
 </body>
 </html>

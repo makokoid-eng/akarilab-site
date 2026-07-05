@@ -47,8 +47,28 @@
       color: var(--text);
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      isolation: isolate;
     }
     a { color: inherit; text-decoration: none; }
+
+    /* 灯（あかり）の揺らぎ：光源位置がごくゆっくり漂う背景レイヤー */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(50% 38% at 50% 6%, rgba(76,175,125,0.09), rgba(76,175,125,0) 70%);
+      animation: lantern-drift 26s ease-in-out infinite alternate;
+      will-change: transform, opacity;
+    }
+    @keyframes lantern-drift {
+      0%   { transform: translate(0, 0) scale(1);        opacity: 0.85; }
+      35%  { transform: translate(1.5%, 0.8%) scale(1.03); opacity: 1; }
+      70%  { transform: translate(-1.2%, 0.4%) scale(0.99); opacity: 0.75; }
+      100% { transform: translate(0.8%, -0.6%) scale(1.02); opacity: 0.95; }
+    }
 
     /* Masthead（誌面の柱：最上部の細い帯） */
     .masthead {
@@ -396,7 +416,124 @@
     }
     footer .links a:hover { color: var(--text); }
 
+    /* Updates timeline（エディトリアル調の縦罫線リスト） */
+    .updates {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .updates .lead {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 2;
+      margin-bottom: 24px;
+    }
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid var(--border);
+    }
+    .timeline li {
+      position: relative;
+      padding: 0 0 28px 24px;
+    }
+    .timeline li:last-child { padding-bottom: 4px; }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: -3px;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      transition: box-shadow 0.25s ease;
+    }
+    .timeline li:hover::before {
+      box-shadow: 0 0 0 4px rgba(76,175,125,0.15);
+    }
+    .timeline .tl-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent-green);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .timeline .tl-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .timeline .tl-body {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.9;
+    }
+
+    /* スクロールリビール */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* eyebrow の罫線が視界に入るとゆっくり伸びる（JS有効時のみ） */
+    html.js .eyebrow-rule {
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+    }
+    html.js .eyebrow-rule.is-visible { transform: scaleX(1); }
+
+    /* ヒーロー：kicker 罫線がゆっくり明滅する微細な演出 */
+    .hero .kicker::after {
+      content: "";
+      display: block;
+      width: 40px;
+      margin: 14px auto 0;
+      border-top: 1px solid var(--accent-green);
+      opacity: 0.5;
+      animation: kicker-breathe 5s ease-in-out infinite;
+    }
+    @keyframes kicker-breathe {
+      0%, 100% { opacity: 0.35; width: 40px; }
+      50% { opacity: 0.8; width: 64px; }
+    }
+
+    /* リンクのホバー微アニメーション */
+    footer .links a,
+    .service-hub-link .hub-cta {
+      transition: color 0.2s ease;
+    }
+    .service-card,
+    .service-hub-link {
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.2s ease;
+    }
+    .service-hub-link:hover { transform: translateY(-2px); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .eyebrow-rule {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .hero .kicker::after { animation: none; }
+      body::before { animation: none; transform: none; opacity: 0.9; }
+      .product-card:hover, .service-hub-link:hover { transform: none; }
+    }
+
     @media (max-width: 480px) {
+      .updates { padding: 24px 16px; }
       .masthead { padding: 16px 16px 0; font-size: 10px; letter-spacing: 0.12em; }
       .masthead .rule-line { padding: 0 16px; }
       .hero { padding: 48px 16px 36px; }
@@ -605,9 +742,45 @@
     </a>
   </div>
 
-  <div class="about">
+  <div class="updates">
     <div class="eyebrow">
       <span class="eyebrow-num">04</span>
+      <span class="eyebrow-label">Updates</span>
+      <span class="eyebrow-rule"></span>
+    </div>
+    <p class="lead">AkariLab のいま。各プロダクトの近況を時系列で載せています。</p>
+    <ul class="timeline">
+      <li>
+        <p class="tl-date">2026-07</p>
+        <p class="tl-title">地図アプリ「ここら」がAndroidのクローズドテスト段階に</p>
+        <p class="tl-body">新しい地図アプリ「ここら」の開発を進めています。お気に入りの場所の記録、リスト作成、ルート提案、日英2言語表示に対応し、現在はAndroidのクローズドテストとしてテスターに使ってもらう段階です。利用規約・プライバシーポリシー・アカウント削除の案内ページも整えました。</p>
+      </li>
+      <li>
+        <p class="tl-date">2026-06</p>
+        <p class="tl-title">ひだまりが小1〜中3の算数・数学の全範囲に対応</p>
+        <p class="tl-body">学習支援サービス「ひだまり」の対応範囲を学習指導要領の小1〜中3の全範囲に広げました。図形問題をLINEから開ける図形ビューア、親子で1台を共用するモード、端末の機種変更に備えるアカウント引き継ぎも追加しています。</p>
+      </li>
+      <li>
+        <p class="tl-date">2026-06</p>
+        <p class="tl-title">りぴメモが店舗単位の利用に対応</p>
+        <p class="tl-body">「りぴメモ」を個人利用に加えて店舗単位でも使えるようにしました。店舗登録、招待コードによるスタッフ追加、役割ごとのメニュー切り替え、予約ハブ、店舗ごとに顧客情報の公開範囲を決めるポリシー機能を追加しています。</p>
+      </li>
+      <li>
+        <p class="tl-date">2026-06</p>
+        <p class="tl-title">もやログのAI応答を「受け取るだけ」に見直し</p>
+        <p class="tl-body">「もやログ」で、書いた内容に対してAIが助言や解釈を返さず、まず受け取ることを優先する方針に見直しました。自分との約束機能や週次のふり返り提案も加えています。</p>
+      </li>
+      <li>
+        <p class="tl-date">2026-05</p>
+        <p class="tl-title">ひだまりのクローズドテストを実施中</p>
+        <p class="tl-body">ひだまりでβ版のモニター募集と応募受付の体制を整え、実際の利用者からのフィードバックをもとに改善を続けています。</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="about">
+    <div class="eyebrow">
+      <span class="eyebrow-num">05</span>
       <span class="eyebrow-label">About</span>
       <span class="eyebrow-rule"></span>
     </div>
@@ -646,6 +819,43 @@
     </div>
     <p>© 2026 AkariLab</p>
   </footer>
+
+  <script>
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced || !('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js');
+
+      // リビール対象：カード・引用・タイムライン項目・見出しまわり
+      var targets = document.querySelectorAll(
+        '.pullquote, .product-card, .service-card, .timeline li, .about h2, .about p, .updates .lead, .services .lead'
+      );
+      targets.forEach(function (el) { el.classList.add('reveal'); });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      targets.forEach(function (el) { io.observe(el); });
+
+      // eyebrow 罫線：視界に入るとゆっくり伸びる
+      var rules = document.querySelectorAll('.eyebrow-rule');
+      var ruleIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            ruleIo.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      rules.forEach(function (el) { ruleIo.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>
