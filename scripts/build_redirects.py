@@ -35,7 +35,7 @@ HEAD_COMMON = REPO_ROOT / "assets" / "partials" / "head-common.html"
 OUT_DIR = REPO_ROOT / "r"
 
 REQUIRED_KEYS = {"slug", "dest_url", "label", "category", "dest_domain", "active"}
-ALLOWED_CATEGORIES = {"brain", "coconala", "line_bot", "form", "hub"}
+ALLOWED_CATEGORIES = {"brain", "coconala", "line_bot", "form", "hub", "stripe"}
 
 
 def load_redirects() -> list[dict]:

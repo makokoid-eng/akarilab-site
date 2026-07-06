@@ -133,6 +133,14 @@ redirects:
     dest_domain: akarilab.org
     active: true
 
+  # 2026-07-06 Stripe 直接決済（設計: docs/aiseo/page_stripe_payment_design.md）
+  - slug: stripe-consult
+    dest_url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
+    label: 業務の自動化 現場目線相談（30分）をカードで直接申し込み
+    category: stripe
+    dest_domain: buy.stripe.com
+    active: true
+
   - slug: hidamari-monitor-form
     dest_url: https://docs.google.com/forms/d/e/1FAIpQLSfVPXLX4VNbpUNcXB2VbUeISehx0OBs24G_RpfpsCM00XzLJg/viewform
     label: ひだまりβ版モニター応募フォーム
