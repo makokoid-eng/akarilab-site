@@ -72,6 +72,32 @@ jobs:
             > /tmp/report.md
           echo "report_path=docs/redirect-reports/${{ steps.week.outputs.label }}.md" >> "$GITHUB_OUTPUT"
 
+      # TLS証明書の期限監視。GitHub Pages は通常30日前に自動更新するので、
+      # 残り14日未満は「自動更新が走っていない」異常サインとして警告する
+      - name: Check TLS certificate expiry
+        run: |
+          {
+            echo ""
+            echo "## TLS証明書期限"
+            echo ""
+          } > /tmp/cert.md
+          for d in akarilab.org demo.akarilab.org; do
+            exp=$(echo | openssl s_client -servername "$d" -connect "$d:443" 2>/dev/null \
+              | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+            if [ -z "$exp" ]; then
+              echo "- ⚠️ $d: 証明書を取得できず（接続失敗。発行停止や期限切れの可能性）" >> /tmp/cert.md
+              continue
+            fi
+            days=$(( ($(date -d "$exp" +%s) - $(date +%s)) / 86400 ))
+            if [ "$days" -lt 14 ]; then
+              echo "- ⚠️ $d: 残り ${days}日（$exp）— GitHub の自動更新が走っていない可能性。Pages 設定を確認" >> /tmp/cert.md
+            else
+              echo "- $d: 残り ${days}日（$exp）" >> /tmp/cert.md
+            fi
+          done
+          cat /tmp/cert.md >> /tmp/report.md
+          cat /tmp/cert.md >> "${{ steps.collect.outputs.report_path }}"
+
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
