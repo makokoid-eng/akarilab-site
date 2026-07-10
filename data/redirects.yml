@@ -157,9 +157,10 @@ redirects:
     dest_domain: coconala.com
     active: true
 
+  # dest は LP制作サービス（2026-07-11時点で仮ページ。公開前に記事を出さないこと）
   - slug: coconala-lp-note
-    dest_url: https://coconala.com/services/4306507
-    label: 店舗のホームページをWordPressで作ります（note イベントLP記事経由）
+    dest_url: https://coconala.com/services/4307339
+    label: イベント・キャンペーンLP制作（note イベントLP記事経由）
     category: coconala
     dest_domain: coconala.com
     active: true
