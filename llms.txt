@@ -10,7 +10,7 @@
 - /makoto/profile/     経歴詳細＋FAQ
 - /makoto/timeline/    AI 利用タイムライン
 - /makoto/contact/     連絡先（ココナラ／note／IG／GitHub）
-- /makoto/services/    運営者の提供サービス一覧（ココナラ×4／BrAIN×1。業務自動化の30分相談を入口に、Excel自動化・AI業務ツールのビデオ伴走制作・現場LINEBotの設計導入へ進む縦動線あり）
+- /makoto/services/    運営者の提供サービス一覧（ココナラ×6／Brain×1の7件。業務自動化の30分相談を入口に、Excel自動化・AI業務ツールのビデオ伴走制作・現場LINEBotの設計導入・WordPress HP制作・小規模実装へ進む縦動線あり）
 - /hidamari/           ひだまり（学習 Bot、開発中）
 
 ## Products

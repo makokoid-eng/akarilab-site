@@ -133,6 +133,21 @@ redirects:
     dest_domain: akarilab.org
     active: true
 
+  # 2026-07-10 ココナラ新規出品2件（WordPress HP制作・現場実装）
+  - slug: coconala-wordpress-hp
+    dest_url: https://coconala.com/services/4306507
+    label: 店舗のホームページをWordPressで作ります
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  - slug: coconala-genba-jissou
+    dest_url: https://coconala.com/services/4297816
+    label: こうだったら楽なのにを現場側の人間が実装
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
   # 2026-07-06 Stripe 直接決済（設計: docs/aiseo/page_stripe_payment_design.md）
   - slug: stripe-consult
     dest_url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
