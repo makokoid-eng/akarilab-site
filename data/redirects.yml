@@ -148,6 +148,22 @@ redirects:
     dest_domain: coconala.com
     active: true
 
+  # 2026-07-11 note 実績紹介記事2本（WP HP制作・イベントLP制作）からの記事別計測用。
+  # dest は既存 coconala-wordpress-hp と同じサービス。記事経由クリックを区別するため slug を分ける。
+  - slug: coconala-wp-note
+    dest_url: https://coconala.com/services/4306507
+    label: 店舗のホームページをWordPressで作ります（note WP制作記事経由）
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
+  - slug: coconala-lp-note
+    dest_url: https://coconala.com/services/4306507
+    label: 店舗のホームページをWordPressで作ります（note イベントLP記事経由）
+    category: coconala
+    dest_domain: coconala.com
+    active: true
+
   # 2026-07-06 Stripe 直接決済（設計: docs/aiseo/page_stripe_payment_design.md）
   - slug: stripe-consult
     dest_url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
