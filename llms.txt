@@ -19,7 +19,7 @@
 - /repimemo/           りぴメモ（接客メモ Bot、個人モード）
 - /repimemo/store/     りぴメモ 店舗向け
 - /repimemo/voices/    りぴメモ 体験談
-- /kokora/             ここら（地図記録アプリ。Web版公開中、Android/iOS準備中）
+- /kokora/             ここら（地図記録アプリ。iOSリリース済み、Android準備中、Web版公開中）
 
 ## Works
 - /works/              制作実績・デモ（受託 Web 制作のサンプル一覧。第1弾=製造業BtoB向けサイトデモ。今後デモを追加予定）
