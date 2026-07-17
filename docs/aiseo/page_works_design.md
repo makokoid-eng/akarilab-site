@@ -79,3 +79,23 @@ AkariLab の受託 Web 制作の実績・デモを一覧で示すハブページ
 - sitemap.xml・llms.txt・TARGETS 同期済み
 - リッチリザルトテスト警告ゼロ
 - 外部デモリンクが有効（200）
+
+## 11. 追補（2026-07-18）ジャンル別デモ集化
+初版は製造業1件のみだったが、ユーザー要望で「ジャンル別デモ集」に拡張。
+Vercel 上の既存デモ5件を調査（`vercel projects ls`）して外部リンクで集約した:
+- 飲食: とんかつ ひなた亭 https://akarilab-demo-tonkatsu.vercel.app/
+- 不動産: 海風不動産 https://okinawa-fudosan-demo.vercel.app/
+- 製造: 丸誠精工 https://seizo-btob-demo.vercel.app/
+- イベントLP: DOG DAYS PARK 2026 https://dog-event-lp.vercel.app/
+- イベントLP: いぬ集会 in 秦野戸川公園 https://inusyukai-mock.vercel.app/
+
+除外: 一宮自習室デモ（ichinomiya-jishushitsu-mock）。memory `ichinomiya-demo-not-linked` の
+「Vercel公開は続けるが AkariLab とは紐づけない」方針に従い、本ハブに載せない。
+
+変更点:
+- body をジャンル別セクション（01飲食/02不動産/03製造/04イベントLP/05相談）に再構成
+- カードはサムネなしのテキストカード（各デモの内部画像参照が不揃いで安定取得できないため、v1では画像なしで統一）。将来サムネ追加可
+- JSON-LD ItemList を numberOfItems=5・ListItem×5(WebSite) に更新
+- og:image は暫定で seizo-btob.jpg のまま（CODEX 指摘の任意改善: /works/ 汎用OG画像への差し替えは将来対応）
+- CODEX コードレビュー: ブロッカーなし・commit OK
+- sitemap.xml / llms.txt / TARGETS は初版で /works/ 追加済みのため変更なし

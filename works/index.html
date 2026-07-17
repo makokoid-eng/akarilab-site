@@ -24,10 +24,10 @@
 
 <!-- include-end: assets/partials/head-common.html -->
 <title>制作実績・デモ｜AkariLab</title>
-<meta name="description" content="AkariLab の受託 Web 制作の実績・デモ一覧。業種に合わせた LP・採用ページのサンプルを掲載しています。第1弾は製造業（金属加工・精密部品製造）向けの BtoB サイトデモ。">
+<meta name="description" content="AkariLab の受託 Web 制作の実績・デモ集。飲食・不動産・製造・イベントLP など、業種・目的に合わせて作ったサイトのデザインデモをジャンル別に掲載しています（掲載内容はすべて架空）。">
 <link rel="canonical" href="https://akarilab.org/works/">
 <meta property="og:title" content="制作実績・デモ｜AkariLab">
-<meta property="og:description" content="AkariLab の受託 Web 制作の実績・デモ一覧。業種に合わせた LP・採用ページのサンプルを掲載。">
+<meta property="og:description" content="飲食・不動産・製造・イベントLP など、業種別の受託 Web 制作デモをジャンル別に掲載。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://akarilab.org/works/">
 <meta property="og:image" content="https://akarilab.org/works/img/seizo-btob.jpg">
@@ -41,24 +41,68 @@
   "@id": "https://akarilab.org/works/#collection",
   "name": "制作実績・デモ｜AkariLab",
   "url": "https://akarilab.org/works/",
-  "description": "AkariLab の受託 Web 制作の実績・デモ一覧。",
+  "description": "AkariLab の受託 Web 制作の実績・デモ集（ジャンル別）。",
   "publisher": { "@id": "https://akarilab.org/#org" },
   "mainEntity": {
     "@type": "ItemList",
     "@id": "https://akarilab.org/works/#itemlist",
     "name": "制作実績・デモ一覧",
-    "description": "AkariLab の受託 Web 制作の実績・デモ一覧。",
-    "numberOfItems": 1,
+    "description": "AkariLab の受託 Web 制作の実績・デモ一覧（ジャンル別）。",
+    "numberOfItems": 5,
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
         "item": {
           "@type": "WebSite",
+          "@id": "https://akarilab-demo-tonkatsu.vercel.app/#website",
+          "name": "とんかつ ひなた亭（飲食店サイトデモ）",
+          "url": "https://akarilab-demo-tonkatsu.vercel.app/",
+          "description": "宮崎・日向のとんかつ店を想定した飲食店サイトのデザインデモ（架空）。"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "WebSite",
+          "@id": "https://okinawa-fudosan-demo.vercel.app/#website",
+          "name": "海風不動産（不動産サイトデモ）",
+          "url": "https://okinawa-fudosan-demo.vercel.app/",
+          "description": "沖縄の土地・住まいを扱う不動産会社を想定したサイトのデザインデモ（架空）。"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "WebSite",
           "@id": "https://seizo-btob-demo.vercel.app/#website",
-          "name": "製造業BtoB向け制作デモ（金属加工・精密部品製造）",
+          "name": "丸誠精工（製造業BtoBサイトデモ）",
           "url": "https://seizo-btob-demo.vercel.app/",
-          "description": "金属加工・精密部品製造の BtoB 企業向けコーポレートサイトのデザイン・構造デモ（掲載内容はすべて架空）。"
+          "description": "金属加工・精密部品製造の BtoB 企業を想定したコーポレートサイトのデザインデモ（架空）。"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "WebSite",
+          "@id": "https://dog-event-lp.vercel.app/#website",
+          "name": "DOG DAYS PARK 2026（イベント告知LPデモ）",
+          "url": "https://dog-event-lp.vercel.app/",
+          "description": "犬と楽しむ秋の公園イベントの告知 LP のデザインラフ（架空）。"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "WebSite",
+          "@id": "https://inusyukai-mock.vercel.app/#website",
+          "name": "いぬ集会 in 秦野戸川公園（イベント告知LPデモ）",
+          "url": "https://inusyukai-mock.vercel.app/",
+          "description": "犬好きが集まる集会イベントの告知 LP のデザインモック（架空）。"
         }
       }
     ]
@@ -97,62 +141,41 @@
   padding-bottom: 10px;
 }
 
-/* 実績カード */
-.work-list {
+/* 実績カード（ジャンルごとに1〜複数枚をグリッド配置） */
+.work-grid {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
 }
 .work-card {
   border: 1px solid var(--border);
   border-radius: 14px;
-  overflow: hidden;
+  padding: 24px 24px 22px;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
 }
 .work-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
-.work-card .thumb {
-  display: block;
-  aspect-ratio: 16 / 8;
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-}
-.work-card .thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.work-card:hover .thumb img {
-  transform: scale(1.04);
-}
-.work-card .body {
-  padding: 22px 24px 26px;
-}
-.work-card .cat {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 6px;
-}
 .work-card h3 {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text);
   margin: 0 0 8px;
 }
 .work-card p {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text-dim);
-  line-height: 1.9;
+  line-height: 1.85;
   margin: 0 0 16px;
+  flex: 1;
 }
 .work-card .actions a {
   display: inline-block;
@@ -176,7 +199,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .work-card, .work-card .thumb img { transition: none; }
+  .work-card { transition: none; }
 }
 </style>
 </head>
@@ -185,37 +208,64 @@
 
 <section class="hero">
   <h1>制作実績・デモ</h1>
-  <p class="tagline">業種に合わせて作る、受託 Web 制作のサンプル</p>
+  <p class="tagline">業種・目的に合わせて作る、受託 Web 制作のサンプル集</p>
   <p class="description">
-    AkariLab では、LINE Bot の開発と並行して、企業サイト・採用ページなどの受託 Web 制作も手がけています。<br>
-    ここでは、業種に合わせて作ったデザイン・構造のデモを公開しています（掲載している会社名・住所・数値はすべて架空です）。
+    AkariLab では、LINE Bot の開発と並行して、企業サイト・店舗サイト・イベント告知ページなどの受託 Web 制作も手がけています。<br>
+    ここでは、業種や目的に合わせて作ったデザイン・構造のデモをジャンル別に公開しています（掲載している会社名・店名・住所・数値・日付はすべて架空です）。
   </p>
 </section>
 
 <section class="section reveal">
-  <h2 class="section-title"><span class="sec-num">01</span>制作デモ</h2>
-  <ul class="work-list">
+  <h2 class="section-title"><span class="sec-num">01</span>飲食</h2>
+  <ul class="work-grid">
     <li class="work-card reveal">
-      <a class="thumb" href="https://seizo-btob-demo.vercel.app" target="_blank" rel="noopener">
-        <img src="/works/img/seizo-btob.jpg" alt="製造業BtoB向け制作デモのトップ画面（金属加工・精密部品製造の企業サイト）">
-      </a>
-      <div class="body">
-        <span class="cat">製造業・BtoB</span>
-        <h3>金属加工・精密部品製造の企業サイト</h3>
-        <p>
-          小ロット試作から量産までを担う金属加工メーカー（架空）を想定した、コーポレートサイトのデザイン・構造デモ。
-          事業内容・選ばれる理由・設備実績・採用情報・会社概要までを一枚で見せる構成です。スマートフォン表示にも対応しています。
-        </p>
-        <div class="actions">
-          <a href="https://seizo-btob-demo.vercel.app" target="_blank" rel="noopener">デモを開く（別タブ）→</a>
-        </div>
-      </div>
+      <h3>とんかつ ひなた亭</h3>
+      <p>宮崎・日向のとんかつ店を想定した飲食店サイトのデザインデモ。メニュー・店舗情報・お店のこだわりを一枚で見せる構成です。</p>
+      <div class="actions"><a href="https://akarilab-demo-tonkatsu.vercel.app/" target="_blank" rel="noopener">デモを開く（別タブ）→</a></div>
     </li>
   </ul>
 </section>
 
 <section class="section reveal">
-  <h2 class="section-title"><span class="sec-num">02</span>制作のご相談</h2>
+  <h2 class="section-title"><span class="sec-num">02</span>不動産</h2>
+  <ul class="work-grid">
+    <li class="work-card reveal">
+      <h3>海風不動産</h3>
+      <p>沖縄の土地・住まいを扱う不動産会社を想定したサイトのデザインデモ。物件種別・エリア・相談への導線を整理した構成です。</p>
+      <div class="actions"><a href="https://okinawa-fudosan-demo.vercel.app/" target="_blank" rel="noopener">デモを開く（別タブ）→</a></div>
+    </li>
+  </ul>
+</section>
+
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">03</span>製造</h2>
+  <ul class="work-grid">
+    <li class="work-card reveal">
+      <h3>丸誠精工（金属加工・精密部品製造）</h3>
+      <p>小ロット試作から量産までを担う金属加工メーカーを想定した BtoB コーポレートサイトのデザインデモ。事業内容・選ばれる理由・設備実績・採用情報・会社概要までを一枚で見せる構成です。</p>
+      <div class="actions"><a href="https://seizo-btob-demo.vercel.app/" target="_blank" rel="noopener">デモを開く（別タブ）→</a></div>
+    </li>
+  </ul>
+</section>
+
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">04</span>イベントLP</h2>
+  <ul class="work-grid">
+    <li class="work-card reveal">
+      <h3>DOG DAYS PARK 2026</h3>
+      <p>犬と楽しむ秋の公園イベントの告知 LP のデザインラフ。開催概要・見どころ・アクセスを一枚にまとめた、告知に特化した構成です。</p>
+      <div class="actions"><a href="https://dog-event-lp.vercel.app/" target="_blank" rel="noopener">デモを開く（別タブ）→</a></div>
+    </li>
+    <li class="work-card reveal">
+      <h3>いぬ集会 in 秦野戸川公園</h3>
+      <p>犬好きが集まる集会イベントの告知 LP のデザインモック。日時・場所・参加の呼びかけを、親しみやすいトーンでまとめた構成です。</p>
+      <div class="actions"><a href="https://inusyukai-mock.vercel.app/" target="_blank" rel="noopener">デモを開く（別タブ）→</a></div>
+    </li>
+  </ul>
+</section>
+
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">05</span>制作のご相談</h2>
   <p>
     「自社の業種でこういうサイトを作れる？」といったご相談は、<a href="/makoto/services/">提供サービス一覧</a>、または
     <a href="/makoto/contact/">連絡先ページ</a>から受け付けています。
