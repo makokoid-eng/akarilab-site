@@ -21,6 +21,9 @@
 - /repimemo/voices/    りぴメモ 体験談
 - /kokora/             ここら（地図記録アプリ。Web版公開中、Android/iOS準備中）
 
+## Works
+- /works/              制作実績・デモ（受託 Web 制作のサンプル一覧。第1弾=製造業BtoB向けサイトデモ。今後デモを追加予定）
+
 ## Articles
 - /articles/                     note 記事のまとめ（AkariLab メディア索引）
 - /articles/ai-9months/          連載「触り始めて9ヶ月の記録」（2026-05-17 開始）

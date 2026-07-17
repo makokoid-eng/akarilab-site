@@ -54,6 +54,8 @@ TARGETS: list[str] = [
     "repimemo/index.html",
     "repimemo/store/index.html",
     "repimemo/voices/index.html",
+    # Works: 制作実績・デモ ハブ (2026-07-18)
+    "works/index.html",
     # Phase 5: /articles/ 連載ハブ
     "articles/index.html",
     "articles/ai-9months/index.html",

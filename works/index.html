@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>制作実績・デモ｜AkariLab</title>
+<meta name="description" content="AkariLab の受託 Web 制作の実績・デモ一覧。業種に合わせた LP・採用ページのサンプルを掲載しています。第1弾は製造業（金属加工・精密部品製造）向けの BtoB サイトデモ。">
+<link rel="canonical" href="https://akarilab.org/works/">
+<meta property="og:title" content="制作実績・デモ｜AkariLab">
+<meta property="og:description" content="AkariLab の受託 Web 制作の実績・デモ一覧。業種に合わせた LP・採用ページのサンプルを掲載。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/works/">
+<meta property="og:image" content="https://akarilab.org/works/img/seizo-btob.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://akarilab.org/works/#collection",
+  "name": "制作実績・デモ｜AkariLab",
+  "url": "https://akarilab.org/works/",
+  "description": "AkariLab の受託 Web 制作の実績・デモ一覧。",
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "@id": "https://akarilab.org/works/#itemlist",
+    "name": "制作実績・デモ一覧",
+    "description": "AkariLab の受託 Web 制作の実績・デモ一覧。",
+    "numberOfItems": 1,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "WebSite",
+          "@id": "https://seizo-btob-demo.vercel.app/#website",
+          "name": "製造業BtoB向け制作デモ（金属加工・精密部品製造）",
+          "url": "https://seizo-btob-demo.vercel.app/",
+          "description": "金属加工・精密部品製造の BtoB 企業向けコーポレートサイトのデザイン・構造デモ（掲載内容はすべて架空）。"
+        }
+      }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": "https://akarilab.org/works/#breadcrumb",
+  "name": "制作実績・デモ パンくず",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "制作実績・デモ", "item": "https://akarilab.org/works/" }
+  ]
+}
+</script>
+<style>
+/* ---- page enhancements (works hub) ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-inview {
+  opacity: 1;
+  transform: none;
+}
+.section-title .sec-num {
+  color: var(--accent);
+  margin-right: 10px;
+}
+.section-title {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+/* 実績カード */
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.work-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.work-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+.work-card .thumb {
+  display: block;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.work-card .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.work-card:hover .thumb img {
+  transform: scale(1.04);
+}
+.work-card .body {
+  padding: 22px 24px 26px;
+}
+.work-card .cat {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+}
+.work-card h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.work-card p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.9;
+  margin: 0 0 16px;
+}
+.work-card .actions a {
+  display: inline-block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.work-card .actions a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+.section a {
+  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+.section a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .work-card, .work-card .thumb img { transition: none; }
+}
+</style>
+</head>
+<body>
+<nav class="header"><a href="/">← AkariLab トップへ</a></nav>
+
+<section class="hero">
+  <h1>制作実績・デモ</h1>
+  <p class="tagline">業種に合わせて作る、受託 Web 制作のサンプル</p>
+  <p class="description">
+    AkariLab では、LINE Bot の開発と並行して、企業サイト・採用ページなどの受託 Web 制作も手がけています。<br>
+    ここでは、業種に合わせて作ったデザイン・構造のデモを公開しています（掲載している会社名・住所・数値はすべて架空です）。
+  </p>
+</section>
+
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">01</span>制作デモ</h2>
+  <ul class="work-list">
+    <li class="work-card reveal">
+      <a class="thumb" href="https://seizo-btob-demo.vercel.app" target="_blank" rel="noopener">
+        <img src="/works/img/seizo-btob.jpg" alt="製造業BtoB向け制作デモのトップ画面（金属加工・精密部品製造の企業サイト）">
+      </a>
+      <div class="body">
+        <span class="cat">製造業・BtoB</span>
+        <h3>金属加工・精密部品製造の企業サイト</h3>
+        <p>
+          小ロット試作から量産までを担う金属加工メーカー（架空）を想定した、コーポレートサイトのデザイン・構造デモ。
+          事業内容・選ばれる理由・設備実績・採用情報・会社概要までを一枚で見せる構成です。スマートフォン表示にも対応しています。
+        </p>
+        <div class="actions">
+          <a href="https://seizo-btob-demo.vercel.app" target="_blank" rel="noopener">デモを開く（別タブ）→</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section class="section reveal">
+  <h2 class="section-title"><span class="sec-num">02</span>制作のご相談</h2>
+  <p>
+    「自社の業種でこういうサイトを作れる？」といったご相談は、<a href="/makoto/services/">提供サービス一覧</a>、または
+    <a href="/makoto/contact/">連絡先ページ</a>から受け付けています。
+  </p>
+</section>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var targets = document.querySelectorAll('.reveal, .section-title');
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach(function (el) { el.classList.add('is-inview'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-inview');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  targets.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
