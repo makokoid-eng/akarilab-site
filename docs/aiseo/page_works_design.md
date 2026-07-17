@@ -106,3 +106,8 @@ Vercel 上の既存デモ5件を調査（`vercel projects ls`）して外部リ�
 - トップ index.html（手書きページ・partial非対象）の Works セクション(04)に「すべての制作実績・デモを見る → /works/」導線を追加。
   これで「トップ → /works/ ハブ（全6デモ・ジャンル別）」でたどれる。トップ側の3枚（海風不動産/DOG DAYS PARK/純喫茶つた）は
   featured のまま維持し、全件は /works/ に集約する二段構成（Articles と同じパターン）。
+
+## 13. 追補（2026-07-18その3）いぬ集会を除外
+ユーザー判断で いぬ集会 in 秦野戸川公園（inusyukai-mock）を /works/ から除外。計5デモに。
+イベントLPジャンルは DOG DAYS PARK 2026 の1件に。JSON-LD numberOfItems=5。
+（デモ自体の Vercel 公開は継続。本ハブに載せないだけ。）
