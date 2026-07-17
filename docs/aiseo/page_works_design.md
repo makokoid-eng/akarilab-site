@@ -99,3 +99,10 @@ Vercel 上の既存デモ5件を調査（`vercel projects ls`）して外部リ�
 - og:image は暫定で seizo-btob.jpg のまま（CODEX 指摘の任意改善: /works/ 汎用OG画像への差し替えは将来対応）
 - CODEX コードレビュー: ブロッカーなし・commit OK
 - sitemap.xml / llms.txt / TARGETS は初版で /works/ 追加済みのため変更なし
+
+## 12. 追補（2026-07-18その2）純喫茶つた追加＋トップ導線
+- 純喫茶つた（demo.akarilab.org、WordPress飲食デモ）を /works/ の飲食ジャンルに追加（計6デモ、JSON-LD numberOfItems=6）。
+  demo.akarilab.org はトップ index.html の Works セクションには既掲載だったが /works/ ハブ側に未掲載だったため接続。
+- トップ index.html（手書きページ・partial非対象）の Works セクション(04)に「すべての制作実績・デモを見る → /works/」導線を追加。
+  これで「トップ → /works/ ハブ（全6デモ・ジャンル別）」でたどれる。トップ側の3枚（海風不動産/DOG DAYS PARK/純喫茶つた）は
+  featured のまま維持し、全件は /works/ に集約する二段構成（Articles と同じパターン）。
