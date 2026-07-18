@@ -9,10 +9,10 @@
 <meta property="og:title" content="ここら — 自分だけの地図を育てる">
 <meta property="og:description" content="気に入った場所を写真とメモで記録して、自分だけの地図を育てるアプリ。星も口コミもありません。">
 <meta property="og:url" content="https://akarilab.org/kokora/">
-<meta property="og:image" content="https://akarilab.org/assets/logo/hidamari_icon_256.png">
+<meta property="og:image" content="https://akarilab.org/assets/kokora/kokora-icon-256.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/logo/hidamari_icon_256.png">
+<link rel="icon" href="/assets/kokora/kokora-icon-256.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap">
@@ -152,12 +152,20 @@ html:not(.js) .reveal{opacity:1;transform:none}
   .feature-card:hover,.list-chip:hover,.cta-button:hover{transform:none}
 }
 @media(max-width:480px){.hero h1{font-size:2rem}}
+
+.hero-icon{width:88px;height:88px;border-radius:22px;margin:0 auto 1.2rem;display:block;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:800px;margin:0 auto}
+@media(max-width:600px){.shots{grid-template-columns:repeat(2,1fr);gap:.8rem}}
+.shot{margin:0;text-align:center}
+.shot img{width:100%;height:auto;border-radius:14px;border:1px solid var(--border);box-shadow:0 6px 18px rgba(0,0,0,.3);display:block}
+.shot figcaption{font-size:.72rem;color:var(--text-dim);margin-top:.5rem}
 </style>
 </head>
 <body>
 <div class="header"><a href="/">← トップへ</a></div>
 
 <div class="hero">
+  <img class="hero-icon" src="/assets/kokora/kokora-icon-256.png" alt="ここら アプリアイコン">
   <h1>ここら</h1>
   <p class="tagline">自分だけの地図を、育てる。</p>
   <p class="description">
@@ -187,6 +195,16 @@ html:not(.js) .reveal{opacity:1;transform:none}
       <h3>公開するかは自分で決める</h3>
       <p>初期設定は非公開。公開に切り替えた場所だけ、専用URLで人に見せられます。</p>
     </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title rule-wait">アプリの画面</h2>
+  <div class="shots">
+    <figure class="shot reveal"><img src="/assets/kokora/screen-map.png" alt="ここらのマップ画面。登録したスポットのピンが地図上に並んでいる" loading="lazy" width="640" height="1387"><figcaption>マップで見る</figcaption></figure>
+    <figure class="shot reveal"><img src="/assets/kokora/screen-list.png" alt="ここらのリスト画面。写真つきで登録スポットが一覧表示されている" loading="lazy" width="640" height="1387"><figcaption>リストで見返す</figcaption></figure>
+    <figure class="shot reveal"><img src="/assets/kokora/screen-route.png" alt="ここらのルート作成画面。選んだスポットを巡る最短ルートが地図に表示されている" loading="lazy" width="640" height="1387"><figcaption>ルートを作る</figcaption></figure>
+    <figure class="shot reveal"><img src="/assets/kokora/screen-detail.png" alt="ここらのスポット詳細画面。お店の写真とメモ、駐車場情報が表示されている" loading="lazy" width="640" height="1387"><figcaption>写真とメモを残す</figcaption></figure>
   </div>
 </div>
 
