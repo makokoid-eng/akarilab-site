@@ -125,6 +125,51 @@
     }
 
     /* Pull quote（誌面の大きな引用） */
+    .hero-stats {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 32px;
+      margin: 30px 0 0;
+      padding: 18px 0 0;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stats li { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .hero-stats strong {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--accent-green);
+      line-height: 1.1;
+    }
+    .hero-stats span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .hero-btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-size: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .hero-btn:hover { background: #1a1a1a; transform: translateY(-2px); }
+    .hero-btn.primary { border-color: var(--accent-green); color: var(--accent-green); }
+    .hero-btn.primary:hover { background: rgba(76,175,125,.10); }
+    .hero-btn:focus-visible { outline: 2px solid var(--accent-green); outline-offset: 2px; }
     .pullquote {
       max-width: 720px;
       margin: 24px auto;
@@ -607,13 +652,23 @@
   <div class="masthead rule-line"></div>
 
   <div class="hero">
-    <p class="kicker">現場発・ひとりで作るLINEプロダクト</p>
+    <p class="kicker">現場21年 × ひとりで作る</p>
     <h1>AkariLab</h1>
     <p class="tagline">となりで灯す。</p>
     <p class="sub">
-      現場で感じた「あったらいいのに」を<br>
-      小さく作って、静かに届ける。
+      外食の現場に21年立ってきた人間が、<br>
+      LINE Bot・スマホアプリ・業務ツール・Webサイトを、<br>
+      企画から公開までひとりで作っています。
     </p>
+    <ul class="hero-stats">
+      <li><strong>1本</strong><span>App Store 公開アプリ</span></li>
+      <li><strong>10本以上</strong><span>制作した LINE Bot</span></li>
+      <li><strong>6業種</strong><span>触れる制作デモ</span></li>
+    </ul>
+    <div class="hero-cta">
+      <a class="hero-btn primary" href="/makoto/services/">制作・相談を依頼する</a>
+      <a class="hero-btn" href="/works/">作ったものを見る</a>
+    </div>
   </div>
 
   <div class="pullquote">
@@ -621,9 +676,107 @@
     <p class="attr">— AkariLab がつくるときの基準</p>
   </div>
 
-  <div class="products">
+  <!-- Works: 制作実績（デモサイト）。個別カードは置かず /works/ への集約カード1枚に統一。デモを足すときは hub-item を1行増やす。 -->
+  <div class="services">
     <div class="eyebrow">
       <span class="eyebrow-num">01</span>
+      <span class="eyebrow-label">Works</span>
+      <span class="eyebrow-rule"></span>
+    </div>
+    <p class="lead">
+      実際の案件で、提案のために作ったデモサイトです。<br>
+      架空のデータを使った、デザインと構造の確認用。そのまま公開できる状態まで作ってから渡しています。
+    </p>
+    <a href="/works/" class="service-card service-hub-link works-hub-link">
+      <h3>制作実績・デモ一覧 →</h3>
+      <p class="hub-lead">業種別に6つ。すべて実際に触って確かめられます。</p>
+
+      <div class="hub-item">
+        <p class="hub-item-title">あかり内科クリニック</p>
+        <p class="hub-item-meta">医療 ・ Web予約フロー付き</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">丸誠精工（金属加工・精密部品製造）</p>
+        <p class="hub-item-meta">製造 ・ BtoBコーポレート</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">海風不動産</p>
+        <p class="hub-item-meta">不動産 ・ 管理画面デモ付き</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">純喫茶つた／とんかつ ひなた亭</p>
+        <p class="hub-item-meta">飲食 ・ WordPress制作デモ</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">DOG DAYS PARK 2026</p>
+        <p class="hub-item-meta">イベント告知LP</p>
+      </div>
+
+      <p class="hub-cta">デモページはこちら →</p>
+    </a>
+  </div>
+
+  <div class="services">
+    <div class="eyebrow">
+      <span class="eyebrow-num">02</span>
+      <span class="eyebrow-label">Services</span>
+      <span class="eyebrow-rule"></span>
+    </div>
+    <p class="lead">
+      AkariLabで作っているLINE Botの設計ノウハウと、外食現場21年で蓄えた組織運営の型を、相談・実装・ノウハウの形で外に出しています。<br>
+      決済・連絡はそれぞれの媒体（ココナラ／Brain）経由です。
+    </p>
+
+    <a href="/makoto/services/" class="service-card service-hub-link">
+      <h3>提供サービス一覧 →</h3>
+      <p class="hub-lead">現役の店舗運営マネージャー／個人開発者が提供している7サービス。</p>
+
+      <div class="hub-item">
+        <p class="hub-item-title">業務の自動化、現場目線でご相談乗ります</p>
+        <p class="hub-item-meta">ココナラ ・ 4,000円 / 30分</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">現役マネージャーがExcel自動化します</p>
+        <p class="hub-item-meta">ココナラ ・ 20,000円〜</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">AI業務ツールをビデオ伴走で一緒に作ります</p>
+        <p class="hub-item-meta">ココナラ ・ 34,000円〜 / 90分</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">現場で回るLINEBot設計から導入します</p>
+        <p class="hub-item-meta">ココナラ ・ 70,000円〜</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">店舗のホームページをWordPressで作ります</p>
+        <p class="hub-item-meta">ココナラ ・ 50,000円〜</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">こうだったら楽なのにを、現場側の人間が実装します</p>
+        <p class="hub-item-meta">ココナラ ・ 15,000円〜</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">店舗運営20年マネージャーのAI実用例20選</p>
+        <p class="hub-item-meta">Brain ・ 4,980円 / 買い切り</p>
+      </div>
+
+      <p class="hub-cta">/makoto/services/ で詳細を見る →</p>
+    </a>
+  </div>
+
+  <div class="products">
+    <div class="eyebrow">
+      <span class="eyebrow-num">03</span>
       <span class="eyebrow-label">Products</span>
       <span class="eyebrow-rule"></span>
     </div>
@@ -696,25 +849,13 @@
         <span class="arrow">→</span>
       </a>
 
-      <!-- AkariLab STORE（Shopify・準備中）。ストア公開時にリンク付きへ戻す:
-           <a href="https://akarilab.myshopify.com/" class="product-card green" target="_blank" rel="noopener noreferrer"> に置換し、末尾に <span class="arrow">→</span> を追加。 -->
-      <div class="product-card green">
-        <div class="emoji">🛍️</div>
-        <h3>AkariLab STORE</h3>
-        <p class="desc">
-          Shopifyで構築しているオンラインストア。<br>
-          準備が整い次第、公開します。
-        </p>
-        <span class="meta">Shopifyストア ・ まもなく公開</span>
-      </div>
-
     </div>
   </div>
 
   <!-- Articles: 連載集客 + /articles/ ハブへの内部導線 -->
   <div class="products">
     <div class="eyebrow">
-      <span class="eyebrow-num">02</span>
+      <span class="eyebrow-num">04</span>
       <span class="eyebrow-label">Articles</span>
       <span class="eyebrow-rule"></span>
     </div>
@@ -733,104 +874,6 @@
 
     </div>
     <p style="text-align: center; margin-top: 1.5em;"><a href="/articles/" style="color: inherit; text-decoration: underline;">すべての記事を見る →</a></p>
-  </div>
-
-  <div class="services">
-    <div class="eyebrow">
-      <span class="eyebrow-num">03</span>
-      <span class="eyebrow-label">Services</span>
-      <span class="eyebrow-rule"></span>
-    </div>
-    <p class="lead">
-      AkariLabで作っているLINE Botの設計ノウハウと、外食現場21年で蓄えた組織運営の型を、相談・実装・ノウハウの形で外に出しています。<br>
-      決済・連絡はそれぞれの媒体（ココナラ／Brain）経由です。
-    </p>
-
-    <a href="/makoto/services/" class="service-card service-hub-link">
-      <h3>提供サービス一覧 →</h3>
-      <p class="hub-lead">現役の店舗運営マネージャー／個人開発者が提供している7サービス。</p>
-
-      <div class="hub-item">
-        <p class="hub-item-title">業務の自動化、現場目線でご相談乗ります</p>
-        <p class="hub-item-meta">ココナラ ・ 4,000円 / 30分</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">現役マネージャーがExcel自動化します</p>
-        <p class="hub-item-meta">ココナラ ・ 20,000円〜</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">AI業務ツールをビデオ伴走で一緒に作ります</p>
-        <p class="hub-item-meta">ココナラ ・ 34,000円〜 / 90分</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">現場で回るLINEBot設計から導入します</p>
-        <p class="hub-item-meta">ココナラ ・ 70,000円〜</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">店舗のホームページをWordPressで作ります</p>
-        <p class="hub-item-meta">ココナラ ・ 50,000円〜</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">こうだったら楽なのにを、現場側の人間が実装します</p>
-        <p class="hub-item-meta">ココナラ ・ 15,000円〜</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">店舗運営20年マネージャーのAI実用例20選</p>
-        <p class="hub-item-meta">Brain ・ 4,980円 / 買い切り</p>
-      </div>
-
-      <p class="hub-cta">/makoto/services/ で詳細を見る →</p>
-    </a>
-  </div>
-
-  <!-- Works: 制作実績（デモサイト）。個別カードは置かず /works/ への集約カード1枚に統一。デモを足すときは hub-item を1行増やす。 -->
-  <div class="services">
-    <div class="eyebrow">
-      <span class="eyebrow-num">04</span>
-      <span class="eyebrow-label">Works</span>
-      <span class="eyebrow-rule"></span>
-    </div>
-    <p class="lead">
-      実際の案件で、提案のために作ったデモサイトです。<br>
-      架空のデータを使った、デザインと構造の確認用。そのまま公開できる状態まで作ってから渡しています。
-    </p>
-    <a href="/works/" class="service-card service-hub-link works-hub-link">
-      <h3>制作実績・デモ一覧 →</h3>
-      <p class="hub-lead">業種別に6つ。すべて実際に触って確かめられます。</p>
-
-      <div class="hub-item">
-        <p class="hub-item-title">あかり内科クリニック</p>
-        <p class="hub-item-meta">医療 ・ Web予約フロー付き</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">丸誠精工（金属加工・精密部品製造）</p>
-        <p class="hub-item-meta">製造 ・ BtoBコーポレート</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">海風不動産</p>
-        <p class="hub-item-meta">不動産 ・ 管理画面デモ付き</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">純喫茶つた／とんかつ ひなた亭</p>
-        <p class="hub-item-meta">飲食 ・ WordPress制作デモ</p>
-      </div>
-
-      <div class="hub-item">
-        <p class="hub-item-title">DOG DAYS PARK 2026</p>
-        <p class="hub-item-meta">イベント告知LP</p>
-      </div>
-
-      <p class="hub-cta">デモページはこちら →</p>
-    </a>
   </div>
 
   <div class="updates">
