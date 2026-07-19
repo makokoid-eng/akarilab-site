@@ -344,7 +344,8 @@
     }
     .service-hub-link:hover { background: #1a1a1a; }
     /* Works の集約カード（デモ一覧への導線）。Services のハブと同じ作りで、アクセントだけ緑。 */
-    .works-hub-link { border-left-color: var(--accent-green); }
+    .works-hub-link { border-left-color: var(--accent-green); border-left-width: 4px; }
+    .works-hub-link h3 { font-size: 24px; }
     .works-hub-link .hub-cta { color: var(--accent-green); }
     .service-hub-link:focus-visible {
       outline: 2px solid var(--accent-orange);
@@ -788,7 +789,7 @@
     </a>
   </div>
 
-  <!-- Works: 制作実績（デモサイト）。デモを足すときは product-list に product-card を1枚増やすだけ。 -->
+  <!-- Works: 制作実績（デモサイト）。個別カードは置かず /works/ への集約カード1枚に統一。デモを足すときは hub-item を1行増やす。 -->
   <div class="services">
     <div class="eyebrow">
       <span class="eyebrow-num">04</span>
@@ -799,57 +800,35 @@
       実際の案件で、提案のために作ったデモサイトです。<br>
       架空のデータを使った、デザインと構造の確認用。そのまま公開できる状態まで作ってから渡しています。
     </p>
-    <div class="product-list">
-
-      <a href="https://okinawa-fudosan-demo.vercel.app" class="product-card brown" target="_blank" rel="noopener noreferrer">
-        <div class="emoji">🏠</div>
-        <h3>海風不動産</h3>
-        <p class="desc">
-          不動産会社のホームページ制作案件の提案用デモ。<br>
-          物件一覧に加えて、写真を差し替えてその日のうちに公開できる管理画面のデモも入れた。
-        </p>
-        <span class="meta">Webサイト ・ 不動産 ・ 提案用デモ（架空データ）</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://dog-event-lp.vercel.app" class="product-card green" target="_blank" rel="noopener noreferrer">
-        <div class="emoji">🐕</div>
-        <h3>DOG DAYS PARK</h3>
-        <p class="desc">
-          犬と楽しむ屋外イベントの告知ランディングページ。<br>
-          開催日・会場・見どころを1ページにまとめ、スマホで読み進めやすい縦スクロールで構成したデザインラフ。
-        </p>
-        <span class="meta">Webサイト ・ イベント告知 ・ 提案用デザインラフ</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://demo.akarilab.org/" class="product-card orange" target="_blank" rel="noopener noreferrer">
-        <div class="emoji">☕</div>
-        <h3>純喫茶つた</h3>
-        <p class="desc">
-          喫茶店のホームページを WordPress で制作したデモ。<br>
-          お品書き・店舗情報・お知らせを、落ち着いた誌面のテーマにまとめた（架空店舗）。
-        </p>
-        <span class="meta">Webサイト ・ 飲食店 ・ WordPress制作デモ（架空店舗）</span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a href="https://iryo-clinic-demo.vercel.app" class="product-card blue" target="_blank" rel="noopener noreferrer">
-        <div class="emoji">🩺</div>
-        <h3>あかり内科クリニック</h3>
-        <p class="desc">
-          地域のかかりつけ医を想定したクリニックサイトのデモ。<br>
-          診療案内・医師紹介に加えて、診療内容 → 日付 → 時間と進む Web 予約フローまで作り込んだ（架空医院）。
-        </p>
-        <span class="meta">Webサイト ・ 医療 ・ 提案用デモ（架空医院）</span>
-        <span class="arrow">→</span>
-      </a>
-
-    </div>
-
     <a href="/works/" class="service-card service-hub-link works-hub-link">
       <h3>制作実績・デモ一覧 →</h3>
-      <p class="hub-lead">飲食・不動産・製造・医療・イベントLP。業種別に、実際に触れるデモをまとめています。</p>
+      <p class="hub-lead">業種別に6つ。すべて実際に触って確かめられます。</p>
+
+      <div class="hub-item">
+        <p class="hub-item-title">あかり内科クリニック</p>
+        <p class="hub-item-meta">医療 ・ Web予約フロー付き</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">丸誠精工（金属加工・精密部品製造）</p>
+        <p class="hub-item-meta">製造 ・ BtoBコーポレート</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">海風不動産</p>
+        <p class="hub-item-meta">不動産 ・ 管理画面デモ付き</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">純喫茶つた／とんかつ ひなた亭</p>
+        <p class="hub-item-meta">飲食 ・ WordPress制作デモ</p>
+      </div>
+
+      <div class="hub-item">
+        <p class="hub-item-title">DOG DAYS PARK 2026</p>
+        <p class="hub-item-meta">イベント告知LP</p>
+      </div>
+
       <p class="hub-cta">デモページはこちら →</p>
     </a>
   </div>
