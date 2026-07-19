@@ -343,6 +343,9 @@
       transition: background 0.2s;
     }
     .service-hub-link:hover { background: #1a1a1a; }
+    /* Works の集約カード（デモ一覧への導線）。Services のハブと同じ作りで、アクセントだけ緑。 */
+    .works-hub-link { border-left-color: var(--accent-green); }
+    .works-hub-link .hub-cta { color: var(--accent-green); }
     .service-hub-link:focus-visible {
       outline: 2px solid var(--accent-orange);
       outline-offset: 3px;
@@ -843,7 +846,12 @@
       </a>
 
     </div>
-    <p style="text-align: center; margin-top: 1.5em;"><a href="/works/" style="color: inherit; text-decoration: underline;">すべての制作実績・デモを見る →</a></p>
+
+    <a href="/works/" class="service-card service-hub-link works-hub-link">
+      <h3>制作実績・デモ一覧 →</h3>
+      <p class="hub-lead">飲食・不動産・製造・医療・イベントLP。業種別に、実際に触れるデモをまとめています。</p>
+      <p class="hub-cta">デモページはこちら →</p>
+    </a>
   </div>
 
   <div class="updates">
