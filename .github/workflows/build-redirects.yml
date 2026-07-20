@@ -1,0 +1,49 @@
+# PURPOSE: data/redirects.yml から中継ページ /r/<slug>/index.html を自動生成してコミットする。
+#
+# 背景: これまで build_redirects.py はローカル実行で、生成物を手でコミットしていた。
+#       中継リンクを1本増やすたびにフォルダごと push する必要があり、取りこぼしが起きていた
+#       （ここらの30本中、実際に本番へ出ていたのは1本だけだった）。
+#
+# 使い方: data/redirects.yml か scripts/build_redirects.py を main に push すると自動で走る。
+#         手動で流したいときは Actions から「Run workflow」。
+#
+# 無限ループ対策: paths で data/ と scripts/ の変更に限定しているため、
+#                 このワークフロー自身が r/ にコミットしても再発火しない。
+name: Build redirect pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/redirects.yml"
+      - "scripts/build_redirects.py"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet pyyaml
+
+      - name: Build redirect pages
+        run: python scripts/build_redirects.py
+
+      - name: Verify sitemap is still consistent
+        run: python scripts/aiseo_check_sitemap.py
+
+      - name: Commit generated pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add r/
+          git diff --staged --quiet || git commit -m "build(redirects): 中継ページを再生成 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
