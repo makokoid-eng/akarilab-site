@@ -14,168 +14,315 @@
 # active: false にすると build_redirects.py は HTML を新規生成しない（既存ファイルは保持）
 
 redirects:
-  - slug: brain-1on1
-    dest_url: https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY?discount_code=8b74
-    label: 1on1・報告書・朝礼が半分の時間で動く 店舗運営20年マネージャーのAI実用例20選
-    category: brain
-    dest_domain: brain-market.com
-    active: true
-
-  - slug: brain-mendan-template
-    dest_url: https://brain-market.com/u/akarilab/a/bykTO5QjMgoTZsNWa0JXY?discount_code=9311
-    label: 1人で動くコンサル・コーチの「面談まわり3時間」を1.5時間に圧縮する実践テンプレ集
-    category: brain
-    dest_domain: brain-market.com
-    active: true
-
-  # X 専用バリアント（makochinta1 から送客）
-  # v1 は note 経由と違い割引コードなし、v2 は free_pass パス付き
-  - slug: brain-1on1-x
-    dest_url: https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY
-    label: 1on1・報告書・朝礼AI実用例20選（X送客版、割引なし）
-    category: brain
-    dest_domain: brain-market.com
-    active: true
-
-  - slug: brain-mendan-x
-    dest_url: https://brain-market.com/u/akarilab/a/bykTO5QjMgoTZsNWa0JXY?free_pass=pyHJUkreYV2JOor6eiqRAw
-    label: 面談まわりAI圧縮テンプレ20本（X送客版、free_pass付き）
-    category: brain
-    dest_domain: brain-market.com
-    active: true
-
-  - slug: brain-tenpo-jidoka-x
-    dest_url: https://brain-market.com/u/akarilab/a/byADMyUjMgoTZsNWa0JXY
-    label: 店長が「数字を集める係」をやめた日（多店舗をAIで仕組み化する実例4つ・X送客版）
-    category: brain
-    dest_domain: brain-market.com
-    active: true
-
-  # note 切り抜き連載（2026-06-13〜）からの送客用
-  - slug: brain-tenpo-jidoka
-    dest_url: https://brain-market.com/u/akarilab/a/byADMyUjMgoTZsNWa0JXY
-    label: 店長が「数字を集める係」をやめた日（多店舗をAIで仕組み化する実例4つ・note送客版）
-    category: brain
-    dest_domain: brain-market.com
-    active: true
-
-  - slug: coconala-line-shindan
-    dest_url: https://coconala.com/services/4214161
-    label: 業務の自動化を現場目線で相談（30分）
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  # 2026-06-26 ココナラ出品刷新で追加（Excel/VBA 自動化・AI伴走・LINEBot設計）
-  - slug: coconala-excel
-    dest_url: https://coconala.com/services/4244110
-    label: 現役マネージャーがExcel自動化（VBA）
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  - slug: coconala-ai-tool
-    dest_url: https://coconala.com/services/4286326
-    label: AI業務ツールをビデオ伴走で一緒に作る（90分）
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  - slug: coconala-linebot
-    dest_url: https://coconala.com/services/4286336
-    label: 現場で回るLINEBot設計から導入
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  # 2026-06-26 ココナラ側で廃止・非公開。slug は immutable のため物理削除せず active:false。
-  # 既存被リンクからの 404 防止のため /r/ 中継ページ自体は残す（dest はそのまま）。
-  - slug: coconala-soshiki-shindan
-    dest_url: https://coconala.com/services/4227512
-    label: 組織の評価監査制度を型診断（30分）【提供終了】
-    category: coconala
-    dest_domain: coconala.com
-    active: false
-
-  - slug: coconala-poc-1week
-    dest_url: https://coconala.com/services/4236833
-    label: 現場の業務1フローを1週間でLINE Bot化【提供終了】
-    category: coconala
-    dest_domain: coconala.com
-    active: false
-
-  - slug: line-moyalog
-    dest_url: https://lin.ee/q1k7v8F
-    label: もやログを友だち追加
-    category: line_bot
-    dest_domain: lin.ee
-    active: true
-
-  - slug: line-hidamari
-    dest_url: https://line.me/R/ti/p/@659lldiy
-    label: ひだまりを友だち追加
-    category: line_bot
-    dest_domain: line.me
-    active: true
-
-  - slug: line-repimemo
-    dest_url: https://lin.ee/HbV7Ehv
-    label: りぴメモを友だち追加
-    category: line_bot
-    dest_domain: lin.ee
-    active: true
-
-  # X プロフィール Website 欄経由（Bio クリック計測）
-  - slug: services-hub-x
-    dest_url: https://akarilab.org/makoto/services/
-    label: 提供サービス集約ハブ（X プロフィール経由）
-    category: hub
-    dest_domain: akarilab.org
-    active: true
-
-  # 2026-07-10 ココナラ新規出品2件（WordPress HP制作・現場実装）
-  - slug: coconala-wordpress-hp
-    dest_url: https://coconala.com/services/4306507
-    label: 店舗のホームページをWordPressで作ります
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  - slug: coconala-genba-jissou
-    dest_url: https://coconala.com/services/4297816
-    label: こうだったら楽なのにを現場側の人間が実装
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  # 2026-07-11 note 実績紹介記事2本（WP HP制作・イベントLP制作）からの記事別計測用。
-  # dest は既存 coconala-wordpress-hp と同じサービス。記事経由クリックを区別するため slug を分ける。
-  - slug: coconala-wp-note
-    dest_url: https://coconala.com/services/4306507
-    label: 店舗のホームページをWordPressで作ります（note WP制作記事経由）
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  # dest は LP制作サービス（2026-07-11時点で仮ページ。公開前に記事を出さないこと）
-  - slug: coconala-lp-note
-    dest_url: https://coconala.com/services/4307339
-    label: イベント・キャンペーンLP制作（note イベントLP記事経由）
-    category: coconala
-    dest_domain: coconala.com
-    active: true
-
-  # 2026-07-06 Stripe 直接決済（設計: docs/aiseo/page_stripe_payment_design.md）
-  - slug: stripe-consult
-    dest_url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
-    label: 業務の自動化 現場目線相談（30分）をカードで直接申し込み
-    category: stripe
-    dest_domain: buy.stripe.com
-    active: true
-
-  - slug: hidamari-monitor-form
-    dest_url: https://docs.google.com/forms/d/e/1FAIpQLSfVPXLX4VNbpUNcXB2VbUeISehx0OBs24G_RpfpsCM00XzLJg/viewform
-    label: ひだまりβ版モニター応募フォーム
-    category: form
-    dest_domain: docs.google.com
-    active: true
+- slug: brain-1on1
+  dest_url: https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY?discount_code=8b74
+  label: 1on1・報告書・朝礼が半分の時間で動く 店舗運営20年マネージャーのAI実用例20選
+  category: brain
+  dest_domain: brain-market.com
+  active: true
+- slug: brain-mendan-template
+  dest_url: https://brain-market.com/u/akarilab/a/bykTO5QjMgoTZsNWa0JXY?discount_code=9311
+  label: 1人で動くコンサル・コーチの「面談まわり3時間」を1.5時間に圧縮する実践テンプレ集
+  category: brain
+  dest_domain: brain-market.com
+  active: true
+- slug: brain-1on1-x
+  dest_url: https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY
+  label: 1on1・報告書・朝礼AI実用例20選（X送客版、割引なし）
+  category: brain
+  dest_domain: brain-market.com
+  active: true
+- slug: brain-mendan-x
+  dest_url: https://brain-market.com/u/akarilab/a/bykTO5QjMgoTZsNWa0JXY?free_pass=pyHJUkreYV2JOor6eiqRAw
+  label: 面談まわりAI圧縮テンプレ20本（X送客版、free_pass付き）
+  category: brain
+  dest_domain: brain-market.com
+  active: true
+- slug: brain-tenpo-jidoka-x
+  dest_url: https://brain-market.com/u/akarilab/a/byADMyUjMgoTZsNWa0JXY
+  label: 店長が「数字を集める係」をやめた日（多店舗をAIで仕組み化する実例4つ・X送客版）
+  category: brain
+  dest_domain: brain-market.com
+  active: true
+- slug: brain-tenpo-jidoka
+  dest_url: https://brain-market.com/u/akarilab/a/byADMyUjMgoTZsNWa0JXY
+  label: 店長が「数字を集める係」をやめた日（多店舗をAIで仕組み化する実例4つ・note送客版）
+  category: brain
+  dest_domain: brain-market.com
+  active: true
+- slug: coconala-line-shindan
+  dest_url: https://coconala.com/services/4214161
+  label: 業務の自動化を現場目線で相談（30分）
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-excel
+  dest_url: https://coconala.com/services/4244110
+  label: 現役マネージャーがExcel自動化（VBA）
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-ai-tool
+  dest_url: https://coconala.com/services/4286326
+  label: AI業務ツールをビデオ伴走で一緒に作る（90分）
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-linebot
+  dest_url: https://coconala.com/services/4286336
+  label: 現場で回るLINEBot設計から導入
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-soshiki-shindan
+  dest_url: https://coconala.com/services/4227512
+  label: 組織の評価監査制度を型診断（30分）【提供終了】
+  category: coconala
+  dest_domain: coconala.com
+  active: false
+- slug: coconala-poc-1week
+  dest_url: https://coconala.com/services/4236833
+  label: 現場の業務1フローを1週間でLINE Bot化【提供終了】
+  category: coconala
+  dest_domain: coconala.com
+  active: false
+- slug: line-moyalog
+  dest_url: https://lin.ee/q1k7v8F
+  label: もやログを友だち追加
+  category: line_bot
+  dest_domain: lin.ee
+  active: true
+- slug: line-hidamari
+  dest_url: https://line.me/R/ti/p/@659lldiy
+  label: ひだまりを友だち追加
+  category: line_bot
+  dest_domain: line.me
+  active: true
+- slug: line-repimemo
+  dest_url: https://lin.ee/HbV7Ehv
+  label: りぴメモを友だち追加
+  category: line_bot
+  dest_domain: lin.ee
+  active: true
+- slug: services-hub-x
+  dest_url: https://akarilab.org/makoto/services/
+  label: 提供サービス集約ハブ（X プロフィール経由）
+  category: hub
+  dest_domain: akarilab.org
+  active: true
+- slug: coconala-wordpress-hp
+  dest_url: https://coconala.com/services/4306507
+  label: 店舗のホームページをWordPressで作ります
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-genba-jissou
+  dest_url: https://coconala.com/services/4297816
+  label: こうだったら楽なのにを現場側の人間が実装
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-wp-note
+  dest_url: https://coconala.com/services/4306507
+  label: 店舗のホームページをWordPressで作ります（note WP制作記事経由）
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: coconala-lp-note
+  dest_url: https://coconala.com/services/4307339
+  label: イベント・キャンペーンLP制作（note イベントLP記事経由）
+  category: coconala
+  dest_domain: coconala.com
+  active: true
+- slug: stripe-consult
+  dest_url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
+  label: 業務の自動化 現場目線相談（30分）をカードで直接申し込み
+  category: stripe
+  dest_domain: buy.stripe.com
+  active: true
+- slug: hidamari-monitor-form
+  dest_url: https://docs.google.com/forms/d/e/1FAIpQLSfVPXLX4VNbpUNcXB2VbUeISehx0OBs24G_RpfpsCM00XzLJg/viewform
+  label: ひだまりβ版モニター応募フォーム
+  category: form
+  dest_domain: docs.google.com
+  active: true
+- slug: x-kokora-jp01
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp01: SNSで見つけた店、いいね押したのに見つからない'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp02
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp02: あのカフェどこだっけ'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp03
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp03: Googleマップ保存が増えすぎてカオス'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp04
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp04: スクショフォルダが店の写真だらけ'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp05
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp05: 旅行先で行きたいと思ったのに着いたら忘れてる'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp06
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp06: 気になる店をLINEで自分に送るけど流れる'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp07
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp07: また行きたいが積み重ならない'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp08
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp08: 友達におすすめある?で出てこない'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp09
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp09: 自分だけの地図を育てる'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp10
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp10: ここら辺いいんだよねを集める'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp11
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp11: 写真とメモで残す'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp12
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp12: 静かに読書できるカフェ'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp13
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp13: 御朱印の神社'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp14
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp14: もう一度泊まりたい温泉宿'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-jp15
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX jp15: 公開は自分で決める'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en01
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en01: Saved on IG now cant find'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en02
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en02: Which cafe was that'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en03
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en03: Too many Maps pins'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en04
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en04: Camera roll chaos'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en05
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en05: Forgot once arrived'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en06
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en06: Screenshots vanish'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en07
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en07: Save then never open'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en08
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en08: The onsen you loved'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en09
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en09: Your own map of Japan'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en10
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en10: Save the places you loved'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en11
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en11: Cafe in Kyoto'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en12
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en12: The goshuin shrine'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en13
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en13: Not a guidebook'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en14
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en14: Choose by your memory'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
+- slug: x-kokora-en15
+  dest_url: https://apps.apple.com/jp/app/kokora/id6789018848
+  label: 'ここらX en15: Keep it private'
+  category: kokora
+  dest_domain: apps.apple.com
+  active: true
