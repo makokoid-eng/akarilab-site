@@ -46,4 +46,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add r/
           git diff --staged --quiet || git commit -m "build(redirects): 中継ページを再生成 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          # 他のワークフローと push が競合しても落ちないように、送る直前に main を取り込む。
+          git pull --rebase origin main
           git push

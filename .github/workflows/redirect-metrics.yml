@@ -107,6 +107,9 @@ jobs:
             echo "no report changes to commit"
           else
             git commit -m "chore(redirect-metrics): weekly report ${{ steps.week.outputs.label }}"
+            # ジョブがキューで待っている間に main が進むと push が rejected になる。
+            # 実際に 2026-07-20 の障害時、1時間待たされた後に押し負けてレポートを取りこぼした。
+            git pull --rebase origin main
             git push
           fi
 
