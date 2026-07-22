@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ここら — 自分の記憶で、場所を残す地図</title>
+<meta name="description" content="星も、口コミもない。行きたい場所も、行った場所も、写真とメモで自分だけの地図に残していく。あなたの「ここら辺、いいんだよね」が集まっていく地図アプリ、ここら。">
+<meta property="og:title" content="ここら — 自分の記憶で、場所を残す地図">
+<meta property="og:description" content="星も、口コミもない。自分の記憶で場所を選び直せる地図。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5efe3; --paper2:#efe7d7; --ink:#2a3a33; --ink2:#3d5148;
+    --pine:#3a7359; --pine-d:#2c5a45; --clay:#dd7a48; --clay-d:#c9663a;
+    --peach:#e7a976; --muted:#7d8b82; --line:#e2d9c8;
+    --serif:"Zen Maru Gothic",serif; --sans:"Noto Sans JP",sans-serif; --mono:"Ubuntu Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.35;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--pine)}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+  /* device frame */
+  .device{position:relative;width:100%;max-width:270px;margin:0 auto;border-radius:38px;background:#12100d;padding:11px;box-shadow:0 30px 60px -24px rgba(30,25,15,.5),0 6px 16px -8px rgba(30,25,15,.4)}
+  .device::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:38%;height:20px;background:#12100d;border-radius:0 0 14px 14px;z-index:2}
+  .device video,.device img{display:block;width:100%;border-radius:28px;background:#0d1a14}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+        background:radial-gradient(120% 80% at 80% 0,#1f3a2e 0,#16281f 55%,#101c16 100%);color:#f3ede0}
+  .hero .glow{position:absolute;inset:0;background:radial-gradient(50% 45% at 78% 62%,rgba(221,122,72,.20),transparent 70%);pointer-events:none}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:92px;padding-bottom:64px}
+  .hero .badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:#cfe3d5;border:1px solid rgba(207,227,213,.34);padding:6px 13px;border-radius:40px;margin-bottom:26px}
+  .hero .badge img{width:18px;height:18px;border-radius:5px}
+  .hero h1{font-size:clamp(30px,5.4vw,52px);color:#fff;margin-bottom:20px}
+  .hero h1 .accent{color:var(--peach)}
+  .hero .lead{font-size:16px;color:#d6e0d5;font-weight:300;max-width:460px;margin-bottom:34px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-weight:700;font-size:15px;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+  .btn-primary{background:var(--clay);color:#fff;box-shadow:0 12px 24px -10px rgba(221,122,72,.7)}
+  .btn-primary:hover{background:var(--clay-d);transform:translateY(-2px)}
+  .btn-ghost{border:1px solid rgba(243,237,224,.4);color:#f3ede0}
+  .btn-ghost:hover{background:rgba(243,237,224,.09);transform:translateY(-2px)}
+  .hero .phone{justify-self:center}
+  .hero .phone .device{transform:rotate(2.5deg)}
+  .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:rgba(243,237,224,.6);text-align:center}
+  .scroll-hint .bar{display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(rgba(243,237,224,.7),transparent);animation:drop 1.8s ease-in-out infinite}
+  @keyframes drop{0%,100%{opacity:.3;transform:scaleY(.5) translateY(-6px)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* section base */
+  section{position:relative}
+  .pad{padding:96px 0}
+  .sec-eyebrow{margin-bottom:14px}
+  .sec-title{font-size:clamp(24px,3.6vw,34px);margin-bottom:16px}
+  .sec-lead{color:var(--ink2);font-weight:300;max-width:620px}
+
+  /* ARU-ARU (problem) */
+  .aru{background:#16281f;color:#eae2d3}
+  .aru .sec-eyebrow{color:var(--peach)}
+  .aru h2{font-size:clamp(22px,3.4vw,32px);color:#fff;margin-bottom:8px}
+  .aru .subttl{color:#a9bcae;font-weight:300;margin-bottom:52px}
+  .aru-list{display:grid;gap:18px;max-width:720px}
+  .aru-item{display:flex;gap:16px;align-items:flex-start;padding:20px 22px;border:1px solid rgba(233,226,211,.16);border-radius:16px;background:rgba(255,255,255,.02)}
+  .aru-item .no{font-family:var(--mono);font-size:13px;color:var(--peach);padding-top:3px;min-width:26px}
+  .aru-item p{font-size:16px;color:#e6ddcd}
+  .aru-item p b{color:#fff;font-weight:700}
+  .aru-turn{margin-top:46px;font-family:var(--serif);font-size:clamp(20px,3vw,27px);color:#fff;text-align:center}
+  .aru-turn .accent{color:var(--peach)}
+
+  /* SOLUTION features */
+  .feat .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:56px 40px;margin-top:56px;align-items:center}
+  .feat .row{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center;margin-top:64px}
+  .feat .row.rev{grid-template-columns:1.1fr .9fr}
+  .feat .row.rev .txt{order:2}
+  .feat .tag{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--pine);margin-bottom:10px}
+  .feat .row h3{font-size:clamp(20px,2.8vw,26px);margin-bottom:12px}
+  .feat .row p{color:var(--ink2);font-weight:300}
+
+  /* ROUTE highlight */
+  .route{background:linear-gradient(160deg,#2c5a45,#3a7359 70%,#46826a);color:#f2f7f2;overflow:hidden}
+  .route .wrap{display:grid;grid-template-columns:1fr .8fr;gap:44px;align-items:center}
+  .route .sec-eyebrow{color:#cfe9d6}
+  .route h2{font-size:clamp(24px,3.6vw,34px);color:#fff;margin-bottom:16px}
+  .route p{color:#dcecdd;font-weight:300;max-width:460px}
+  .route .phone .device{transform:rotate(-2deg)}
+  .route .facts{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap}
+  .route .facts div span{display:block;font-family:var(--serif);font-size:26px;color:#fff}
+  .route .facts div small{font-size:12px;color:#bfe0c6;font-family:var(--mono)}
+
+  /* WORLDVIEW */
+  .world{background:var(--paper2);text-align:center}
+  .world .lines{font-family:var(--serif);font-size:clamp(24px,4.4vw,42px);line-height:1.7;color:var(--ink)}
+  .world .lines .strike{color:var(--muted);position:relative}
+  .world .lines .strike::after{content:"";position:absolute;left:-4%;right:-4%;top:52%;height:2px;background:var(--clay);transform:scaleX(0);transform-origin:left;transition:transform 1s ease .3s}
+  .world .lines.in .strike::after{transform:scaleX(1)}
+  .world .lead{margin:34px auto 0;max-width:560px;color:var(--ink2);font-weight:300}
+  .world .device{margin-top:52px;max-width:230px}
+
+  /* CTA band */
+  .cta{background:radial-gradient(120% 90% at 50% 0,#1f3a2e,#14241c);color:#f3ede0;text-align:center}
+  .cta img.ic{width:76px;height:76px;border-radius:20px;box-shadow:0 16px 30px -12px rgba(0,0,0,.6);margin-bottom:22px}
+  .cta h2{font-size:clamp(24px,3.6vw,34px);color:#fff;margin-bottom:12px}
+  .cta p{color:#cfdccf;font-weight:300;margin-bottom:30px}
+  .cta .hero-cta{justify-content:center}
+  .cta .note{margin-top:20px;font-size:13px;color:#9db0a3}
+
+  /* FOOTER — maker */
+  footer{background:#111c16;color:#ccd6cd;padding:60px 0 46px}
+  footer .maker{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;justify-content:space-between}
+  footer .maker h3{font-size:19px;color:#fff;margin-bottom:8px}
+  footer .maker p{font-size:14px;color:#9db0a3;font-weight:300;max-width:520px}
+  footer .maker .mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--peach);margin-bottom:14px}
+  footer .flink{display:inline-block;margin-top:14px;font-size:14px;color:#cfe3d5;border-bottom:1px solid rgba(207,227,213,.4);padding-bottom:2px}
+  footer .copy{margin-top:40px;font-family:var(--mono);font-size:11px;color:#6f8177}
+
+  @media(max-width:820px){
+    .hero .wrap{grid-template-columns:1fr;gap:30px;text-align:center;padding-top:104px}
+    .hero .badge{margin-left:auto;margin-right:auto}
+    .hero .lead{margin-left:auto;margin-right:auto}
+    .hero-cta{justify-content:center}
+    .hero .phone{order:-1}
+    .hero .phone .device{max-width:210px;transform:none}
+    .feat .grid{grid-template-columns:1fr;gap:40px}
+    .feat .row,.feat .row.rev{grid-template-columns:1fr;gap:22px;text-align:center}
+    .feat .row.rev .txt{order:0}
+    .route .wrap{grid-template-columns:1fr;text-align:center}
+    .route .facts{justify-content:center}
+    .route p{margin:0 auto}
+    .pad{padding:72px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="txt rv in">
+      <span class="badge"><img src="assets/icon.png" alt="">iOS 公開中 ／ Web版も</span>
+      <h1>「行きたい」も、「行った」も、<br><span class="accent">自分の地図</span>に残していく。</h1>
+      <p class="lead">星も、口コミもない。あなたの「ここら辺、いいんだよね」を、写真とメモで残していく地図アプリ。誰かの点数じゃなく、自分の記憶で場所を選び直せる。</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://apps.apple.com/jp/app/kokora/id6789018848" target="_blank" rel="noopener">App Store で入手</a>
+        <a class="btn btn-ghost" href="https://mymap-260625-22054.web.app" target="_blank" rel="noopener">ブラウザで試す</a>
+      </div>
+    </div>
+    <div class="phone rv in d2">
+      <div class="device"><video src="assets/hero.mp4" autoplay muted loop playsinline></video></div>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL<span class="bar"></span></div>
+</header>
+
+<!-- ARU-ARU -->
+<section class="aru pad">
+  <div class="wrap">
+    <p class="sec-eyebrow rv">You know this feeling</p>
+    <h2 class="rv d1">その場所、どこだっけ。</h2>
+    <p class="subttl rv d2">気に入ったはずなのに、たどり着けない。誰にでもある、あの感じ。</p>
+    <div class="aru-list">
+      <div class="aru-item rv"><span class="no">01</span><p>SNSで見つけた良さげなお店。いいねは押した。<b>でも、いざ探すと出てこない。</b></p></div>
+      <div class="aru-item rv d1"><span class="no">02</span><p>Googleマップの保存が増えすぎて、<b>どれがどれだか分からない。</b></p></div>
+      <div class="aru-item rv d2"><span class="no">03</span><p>スクショフォルダが店の写真だらけ。<b>結局、見返さない。</b></p></div>
+      <div class="aru-item rv d3"><span class="no">04</span><p>旅行先で「行きたい」と思ったのに、<b>着いたら忘れてる。</b></p></div>
+    </div>
+    <p class="aru-turn rv d1">残す場所を、<span class="accent">ひとつに。</span></p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feat pad">
+  <div class="wrap">
+    <p class="sec-eyebrow rv">What kokora does</p>
+    <h2 class="sec-title rv d1">見つけた場所を、記憶ごと残す。</h2>
+    <p class="sec-lead rv d2">カフェでも、神社でも、温泉宿でも、パン屋でも。ジャンルは自由。あなたの地図が、少しずつ育っていく。</p>
+
+    <div class="row rv">
+      <div class="txt">
+        <p class="tag">RECORD</p>
+        <h3>写真とメモで、その場に残す。</h3>
+        <p>地図をタップするか、店名で検索して登録。写真とメモを添えれば、「なぜ良かったか」まで残る。行った／行きたいも、ワンタップで切り替え。</p>
+      </div>
+      <div class="phone"><div class="device"><img src="assets/shot_detail.jpg" alt="スポット詳細画面"></div></div>
+    </div>
+
+    <div class="row rev rv">
+      <div class="txt">
+        <p class="tag">ORGANIZE</p>
+        <h3>タグとリストで、自分の索引に。</h3>
+        <p>「カフェ」「御朱印」「サウナ」——タグは自由入力。あなたの分類が、そのまま地図の索引になる。地図でもリストでも見返せる。</p>
+      </div>
+      <div class="phone"><div class="device"><img src="assets/shot_list.jpg" alt="リスト画面"></div></div>
+    </div>
+
+    <div class="row rv">
+      <div class="txt">
+        <p class="tag">SHARE</p>
+        <h3>公開するかは、自分で決める。</h3>
+        <p>初期設定は非公開。公開に切り替えた場所だけ、専用リンクで人に見せられる。「まこの地図」を渡して、相手も自分の地図を作りはじめる。</p>
+      </div>
+      <div class="phone"><div class="device"><img src="assets/shot_share.jpg" alt="共有・公開マップ"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section class="route pad">
+  <div class="wrap">
+    <div class="txt rv">
+      <p class="sec-eyebrow">The killer feature</p>
+      <h2>行く前に、順番まで決まっている。</h2>
+      <p>集めた場所を選ぶだけ。徒歩・自転車・車、周回か片道を選べば、いちばん短いルートを自動で組む。そのまま Google マップでナビ開始。当日、迷わない。</p>
+      <div class="facts">
+        <div><span>3手段</span><small>徒歩 / 自転車 / 車</small></div>
+        <div><span>周回・片道</span><small>戻る/戻らないを選べる</small></div>
+        <div><span>ワンタップ</span><small>そのままナビへ</small></div>
+      </div>
+    </div>
+    <div class="phone rv d1"><div class="device"><video src="assets/route.mp4" autoplay muted loop playsinline></video></div></div>
+  </div>
+</section>
+
+<!-- WORLDVIEW -->
+<section class="world pad">
+  <div class="wrap">
+    <p class="sec-eyebrow rv">Why kokora</p>
+    <p class="lines rv d1">
+      <span class="strike">星</span>も、<span class="strike">口コミ</span>も、ありません。<br>残るのは、自分のための写真とメモだけ。
+    </p>
+    <p class="lead rv d2">誰かの点数で決めるのではなく、自分の記憶で場所を選び直せる地図。だから、あなたにとってだけ意味のある一枚が育っていく。</p>
+    <div class="phone rv d3"><div class="device"><video src="assets/world.mp4" autoplay muted loop playsinline></video></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta pad">
+  <div class="wrap rv">
+    <img class="ic" src="assets/icon.png" alt="ここら アイコン">
+    <h2>自分の地図を、育てはじめる。</h2>
+    <p>無料。iOSはApp Storeから、Android・PCはブラウザからそのまま。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://apps.apple.com/jp/app/kokora/id6789018848" target="_blank" rel="noopener">App Store で入手</a>
+      <a class="btn btn-ghost" href="https://mymap-260625-22054.web.app" target="_blank" rel="noopener">ブラウザで開く</a>
+    </div>
+    <p class="note">アカウント登録は Google またはメールアドレスで。Android版は準備中です。</p>
+  </div>
+</section>
+
+<!-- FOOTER / maker -->
+<footer>
+  <div class="wrap maker rv">
+    <div>
+      <p class="mono">現場21年 × ひとりで作る</p>
+      <h3>ここらを作っているのは、AkariLab。</h3>
+      <p>外食の現場に21年立ってきた人間が、企画からデザイン・開発・公開まで、ひとりで作っています。大きなシステムではなく、日々の中でそっと役に立つものを。ここらも、その一つです。</p>
+      <a class="flink" href="https://akarilab.org/" target="_blank" rel="noopener">AkariLab について →</a>
+    </div>
+  </div>
+  <div class="wrap"><p class="copy">© 2026 AkariLab ・ ここら</p></div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.18});
+  document.querySelectorAll('.rv, .world .lines').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
