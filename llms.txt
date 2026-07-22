@@ -20,6 +20,7 @@
 - /repimemo/store/     りぴメモ 店舗向け
 - /repimemo/voices/    りぴメモ 体験談
 - /kokora/             ここら（地図記録アプリ。iOSリリース済み、Android準備中、Web版公開中）
+- /lp/                 ここら 紹介LP（世界観訴求・App Store/Web導線。星も口コミもない自分の記憶の地図という価値を提示）
 
 ## Works
 - /works/              制作実績・デモ（受託 Web 制作のサンプル一覧。第1弾=製造業BtoB向けサイトデモ。今後デモを追加予定）
