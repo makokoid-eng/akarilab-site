@@ -3,11 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ここら — 自分の記憶で、場所を残す地図</title>
-<meta name="description" content="星も、口コミもない。行きたい場所も、行った場所も、写真とメモで自分だけの地図に残していく。あなたの「ここら辺、いいんだよね」が集まっていく地図アプリ、ここら。">
-<meta property="og:title" content="ここら — 自分の記憶で、場所を残す地図">
-<meta property="og:description" content="星も、口コミもない。自分の記憶で場所を選び直せる地図。">
+<title>ここら｜行きたい・行った場所を写真とメモで残す地図アプリ</title>
+<meta name="description" content="星も口コミもない地図アプリ「ここら」。行きたい場所も行った場所も、写真とメモで自分だけの地図に残していく。タグで整理、地図とリストで見返し、巡るルートも自動作成。iOS公開中、Web版も無料。">
+<meta name="keywords" content="ここら,地図アプリ,行きたい場所,行った場所,お気に入り,スポット記録,マイマップ,ルート作成,AkariLab">
+<link rel="canonical" href="https://akarilab.org/lp/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#16281f">
+<!-- OGP / Twitter -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/lp/">
+<meta property="og:site_name" content="AkariLab">
+<meta property="og:title" content="ここら｜行きたい・行った場所を写真とメモで残す地図アプリ">
+<meta property="og:description" content="星も口コミもない。自分の記憶で場所を選び直せる地図。行きたいも行ったも、写真とメモで残していく。">
+<meta property="og:image" content="https://akarilab.org/lp/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ここら｜行きたい・行った場所を残す地図アプリ">
+<meta name="twitter:description" content="星も口コミもない。自分の記憶で場所を残していく地図。">
+<meta name="twitter:image" content="https://akarilab.org/lp/assets/og.jpg">
+<!-- 構造化データ：アプリ本体 + 提供元 + よくある質問。検索とAIに正しく渡す -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"MobileApplication",
+      "name":"ここら",
+      "alternateName":"kokora",
+      "operatingSystem":"iOS, Web",
+      "applicationCategory":"LifestyleApplication",
+      "url":"https://akarilab.org/lp/",
+      "downloadUrl":"https://apps.apple.com/jp/app/kokora/id6789018848",
+      "description":"星も口コミもない、自分の記憶で場所を残す地図アプリ。行きたい・行った場所を写真とメモで記録し、タグで整理、地図とリストで見返し、巡るルートも自動で組める。",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},
+      "author":{"@type":"Organization","name":"AkariLab","url":"https://akarilab.org/"}
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"無料で使えますか？","acceptedAnswer":{"@type":"Answer","text":"基本の機能は無料で使えます。写真枚数やスポット数を増やしたい方向けに有料プランもあります。Web版はブラウザからそのまま利用できます。"}},
+        {"@type":"Question","name":"お店の評価やレビューはできますか？","acceptedAnswer":{"@type":"Answer","text":"できません。ここらには星や口コミの機能がありません。記録するのは自分のための写真とメモだけです。"}},
+        {"@type":"Question","name":"記録した場所は他の人に見られますか？","acceptedAnswer":{"@type":"Answer","text":"初期設定は非公開です。公開に切り替えた場所だけが、あなたの公開URLで閲覧できるようになります。"}},
+        {"@type":"Question","name":"スマホアプリはありますか？","acceptedAnswer":{"@type":"Answer","text":"iOS版を公開しています。Android版は準備中で、Web版はスマホのブラウザからそのまま使えます。"}}
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Ubuntu+Mono&display=swap" rel="stylesheet">
@@ -23,6 +66,7 @@
   body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
   h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.35;letter-spacing:.01em}
+  .nw{white-space:nowrap}
   a{color:inherit;text-decoration:none}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--pine)}
 
@@ -32,7 +76,7 @@
   .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
 
   /* device frame */
-  .device{position:relative;width:100%;max-width:270px;margin:0 auto;border-radius:38px;background:#12100d;padding:11px;box-shadow:0 30px 60px -24px rgba(30,25,15,.5),0 6px 16px -8px rgba(30,25,15,.4)}
+  .device{position:relative;width:100%;max-width:320px;margin:0 auto;border-radius:42px;background:#12100d;padding:12px;box-shadow:0 34px 70px -24px rgba(30,25,15,.55),0 8px 20px -8px rgba(30,25,15,.42)}
   .device::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:38%;height:20px;background:#12100d;border-radius:0 0 14px 14px;z-index:2}
   .device video,.device img{display:block;width:100%;border-radius:28px;background:#0d1a14}
 
@@ -89,7 +133,9 @@
 
   /* ROUTE highlight */
   .route{background:linear-gradient(160deg,#2c5a45,#3a7359 70%,#46826a);color:#f2f7f2;overflow:hidden}
-  .route .wrap{display:grid;grid-template-columns:1fr .8fr;gap:44px;align-items:center}
+  .route .wrap{display:grid;grid-template-columns:1fr .9fr;gap:44px;align-items:center}
+  .route .phone .device{max-width:360px}
+  .world .device video,.route .phone .device video{background:#0d1a14}
   .route .sec-eyebrow{color:#cfe9d6}
   .route h2{font-size:clamp(24px,3.6vw,34px);color:#fff;margin-bottom:16px}
   .route p{color:#dcecdd;font-weight:300;max-width:460px}
@@ -149,8 +195,8 @@
   <div class="wrap">
     <div class="txt rv in">
       <span class="badge"><img src="assets/icon.png" alt="">iOS 公開中 ／ Web版も</span>
-      <h1>「行きたい」も、「行った」も、<br><span class="accent">自分の地図</span>に残していく。</h1>
-      <p class="lead">星も、口コミもない。あなたの「ここら辺、いいんだよね」を、写真とメモで残していく地図アプリ。誰かの点数じゃなく、自分の記憶で場所を選び直せる。</p>
+      <h1><span class="nw">「行きたい」</span>も <span class="nw">「行った」</span>も<br><span class="accent">自分の地図</span>に残していく</h1>
+      <p class="lead">星も口コミもない。あなたの「ここら辺、いいんだよね」を写真とメモで残していく地図アプリ。誰かの点数じゃなく、自分の記憶で場所を選び直せる。</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://apps.apple.com/jp/app/kokora/id6789018848" target="_blank" rel="noopener">App Store で入手</a>
         <a class="btn btn-ghost" href="https://mymap-260625-22054.web.app" target="_blank" rel="noopener">ブラウザで試す</a>
@@ -167,7 +213,7 @@
 <section class="aru pad">
   <div class="wrap">
     <p class="sec-eyebrow rv">You know this feeling</p>
-    <h2 class="rv d1">その場所、どこだっけ。</h2>
+    <h2 class="rv d1">その場所どこだっけ</h2>
     <p class="subttl rv d2">気に入ったはずなのに、たどり着けない。誰にでもある、あの感じ。</p>
     <div class="aru-list">
       <div class="aru-item rv"><span class="no">01</span><p>SNSで見つけた良さげなお店。いいねは押した。<b>でも、いざ探すと出てこない。</b></p></div>
@@ -175,7 +221,7 @@
       <div class="aru-item rv d2"><span class="no">03</span><p>スクショフォルダが店の写真だらけ。<b>結局、見返さない。</b></p></div>
       <div class="aru-item rv d3"><span class="no">04</span><p>旅行先で「行きたい」と思ったのに、<b>着いたら忘れてる。</b></p></div>
     </div>
-    <p class="aru-turn rv d1">残す場所を、<span class="accent">ひとつに。</span></p>
+    <p class="aru-turn rv d1">残す場所を<span class="accent">ひとつに</span></p>
   </div>
 </section>
 
@@ -183,13 +229,13 @@
 <section class="feat pad">
   <div class="wrap">
     <p class="sec-eyebrow rv">What kokora does</p>
-    <h2 class="sec-title rv d1">見つけた場所を、記憶ごと残す。</h2>
+    <h2 class="sec-title rv d1">見つけた場所を 記憶ごと残す</h2>
     <p class="sec-lead rv d2">カフェでも、神社でも、温泉宿でも、パン屋でも。ジャンルは自由。あなたの地図が、少しずつ育っていく。</p>
 
     <div class="row rv">
       <div class="txt">
         <p class="tag">RECORD</p>
-        <h3>写真とメモで、その場に残す。</h3>
+        <h3>写真とメモで その場に残す</h3>
         <p>地図をタップするか、店名で検索して登録。写真とメモを添えれば、「なぜ良かったか」まで残る。行った／行きたいも、ワンタップで切り替え。</p>
       </div>
       <div class="phone"><div class="device"><img src="assets/shot_detail.jpg" alt="スポット詳細画面"></div></div>
@@ -198,7 +244,7 @@
     <div class="row rev rv">
       <div class="txt">
         <p class="tag">ORGANIZE</p>
-        <h3>タグとリストで、自分の索引に。</h3>
+        <h3>タグとリストで 自分の索引に</h3>
         <p>「カフェ」「御朱印」「サウナ」——タグは自由入力。あなたの分類が、そのまま地図の索引になる。地図でもリストでも見返せる。</p>
       </div>
       <div class="phone"><div class="device"><img src="assets/shot_list.jpg" alt="リスト画面"></div></div>
@@ -207,7 +253,7 @@
     <div class="row rv">
       <div class="txt">
         <p class="tag">SHARE</p>
-        <h3>公開するかは、自分で決める。</h3>
+        <h3>公開するかは 自分で決める</h3>
         <p>初期設定は非公開。公開に切り替えた場所だけ、専用リンクで人に見せられる。「まこの地図」を渡して、相手も自分の地図を作りはじめる。</p>
       </div>
       <div class="phone"><div class="device"><img src="assets/shot_share.jpg" alt="共有・公開マップ"></div></div>
@@ -220,7 +266,7 @@
   <div class="wrap">
     <div class="txt rv">
       <p class="sec-eyebrow">The killer feature</p>
-      <h2>行く前に、順番まで決まっている。</h2>
+      <h2>行く前に 順番まで決まっている</h2>
       <p>集めた場所を選ぶだけ。徒歩・自転車・車、周回か片道を選べば、いちばん短いルートを自動で組む。そのまま Google マップでナビ開始。当日、迷わない。</p>
       <div class="facts">
         <div><span>3手段</span><small>徒歩 / 自転車 / 車</small></div>
@@ -237,7 +283,7 @@
   <div class="wrap">
     <p class="sec-eyebrow rv">Why kokora</p>
     <p class="lines rv d1">
-      <span class="strike">星</span>も、<span class="strike">口コミ</span>も、ありません。<br>残るのは、自分のための写真とメモだけ。
+      <span class="strike">星</span>も <span class="strike">口コミ</span>も ない<br>残るのは 自分のための写真とメモだけ
     </p>
     <p class="lead rv d2">誰かの点数で決めるのではなく、自分の記憶で場所を選び直せる地図。だから、あなたにとってだけ意味のある一枚が育っていく。</p>
     <div class="phone rv d3"><div class="device"><video src="assets/world.mp4" autoplay muted loop playsinline></video></div></div>
@@ -248,7 +294,7 @@
 <section class="cta pad">
   <div class="wrap rv">
     <img class="ic" src="assets/icon.png" alt="ここら アイコン">
-    <h2>自分の地図を、育てはじめる。</h2>
+    <h2>自分の地図を 育てはじめる</h2>
     <p>無料。iOSはApp Storeから、Android・PCはブラウザからそのまま。</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://apps.apple.com/jp/app/kokora/id6789018848" target="_blank" rel="noopener">App Store で入手</a>
@@ -263,7 +309,7 @@
   <div class="wrap maker rv">
     <div>
       <p class="mono">現場21年 × ひとりで作る</p>
-      <h3>ここらを作っているのは、AkariLab。</h3>
+      <h3>ここらを作っているのは AkariLab</h3>
       <p>外食の現場に21年立ってきた人間が、企画からデザイン・開発・公開まで、ひとりで作っています。大きなシステムではなく、日々の中でそっと役に立つものを。ここらも、その一つです。</p>
       <a class="flink" href="https://akarilab.org/" target="_blank" rel="noopener">AkariLab について →</a>
     </div>
