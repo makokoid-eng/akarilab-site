@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ここら — 自分だけの地図を育てる</title>
-<meta name="description" content="気に入った場所を写真とメモで記録して、自分だけの地図を育てるアプリ。カフェ巡り、神社、温泉宿、パン屋。ジャンルは自由。星も口コミもありません。">
+<title>ここら｜自分だけの地図を育てる地図アプリ（行った場所・お気に入りの記録）</title>
+<meta name="description" content="ここらは、気に入った場所を写真とメモで記録して自分だけの地図を育てる地図アプリ。行った場所の記録、お気に入りスポットの整理、カフェ巡り・神社・温泉宿・パン屋めぐりに。星も口コミもありません。iOS／Web版 公開中。">
 <link rel="canonical" href="https://akarilab.org/kokora/">
 <meta property="og:title" content="ここら — 自分だけの地図を育てる">
 <meta property="og:description" content="気に入った場所を写真とメモで記録して、自分だけの地図を育てるアプリ。星も口コミもありません。">
@@ -39,7 +39,7 @@
         {
           "@type": "Question",
           "name": "無料で使えますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "基本の機能は無料で使えます。写真の枚数やスポット数を増やしたい方向けに、有料プランもあります。Web版はブラウザからそのまま利用できます。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "はい。現在は無料で使えます。Web版はブラウザからそのまま利用できます。" }
         },
         {
           "@type": "Question",
@@ -104,6 +104,9 @@ a:hover{text-decoration:underline}
 .hero .tagline{font-family:'Zen Maru Gothic',sans-serif;font-size:1.15rem;color:var(--text);margin-bottom:1.6rem}
 .hero .description{font-size:.9rem;color:var(--text-dim);line-height:2.1;max-width:540px;margin:0 auto}
 .status-badge{display:inline-block;background:rgba(123,160,91,0.16);color:var(--accent-text);font-size:.75rem;padding:.3rem 1rem;border-radius:20px;margin-top:1.6rem;font-weight:500}
+.reel-wrap{display:flex;justify-content:center;margin:2rem 0 .5rem}
+.reel-phone{width:min(300px,80vw);aspect-ratio:9/19.5;border-radius:34px;border:1px solid var(--border);background:#0d100e;box-shadow:0 12px 44px rgba(0,0,0,.5);overflow:hidden}
+.reel-phone video{width:100%;height:100%;object-fit:cover;display:block}
 .section{max-width:800px;margin:0 auto;padding:2.2rem 2rem 3rem}
 .section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:1.6rem;text-align:center;position:relative;padding-bottom:.9rem}
 .section-title::after{content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:2.4rem;height:2px;background:var(--accent);opacity:.85;transition:width 1s cubic-bezier(.22,1,.36,1)}
@@ -176,12 +179,19 @@ html:not(.js) .reveal{opacity:1;transform:none}
   <span class="status-badge">iOS版 リリース済み ／ Android版 準備中 ／ Web版 公開中</span>
 </div>
 
+<!-- ここら 実機リール（本物の縦型動画・自動再生/ミュート/ループ） -->
+<div class="reel-wrap">
+  <div class="reel-phone">
+    <video src="/assets/kokora/kokora-reel.mp4" poster="/assets/kokora/kokora-reel-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ここらの操作イメージ動画"></video>
+  </div>
+</div>
+
 <div class="section">
   <h2 class="section-title rule-wait">できること</h2>
   <div class="feature-grid">
     <div class="feature-card reveal">
       <h3>場所を記録する</h3>
-      <p>地図の上でピンを打つか、住所検索で登録。写真は3枚まで、メモも自由に残せます。</p>
+      <p>地図の上でピンを打つか、住所検索で登録。写真は最大5枚、メモも自由に残せます。</p>
     </div>
     <div class="feature-card reveal">
       <h3>タグで整理する</h3>
@@ -267,7 +277,7 @@ html:not(.js) .reveal{opacity:1;transform:none}
   <div class="faq">
     <div class="faq-item reveal">
       <h3>無料で使えますか？</h3>
-      <p>基本の機能は無料で使えます。写真の枚数やスポット数を増やしたい方向けに、有料プランもあります。Web版はブラウザからそのまま利用できます。</p>
+      <p>はい。現在は無料で使えます。Web版はブラウザからそのまま利用できます。</p>
     </div>
     <div class="faq-item reveal">
       <h3>お店の評価やレビューはできますか？</h3>
@@ -288,6 +298,43 @@ html:not(.js) .reveal{opacity:1;transform:none}
   <p>ブラウザからすぐに始められます。</p>
   <a class="cta-button" href="https://mymap-260625-22054.web.app" rel="noopener">Web版を開く</a>
   <p class="note">アカウント登録は Google またはメールアドレスで。</p>
+</div>
+
+<!-- ===== English (draft translation — まこと確認前) ===== -->
+<div class="section" id="en" lang="en" style="border-top:1px solid var(--border);padding-top:2.4rem;margin-top:1rem;">
+  <h2 class="section-title">kokora — grow a map that's all your own</h2>
+  <p class="description" style="margin-bottom:1.4rem;">
+    Keep the places you love as photos and notes. Cafés, shrines, hot-spring inns, bakeries —
+    any genre you like. Little by little, a map of your own favourite spots takes shape.
+  </p>
+  <span class="status-badge">iOS: released ／ Android: in preparation ／ Web: available</span>
+
+  <h3 style="margin-top:1.8rem;">What you can do</h3>
+  <p style="color:var(--text-dim);line-height:1.9;">
+    Save a place by dropping a pin or searching an address — up to 5 photos and free-form notes.
+    Organise with your own tags (“café”, “sauna”, “plants”…), which become the index of your map.
+    Look back through the map view or a list sorted by date or tag. Everything is private by default;
+    only the places you choose to make public get a shareable URL.
+  </p>
+
+  <h3 style="margin-top:1.6rem;">No ratings, no reviews</h3>
+  <p style="color:var(--text-dim);line-height:1.9;">
+    kokora has no scoring feature. What remains is simply your own photos and notes —
+    a map where you choose places by your own memory, not someone else's stars.
+  </p>
+
+  <h3 style="margin-top:1.6rem;">FAQ</h3>
+  <p style="color:var(--text-dim);line-height:1.9;">
+    <strong>Is it free?</strong> The core features are free; paid plans add more photos and spots. The web version runs right in your browser.<br>
+    <strong>Are places visible to others?</strong> Private by default — only places you switch to public are viewable via your public URL.<br>
+    <strong>Is there a mobile app?</strong> The iOS app is out; Android is in preparation. The web version works in a phone browser too.
+  </p>
+
+  <div class="cta" style="margin-top:1.8rem;">
+    <p>Start right from your browser.</p>
+    <a class="cta-button" href="https://mymap-260625-22054.web.app" rel="noopener">Open the web app</a>
+    <p class="note">Sign in with Google or email. iOS app: search “kokora” on the App Store.</p>
+  </div>
 </div>
 
 <footer>© 2026 AkariLab</footer>

@@ -11,11 +11,15 @@
     gtag('js', new Date());
     gtag('config', 'G-K6N7W00YYP');
   </script>
-  <title>AkariLab — となりで灯す。</title>
-  <meta name="description" content="AkariLabは、現場の「困った」から生まれたプロダクトを作っています。LINEの中で完結する小さなツール。業務改善コンサルもココナラで受付中。">
-  <meta property="og:title" content="AkariLab — となりで灯す。">
-  <meta property="og:description" content="現場で感じた「あったらいいのに」を、小さく作って、静かに届ける。">
+  <title>AkariLab｜LINE Bot・Excel自動化・アプリ開発を外食の現場から（個人開発）</title>
+  <meta name="description" content="外食の現場に21年立つ店舗マネージャーが、飲食店向けLINE Bot、Excel（VBA）自動化、業務効率化、店舗ホームページ制作、スマホアプリ開発を、相談から実装まで受けています。地図アプリ「ここら」も公開中。まずは無料相談から。">
+  <meta name="keywords" content="LINE Bot 飲食店,Excel自動化 依頼,VBA マクロ 作成,業務効率化 現場,店舗 DX,スマホアプリ 個人開発 依頼,ホームページ制作 個人,地図アプリ,AkariLab">
+  <link rel="canonical" href="https://akarilab.org/">
+  <meta property="og:title" content="AkariLab｜LINE Bot・Excel自動化・アプリ開発を外食の現場から">
+  <meta property="og:description" content="飲食店向けLINE Bot、Excel自動化、業務効率化、ホームページ制作、アプリ開発。現場を知る個人開発者が相談から実装まで。">
+  <meta property="og:url" content="https://akarilab.org/">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <!-- editorial: 見出し=Gelasio/Noto Serif JP、ラベル=Ubuntu Mono、本文=Noto Sans JP -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,7 +77,7 @@
 
     /* Masthead（誌面の柱：最上部の細い帯） */
     .masthead {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
       padding: 20px 24px 0;
       display: flex;
@@ -86,7 +90,7 @@
       color: var(--text-muted);
     }
     .masthead .rule-line {
-      max-width: 720px;
+      max-width: 760px;
       margin: 12px auto 0;
       padding: 0 24px;
     }
@@ -96,31 +100,33 @@
       border-top: 1px solid var(--border);
     }
 
-    /* Eyebrow（番号付き見出し：01 —— PRODUCTS） */
+    /* Eyebrow（番号付き見出し：大きな装飾数字で章の切れ目を立てる） */
     .eyebrow {
       display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
+      align-items: baseline;
+      gap: 18px;
+      margin-bottom: 44px;
     }
     .eyebrow-num {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      font-weight: 600;
       color: var(--accent-green);
-      letter-spacing: 0.1em;
+      letter-spacing: -0.01em;
+      line-height: 1;
     }
     .eyebrow-label {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-muted);
-      letter-spacing: 0.22em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       white-space: nowrap;
     }
     .eyebrow-rule {
       flex: 1;
+      align-self: center;
       border-top: 1px solid var(--border);
     }
 
@@ -130,15 +136,15 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px 32px;
-      margin: 30px 0 0;
-      padding: 18px 0 0;
+      gap: 14px 48px;
+      margin: 48px 0 0;
+      padding: 30px 0 0;
       border-top: 1px solid var(--border);
     }
-    .hero-stats li { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .hero-stats li { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .hero-stats strong {
       font-family: var(--font-serif);
-      font-size: 24px;
+      font-size: 34px;
       font-weight: 600;
       color: var(--accent-green);
       line-height: 1.1;
@@ -153,12 +159,12 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 14px;
+      margin-top: 44px;
     }
     .hero-btn {
       display: inline-block;
-      padding: 12px 22px;
+      padding: 15px 30px;
       border: 1px solid var(--border);
       border-radius: 3px;
       font-size: 14px;
@@ -171,17 +177,17 @@
     .hero-btn.primary:hover { background: rgba(76,175,125,.10); }
     .hero-btn:focus-visible { outline: 2px solid var(--accent-green); outline-offset: 2px; }
     .pullquote {
-      max-width: 720px;
-      margin: 24px auto;
-      padding: 40px 24px;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(56px, 8vh, 90px) 24px;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
     .pullquote p {
       font-family: var(--font-serif);
-      font-size: 26px;
+      font-size: clamp(1.7rem, 3.4vw, 2.4rem);
       font-weight: 500;
-      line-height: 1.6;
+      line-height: 1.55;
       color: var(--text);
       letter-spacing: -0.005em;
     }
@@ -194,48 +200,62 @@
       margin-top: 16px;
     }
 
-    /* Hero */
+    /* Hero — ファーストビューを占有する堂々としたヒーロー */
     .hero {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 72px 24px 56px;
+      padding: clamp(96px, 13vh, 160px) 24px clamp(72px, 9vh, 120px);
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
+    }
+    /* ヒーロー：主役は「となりで灯す。」。灯りは"灯"の一字に宿す */
+    .hero .brandmark {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3.4vw, 2rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text-dim);
+      margin-bottom: clamp(20px, 3vh, 32px);
+    }
+    .hero .lead-copy {
+      font-family: var(--font-serif);
+      font-size: clamp(2.9rem, 8.5vw, 5rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.18;
+      color: #ece7dd;
+      margin-bottom: clamp(26px, 3.5vh, 38px);
+    }
+    .hero .lead-copy .glow {
+      color: #ffe8c8;
+      text-shadow: 0 0 14px rgba(255,196,122,0.55), 0 0 34px rgba(255,182,104,0.30), 0 0 60px rgba(255,170,90,0.16);
+      animation: ember 5s ease-in-out infinite;
+    }
+    @keyframes ember {
+      0%, 100% { text-shadow: 0 0 12px rgba(255,196,122,0.45), 0 0 30px rgba(255,182,104,0.24), 0 0 54px rgba(255,170,90,0.12); }
+      50% { text-shadow: 0 0 18px rgba(255,200,130,0.65), 0 0 42px rgba(255,186,110,0.36), 0 0 72px rgba(255,172,92,0.20); }
     }
     .hero .kicker {
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
       color: var(--accent-green);
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: 52px;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-    .hero .tagline {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 28px;
+      margin-bottom: clamp(28px, 4vh, 40px);
     }
     .hero .sub {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-muted);
-      line-height: 2;
+      line-height: 2.1;
     }
 
     /* Products */
     .products {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: clamp(72px, 10vh, 120px) 24px;
     }
     .products h2 {
       font-family: var(--font-mono);
@@ -251,49 +271,113 @@
       flex-direction: column;
       gap: 16px;
     }
+    /* ===== 統一カード（清潔感：同じ角丸・余白・境界・影） ===== */
     .product-card {
       display: block;
       position: relative;
-      background: linear-gradient(180deg, #181818 0%, #131313 100%);
+      background: linear-gradient(180deg, rgba(30,34,31,0.85) 0%, rgba(21,24,22,0.85) 100%);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--accent-green);
-      border-radius: 10px;
+      border-radius: 14px;
       padding: 24px;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 8px 24px rgba(0,0,0,0.35);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 6px 20px rgba(0,0,0,0.28);
+      transition: transform 0.18s ease, border-color 0.18s ease;
     }
-    .product-card:hover {
-      transform: translateY(-2px);
-      border-color: #2e2e2e;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(76,175,125,0.12);
+    /* 押せるカードだけがホバーで持ち上がる */
+    a.product-card:hover { transform: translateY(-2px); border-color: #33403a; }
+    .product-card .pc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
     }
-    .product-card.orange { border-left-color: var(--accent-orange); }
-    .product-card.blue { border-left-color: var(--accent-blue); }
-    .product-card.brown { border-left-color: var(--accent-brown); }
-    .product-card.green { border-left-color: var(--accent-green); }
-    .product-card .emoji { font-size: 20px; margin-bottom: 8px; }
-    .product-card h3 { font-family: var(--font-serif); font-size: 21px; font-weight: 600; margin-bottom: 6px; }
+    .product-card h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
     .product-card .desc {
       font-size: 14px;
       color: var(--text-dim);
-      line-height: 1.7;
-      margin-bottom: 12px;
+      line-height: 1.85;
+      margin-bottom: 14px;
     }
-    .product-card .meta {
+    .product-card .pc-meta {
+      font-family: var(--font-mono);
       font-size: 12px;
+      letter-spacing: 0.04em;
       color: var(--text-muted);
     }
-    .product-card .arrow {
-      float: right;
-      color: var(--text-muted);
-      font-size: 14px;
+    /* 状態バッジ */
+    .badge {
+      flex: none;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      white-space: nowrap;
     }
+    .badge-live { color: #8fe0b8; background: rgba(76,175,125,0.12); border-color: rgba(76,175,125,0.35); }
+    .badge-beta { color: #f0c98a; background: rgba(232,145,58,0.12); border-color: rgba(232,145,58,0.32); }
+    .badge-dev  { color: var(--text-muted); background: rgba(255,255,255,0.03); border-color: var(--border); }
+    /* 統一ボタン（カード内アクション） */
+    .pc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .btn {
+      display: inline-block;
+      font-size: 13px;
+      line-height: 1;
+      padding: 11px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    }
+    .btn:hover { background: rgba(255,255,255,0.04); color: var(--text); border-color: #33403a; }
+    .btn-primary { border-color: var(--accent-green); color: var(--accent-green); }
+    .btn-primary:hover { background: rgba(76,175,125,0.10); color: var(--accent-green); }
+    .pc-note { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
+    /* サービス専用ページへの内部リンク・ナビ */
+    .svc-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 4px 0 28px; }
+    .svc-nav a { display: block; background: linear-gradient(180deg, rgba(30,34,31,0.85), rgba(21,24,22,0.85)); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; transition: border-color .18s, transform .18s; }
+    .svc-nav a:hover { border-color: #33403a; transform: translateY(-2px); }
+    .svc-nav .n-title { font-family: var(--font-serif); font-size: 15px; color: var(--text); margin-bottom: 2px; }
+    .svc-nav .n-meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+    /* サービス詳細アコーディオン */
+    .svc-list { display: flex; flex-direction: column; gap: 16px; }
+    .product-card details { margin-top: 6px; border-top: 1px solid var(--border); padding-top: 14px; }
+    .product-card summary { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--accent-green); cursor: pointer; list-style: none; }
+    .product-card summary::-webkit-details-marker { display: none; }
+    .product-card summary::after { content: " ＋ くわしく"; }
+    .product-card details[open] summary::after { content: " － 閉じる"; }
+    .product-card details[open] summary { color: var(--text-muted); }
+    .svc-body { margin-top: 12px; font-size: 13.5px; color: var(--text-dim); line-height: 1.95; }
+    .svc-body h5 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin: 14px 0 4px; }
+    .svc-body h5:first-child { margin-top: 0; }
+    .link-quiet { align-self: center; font-size: 12px; color: var(--text-muted); }
+    .link-quiet:hover { color: var(--text-dim); }
+    /* セクション図版（大きく・中央1軸・幅いっぱい） */
+    .section-figure { width: 100%; border-radius: 14px; border: 1px solid var(--border); overflow: hidden; margin: 0 0 28px; }
+    .section-figure img { display: block; width: 100%; height: auto; }
+    .section-figure.ph { aspect-ratio: 16 / 7; background: radial-gradient(120% 140% at 30% 10%, rgba(76,175,125,0.16), transparent 60%), linear-gradient(180deg, #1b211d 0%, #141814 100%); display: flex; align-items: center; justify-content: center; }
+    .ph-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; color: var(--text-muted); }
+    /* ここら リール（スマホ枠でスクショを自動送り） */
+    .kokora-reel { margin-top: 4px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .kokora-reel .phone { position: relative; width: min(320px, 82vw); aspect-ratio: 9 / 19.5; border-radius: 34px; border: 1px solid var(--border); background: #0d100e; box-shadow: 0 12px 44px rgba(0,0,0,0.5); overflow: hidden; }
+    .kokora-reel .reel-shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease; }
+    .kokora-reel .reel-shot.is-on { opacity: 1; }
+    .kokora-reel .reel-note { font-size: 12px; color: var(--text-muted); text-align: center; }
+    @media (prefers-reduced-motion: reduce) { .kokora-reel .reel-shot { transition: none; } }
 
     /* Services（業務改善コンサル） */
     .services {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: clamp(72px, 10vh, 120px) 24px;
     }
     .services h2 {
       font-family: var(--font-mono);
@@ -311,12 +395,11 @@
       margin-bottom: 20px;
     }
     .service-card {
-      background: linear-gradient(180deg, #181818 0%, #131313 100%);
+      background: linear-gradient(180deg, rgba(30,34,31,0.85) 0%, rgba(21,24,22,0.85) 100%);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--accent-orange);
-      border-radius: 10px;
+      border-radius: 14px;
       padding: 24px;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 8px 24px rgba(0,0,0,0.35);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset, 0 6px 20px rgba(0,0,0,0.28);
     }
     .service-card h3 {
       font-family: var(--font-serif);
@@ -390,47 +473,57 @@
     .service-hub-link:hover { background: #1a1a1a; }
     /* Works の集約カード（デモ一覧への導線）。Services のハブと同じ作りで、アクセントだけ緑。 */
     .works-hub-link { border-left-color: var(--accent-green); border-left-width: 4px; }
-    .works-hub-link h3 { font-size: 24px; }
+    .works-hub-link h3 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
     .works-hub-link .hub-cta { color: var(--accent-green); }
+    /* ハブカード：囲みを弱め、項目そのものを大きく見せる */
+    .service-hub-link {
+      background: linear-gradient(180deg, rgba(30,34,31,0.85) 0%, rgba(21,24,22,0.85) 100%);
+      padding: clamp(28px, 4vw, 44px);
+      box-shadow: none;
+    }
     .service-hub-link:focus-visible {
-      outline: 2px solid var(--accent-orange);
+      outline: 2px solid var(--accent-green);
       outline-offset: 3px;
     }
-    .service-hub-link h3 { font-family: var(--font-serif); font-size: 20px; margin-bottom: 6px; }
+    .service-hub-link h3 { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
     .service-hub-link .hub-lead {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-dim);
-      margin-bottom: 14px;
+      margin-bottom: 24px;
     }
     .service-hub-link .hub-item {
-      padding: 10px 0;
+      padding: 20px 0;
       border-top: 1px solid var(--border);
     }
     .service-hub-link .hub-item:first-of-type {
       border-top: none;
-      padding-top: 4px;
+      padding-top: 6px;
     }
     .service-hub-link .hub-item-title {
-      font-size: 14px;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 500;
       color: var(--text);
-      margin-bottom: 2px;
+      margin-bottom: 5px;
     }
     .service-hub-link .hub-item-meta {
+      font-family: var(--font-mono);
       font-size: 12px;
+      letter-spacing: 0.04em;
       color: var(--text-muted);
     }
     .service-hub-link .hub-cta {
-      font-size: 13px;
-      color: var(--accent-orange);
-      margin-top: 14px;
+      font-size: 14px;
+      color: var(--accent-green);
+      margin-top: 24px;
       text-align: right;
     }
 
     /* About */
     .about {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 40px 24px 60px;
+      padding: clamp(72px, 10vh, 120px) 24px clamp(72px, 10vh, 120px);
     }
     .about h2 {
       font-family: var(--font-serif);
@@ -446,31 +539,69 @@
 
     /* Footer */
     footer {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 24px;
+      padding: clamp(56px, 8vh, 80px) 24px 48px;
       border-top: 1px solid var(--border);
-      text-align: center;
     }
-    footer p {
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px 24px;
+    }
+    .footer-brand { max-width: 280px; }
+    .footer-brand .fb-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .footer-brand .fb-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .footer-brand .fb-social a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text-dim);
+      margin-right: 16px;
+    }
+    .footer-brand .fb-social a:hover { color: var(--text); }
+    .footer-cols { display: flex; flex-wrap: wrap; gap: 28px 48px; }
+    .footer-col h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 2.15;
+    }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
       font-size: 12px;
       color: var(--text-muted);
     }
-    footer .links {
-      margin-bottom: 8px;
-    }
-    footer .links a {
-      font-size: 13px;
-      color: var(--text-dim);
-      margin: 0 12px;
-    }
-    footer .links a:hover { color: var(--text); }
 
     /* Updates timeline（エディトリアル調の縦罫線リスト） */
     .updates {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: clamp(72px, 10vh, 120px) 24px;
     }
     .updates .lead {
       font-size: 14px;
@@ -578,6 +709,7 @@
         transition: none;
       }
       .hero .kicker::after { animation: none; }
+      .hero .lead-copy .glow { animation: none; }
       body::before { animation: none; transform: none; opacity: 0.9; }
       .product-card:hover, .service-hub-link:hover { transform: none; }
     }
@@ -586,9 +718,10 @@
       .updates { padding: 24px 16px; }
       .masthead { padding: 16px 16px 0; font-size: 10px; letter-spacing: 0.12em; }
       .masthead .rule-line { padding: 0 16px; }
-      .hero { padding: 48px 16px 36px; }
-      .hero h1 { font-size: 38px; }
-      .products, .about, .services { padding: 24px 16px; }
+      .hero { padding: 40px 20px; }
+      .hero .brandmark { font-size: clamp(1.3rem, 5vw, 1.6rem); }
+      .hero .lead-copy { font-size: clamp(2.4rem, 11vw, 3.3rem); }
+      .products, .about, .services { padding: 48px 16px; }
       .pullquote { margin: 16px auto; padding: 28px 16px; }
       .pullquote p { font-size: 20px; }
     }
@@ -597,7 +730,34 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://akarilab.org/#org"
+    "@id": "https://akarilab.org/#org",
+    "name": "AkariLab",
+    "url": "https://akarilab.org/",
+    "description": "外食の現場に21年立つ店舗マネージャーが運営する個人開発スタジオ。飲食店向けLINE Bot、Excel（VBA）自動化、業務効率化、店舗ホームページ制作、スマホアプリ開発を、相談から実装まで提供。",
+    "sameAs": ["https://www.instagram.com/akarilab_jp/", "https://note.com/akarilab"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AkariLab の業務効率化・開発支援",
+    "provider": { "@id": "https://akarilab.org/#org" },
+    "areaServed": "JP",
+    "serviceType": ["飲食店向けLINE Bot設計・導入", "Excel（VBA）自動化", "AI業務ツールの伴走制作", "店舗ホームページ制作（WordPress）", "スマホアプリ・業務ツール開発", "業務効率化の相談"],
+    "url": "https://akarilab.org/#services"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ここら（kokora）",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "iOS, Web",
+    "description": "気に入った場所を写真とメモで記録して、自分だけの地図を育てる地図アプリ。行った場所の記録、お気に入りスポットの整理に。星も口コミもありません。",
+    "url": "https://akarilab.org/kokora/",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
   }
   </script>
   <script type="application/ld+json">
@@ -652,9 +812,9 @@
   <div class="masthead rule-line"></div>
 
   <div class="hero">
+    <p class="brandmark">AkariLab</p>
+    <h1 class="lead-copy">となりで<span class="glow">灯</span>す。</h1>
     <p class="kicker">現場21年 × ひとりで作る</p>
-    <h1>AkariLab</h1>
-    <p class="tagline">となりで灯す。</p>
     <p class="sub">
       外食の現場に21年立ってきた人間が、<br>
       LINE Bot・スマホアプリ・業務ツール・Webサイトを、<br>
@@ -727,51 +887,131 @@
       <span class="eyebrow-rule"></span>
     </div>
     <p class="lead">
-      AkariLabで作っているLINE Botの設計ノウハウと、外食現場21年で蓄えた組織運営の型を、相談・実装・ノウハウの形で外に出しています。<br>
-      決済・連絡はそれぞれの媒体（ココナラ／Brain）経由です。
+      現場で21年、いまも複数店舗を統括するマネージャーが、Excel自動化・AIツール・LINEBot設計・HP制作を、相談から実装まで受けています。<br>
+      まずは30分の相談で「うちの現場で本当に回るか」を切り分けます。
     </p>
 
-    <a href="/makoto/services/" class="service-card service-hub-link">
-      <h3>提供サービス一覧 →</h3>
-      <p class="hub-lead">現役の店舗運営マネージャー／個人開発者が提供している7サービス。</p>
+    <!-- 各サービスの専用ページ（1語1ページ）への内部リンク -->
+    <nav class="svc-nav" aria-label="サービス専用ページ">
+      <a href="/makoto/services/line-bot/"><p class="n-title">飲食店向けLINE Bot</p><p class="n-meta">設計・導入</p></a>
+      <a href="/makoto/services/excel-vba/"><p class="n-title">Excel（VBA）自動化</p><p class="n-meta">マクロ作成</p></a>
+      <a href="/makoto/services/tenpo-dx/"><p class="n-title">業務効率化・店舗DX</p><p class="n-meta">現場向け</p></a>
+      <a href="/makoto/services/app-dev/"><p class="n-title">アプリ・ツール開発</p><p class="n-meta">個人開発 依頼</p></a>
+      <a href="/makoto/services/homepage/"><p class="n-title">ホームページ制作</p><p class="n-meta">WordPress</p></a>
+      <a href="/makoto/services/soudan/"><p class="n-title">業務相談（30分）</p><p class="n-meta">まず切り分ける</p></a>
+    </nav>
+    <!-- サービス図版：コード生成の上品なブランドビジュアル（ダークグリーン＋等高線＋灯り、微グレインでのっぺり回避）。約51KB -->
+    <div class="section-figure">
+      <img src="/assets/services-visual-1.webp" width="1400" height="612" loading="lazy" alt="現場を読み解き、道具で静かに灯す——AkariLabのサービスのイメージ" style="display:block;width:100%;height:auto;">
+    </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">業務の自動化、現場目線でご相談乗ります</p>
-        <p class="hub-item-meta">ココナラ ・ 4,000円 / 30分</p>
+    <div class="svc-list">
+
+      <div class="product-card">
+        <div class="pc-head"><h3>業務の自動化、現場目線で相談</h3><span class="badge badge-live">相談・30分</span></div>
+        <p class="desc">「技術的にできるか」ではなく「うちの現場で本当に回るか」を切り分ける30分。落とし穴まで正直に伝えます。</p>
+        <p class="pc-meta">初回無料／有料相談は直接3,500円（ココナラ参考4,000円）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>できること</h5>あなたの業務をExcel・AI・LINEBotで自動化できるか、現場目線で判定。「できます。ただし、ここに落とし穴があります」まで。
+          <h5>できないこと</h5>この枠は相談のみ。開発が必要なら別途見積もりを提案（相談だけで解決でもOK）。
+          <h5>進め方</h5>現状の業務を伺う → 技術的可否と現場での回り方を切り分け → 次の一手を提示。
+          <h5>所要</h5>30分。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" data-soudan href="#soudan">まず相談する（無料）→</a>
+          <a class="btn" href="https://akarilab.org/r/stripe-consult/?from=lp&ch=akari" target="_blank" rel="noopener noreferrer">カードで申し込む</a>
+          <a class="link-quiet" href="https://coconala.com/services/4214161" target="_blank" rel="noopener noreferrer">レビュー・実績を見る →</a>
+        </div>
       </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">現役マネージャーがExcel自動化します</p>
-        <p class="hub-item-meta">ココナラ ・ 20,000円〜</p>
+      <div class="product-card">
+        <div class="pc-head"><h3>Excel（VBA）自動化</h3><span class="badge badge-live">実装</span></div>
+        <p class="desc">現役マネージャーが、勤怠・売上集計などのExcel業務をVBAで自動化。詳しくないスタッフでも迷わない設計に。</p>
+        <p class="pc-meta">直接依頼 17,000円〜（ココナラ参考20,000円〜）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>できること</h5>既存Excelの改修から中規模ツールまで。金額に直結するツールはPythonで独立再実装し1円/1分単位で突合してから納品。
+          <h5>落とし穴対策</h5>「簡単そうで実は厄介」な要件は作る前に洗い出して先に共有。
+          <h5>進め方</h5>要件ヒアリング → 設計 → 実装 → 検算 → 納品後の動作確認。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" data-soudan href="#soudan">まず相談する（無料）→</a>
+          <a class="link-quiet" href="https://coconala.com/services/4244110" target="_blank" rel="noopener noreferrer">レビュー・実績を見る →</a>
+        </div>
       </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">AI業務ツールをビデオ伴走で一緒に作ります</p>
-        <p class="hub-item-meta">ココナラ ・ 34,000円〜 / 90分</p>
+      <div class="product-card">
+        <div class="pc-head"><h3>AI業務ツールをビデオ伴走で制作</h3><span class="badge badge-live">伴走制作</span></div>
+        <p class="desc">画面共有しながら、あなたの業務に合うAIツールをその場で一緒に作り、その日のうちに使える状態で渡します。</p>
+        <p class="pc-meta">直接依頼 Light 29,000円／Full 39,000円（ココナラ参考34,000／45,000円）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>できること</h5>セッション内で実際に動くものを完成。使い方まで持ち帰れる。
+          <h5>設計方針</h5>技術的正しさより「現場のスタッフが使い続けられる」を優先。運用で困りそうな点をその場で指摘。
+          <h5>所要</h5>90分×1〜2回。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" data-soudan href="#soudan">まず相談する（無料）→</a>
+          <a class="link-quiet" href="https://coconala.com/services/4286326" target="_blank" rel="noopener noreferrer">レビュー・実績を見る →</a>
+        </div>
       </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">現場で回るLINEBot設計から導入します</p>
-        <p class="hub-item-meta">ココナラ ・ 70,000円〜</p>
+      <div class="product-card">
+        <div class="pc-head"><h3>現場で回るLINEBot設計・導入</h3><span class="badge badge-live">設計・導入</span></div>
+        <p class="desc">電話・紙・回し連絡を、毎日使えるLINEBotへ。機能が複雑で使われなくなる失敗を、導入経験から防ぐ設計に。</p>
+        <p class="pc-meta">直接依頼 60,000円〜（ココナラ参考70,000円〜）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>対象業務の例</h5>シフト報告（LINE申請→Sheets/Notion集計）／マニュアル参照（AI連携可）／店舗チェック（写真→チェックリスト）／FAQ・予約の自動返信。
+          <h5>進め方</h5>業務の棚卸し → 機能を絞った設計 → 実装 → 現場テスト → 導入。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" data-soudan href="#soudan">まず相談する（無料）→</a>
+          <a class="link-quiet" href="https://coconala.com/services/4286336" target="_blank" rel="noopener noreferrer">レビュー・実績を見る →</a>
+        </div>
       </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">店舗のホームページをWordPressで作ります</p>
-        <p class="hub-item-meta">ココナラ ・ 50,000円〜</p>
+      <div class="product-card">
+        <div class="pc-head"><h3>店舗ホームページをWordPressで制作</h3><span class="badge badge-live">Web制作</span></div>
+        <p class="desc">「見られる側」を20年やってきた視点で、お客様が知りたい順に情報を置き、スタッフが自分で更新できる形に。</p>
+        <p class="pc-meta">直接依頼 43,000円〜（ココナラ参考50,000円〜）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>できること</h5>スマホ最優先、メニュー→場所→営業時間の順で設計、スタッフ更新可。スタンダードは文章のたたき台も作成。
+          <h5>前提</h5>サーバー・ドメインは依頼者名義で契約（月額目安1,000円前後）。
+          <h5>進め方</h5>質問シート回答 → 構成 → 制作 → 公開 →（スタンダードは3ヶ月サポート）。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" data-soudan href="#soudan">まず相談する（無料）→</a>
+          <a class="link-quiet" href="https://coconala.com/services/4306507" target="_blank" rel="noopener noreferrer">レビュー・実績を見る →</a>
+        </div>
       </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">こうだったら楽なのにを、現場側の人間が実装します</p>
-        <p class="hub-item-meta">ココナラ ・ 15,000円〜</p>
+      <div class="product-card">
+        <div class="pc-head"><h3>「こうだったら楽なのに」を実装</h3><span class="badge badge-live">小さな実装</span></div>
+        <p class="desc">現場を知っている人間が形にします。LINE Bot・Excel/VBA・Pythonの業務自動化・生成AI相談まで。</p>
+        <p class="pc-meta">直接依頼 13,000円〜（ココナラ参考15,000円〜）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>できること</h5>「こんなことで困ってる」だけのざっくり相談でOK。業務フローを一緒に整理して要件化。
+          <h5>進め方</h5>ヒアリング → 要件整理 → 設計・開発・テスト → 納品後の動作確認まで伴走。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" data-soudan href="#soudan">まず相談する（無料）→</a>
+          <a class="link-quiet" href="https://coconala.com/services/4297816" target="_blank" rel="noopener noreferrer">レビュー・実績を見る →</a>
+        </div>
       </div>
 
-      <div class="hub-item">
-        <p class="hub-item-title">店舗運営20年マネージャーのAI実用例20選</p>
-        <p class="hub-item-meta">Brain ・ 4,980円 / 買い切り</p>
+      <div class="product-card">
+        <div class="pc-head"><h3>店舗運営20年マネージャーのAI実用例20選</h3><span class="badge badge-beta">Brain・買い切り</span></div>
+        <p class="desc">1on1・報告書・朝礼の時間を半減させたAI実用例20件＋そのまま使えるプロンプト集10個。</p>
+        <p class="pc-meta">4,980円（買い切り）／ Brain ノウハウ（テキスト）</p>
+        <details><summary>くわしく</summary><div class="svc-body">
+          <h5>内容</h5>カテゴリは人事・育成／数値・分析／コミュニケーション／戦略・意思決定の4つ、各5例で計20例。
+          <h5>向いている人</h5>生成AIを業務に組み込む段階の人。
+        </div></details>
+        <div class="pc-actions">
+          <a class="btn btn-primary" href="https://akarilab.org/r/brain-1on1/?from=lp&ch=akari" target="_blank" rel="noopener noreferrer">Brainで購入する →</a>
+          <a class="link-quiet" href="https://brain-market.com/u/akarilab/a/bzgjM5QjMgoTZsNWa0JXY" target="_blank" rel="noopener noreferrer">内容・レビューを見る →</a>
+        </div>
       </div>
 
-      <p class="hub-cta">/makoto/services/ で詳細を見る →</p>
-    </a>
+    </div>
   </div>
 
   <div class="products">
@@ -782,76 +1022,84 @@
     </div>
     <div class="product-list">
 
-      <!-- ひだまり（最優先プロダクト） -->
-      <a href="/kokora/" class="product-card green">
-        <div class="emoji">🗺️</div>
-        <h3>ここら</h3>
+      <div class="product-card">
+        <div class="pc-head">
+          <h3>ここら</h3>
+          <span class="badge badge-live">公開中</span>
+        </div>
         <p class="desc">
-          気に入った場所を、写真とメモで記録して、<br>
-          自分だけの地図を育てるアプリ。<br>
-          カフェ・神社・温泉・パン屋——ジャンルは自由。<br>
-          星も口コミもありません。
+          気に入った場所を、写真とメモで記録して、自分だけの地図を育てるアプリ。<br>
+          カフェ・神社・温泉・パン屋——ジャンルは自由。星も口コミもありません。
         </p>
-        <span class="meta">地図アプリ ・ iOSリリース済み／Android準備中／Web版公開中</span>
-        <span class="arrow">→</span>
-      </a>
+        <p class="pc-meta">地図アプリ ・ iOS／Web</p>
+        <div class="pc-actions">
+          <a class="btn btn-primary" href="https://apps.apple.com/jp/app/kokora/id6789018848" target="_blank" rel="noopener noreferrer">App Store</a>
+          <a class="btn" href="https://mymap-260625-22054.web.app" target="_blank" rel="noopener noreferrer">Web版を開く</a>
+          <a class="btn" href="/kokora/">紹介ページ・English</a>
+        </div>
+        <!-- ここらリール：実スクショを自動送り。動画版(mp4)は準備中、後で phone 内の img を video に差し替え可 -->
+        <div class="kokora-reel">
+          <div class="phone">
+            <img class="reel-shot is-on" src="https://akarilab.org/assets/kokora/screen-map.png" alt="ここらのマップ画面">
+            <img class="reel-shot" src="https://akarilab.org/assets/kokora/screen-list.png" alt="ここらのリスト画面">
+            <img class="reel-shot" src="https://akarilab.org/assets/kokora/screen-route.png" alt="ここらのルート画面">
+            <img class="reel-shot" src="https://akarilab.org/assets/kokora/screen-detail.png" alt="ここらのスポット詳細画面">
+          </div>
+          <p class="reel-note">アプリの画面（自動送り・ミュート）。動画版は準備中です。</p>
+        </div>
+      </div>
 
-      <a href="/hidamari/" class="product-card orange">
-        <div class="emoji">🌤️</div>
-        <h3>ひだまり</h3>
+      <a href="/hidamari/" class="product-card">
+        <div class="pc-head">
+          <h3>ひだまり</h3>
+          <span class="badge badge-beta">β版</span>
+        </div>
         <p class="desc">
           その子の「ここなら大丈夫」と思える場所。<br>
-          算数・数学が苦手な子のためのAI家庭教師LINE Bot。<br>
-          つまずきに自然と立ち戻り、「できた！」を積み重ねる。
+          算数・数学が苦手な子のためのAI家庭教師LINE Bot。つまずきに自然と立ち戻り、「できた！」を積み重ねる。
         </p>
-        <span class="meta">LINE Bot ・ 小中学生向け ・ β版モニター募集中</span>
-        <span class="arrow">→</span>
+        <p class="pc-meta">LINE Bot ・ 小中学生向け</p>
+        <div class="pc-actions"><span class="btn btn-primary">詳しく見る →</span></div>
       </a>
 
-      <!-- もやログ -->
-
-      <a href="https://akarilab.org/r/line-moyalog/?from=top&ch=akari" class="product-card green" target="_blank" rel="noopener noreferrer">
-        <div class="emoji">🌿</div>
-        <h3>もやログ</h3>
+      <a href="https://akarilab.org/r/line-moyalog/?from=top&ch=akari" class="product-card" target="_blank" rel="noopener noreferrer">
+        <div class="pc-head">
+          <h3>もやログ</h3>
+          <span class="badge badge-live">公開中</span>
+        </div>
         <p class="desc">
-          気持ちをそのまま置いていい場所。<br>
-          タップ1回。3秒。今の気分を置いていくだけのLINE Bot。<br>
-          理由は聞かない。評価もしない。<br>
-          続けていると、自分のパターンが見えてくる。
+          気持ちをそのまま置いていい場所。タップ1回。3秒。今の気分を置いていくだけのLINE Bot。<br>
+          理由は聞かない。評価もしない。続けていると、自分のパターンが見えてくる。
         </p>
-        <span class="meta">LINE Bot ・ 個人向け ・ 公開中（友だち追加可）</span>
-        <span class="arrow">→</span>
+        <p class="pc-meta">LINE Bot ・ 個人向け</p>
+        <div class="pc-actions"><span class="btn btn-primary">友だち追加 →</span></div>
       </a>
 
-      <!-- りぴメモ -->
-
-      <div class="product-card brown">
-        <div class="emoji">💬</div>
-        <h3>りぴメモ</h3>
+      <div class="product-card">
+        <div class="pc-head">
+          <h3>りぴメモ</h3>
+          <span class="badge badge-dev">開発中</span>
+        </div>
         <p class="desc">
-          お客さまとの会話を、接客の力に。<br>
-          接客メモを記録し、お客さまの文体を学習。<br>
-          次の接客メッセージの下書きを自動生成するLINE Bot。<br>
-          リピーターとの関係を深める接客支援ツール。
+          お客さまとの会話を、接客の力に。接客メモを記録し、お客さまの文体を学習。<br>
+          次の接客メッセージの下書きを自動生成するLINE Bot。リピーターとの関係を深める接客支援ツール。
         </p>
-        <span class="meta">LINE Bot ・ 接客スタッフ／店舗向け ・ 開発中</span>
+        <p class="pc-meta">LINE Bot ・ 接客スタッフ／店舗向け</p>
+        <p class="pc-note">現在開発中です。公開までもうしばらくお待ちください。</p>
       </div>
 
-      <!-- 店舗運営支援Bot -->
-
-      <div class="product-card blue">
-        <div class="emoji">📋</div>
-        <h3>店舗運営支援Bot</h3>
+      <div class="product-card">
+        <div class="pc-head">
+          <h3>店舗運営支援Bot</h3>
+          <span class="badge badge-dev">社内運用中</span>
+        </div>
         <p class="desc">
-          店舗運営をLINEでシンプルに。<br>
-          飲食店向けの店舗運営支援LINE Bot。<br>
-          監査チェック・マニュアル検索・トラブル診断・多言語翻訳。<br>
-          現場スタッフが日常的に使える実務ツール。
+          店舗運営をLINEでシンプルに。飲食店向けの店舗運営支援LINE Bot。<br>
+          監査チェック・マニュアル検索・トラブル診断・多言語翻訳。現場スタッフが日常的に使える実務ツール。
         </p>
-        <span class="meta">LINE Bot ・ 法人向け ・ 社内運用中</span>
+        <p class="pc-meta">LINE Bot ・ 法人向け</p>
+        <p class="pc-note">現在は社内で運用中です。外部提供は準備中です。</p>
       </div>
-
-      <!-- ここら（地図アプリ・/kokora/ LP へ） -->
 
     </div>
   </div>
@@ -865,15 +1113,17 @@
     </div>
     <div class="product-list">
 
-      <a href="/articles/ai-9months/" class="product-card blue">
-        <div class="emoji">📓</div>
-        <h3>触り始めて9ヶ月の記録</h3>
+      <a href="/articles/ai-9months/" class="product-card">
+        <div class="pc-head">
+          <h3>触り始めて9ヶ月の記録</h3>
+          <span class="badge badge-live">連載中</span>
+        </div>
         <p class="desc">
           44歳でAIに触り始めてから、LINE Botを5本作るまでの記録。<br>
           2026年5月17日から、毎週日曜に1話ずつ更新する全14話の連載。
         </p>
-        <span class="meta">連載 ・ 全14話 ・ 5/17 第1話公開</span>
-        <span class="arrow">→</span>
+        <p class="pc-meta">連載 ・ 全14話 ・ 5/17 第1話公開</p>
+        <div class="pc-actions"><span class="btn btn-primary">読む →</span></div>
       </a>
 
     </div>
@@ -938,24 +1188,38 @@
   </div>
 
   <footer>
-    <div class="links">
-      <a href="/makoto/">運営者プロフィール</a>
-      <a href="/makoto/services/">提供サービス</a>
-      <a href="/articles/">記事</a>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="fb-name">AkariLab</p>
+        <p class="fb-tag">現場の「困った」から、となりで灯すものづくり。</p>
+        <p class="fb-social">
+          <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+          <a href="https://note.com/akarilab">note</a>
+        </p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="/makoto/">運営者プロフィール</a>
+          <a href="/makoto/services/">提供サービス</a>
+          <a href="/articles/">記事</a>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <a href="/kokora/">ここら</a>
+          <a href="/hidamari/">ひだまり</a>
+          <a href="https://akarilab.org/r/line-moyalog/?from=top-footer&ch=akari">もやログ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="terms-of-service.html">利用規約</a>
+          <a href="privacy-policy.html">プライバシーポリシー</a>
+          <a href="billing-policy.html">課金・解約ポリシー</a>
+          <a href="tokushoho.html">特定商取引法に基づく表記</a>
+        </div>
+      </div>
     </div>
-    <div class="links">
-      <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
-      <a href="https://note.com/akarilab">note</a>
-      <a href="/hidamari/">ひだまり</a>
-      <a href="https://akarilab.org/r/line-moyalog/?from=top-footer&ch=akari">もやログ</a>
-    </div>
-    <div class="links" style="margin-bottom: 8px;">
-      <a href="terms-of-service.html">利用規約</a>
-      <a href="privacy-policy.html">プライバシーポリシー</a>
-      <a href="billing-policy.html">課金・解約ポリシー</a>
-      <a href="tokushoho.html">特定商取引法に基づく表記</a>
-    </div>
-    <p>© 2026 AkariLab</p>
+    <div class="footer-bottom">© 2026 AkariLab</div>
   </footer>
 
   <script>
@@ -992,6 +1256,33 @@
         });
       }, { threshold: 0.5 });
       rules.forEach(function (el) { ruleIo.observe(el); });
+    })();
+  </script>
+
+  <script>
+    /* ===== 相談フォームの遷移先：ここ1箇所だけ書き換えれば全「まず相談する」ボタンに反映 =====
+       フォーム項目案：お名前 ／ 連絡先（メール等） ／ 希望サービス ／ 相談内容 ／ 予算感 ／ 希望日時 */
+    var SOUDAN_FORM_URL = "https://forms.gle/WZC6qUJq1pkP4WXp6"; /* 相談フォーム（Googleフォーム） */
+    (function () {
+      if (!SOUDAN_FORM_URL || SOUDAN_FORM_URL === "#soudan") return;
+      document.querySelectorAll('[data-soudan]').forEach(function (a) {
+        a.href = SOUDAN_FORM_URL; a.target = "_blank"; a.rel = "noopener noreferrer";
+      });
+    })();
+  </script>
+
+  <script>
+    /* ここらリール：スクショを自動送り（reduced-motion では静止） */
+    (function () {
+      var shots = document.querySelectorAll('.kokora-reel .reel-shot');
+      if (shots.length < 2) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var i = 0;
+      setInterval(function () {
+        shots[i].classList.remove('is-on');
+        i = (i + 1) % shots.length;
+        shots[i].classList.add('is-on');
+      }, 2600);
     })();
   </script>
 
