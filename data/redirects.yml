@@ -326,7 +326,7 @@ redirects:
   category: kokora
   dest_domain: apps.apple.com
   active: true
-  - slug: cheercareer-tenshoku
+- slug: cheercareer-tenshoku
   dest_url: https://px.a8.net/svt/ejp?a8mat=4B8790+FUDAB6+5WJY+5YJRM
   label: CheerCareer 転職（A8アフィリエイト中継）
   category: affiliate
