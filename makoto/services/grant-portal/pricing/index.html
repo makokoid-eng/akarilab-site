@@ -62,22 +62,23 @@
   <div class="sec">
     <h2>決済・提供開始</h2>
     <p>
-      Stripeの月額商品・価格は作成済みです。Checkout導線とWebhook同期を接続した後、このページから社労士事務所向けプランを申し込めるようにします。
-      導入情報フォームで初期設定に必要な情報を受け取り、設定完了後に40日お試しを開始します。
+      Stripeの月額商品・価格は作成済みです。下の申込ボタンから40日お試し付きの月額申込へ進めます。
+      決済後に導入情報を確認し、社労士事務所・初回顧問先の初期設定へ進みます。
       継続する場合は、お試し開始日から40日後に初回課金し、その後は毎月同日に月額課金します。
       初回課金日が29日・30日・31日の場合は、翌月以降は毎月1日課金に固定する設計を想定します。
     </p>
     <p>
-      決済連携、自動テナント作成、自動招待メール、期限付き招待URL、40日お試しの開始日・終了日・継続確認・初回課金日・毎月同日課金・29〜31日の1日固定・決済状態管理は次段階で自動化します。
+      Webhookで決済状態、40日お試し、利用可否を同期します。自動テナント作成、自動招待メール、期限付き招待URLは段階的に自動化します。
       初版は1事務所・1顧問先で手動運用を試し、案内文と運用の詰まりを見ます。
     </p>
   </div>
 
   <div class="cta-block">
-    <h2>導入相談へ</h2>
-    <p>Stripe決済の公開前は、フォームから社労士事務所向け導入相談として受け付けます。</p>
+    <h2>40日お試しを始める</h2>
+    <p>社労士事務所として申し込み、40日間の試用後に月額課金へ移行します。</p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">導入相談する</a>
+      <a class="btn btn-primary" href="https://buy.stripe.com/bJecN4dw5gym2WH9cP5Ne03">助成金ポータルで申し込む</a>
+      <a class="btn" href="https://buy.stripe.com/eVqbJ00Jj0zodBl4Wz5Ne04">社労士向けセットで申し込む</a>
       <a class="btn" href="/makoto/services/grant-portal/onboarding/">導入情報フォームを見る</a>
       <a class="btn" href="https://akari-josei-portal.akarilab.chatgpt.site/" target="_blank" rel="noopener noreferrer">公開ポータルを見る</a>
     </div>

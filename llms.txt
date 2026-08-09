@@ -14,7 +14,7 @@
 - /makoto/services/grant-portal/    助成金ポータル（社労士事務所が契約し、顧問先へ案内。事業者単独契約は初版では行わず相談受付。導入から40日お試し、40日後に初回課金、以後毎月同日課金。29〜31日は翌月以降1日固定。「これできない？」を聞ける相談窓口付き）
 - /makoto/services/grant-portal/pricing/    社労士事務所向け助成金ポータルの料金・導入ページ（月額7,980円は「これできない？」相談窓口付き、社労士向けセット11,000円〜はOCR・HP導線・提出物フローまで少し厚めに相談。Stripeの商品・価格は作成済みで、Checkout導線とWebhook同期を接続中）
 - /makoto/services/grant-portal/onboarding/ 助成金ポータルの決済後導入情報フォーム設計（社労士事務所情報、初回顧問先、案内文、運用範囲。送信処理は次段階）
-- /makoto/services/attendance-ocr/   勤怠OCRシステムの設計・導入相談（紙・画像・PDFの勤怠記録を読み取り、確認・修正・CSV出力へつなぐ。給与計算や法的適合性の保証は行わない）
+- /makoto/services/attendance-ocr/   タイムカード転記・勤怠OCR（タイムカード、紙・画像・PDFの勤怠記録を読み取り、確認・修正・Excel/CSV出力へつなぐ。給与計算や法的適合性の保証は行わない）
 - /hidamari/           ひだまり（学習 Bot、開発中）
 
 ## Products
