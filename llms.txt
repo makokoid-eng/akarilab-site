@@ -10,7 +10,11 @@
 - /makoto/profile/     経歴詳細＋FAQ
 - /makoto/timeline/    AI 利用タイムライン
 - /makoto/contact/     連絡先（ココナラ／note／IG／GitHub）
-- /makoto/services/    運営者の提供サービス一覧（ココナラ×6／Brain×1の7件。業務自動化の30分相談を入口に、Excel自動化・AI業務ツールのビデオ伴走制作・現場LINEBotの設計導入・WordPress HP制作・小規模実装へ進む縦動線あり）
+- /makoto/services/    運営者の提供サービス一覧（診断・実装・プロダクト化・運用の4層。業務相談、Excel自動化、AI業務改善、LINEBot、Web制作、助成金ポータル、勤怠OCRシステムへ進む）
+- /makoto/services/grant-portal/    助成金ポータル（社労士事務所が契約し、顧問先へ案内。事業者単独契約は初版では行わず相談受付。導入から40日お試し、40日後に初回課金、以後毎月同日課金。29〜31日は翌月以降1日固定。「これできない？」を聞ける相談窓口付き）
+- /makoto/services/grant-portal/pricing/    社労士事務所向け助成金ポータルの料金・導入ページ（月額7,980円は「これできない？」相談窓口付き、社労士向けセット11,000円〜はOCR・HP導線・提出物フローまで少し厚めに相談。Stripe決済連携は準備中）
+- /makoto/services/grant-portal/onboarding/ 助成金ポータルの決済後導入情報フォーム設計（社労士事務所情報、初回顧問先、案内文、運用範囲。送信処理は次段階）
+- /makoto/services/attendance-ocr/   勤怠OCRシステムの設計・導入相談（紙・画像・PDFの勤怠記録を読み取り、確認・修正・CSV出力へつなぐ。給与計算や法的適合性の保証は行わない）
 - /hidamari/           ひだまり（学習 Bot、開発中）
 
 ## Products

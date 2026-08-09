@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>助成金ポータル 導入情報フォーム｜社労士事務所向け（AkariLab）</title>
+<meta name="description" content="助成金ポータルの決済後に確認する導入情報。社労士事務所情報、初回顧問先、案内文、運用範囲を整理します。">
+<link rel="canonical" href="https://akarilab.org/makoto/services/grant-portal/onboarding/">
+<meta property="og:title" content="助成金ポータル 導入情報フォーム">
+<meta property="og:description" content="社労士事務所向け助成金ポータルの初期設定に必要な情報を整理するページです。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/makoto/services/grant-portal/onboarding/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/css/lp.css">
+<style>
+  .form-list label{display:block;margin:18px 0 6px;color:#ededed;font-weight:600}
+  .form-list input,.form-list textarea,.form-list select{width:100%;padding:12px;border:1px solid #333;border-radius:6px;background:#151515;color:#ededed;font:inherit}
+  .form-list textarea{min-height:110px}
+  .form-note{font-size:13px;color:#a3a3a3;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="/">AkariLab</a> ／ <a href="/makoto/services/grant-portal/">助成金ポータル</a> ／ 導入情報フォーム</p>
+
+  <div class="lp-hero">
+    <p class="eyebrow">Onboarding ・ Grant Portal</p>
+    <h1>決済後の<br>導入情報フォーム</h1>
+    <p class="lede">
+      社労士事務所向けプランの決済後に、初期設定で確認する情報です。
+      現段階では送信処理は未接続のため、正式運用時はGoogleフォームまたは専用フォームに接続します。
+    </p>
+    <span class="badge">フォーム設計済み ／ 送信処理は次段階</span>
+  </div>
+
+  <div class="sec">
+    <h2>確認項目</h2>
+    <div class="form-list">
+      <label for="office">社労士事務所名</label>
+      <input id="office" name="office" type="text" placeholder="例：〇〇社会保険労務士事務所">
+
+      <label for="contact">担当者名</label>
+      <input id="contact" name="contact" type="text" placeholder="例：山田 太郎">
+
+      <label for="email">連絡先メールアドレス</label>
+      <input id="email" name="email" type="email" placeholder="例：info@example.com">
+
+      <label for="plan">契約プラン</label>
+      <select id="plan" name="plan">
+        <option>助成金ポータル（40日後に初回課金／月額7,980円／相談窓口付き）</option>
+        <option>社労士向けセット（40日後に初回課金／月額11,000円〜／少し厚めの運用相談付き）</option>
+        <option>Custom（個別見積もり）</option>
+      </select>
+
+      <label for="trial">40日お試しの開始希望日</label>
+      <input id="trial" name="trial" type="text" placeholder="例：初期設定完了日から開始／2026年○月○日から開始。40日後が初回課金日になります。">
+
+      <label for="client">初回に登録する顧問先</label>
+      <textarea id="client" name="client" placeholder="会社名、担当者名、登録メールアドレス、表示名、権限"></textarea>
+
+      <label for="message">顧問先への案内文で入れたい表現</label>
+      <textarea id="message" name="message" placeholder="例：まずは入力できる範囲で大丈夫です。不明点は事務所側で確認します。"></textarea>
+
+      <label for="route">主な案内方法</label>
+      <select id="route" name="route">
+        <option>メールで手動送信</option>
+        <option>LINEで手動送信</option>
+        <option>既存HPにCTAを追加</option>
+        <option>名刺・紹介文にURLを記載</option>
+      </select>
+
+      <label for="scope">初期診断・提出依頼の範囲</label>
+      <textarea id="scope" name="scope" placeholder="扱いたい助成金候補、診断項目、提出依頼したい資料"></textarea>
+
+      <label for="support">月額の相談窓口で聞きたいこと</label>
+      <textarea id="support" name="support" placeholder="例：顧問先への案内文、HPへの置き方、勤怠OCRとのつなぎ方、提出物フローの整理、これできない？と思っていること"></textarea>
+    </div>
+    <p class="form-note">
+      このページは、決済後フォームの項目設計です。正式公開時には入力内容の保存先、保存期間、削除手順、閲覧権限をプライバシーポリシーと合わせて明示します。
+    </p>
+  </div>
+
+  <div class="cta-block">
+    <h2>正式導入前の確認</h2>
+    <p>送信機能をつなぐ前に、1事務所・1顧問先で手動運用を試し、案内文とバトン管理の詰まりを確認します。</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">導入相談する</a>
+      <a class="btn" href="/makoto/services/grant-portal/pricing/">料金を見る</a>
+    </div>
+  </div>
+</div>
+<footer class="lp-footer">
+  <div><a href="/">トップ</a><a href="/makoto/services/">提供サービス</a><a href="/tokushoho.html">特定商取引法に基づく表記</a><a href="/privacy-policy.html">プライバシーポリシー</a></div>
+  <p>© 2026 AkariLab</p>
+</footer>
+</body>
+</html>
