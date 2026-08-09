@@ -446,8 +446,8 @@ Need confirmation:
 ### P1: Site information architecture
 
 - Revise `/makoto/services/` into four layers: Diagnose, Build, Productize, Operate.
-- Add grant portal and attendance OCR teaser cards with "準備中 / 個別相談".
-- Add dedicated LPs without purchase buttons yet.
+- Add grant portal and attendance OCR service cards as active consultation and monthly-plan offerings.
+- Add dedicated LPs with pricing, onboarding, and Stripe Checkout handoff copy.
 - Add legal/data handling section to each LP.
 
 ### P2: Stripe practicalization
