@@ -1,0 +1,117 @@
+# PURPOSE
+# ─────────────────────────────────────────────────────────────
+# 外部システムが「直接URLで指している」サイト内のパスの台帳。
+#
+# ここに載っているパスを、消す・動かす・改名すると、
+# サイト内のリンク切れにはならないのに、外部から来た人だけが 404 に落ちる。
+# 内部リンクチェックでは絶対に検出できない。だから台帳にする。
+#
+# 使い方:
+#   scripts/check_external_refs.py が CI(aiseo-check) で毎回検証する。
+#   - path が実在するか
+#   - stripe_links に書いた決済URLが、site_links のページに実際に載っているか
+#
+# 変更するとき:
+#   必ず before_changing の手順を先に実行すること。
+#   順番を逆にすると、その間に決済した人が着地先を失う。
+# ─────────────────────────────────────────────────────────────
+
+locked_paths:
+  - path: makoto/services/grant-portal/thanks/index.html
+    url: https://akarilab.org/makoto/services/grant-portal/thanks/
+    used_by: Stripe payment link (after_completion.redirect.url)
+    refs:
+      - id: plink_1U2ObXBsOoBW5rkXOZTWfmWp
+        note: 助成金ポータル 月額7,980円
+      - id: plink_1U2ObeBsOoBW5rkXnGZCqhdZ
+        note: 社労士向けセット 月額11,000円
+    breaks_if_removed: 決済を完了した直後の顧客が404に落ちる。課金は成立しているのに案内が出ない。
+    before_changing: >
+      先に Stripe 側の after_completion.redirect.url を新URLへ変更し、
+      新URLが公開されていることを確認してから、このパスを動かすこと。
+
+  - path: makoto/services/attendance-ocr/thanks/index.html
+    url: https://akarilab.org/makoto/services/attendance-ocr/thanks/
+    used_by: Stripe payment link (after_completion.redirect.url)
+    refs:
+      - id: plink_1U2ObPBsOoBW5rkXL93HZxxV
+        note: 勤怠OCR 小規模事業所 月額1,980円
+      - id: plink_1U2ObTBsOoBW5rkXgaoICPul
+        note: 勤怠OCR 標準事業所 月額2,980円
+      - id: plink_1U2p0gBsOoBW5rkXvQwVvLMf
+        note: 勤怠OCR 社労士ライト 月額4,980円
+      - id: plink_1U2p0uBsOoBW5rkXgDIQJrPG
+        note: 勤怠OCR 社労士スタンダード 月額5,980円
+    breaks_if_removed: 決済を完了した直後の顧客が404に落ちる。課金は成立しているのに案内が出ない。
+    before_changing: >
+      先に Stripe 側の after_completion.redirect.url を新URLへ変更し、
+      新URLが公開されていることを確認してから、このパスを動かすこと。
+
+  - path: makoto/services/grant-portal/demo/index.html
+    url: https://akarilab.org/makoto/services/grant-portal/demo/
+    used_by: 営業導線の入口（本番ポータルが非公開のため、これが唯一の「中を見せる」手段）
+    refs: []
+    breaks_if_removed: 申し込み前の社労士が中身を確認できなくなる。以前これで導線が死んだ。
+    before_changing: 代替の公開デモを用意してから動かすこと。
+
+  - path: makoto/services/attendance-ocr/demo/index.html
+    url: https://akarilab.org/makoto/services/attendance-ocr/demo/
+    used_by: 営業導線の入口
+    refs: []
+    breaks_if_removed: 申し込み前に読み取り結果と要確認の出し方を見せられなくなる。
+    before_changing: 代替の公開デモを用意してから動かすこと。
+
+# サイト側に貼ってある Stripe 決済リンク。
+# URL を書き換えると、別プランに課金されるか、決済できなくなる。
+# 目視では気づけないので、実ファイルとの一致を CI で検証する。
+stripe_links:
+  - url: https://buy.stripe.com/bJecN4dw5gym2WH9cP5Ne03
+    plan: 助成金ポータル 月額7,980円
+    site_links:
+      - makoto/services/grant-portal/pricing/index.html
+      - makoto/services/grant-portal/demo/index.html
+  - url: https://buy.stripe.com/eVqbJ00Jj0zodBl4Wz5Ne04
+    plan: 社労士向けセット 月額11,000円
+    site_links:
+      - makoto/services/grant-portal/pricing/index.html
+      - makoto/services/grant-portal/demo/index.html
+  - url: https://buy.stripe.com/6oU6oGgIhci654P88L5Ne01
+    plan: 勤怠OCR 小規模事業所 月額1,980円
+    site_links:
+      - makoto/services/attendance-ocr/index.html
+      - makoto/services/attendance-ocr/demo/index.html
+  - url: https://buy.stripe.com/7sY7sKdw595U2WH0Gj5Ne02
+    plan: 勤怠OCR 標準事業所 月額2,980円
+    site_links:
+      - makoto/services/attendance-ocr/index.html
+      - makoto/services/attendance-ocr/demo/index.html
+  - url: https://buy.stripe.com/bJe28q0Jj4PE40L2Or5Ne06
+    plan: 勤怠OCR 社労士ライト 月額4,980円
+    site_links:
+      - makoto/services/attendance-ocr/index.html
+      - makoto/services/attendance-ocr/demo/index.html
+  - url: https://buy.stripe.com/bJe7sK0JjgymgNx3Sv5Ne07
+    plan: 勤怠OCR 社労士スタンダード 月額5,980円
+    site_links:
+      - makoto/services/attendance-ocr/index.html
+      - makoto/services/attendance-ocr/demo/index.html
+
+  # 業務相談（30分）3,500円。決済後は hosted_confirmation で、サイトへは戻さない。
+  # サイト上の実体は data/redirects.yml から生成される中継ページ。
+  # URLを変えるときは data/redirects.yml 側を直し、build_redirects.py を通すこと。
+  - url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
+    plan: 業務相談（30分）3,500円
+    site_links:
+      - r/stripe-consult/index.html
+
+# 本番の助成金ポータルは ChatGPT Sites の Private Site。
+# 全パスがサインイン必須になるため、客向けページから直リンクしてはいけない。
+# 例外は /owner/ のみ（robots.txt で Disallow 済みの運用ページ）。
+forbidden_in_public_pages:
+  - pattern: akari-josei-portal.akarilab.chatgpt.site
+    reason: 非公開サイト。客が開くとサインイン画面で止まる。
+    allowed_in:
+      - owner/index.html
+      - makoto/services/grant-portal/demo/index.html      # 経緯説明のHTMLコメントのみ
+      - makoto/services/grant-portal/thanks/index.html    # 経緯説明のHTMLコメントのみ
+      - makoto/services/attendance-ocr/thanks/index.html  # 経緯説明のHTMLコメントのみ

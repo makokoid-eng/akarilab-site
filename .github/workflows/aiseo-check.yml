@@ -42,13 +42,24 @@ jobs:
         # beautifulsoup4: 画像 alt / width-height / meta 検査用パーサ（fail + warning）
         # pyld: JSON-LD 検証用（Phase 1 は warning、Phase 2 以降 fail）。
         #       Phase 1 では検査対象がゼロでもインストールしておく。
+        # pyyaml: data/external_refs.yml の読み込み用（fail 系）。
         run: |
           python -m pip install --upgrade pip
-          pip install html5validator beautifulsoup4 pyld
+          pip install html5validator beautifulsoup4 pyld pyyaml
 
       # ============================================================
       # FAIL 系検査（Phase 1 から fail で止める）
       # ============================================================
+
+      - name: "[fail] 外部参照チェック（Stripe決済リンクの着地先）"
+        # 内部リンクチェックでは絶対に検出できない種類の壊れ方を止める。
+        # Stripe の決済リンクは決済完了後にサイト内のサンクスページへ飛ばす。
+        # そのページを消す・動かすと、サイト内はリンク切れゼロのまま、
+        # 決済を完了した顧客だけが 404 に落ちる。課金は成立しているのに案内が出ない。
+        #
+        # 逆方向（サイトに貼った buy.stripe.com のURL書き換え）も同時に見る。
+        # 台帳: data/external_refs.yml
+        run: python scripts/check_external_refs.py
 
       - name: "[fail] build_pages.py --check (partial include 整合)"
         # 並列エージェントBが scripts/build_pages.py を作成中。
