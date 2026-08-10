@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>助成金ポータル 公開デモ｜申し込む前に画面を見る（AkariLab）</title>
+<meta name="description" content="社労士事務所向け助成金ポータルの公開デモ。社労士が見る一画面、顧問先の入力範囲、できること・やらないことを、申し込み前にそのまま確認できます。サンプルデータで動きます。">
+<link rel="canonical" href="https://akarilab.org/makoto/services/grant-portal/demo/">
+<meta property="og:title" content="助成金ポータル 公開デモ｜申し込む前に画面を見る">
+<meta property="og:description" content="社労士が確認する6項目の画面を、顧問先3社分そのまま触れます。サンプルデータで動く公開デモです。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/makoto/services/grant-portal/demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/css/lp.css">
+<!--
+  PURPOSE
+  ─────────────────────────────────────────────────────────────
+  目的  : 社労士が「申し込む前に中身を見る」ための公開デモ。
+          本番ポータル(akari-josei-portal.akarilab.chatgpt.site)は
+          ChatGPT Sites の Private Site のため全パスがサインイン必須で、
+          見込み客は開けない。その代替となる営業導線の入口。
+
+  設計  : docs/SALES_FUNNEL.md（助成金ポータル側リポジトリ）
+          §3-3「社労士向けデモ」/ §6「社労士へ渡す一画面」に準拠。
+          社労士へ見せるのは全機能ではなく次の6項目に絞る。
+            顧問先名 / 現在の工程 / 次に確認すること /
+            未提出書類 / システムが拾った懸念点 / 社労士が最終判断する項目
+
+  制約  : 本番アプリと完全に隔離する。以下を絶対に入れない。
+            - fetch / XMLHttpRequest などの外部通信
+            - D1 / R2 / 本番API の参照
+            - 実在の顧問先データ
+          掲載データはすべて架空。受給可否は断定しない(SALES_FUNNEL §2)。
+─────────────────────────────────────────────────────────────
+-->
+<style>
+/* 公開デモ専用。lp.css を壊さないよう .gp- 接頭辞で閉じる */
+.gp-notice{
+  background:rgba(232,145,58,0.10);border:1px solid rgba(232,145,58,0.30);
+  border-radius:10px;padding:12px 16px;margin:20px 0 0;
+  font-size:12.5px;color:#f0c98a;line-height:1.8;
+}
+.gp-notice strong{font-weight:700;}
+
+.gp-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 -1px;}
+.gp-tab{
+  appearance:none;font:inherit;font-size:13px;cursor:pointer;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);border-bottom-color:transparent;
+  color:var(--text-muted);padding:10px 16px;border-radius:10px 10px 0 0;
+}
+.gp-tab[aria-selected="true"]{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+  color:var(--text);font-weight:700;border-color:var(--border);
+}
+.gp-tab:focus-visible{outline:2px solid var(--accent-green);outline-offset:2px;}
+
+.gp-screen{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85) 0%,rgba(21,24,22,0.85) 100%);
+  border:1px solid var(--border);border-radius:0 14px 14px 14px;padding:24px;
+  box-shadow:0 1px 0 rgba(255,255,255,0.02) inset,0 6px 20px rgba(0,0,0,0.28);
+}
+.gp-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;}
+.gp-head h3{font-family:var(--font-serif);font-size:19px;font-weight:600;color:var(--text);margin:0;}
+.gp-meta{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);line-height:1.85;margin:8px 0 0;}
+
+.gp-state{
+  display:inline-block;font-family:var(--font-mono);font-size:11px;font-weight:700;
+  letter-spacing:0.08em;padding:4px 10px;border-radius:999px;white-space:nowrap;flex:none;
+}
+.gp-state.review{color:#a9c4ea;background:rgba(120,160,220,0.12);border:1px solid rgba(120,160,220,0.32);}
+.gp-state.input{color:#f0c98a;background:rgba(232,145,58,0.12);border:1px solid rgba(232,145,58,0.32);}
+.gp-state.ready{color:#8fe0b8;background:rgba(76,175,125,0.12);border:1px solid rgba(76,175,125,0.35);}
+
+.gp-block{padding:18px 0 0;margin-top:18px;border-top:1px solid var(--border);}
+.gp-block h4{
+  font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--text-muted);margin:0 0 12px;
+}
+.gp-flow{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0;}
+.gp-flow li{
+  font-family:var(--font-mono);font-size:11.5px;padding:5px 11px;border-radius:999px;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);
+  padding-left:11px;
+}
+.gp-flow li::before{content:none;}
+.gp-flow li.now{background:rgba(76,175,125,0.14);border-color:rgba(76,175,125,0.45);color:#8fe0b8;font-weight:700;}
+
+.gp-items{list-style:none;margin:0;padding:0;}
+.gp-items li{
+  display:flex;gap:12px;align-items:flex-start;padding:9px 0;
+  border-top:1px solid rgba(42,48,44,0.6);font-size:14px;color:var(--text-dim);
+  line-height:1.85;padding-left:0;position:static;
+}
+.gp-items li:first-child{border-top:none;}
+.gp-items li::before{content:none;}
+.gp-pill{
+  flex:none;font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:0.04em;
+  padding:3px 8px;border-radius:5px;margin-top:4px;min-width:74px;text-align:center;
+}
+.gp-pill.wait{color:#a9c4ea;background:rgba(120,160,220,0.12);border:1px solid rgba(120,160,220,0.28);}
+.gp-pill.done{color:#8fe0b8;background:rgba(76,175,125,0.12);border:1px solid rgba(76,175,125,0.30);}
+.gp-pill.alert{color:#f0c98a;background:rgba(232,145,58,0.12);border:1px solid rgba(232,145,58,0.30);}
+.gp-pill.judge{color:#d8c8a8;background:rgba(255,255,255,0.04);border:1px solid var(--border);}
+.gp-sub{display:block;font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);margin-top:2px;}
+
+.gp-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
+.gp-card{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+  border:1px solid var(--border);border-radius:14px;padding:20px;
+}
+.gp-card h3{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:0 0 10px;}
+.gp-card .gp-close{
+  font-family:var(--font-mono);font-size:11.5px;color:#8fe0b8;
+  margin:14px 0 0;padding-top:12px;border-top:1px solid var(--border);line-height:1.8;
+}
+.gp-cols.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:820px){.gp-cols.three{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.gp-cols,.gp-cols.three{grid-template-columns:1fr;}.gp-screen{padding:18px;border-radius:14px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="/">AkariLab</a> ／ <a href="/makoto/services/">提供サービス</a> ／ <a href="/makoto/services/grant-portal/">助成金ポータル</a> ／ 公開デモ</p>
+
+  <div class="lp-hero">
+    <p class="eyebrow">Demo ・ Grant Portal</p>
+    <h1>申し込む前に、<br>画面をそのまま見る</h1>
+    <p class="lede">
+      キャリアアップ助成金・正社員化コースの準備を、社労士事務所と顧問先が同じ画面で進めるためのポータルです。
+      登録もログインも要りません。実際に社労士が見る画面を、顧問先3社分そのまま触れます。
+    </p>
+    <span class="badge">ログイン不要 ／ サンプルデータ</span>
+    <p class="gp-notice">
+      <strong>これは公開デモです。</strong>
+      表示されている会社名・氏名・書類・日付はすべて架空のサンプルで、実在の顧問先データは含まれていません。
+      このページはデータベースに接続しておらず、入力・保存はできません。
+    </p>
+  </div>
+
+  <div class="sec">
+    <h2>社労士が見る画面</h2>
+    <p>
+      全機能を並べた管理画面ではなく、確認に必要な6項目に絞っています。
+      顧問先のタブを切り替えて、工程の違う3社を見てください。
+    </p>
+
+    <div class="gp-tabs" role="tablist" aria-label="顧問先の切り替え">
+      <button class="gp-tab" role="tab" id="gp-tab-0" aria-controls="gp-screen" aria-selected="true" data-i="0">みらい製作所</button>
+      <button class="gp-tab" role="tab" id="gp-tab-1" aria-controls="gp-screen" aria-selected="false" data-i="1">サンプル運送</button>
+      <button class="gp-tab" role="tab" id="gp-tab-2" aria-controls="gp-screen" aria-selected="false" data-i="2">たとえば介護サービス</button>
+    </div>
+
+    <div class="gp-screen" id="gp-screen" role="tabpanel" tabindex="0">
+      <div class="gp-head">
+        <h3 id="gp-company">—</h3>
+        <span class="gp-state" id="gp-state">—</span>
+      </div>
+      <p class="gp-meta" id="gp-metaline">—</p>
+
+      <div class="gp-block">
+        <h4>現在の工程</h4>
+        <ul class="gp-flow" id="gp-flow"></ul>
+      </div>
+      <div class="gp-block">
+        <h4>次に確認すること</h4>
+        <ul class="gp-items" id="gp-next"></ul>
+      </div>
+      <div class="gp-block">
+        <h4>未提出・未確認の書類</h4>
+        <ul class="gp-items" id="gp-docs"></ul>
+      </div>
+      <div class="gp-block">
+        <h4>システムが拾った懸念点</h4>
+        <ul class="gp-items" id="gp-flags"></ul>
+      </div>
+      <div class="gp-block">
+        <h4>社労士が最終判断する項目</h4>
+        <ul class="gp-items" id="gp-judge"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>顧問先の画面は、ここまで絞ります</h2>
+    <p>顧問先には自社の案件だけが見えます。判断を求めず、入力と添付に集中してもらう作りです。</p>
+    <div class="gp-cols">
+      <div class="gp-card">
+        <h3>顧問先がやること</h3>
+        <ul>
+          <li>会社情報と対象労働者の情報を入力する</li>
+          <li>案内された書類を添付する</li>
+          <li>未入力の項目を確認する</li>
+        </ul>
+      </div>
+      <div class="gp-card">
+        <h3>顧問先がやらないこと</h3>
+        <ul>
+          <li>受給できるかどうかの判断</li>
+          <li>制度要件の解釈</li>
+          <li>申請の可否決定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>できること／やらないこと／まだできないこと</h2>
+    <p>導入判断のために、3つに分けて書いておきます。真ん中は「今後もやらない」と決めている範囲です。</p>
+    <div class="gp-cols three">
+      <div class="gp-card">
+        <h3>できること</h3>
+        <ul>
+          <li>社労士事務所を主体とした案件管理</li>
+          <li>顧問先ごとのアクセス境界（自社案件のみ表示）</li>
+          <li>正社員化コースの期限計算とルール版の表示</li>
+          <li>必要書類の受信と、社労士確認の分離記録</li>
+          <li>ステータス履歴と社労士の確認記録</li>
+          <li>申請準備データのZIP出力</li>
+          <li>案件終了後90日での自動削除</li>
+        </ul>
+      </div>
+      <div class="gp-card">
+        <h3>やらないこと</h3>
+        <ul>
+          <li>受給できるかどうかの判定・保証</li>
+          <li>申請可否の最終判断</li>
+          <li>電子申請ポータルとの連携</li>
+          <li>給与計算</li>
+          <li>専門士業の業務の代替</li>
+        </ul>
+        <p class="gp-close">最終確認は、必ず人が行う設計です。</p>
+      </div>
+      <div class="gp-card">
+        <h3>まだできないこと</h3>
+        <ul>
+          <li>公式Excel様式への完全自動転記</li>
+          <li>書類内容の自動プレチェック</li>
+          <li>メールでの自動リマインド・削除前通知</li>
+          <li>事務所内の複数担当者ごとの細かい権限分け</li>
+        </ul>
+        <p class="gp-close">こちらは順次対応していきます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <h2>40日お試しを始める</h2>
+    <p>初期導入費なし。導入から40日はお試し期間で、40日後に初回課金します。初回は、こちらで顧問先1社分の初期設定まで行います。</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://buy.stripe.com/bJecN4dw5gym2WH9cP5Ne03">助成金ポータルで申し込む</a>
+      <a class="btn" href="https://buy.stripe.com/eVqbJ00Jj0zodBl4Wz5Ne04">社労士向けセットで申し込む</a>
+      <a class="btn" href="/makoto/services/grant-portal/pricing/">料金・導入の条件</a>
+      <a class="btn" href="https://forms.gle/WZC6qUJq1pkP4WXp6">先に相談する</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>お読みください</h2>
+    <ul>
+      <li>このデモの会社名・氏名・書類名・日付はすべて架空のサンプルです。実在の顧問先情報は含まれていません。</li>
+      <li>本ポータルは受給の可否を判定するものではありません。画面表示は「検討対象候補」「要確認」までで、最終的な判断は社労士が行う設計です。</li>
+      <li>制度の要件・様式は改正されます。画面には参照したルールの基準日と版を表示します。実際の申請では必ず最新の公式情報をご確認ください。</li>
+      <li>本番のポータルは、契約事務所と顧問先だけが入れる非公開環境で運用しています。</li>
+    </ul>
+  </div>
+
+  <div class="related">
+    <h2>Related</h2>
+    <div class="related-grid">
+      <a href="/makoto/services/grant-portal/"><div class="r-title">助成金ポータル</div><div class="r-meta">サービス内容</div></a>
+      <a href="/makoto/services/grant-portal/pricing/"><div class="r-title">料金・導入</div><div class="r-meta">40日お試し・相談窓口</div></a>
+      <a href="/makoto/services/attendance-ocr/"><div class="r-title">勤怠OCRシステム</div><div class="r-meta">労務データの整理</div></a>
+    </div>
+  </div>
+</div>
+<footer class="lp-footer">
+  <div><a href="/">トップ</a><a href="/makoto/services/">提供サービス</a><a href="/tokushoho.html">特定商取引法に基づく表記</a><a href="/privacy-policy.html">プライバシーポリシー</a></div>
+  <p>© 2026 AkariLab</p>
+</footer>
+
+<script>
+/*
+  デモ用サンプルデータ。すべて架空。
+  外部通信は一切行わない（fetch / XMLHttpRequest 不使用）。状態はメモリ上のみ。
+*/
+(function(){
+  var STAGES = ["顧問先入力中","顧問先提出済み","社労士確認中","要件確認済み","書類作成中","最終確認中","出力可能"];
+
+  var CASES = [
+    {
+      company:"みらい製作所 株式会社",
+      meta:"総務部 佐藤（架空） ／ キャリアアップ助成金・正社員化コース ／ ルール版 2026.04（基準日 2026-04-01）",
+      deadline:"転換日 2026-06-01 ／ 6か月経過 2026-12-01 ／ 申請期限 2027-01-31",
+      stage:"社労士確認中", state:["review","社労士確認中"],
+      next:[
+        ["wait","就業規則の転換規定が、転換日より前に施行されているかを確認する",""],
+        ["wait","対象者の転換前6か月の賃金台帳がそろっているかを確認する","2026-01-01 〜 2026-05-31 の6か月分"],
+        ["done","対象労働者の雇用契約書を確認した","2026-08-03 確認済み"]
+      ],
+      docs:[
+        ["alert","賃金台帳（転換前）","2026年3月分が未受信"],
+        ["wait","就業規則（転換規定を含む改定版）","顧問先が提出準備中"],
+        ["done","雇用契約書（転換前・転換後）","受信・確認済み"],
+        ["done","出勤簿（転換前6か月）","受信済み／社労士確認待ち"]
+      ],
+      flags:[
+        ["alert","転換前の賃金台帳に1か月分の欠落があります","賃金3%以上増額の確認に必要な期間です"],
+        ["alert","就業規則の施行日が転換日より後になっている可能性があります","提出された版の施行日は 2026-06-15、転換日は 2026-06-01"]
+      ],
+      judge:[
+        ["judge","就業規則の施行日と転換日の前後関係について、受給要件を満たすかの判断",""],
+        ["judge","賃金3%以上増額の算定方法を、どの手当まで含めて計算するかの判断",""],
+        ["judge","申請時期を6か月経過直後にするか、次の締めに合わせるかの判断",""]
+      ]
+    },
+    {
+      company:"サンプル運送 株式会社",
+      meta:"管理部 鈴木（架空） ／ キャリアアップ助成金・正社員化コース ／ ルール版 2026.04（基準日 2026-04-01）",
+      deadline:"転換予定日 2026-10-01 ／ 6か月経過 2027-04-01 ／ 申請期限 2027-05-31（暫定）",
+      stage:"顧問先入力中", state:["input","顧問先入力中"],
+      next:[
+        ["wait","対象労働者3名分の情報入力が完了するのを待つ","現在1名分のみ入力済み"],
+        ["wait","転換予定日が確定したら、期限を再計算する",""]
+      ],
+      docs:[
+        ["wait","雇用契約書（転換前）","3名中1名分のみ受信"],
+        ["wait","就業規則","未受信"],
+        ["wait","賃金台帳（転換前6か月）","未受信"]
+      ],
+      flags:[
+        ["alert","転換予定日が未確定のため、申請期限は暫定表示です","確定後に自動で再計算されます"]
+      ],
+      judge:[
+        ["judge","3名を同時に申請するか、対象者を絞るかの判断",""],
+        ["judge","重点支援対象に該当するかどうかの判断",""]
+      ]
+    },
+    {
+      company:"たとえば介護サービス 合同会社",
+      meta:"代表 田中（架空） ／ キャリアアップ助成金・正社員化コース ／ ルール版 2026.04（基準日 2026-04-01）",
+      deadline:"転換日 2026-01-01 ／ 6か月経過 2026-07-01 ／ 申請期限 2026-08-31",
+      stage:"出力可能", state:["ready","出力可能"],
+      next:[
+        ["done","必要書類がすべてそろい、確認が完了しています",""],
+        ["wait","申請準備データを出力し、公式様式へ転記する","転記は手作業です"]
+      ],
+      docs:[
+        ["done","賃金台帳（転換前後）","受信・確認済み"],
+        ["done","就業規則","受信・確認済み"],
+        ["done","雇用契約書（転換前・転換後）","受信・確認済み"],
+        ["done","出勤簿","受信・確認済み"]
+      ],
+      flags:[
+        ["wait","申請期限まで残り21日です","2026-08-31 が期限です"]
+      ],
+      judge:[
+        ["judge","申請準備完了として確定してよいかの最終判断",""]
+      ]
+    }
+  ];
+
+  var PILL = { wait:"確認待ち", done:"確認済み", alert:"要確認", judge:"社労士判断" };
+
+  function el(id){ return document.getElementById(id); }
+
+  function renderItems(id, rows){
+    var node = el(id);
+    node.textContent = "";
+    rows.forEach(function(r){
+      var li = document.createElement("li");
+      var pill = document.createElement("span");
+      pill.className = "gp-pill " + r[0];
+      pill.textContent = PILL[r[0]] || "";
+      var body = document.createElement("div");
+      body.textContent = r[1];
+      if (r[2]) {
+        var sub = document.createElement("span");
+        sub.className = "gp-sub";
+        sub.textContent = r[2];
+        body.appendChild(sub);
+      }
+      li.appendChild(pill);
+      li.appendChild(body);
+      node.appendChild(li);
+    });
+  }
+
+  function render(i){
+    var c = CASES[i];
+    el("gp-company").textContent = c.company;
+    el("gp-state").className = "gp-state " + c.state[0];
+    el("gp-state").textContent = c.state[1];
+    el("gp-metaline").textContent = c.meta + " ／ " + c.deadline;
+
+    var flow = el("gp-flow");
+    flow.textContent = "";
+    STAGES.forEach(function(s){
+      var li = document.createElement("li");
+      li.textContent = s;
+      if (s === c.stage) li.className = "now";
+      flow.appendChild(li);
+    });
+
+    renderItems("gp-next", c.next);
+    renderItems("gp-docs", c.docs);
+    renderItems("gp-flags", c.flags);
+    renderItems("gp-judge", c.judge);
+  }
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".gp-tab"));
+  tabs.forEach(function(t){
+    t.addEventListener("click", function(){
+      tabs.forEach(function(x){ x.setAttribute("aria-selected", x === t ? "true" : "false"); });
+      render(parseInt(t.getAttribute("data-i"), 10));
+    });
+  });
+
+  render(0);
+})();
+</script>
+</body>
+</html>

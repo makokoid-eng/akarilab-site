@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,follow">
+<title>お申し込みありがとうございます｜助成金ポータル（AkariLab）</title>
+<meta name="description" content="助成金ポータルのお申し込み完了ページ。40日お試しの開始、次にお願いする導入情報、初回課金の条件をご案内します。">
+<link rel="canonical" href="https://akarilab.org/makoto/services/grant-portal/thanks/">
+<meta property="og:title" content="お申し込みありがとうございます｜助成金ポータル">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/makoto/services/grant-portal/thanks/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/css/lp.css">
+<!--
+  PURPOSE
+  ─────────────────────────────────────────────────────────────
+  目的  : Stripe 決済完了後のリダイレクト先になる「公開」サンクスページ。
+
+  背景  : 従来この2本の決済リンクは、決済完了後に
+            https://akari-josei-portal.akarilab.chatgpt.site/billing/success?plan=...
+          へリダイレクトしていた。この遷移先は ChatGPT Sites の Private Site のため、
+          カードで支払った直後の社労士が ChatGPT のサインイン画面で止まる。
+          その受け皿として、匿名で開けるページを用意する。
+
+  Stripe: 下記2本の after_completion.redirect.url をこのページへ向ける。
+            plink_1U2ObXBsOoBW5rkXOZTWfmWp  助成金ポータル   月額7,980円
+            plink_1U2ObeBsOoBW5rkXnGZCqhdZ  社労士向けセット 月額11,000円
+          ?plan= は従来と同じ値をそのまま引き継ぐ。
+
+  仕様  : ?plan= を読んでプラン名と課金条件を出し分ける。
+          欠落・不正値のときは既定表示（助成金ポータル）へフォールバックする。
+          外部通信なし。
+
+  注意  : /makoto/services/grant-portal/onboarding/ は
+          「送信処理が未接続」のため、実際の受け口は Google フォームにしている。
+          onboarding が接続されたら CTA の向き先を差し替えること。
+─────────────────────────────────────────────────────────────
+-->
+<style>
+.gp-plan{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+  border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-top:22px;
+}
+.gp-plan .k{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
+.gp-plan .v{font-family:var(--font-serif);font-size:19px;font-weight:600;color:var(--text);line-height:1.5;}
+.gp-plan .t{font-family:var(--font-mono);font-size:12px;color:#8fe0b8;margin-top:8px;}
+
+.gp-steps{list-style:none;counter-reset:gpstep;margin:6px 0 0;padding:0;}
+.gp-steps li{counter-increment:gpstep;position:relative;padding:0 0 24px 44px;}
+.gp-steps li::before{
+  content:counter(gpstep);position:absolute;left:0;top:0;
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(76,175,125,0.14);border:1px solid rgba(76,175,125,0.45);color:#8fe0b8;
+  font-family:var(--font-mono);font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.gp-steps li::after{content:"";position:absolute;left:13px;top:30px;bottom:4px;width:1px;background:var(--border);}
+.gp-steps li:last-child{padding-bottom:0;}
+.gp-steps li:last-child::after{display:none;}
+.gp-steps h3{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:0 0 4px;}
+.gp-steps p{font-size:14px;color:var(--text-dim);line-height:1.9;margin:0;}
+.gp-you{
+  display:inline-block;font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:0.06em;
+  padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:2px;
+  color:#f0c98a;background:rgba(232,145,58,0.12);border:1px solid rgba(232,145,58,0.32);
+}
+.gp-facts{list-style:none;margin:0;padding:0;}
+.gp-facts li{
+  display:flex;gap:18px;padding:12px 0;border-top:1px solid var(--border);
+  font-size:14px;color:var(--text-dim);line-height:1.9;padding-left:0;position:static;
+}
+.gp-facts li:first-child{border-top:none;}
+.gp-facts li::before{content:none;}
+.gp-facts .k{flex:none;width:130px;font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:0.06em;color:var(--text-muted);padding-top:2px;}
+.gp-facts a{color:#8fe0b8;}
+@media(max-width:560px){.gp-facts li{flex-direction:column;gap:2px;}.gp-facts .k{width:auto;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="/">AkariLab</a> ／ <a href="/makoto/services/grant-portal/">助成金ポータル</a> ／ お申し込み完了</p>
+
+  <div class="lp-hero">
+    <p class="eyebrow">Thanks ・ Grant Portal</p>
+    <h1>ありがとうございます。<br>今日から40日間のお試しです</h1>
+    <p class="lede">
+      この期間中の課金はありません。
+      次にお願いしたいことが1つだけあります。下の「導入情報を送る」から、事務所の情報をお知らせください。
+      いただいた内容をもとに、こちらで初期設定を進めます。
+    </p>
+    <span class="badge">お申し込みを受け付けました</span>
+
+    <div class="gp-plan">
+      <div class="k">お申し込みプラン</div>
+      <div class="v" id="gp-plan-name">助成金ポータル</div>
+      <div class="t" id="gp-plan-terms">40日後に初回課金 ／ 月額7,980円 ／ 相談窓口付き</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>次にやること</h2>
+    <p>初期設定はこちらで手作業で進めます。事務所ごとの事情に合わせられるので、最初のやり取りだけお願いします。</p>
+    <ol class="gp-steps">
+      <li>
+        <h3>導入情報を送る<span class="gp-you">お願いします</span></h3>
+        <p>事務所名、担当者名、連絡先、初回に登録する顧問先、顧問先への案内文のトーンをうかがいます。5分ほどで終わります。</p>
+        <p style="margin-top:14px"><a class="btn btn-primary" href="https://forms.gle/WZC6qUJq1pkP4WXp6">導入情報を送る</a></p>
+      </li>
+      <li>
+        <h3>AkariLabが事務所の環境を作る</h3>
+        <p>いただいた情報をもとに、事務所用の環境と管理者アカウントを用意します。</p>
+      </li>
+      <li>
+        <h3>初回ログインのご案内をメールで送る</h3>
+        <p>ログイン方法と、最初に見ていただきたい画面をあわせてお送りします。</p>
+      </li>
+      <li>
+        <h3>顧問先1社分を、こちらで仮登録する</h3>
+        <p>会社・対象労働者・期限・必要書類まで初期入力しておきます。先生には、懸念点の確認と申請準備完了の判定だけをお願いします。</p>
+      </li>
+      <li>
+        <h3>40日、実際の業務で試す</h3>
+        <p>合わないと感じたら、期間内に解約してください。費用はかかりません。</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="sec">
+    <h2>お支払いについて</h2>
+    <ul class="gp-facts">
+      <li><span class="k">お試し期間</span><span>本日から40日間。この間の課金はありません。</span></li>
+      <li><span class="k">初回課金</span><span>40日経過後に初回の月額課金が始まります。</span></li>
+      <li><span class="k">以降の課金日</span><span>毎月同じ日に月額課金します。初回課金日が29日・30日・31日にあたる場合は、翌月以降は毎月1日に固定します。</span></li>
+      <li><span class="k">初期導入費</span><span>ありません。</span></li>
+      <li><span class="k">解約</span><span>お試し期間中に解約すれば費用は発生しません。詳しくは<a href="/billing-policy.html">課金・解約ポリシー</a>をご覧ください。</span></li>
+      <li><span class="k">領収書</span><span>Stripeから確認メールが届きます。見当たらない場合は迷惑メールフォルダをご確認ください。</span></li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2>ご案内をお待ちいただく間に</h2>
+    <p>環境の準備が整うまで、画面の雰囲気だけ先に確認できます。</p>
+    <div class="btn-row" style="justify-content:flex-start">
+      <a class="btn" href="/makoto/services/grant-portal/demo/">公開デモを見る</a>
+      <a class="btn" href="/makoto/services/grant-portal/">サービス内容</a>
+      <a class="btn" href="/makoto/services/grant-portal/pricing/">料金・導入の条件</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>うまく進まないとき</h2>
+    <p>
+      数日たっても案内メールが届かない、申し込み内容を変更したい、そもそもキャンセルしたい——
+      どれでも構いませんので、<a class="link-quiet" href="https://forms.gle/WZC6qUJq1pkP4WXp6" style="font-size:inherit;color:#8fe0b8">こちらのフォーム</a>からご連絡ください。
+    </p>
+  </div>
+</div>
+<footer class="lp-footer">
+  <div><a href="/">トップ</a><a href="/makoto/services/">提供サービス</a><a href="/tokushoho.html">特定商取引法に基づく表記</a><a href="/billing-policy.html">課金・解約ポリシー</a><a href="/privacy-policy.html">プライバシーポリシー</a></div>
+  <p>© 2026 AkariLab</p>
+</footer>
+
+<script>
+/*
+  ?plan= を読んでプラン名と課金条件を出し分ける。
+  外部通信は行わない。未知の値・欠落時は既定表示を維持する。
+*/
+(function(){
+  var PLANS = {
+    grant_portal_monthly_7980: {
+      name:"助成金ポータル",
+      terms:"40日後に初回課金 ／ 月額7,980円 ／ 相談窓口付き"
+    },
+    sr_bundle_monthly_11000: {
+      name:"社労士向けセット（助成金ポータル ＋ 勤怠OCR社労士版）",
+      terms:"40日後に初回課金 ／ 月額11,000円〜 ／ 少し厚めの運用相談付き"
+    }
+  };
+
+  var key = "";
+  try { key = new URLSearchParams(window.location.search).get("plan") || ""; } catch (e) { key = ""; }
+
+  if (!Object.prototype.hasOwnProperty.call(PLANS, key)) return;
+
+  document.getElementById("gp-plan-name").textContent = PLANS[key].name;
+  document.getElementById("gp-plan-terms").textContent = PLANS[key].terms;
+})();
+</script>
+</body>
+</html>
