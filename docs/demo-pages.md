@@ -219,10 +219,33 @@ Chromium がサンドボックスのネットワーク制限で取得できな�
 
 ---
 
-## 9. 残っている作業
+## 9. Stripe 決済リンクの遷移先（2026-08-10 変更済み）
 
-1. **Stripe の決済リンク6本のリダイレクト先変更**（サンクスページ公開後）
-2. 顧問先招待 `/invite/[token]` の認証方式の決定（別紙: 助成金ポータル側 `docs/INVITE_ACCESS.md`）
-3. 導入情報フォーム `/makoto/services/grant-portal/onboarding/` の送信処理接続。
+本番(livemode)の決済リンク6本の `after_completion.redirect.url` を、
+非公開ポータルから akarilab.org のサンクスページへ変更した。
+変更したのはこの1項目のみで、金額・トライアル日数(40日)・metadata・`submit_type` は元のまま。
+
+| plink | プラン | 遷移先 |
+| --- | --- | --- |
+| `plink_1U2ObXBsOoBW5rkXOZTWfmWp` | 助成金ポータル 7,980円 | `/grant-portal/thanks/?plan=grant_portal_monthly_7980` |
+| `plink_1U2ObeBsOoBW5rkXnGZCqhdZ` | 社労士向けセット 11,000円 | `/grant-portal/thanks/?plan=sr_bundle_monthly_11000` |
+| `plink_1U2ObPBsOoBW5rkXL93HZxxV` | 勤怠OCR 小規模 1,980円 | `/attendance-ocr/thanks/?plan=attendance_ocr_small_monthly_1980` |
+| `plink_1U2ObTBsOoBW5rkXgaoICPul` | 勤怠OCR 標準 2,980円 | `/attendance-ocr/thanks/?plan=attendance_ocr_standard_monthly_2980` |
+| `plink_1U2p0gBsOoBW5rkXvQwVvLMf` | 勤怠OCR 社労士ライト 4,980円 | `/attendance-ocr/thanks/?plan=attendance_ocr_sr_small_monthly_4980` |
+| `plink_1U2p0uBsOoBW5rkXgDIQJrPG` | 勤怠OCR 社労士標準 5,980円 | `/attendance-ocr/thanks/?plan=attendance_ocr_sr_standard_monthly_5980` |
+
+**サンクスページのURLを変えると、決済直後の顧客が404に落ちる。**
+移動・リネームする場合は、先に Stripe 側を変更すること。
+
+会社案内1ページ制作・相談の決済リンクは `hosted_confirmation` 方式で、この変更の対象外。
+
+---
+
+## 10. 残っている作業
+
+1. 顧問先招待 `/invite/[token]` の認証方式の決定（別紙: 助成金ポータル側 `docs/INVITE_ACCESS.md`）
+2. 導入情報フォーム `/makoto/services/grant-portal/onboarding/` の送信処理接続。
    現在は未接続のため、サンクスページの導線は Google フォームへ向けている。
    接続後は向き先を差し替えること。
+3. 実際に1件決済を通した、決済→サンクスページの通しテスト。
+   リダイレクト先が生きていることは確認済みだが、実決済での通貫は未実施。
