@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,follow">
+<title>お申し込みありがとうございます｜勤怠OCR（AkariLab）</title>
+<meta name="description" content="勤怠OCRのお申し込み完了ページ。40日お試しの開始、最初に送っていただくサンプル、初回課金の条件をご案内します。">
+<link rel="canonical" href="https://akarilab.org/makoto/services/attendance-ocr/thanks/">
+<meta property="og:title" content="お申し込みありがとうございます｜勤怠OCR">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/makoto/services/attendance-ocr/thanks/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/css/lp.css">
+<!--
+  PURPOSE
+  ─────────────────────────────────────────────────────────────
+  目的  : 勤怠OCRの Stripe 決済完了後のリダイレクト先になる「公開」サンクスページ。
+
+  背景  : 従来この4本の決済リンクは、決済完了後に
+            https://akari-josei-portal.akarilab.chatgpt.site/billing/success?plan=...
+          へリダイレクトしていた。この遷移先は ChatGPT Sites の Private Site のため、
+          カードで支払った直後の利用者がサインイン画面で止まる。
+          勤怠OCRは事業者向け（月額1,980円〜）で、ITに不慣れな層も買うため影響が大きい。
+
+  Stripe: 下記4本の after_completion.redirect.url をこのページへ向ける。
+            plink_1U2ObPBsOoBW5rkXL93HZxxV  小規模事業所   月額1,980円
+            plink_1U2ObTBsOoBW5rkXgaoICPul  標準事業所     月額2,980円
+            plink_1U2p0gBsOoBW5rkXvQwVvLMf  社労士ライト   月額4,980円
+            plink_1U2p0uBsOoBW5rkXgDIQJrPG  社労士スタンダード 月額5,980円
+          ?plan= は従来と同じ値をそのまま引き継ぐ。
+
+  注意  : 助成金ポータルとは決済後の手順が違うため、ページを分けている。
+          助成金側は /makoto/services/grant-portal/thanks/。
+─────────────────────────────────────────────────────────────
+-->
+<style>
+.oc-plan{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+  border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-top:22px;
+}
+.oc-plan .k{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
+.oc-plan .v{font-family:var(--font-serif);font-size:19px;font-weight:600;color:var(--text);line-height:1.5;}
+.oc-plan .t{font-family:var(--font-mono);font-size:12px;color:#8fe0b8;margin-top:8px;}
+
+.oc-steps{list-style:none;counter-reset:ocstep;margin:6px 0 0;padding:0;}
+.oc-steps li{counter-increment:ocstep;position:relative;padding:0 0 24px 44px;}
+.oc-steps li::before{
+  content:counter(ocstep);position:absolute;left:0;top:0;
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(76,175,125,0.14);border:1px solid rgba(76,175,125,0.45);color:#8fe0b8;
+  font-family:var(--font-mono);font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.oc-steps li::after{content:"";position:absolute;left:13px;top:30px;bottom:4px;width:1px;background:var(--border);}
+.oc-steps li:last-child{padding-bottom:0;}
+.oc-steps li:last-child::after{display:none;}
+.oc-steps h3{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:0 0 4px;}
+.oc-steps p{font-size:14px;color:var(--text-dim);line-height:1.9;margin:0;}
+.oc-you{
+  display:inline-block;font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:0.06em;
+  padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:2px;
+  color:#f0c98a;background:rgba(232,145,58,0.12);border:1px solid rgba(232,145,58,0.32);
+}
+.oc-facts{list-style:none;margin:0;padding:0;}
+.oc-facts li{
+  display:flex;gap:18px;padding:12px 0;border-top:1px solid var(--border);
+  font-size:14px;color:var(--text-dim);line-height:1.9;padding-left:0;position:static;
+}
+.oc-facts li:first-child{border-top:none;}
+.oc-facts li::before{content:none;}
+.oc-facts .k{flex:none;width:130px;font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:0.06em;color:var(--text-muted);padding-top:2px;}
+.oc-facts a{color:#8fe0b8;}
+@media(max-width:560px){.oc-facts li{flex-direction:column;gap:2px;}.oc-facts .k{width:auto;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="/">AkariLab</a> ／ <a href="/makoto/services/attendance-ocr/">勤怠OCRシステム</a> ／ お申し込み完了</p>
+
+  <div class="lp-hero">
+    <p class="eyebrow">Thanks ・ Timecard OCR</p>
+    <h1>ありがとうございます。<br>今日から40日間のお試しです</h1>
+    <p class="lede">
+      この期間中の課金はありません。
+      最初にお願いしたいのは1つだけ、<strong>実際の勤怠に近いサンプルを送っていただくこと</strong>です。
+      紙面の状態で読み取り精度が変わるので、そこを先に見てから環境をご用意します。
+    </p>
+    <span class="badge">お申し込みを受け付けました</span>
+
+    <div class="oc-plan">
+      <div class="k">お申し込みプラン</div>
+      <div class="v" id="oc-plan-name">勤怠OCR</div>
+      <div class="t" id="oc-plan-terms">40日後に初回課金 ／ 初期導入費なし</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>次にやること</h2>
+    <p>初期の読み取り設計はこちらで手作業で進めます。帳票の形に合わせるので、最初のサンプルだけお願いします。</p>
+    <ol class="oc-steps">
+      <li>
+        <h3>勤怠のサンプルを送る<span class="oc-you">お願いします</span></h3>
+        <p>タイムカードや勤怠表を、写真でもPDFでもスキャンでも構いません。1〜2か月分あると精度の傾向が見えます。個人名は塗りつぶしていただいても大丈夫です。</p>
+        <p style="margin-top:14px"><a class="btn btn-primary" href="https://forms.gle/WZC6qUJq1pkP4WXp6">サンプルを送る・連絡する</a></p>
+      </li>
+      <li>
+        <h3>AkariLabが読み取りを試す</h3>
+        <p>実際に読み取って、どこが素直に通り、どこが要確認になるかを確かめます。読み取りが厳しい紙面なら、この時点で正直にお伝えします。</p>
+      </li>
+      <li>
+        <h3>出力の形をすり合わせる</h3>
+        <p>いま使っているExcelや給与ソフトの取り込み形式に合わせて、列の並びと項目名、丸めや端数の扱いを決めます。ここは自動では決めません。</p>
+      </li>
+      <li>
+        <h3>読み取り環境のご案内をメールで送る</h3>
+        <p>アップロード方法と、確認・修正画面の使い方をあわせてお送りします。</p>
+      </li>
+      <li>
+        <h3>40日、実際の締めで試す</h3>
+        <p>1回の勤怠締めを通してみて、手間が減ったかどうかで判断してください。合わなければ期間内に解約で、費用はかかりません。</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="sec">
+    <h2>お支払いについて</h2>
+    <ul class="oc-facts">
+      <li><span class="k">お試し期間</span><span>本日から40日間。この間の課金はありません。</span></li>
+      <li><span class="k">初回課金</span><span>40日経過後に初回の月額課金が始まります。</span></li>
+      <li><span class="k">以降の課金日</span><span>毎月同じ日に月額課金します。初回課金日が29日・30日・31日にあたる場合は、翌月以降は毎月1日に固定します。</span></li>
+      <li><span class="k">初期導入費</span><span>ありません。</span></li>
+      <li><span class="k">解約</span><span>お試し期間中に解約すれば費用は発生しません。詳しくは<a href="/billing-policy.html">課金・解約ポリシー</a>をご覧ください。</span></li>
+      <li><span class="k">個別相談</span><span>手書きが多い、帳票形式が極端に多い、100人超や複数社にまたがる場合は、別途ご相談ください。</span></li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h2>ご案内をお待ちいただく間に</h2>
+    <p>読み取りから出力までの流れは、公開デモで先に確認できます。</p>
+    <div class="btn-row" style="justify-content:flex-start">
+      <a class="btn" href="/makoto/services/attendance-ocr/demo/">公開デモを見る</a>
+      <a class="btn" href="/makoto/services/attendance-ocr/">サービス内容</a>
+      <a class="btn" href="/makoto/services/excel-vba/">Excel自動化も見る</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>うまく進まないとき</h2>
+    <p>
+      数日たっても連絡が届かない、申し込み内容を変更したい、そもそもキャンセルしたい——
+      どれでも構いませんので、<a href="https://forms.gle/WZC6qUJq1pkP4WXp6" style="color:#8fe0b8">こちらのフォーム</a>からご連絡ください。
+    </p>
+  </div>
+</div>
+<footer class="lp-footer">
+  <div><a href="/">トップ</a><a href="/makoto/services/">提供サービス</a><a href="/tokushoho.html">特定商取引法に基づく表記</a><a href="/billing-policy.html">課金・解約ポリシー</a><a href="/privacy-policy.html">プライバシーポリシー</a></div>
+  <p>© 2026 AkariLab</p>
+</footer>
+
+<script>
+/*
+  ?plan= を読んでプラン名と条件を出し分ける。
+  外部通信は行わない。未知の値・欠落時は既定表示を維持する。
+*/
+(function(){
+  var PLANS = {
+    attendance_ocr_small_monthly_1980:{
+      name:"勤怠OCR 小規模事業所プラン",
+      terms:"40日後に初回課金 ／ 月額1,980円 ／ 1事業所・40人まで"
+    },
+    attendance_ocr_standard_monthly_2980:{
+      name:"勤怠OCR 標準事業所プラン",
+      terms:"40日後に初回課金 ／ 月額2,980円 ／ 複数事業所・合計100人まで"
+    },
+    attendance_ocr_sr_small_monthly_4980:{
+      name:"勤怠OCR 社労士ライトプラン",
+      terms:"40日後に初回課金 ／ 月額4,980円 ／ 小規模な社労士事務所向け"
+    },
+    attendance_ocr_sr_standard_monthly_5980:{
+      name:"勤怠OCR 社労士スタンダードプラン",
+      terms:"40日後に初回課金 ／ 月額5,980円 ／ 複数顧問先の受付・変換管理向け"
+    }
+  };
+
+  var key = "";
+  try { key = new URLSearchParams(window.location.search).get("plan") || ""; } catch (e) { key = ""; }
+
+  if (!Object.prototype.hasOwnProperty.call(PLANS, key)) return;
+
+  document.getElementById("oc-plan-name").textContent = PLANS[key].name;
+  document.getElementById("oc-plan-terms").textContent = PLANS[key].terms;
+})();
+</script>
+</body>
+</html>

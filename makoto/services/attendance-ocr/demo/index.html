@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勤怠OCR 公開デモ｜読み取りから確認・出力まで見る（AkariLab）</title>
+<meta name="description" content="タイムカード・勤怠OCRの公開デモ。届いた勤怠、読み取り結果と要確認の出し方、CSV出力までを申し込み前にそのまま確認できます。サンプルデータで動きます。">
+<link rel="canonical" href="https://akarilab.org/makoto/services/attendance-ocr/demo/">
+<meta property="og:title" content="勤怠OCR 公開デモ｜読み取りから確認・出力まで見る">
+<meta property="og:description" content="届いた勤怠 → 読み取り結果 → 出力。要確認の出し方まで、申し込み前にそのまま触れます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/makoto/services/attendance-ocr/demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/css/lp.css">
+<!--
+  PURPOSE
+  ─────────────────────────────────────────────────────────────
+  目的  : 勤怠OCRを「申し込む前に見る」ための公開デモ。
+          助成金ポータルの /grant-portal/demo/ と対になる営業導線の入口。
+
+  見せる順: 届いた勤怠 → 読み取り結果と要確認 → 出力
+          この3ステップをタブで切り替える。
+          売りは読み取り精度そのものではなく「要確認の出し方」なので、
+          ノイズ（空欄日・曜日違い）を強い警告から外していることを明示する。
+
+  制約  : 外部通信ゼロ（fetch / XMLHttpRequest 不使用）。
+          掲載データはすべて架空。実在の従業員情報は含めない。
+          OCR誤読は起こり得るものとして扱い、精度保証はしない。
+          給与計算・法的適合性の保証はしない（最終確認は人）。
+─────────────────────────────────────────────────────────────
+-->
+<style>
+/* 勤怠OCRデモ専用。lp.css を壊さないよう .oc- 接頭辞で閉じる */
+.oc-notice{
+  background:rgba(232,145,58,0.10);border:1px solid rgba(232,145,58,0.30);
+  border-radius:10px;padding:12px 16px;margin:20px 0 0;
+  font-size:12.5px;color:#f0c98a;line-height:1.8;
+}
+.oc-notice strong{font-weight:700;}
+
+.oc-steps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 -1px;}
+.oc-step{
+  appearance:none;font:inherit;font-size:13px;cursor:pointer;text-align:left;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);border-bottom-color:transparent;
+  color:var(--text-muted);padding:10px 16px;border-radius:10px 10px 0 0;
+}
+.oc-step[aria-selected="true"]{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+  color:var(--text);font-weight:700;
+}
+.oc-step .n{font-family:var(--font-mono);color:var(--accent-green);margin-right:7px;}
+.oc-step:focus-visible{outline:2px solid var(--accent-green);outline-offset:2px;}
+
+.oc-panel{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85) 0%,rgba(21,24,22,0.85) 100%);
+  border:1px solid var(--border);border-radius:0 14px 14px 14px;padding:24px;
+  box-shadow:0 1px 0 rgba(255,255,255,0.02) inset,0 6px 20px rgba(0,0,0,0.28);
+}
+.oc-panel h3{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--text);margin:0 0 6px;}
+.oc-panel .oc-lead{font-size:13.5px;color:var(--text-dim);line-height:1.9;margin:0 0 18px;}
+
+/* 届いたタイムカードの模写 */
+.oc-card{
+  background:#f3f1ea;color:#2a2a2a;border-radius:8px;padding:16px 18px;
+  font-family:var(--font-mono);font-size:12px;line-height:1.85;
+  box-shadow:0 6px 18px rgba(0,0,0,0.35);transform:rotate(-0.4deg);
+}
+.oc-card .t{font-weight:700;font-size:13px;border-bottom:1px solid #b9b4a4;padding-bottom:6px;margin-bottom:8px;}
+.oc-card table{width:100%;border-collapse:collapse;}
+.oc-card td{padding:2px 4px;border-bottom:1px dotted #c9c4b4;white-space:nowrap;}
+.oc-card .faint{color:#8d8878;}
+.oc-cap{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-top:12px;line-height:1.8;}
+
+/* 読み取り結果テーブル */
+.oc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.oc-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px;}
+.oc-table th{
+  font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--text-muted);text-align:left;
+  padding:0 10px 8px;border-bottom:1px solid var(--border);white-space:nowrap;
+}
+.oc-table td{padding:9px 10px;border-bottom:1px solid rgba(42,48,44,0.6);color:var(--text-dim);white-space:nowrap;}
+.oc-table tr.flag td{background:rgba(232,145,58,0.06);}
+.oc-table .why{font-family:var(--font-mono);font-size:11px;color:#f0c98a;white-space:normal;}
+.oc-table .ok{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);}
+.oc-tag{
+  display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:4px;margin-right:6px;
+  color:#f0c98a;background:rgba(232,145,58,0.12);border:1px solid rgba(232,145,58,0.32);
+}
+.oc-tag.quiet{color:var(--text-muted);background:rgba(255,255,255,0.03);border-color:var(--border);}
+
+.oc-sum{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;}
+.oc-sum div{
+  flex:1 1 150px;background:rgba(255,255,255,0.02);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;
+}
+.oc-sum .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
+.oc-sum .v{font-family:var(--font-serif);font-size:22px;font-weight:600;color:var(--text);margin-top:2px;}
+.oc-sum .v.warn{color:#f0c98a;}
+.oc-sum .v.good{color:#8fe0b8;}
+
+.oc-csv{
+  background:#0e120f;border:1px solid var(--border);border-radius:10px;padding:14px 16px;
+  font-family:var(--font-mono);font-size:11.5px;color:#b9c7bd;line-height:1.95;
+  overflow-x:auto;white-space:pre;
+}
+
+.oc-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
+.oc-card2{
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+  border:1px solid var(--border);border-radius:14px;padding:20px;
+}
+.oc-card2 h3{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:0 0 10px;}
+.oc-card2 .oc-close{
+  font-family:var(--font-mono);font-size:11.5px;color:#8fe0b8;
+  margin:14px 0 0;padding-top:12px;border-top:1px solid var(--border);line-height:1.8;
+}
+@media(max-width:820px){.oc-cols{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.oc-cols{grid-template-columns:1fr;}.oc-panel{padding:18px;border-radius:14px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="/">AkariLab</a> ／ <a href="/makoto/services/">提供サービス</a> ／ <a href="/makoto/services/attendance-ocr/">勤怠OCRシステム</a> ／ 公開デモ</p>
+
+  <div class="lp-hero">
+    <p class="eyebrow">Demo ・ Timecard OCR</p>
+    <h1>読み取って終わり、<br>にしないところを見る</h1>
+    <p class="lede">
+      紙のタイムカード、写真、PDFで届く勤怠を読み取って、Excel/CSVへ整えるまでのデモです。
+      登録もログインも要りません。大事なのは読み取りそのものより、<strong>どこを「要確認」として出すか</strong>です。そこを見てください。
+    </p>
+    <span class="badge">ログイン不要 ／ サンプルデータ</span>
+    <p class="oc-notice">
+      <strong>これは公開デモです。</strong>
+      従業員名・日付・打刻はすべて架空のサンプルで、実在の勤怠データは含まれていません。
+      このページは実際のOCR処理を行っておらず、アップロード・保存はできません。
+    </p>
+  </div>
+
+  <div class="sec">
+    <h2>届いてから、出すまで</h2>
+    <p>1か月分の勤怠が届いてから、給与ソフトの前段へ渡すまでの3ステップです。順に切り替えてください。</p>
+
+    <div class="oc-steps" role="tablist" aria-label="処理ステップ">
+      <button class="oc-step" role="tab" aria-controls="oc-panel" aria-selected="true" data-i="0"><span class="n">01</span>届いた勤怠</button>
+      <button class="oc-step" role="tab" aria-controls="oc-panel" aria-selected="false" data-i="1"><span class="n">02</span>読み取り結果と要確認</button>
+      <button class="oc-step" role="tab" aria-controls="oc-panel" aria-selected="false" data-i="2"><span class="n">03</span>出力</button>
+    </div>
+
+    <div class="oc-panel" id="oc-panel" role="tabpanel" tabindex="0">
+      <h3 id="oc-title">—</h3>
+      <p class="oc-lead" id="oc-lead">—</p>
+      <div id="oc-body"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>「要確認」の線引き</h2>
+    <p>
+      全部に警告を出すと、結局ぜんぶ目視することになって意味がなくなります。
+      見落とすと後で困るものだけを強い要確認にし、単なるノイズは静かに置いておく。そこが設計の中心です。
+    </p>
+    <div class="oc-cols">
+      <div class="oc-card2">
+        <h3>強い要確認にするもの</h3>
+        <ul>
+          <li>片打刻（出勤だけ、退勤だけ）</li>
+          <li>時刻逆転（退勤が出勤より前）</li>
+          <li>時刻不正（25:70 のような読み取り）</li>
+          <li>氏名不明（名簿と一致しない）</li>
+          <li>同一日の重複打刻</li>
+        </ul>
+        <p class="oc-close">見落とすと給与に響くもの。</p>
+      </div>
+      <div class="oc-card2">
+        <h3>静かに置いておくもの</h3>
+        <ul>
+          <li>空欄の日（公休・欠勤）</li>
+          <li>曜日の表記ゆれ</li>
+          <li>備考欄の手書きメモ</li>
+          <li>枠外のはみ出し</li>
+        </ul>
+        <p class="oc-close">件数だけ出して、警告にはしません。</p>
+      </div>
+      <div class="oc-card2">
+        <h3>人が決めること</h3>
+        <ul>
+          <li>丸め・端数の扱い</li>
+          <li>休憩の自動控除をするか</li>
+          <li>深夜・残業の判定</li>
+          <li>読み取り結果の最終承認</li>
+        </ul>
+        <p class="oc-close">最終確認は、必ず人が行う設計です。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>できること／やらないこと／まだできないこと</h2>
+    <p>導入判断のために、3つに分けて書いておきます。真ん中は「今後もやらない」と決めている範囲です。</p>
+    <div class="oc-cols">
+      <div class="oc-card2">
+        <h3>できること</h3>
+        <ul>
+          <li>紙・画像・PDFの勤怠の読み取り</li>
+          <li>氏名・日付・出退勤・休憩・店舗の抽出</li>
+          <li>読み取り結果の確認・修正</li>
+          <li>片打刻・時刻逆転などの例外チェック</li>
+          <li>Excel / CSV 出力</li>
+          <li>既存Excel・給与ソフト前段の形式に合わせた出力設計</li>
+        </ul>
+      </div>
+      <div class="oc-card2">
+        <h3>やらないこと</h3>
+        <ul>
+          <li>給与計算の確定</li>
+          <li>残業・割増賃金の法的判断</li>
+          <li>労働時間の適法性の保証</li>
+          <li>読み取り精度100%の保証</li>
+          <li>勤怠システムそのものの置き換え</li>
+        </ul>
+        <p class="oc-close">最終確認は、必ず人が行う設計です。</p>
+      </div>
+      <div class="oc-card2">
+        <h3>まだできないこと</h3>
+        <ul>
+          <li>崩れた手書きの高精度な読み取り</li>
+          <li>帳票レイアウトの完全自動判別</li>
+          <li>給与ソフトへの直接API連携</li>
+          <li>リアルタイムの打刻取り込み</li>
+        </ul>
+        <p class="oc-close">こちらは順次対応していきます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <h2>40日お試しから始める</h2>
+    <p>初期導入費なし。まず実際の勤怠に近いサンプルで、読み取り精度と確認の手間を切り分けます。手書きが多い場合や帳票が特殊な場合は、申し込み前にご相談ください。</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://buy.stripe.com/6oU6oGgIhci654P88L5Ne01">小規模事業所 月額1,980円</a>
+      <a class="btn" href="https://buy.stripe.com/7sY7sKdw595U2WH0Gj5Ne02">標準事業所 月額2,980円</a>
+      <a class="btn" href="https://buy.stripe.com/bJe28q0Jj4PE40L2Or5Ne06">社労士ライト 月額4,980円</a>
+      <a class="btn" href="https://buy.stripe.com/bJe7sK0JjgymgNx3Sv5Ne07">社労士スタンダード 月額5,980円</a>
+      <a class="btn" href="https://forms.gle/WZC6qUJq1pkP4WXp6">先に相談する（無料）</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>お読みください</h2>
+    <ul>
+      <li>このデモの従業員名・日付・打刻はすべて架空のサンプルです。実在の勤怠データは含まれていません。</li>
+      <li>OCRには読み取り誤りが起こります。本サービスは読み取り・整理・確認補助であり、精度を保証するものではありません。</li>
+      <li>労働時間、残業、割増賃金の判断は会社ルールと法令確認が絡みます。給与計算や法的適合性を自動で保証するものではありません。</li>
+      <li>最終確認は、利用者または専門家が行う前提で設計しています。</li>
+      <li>実際の読み取り精度は、紙面の状態・文字の濃さ・撮影状況で変わります。申し込み前にサンプルで確認することをおすすめします。</li>
+    </ul>
+  </div>
+
+  <div class="related">
+    <h2>Related</h2>
+    <div class="related-grid">
+      <a href="/makoto/services/attendance-ocr/"><div class="r-title">勤怠OCRシステム</div><div class="r-meta">サービス内容・料金</div></a>
+      <a href="/makoto/services/grant-portal/demo/"><div class="r-title">助成金ポータル 公開デモ</div><div class="r-meta">社労士向け</div></a>
+      <a href="/makoto/services/excel-vba/"><div class="r-title">Excel（VBA）自動化</div><div class="r-meta">集計・検算</div></a>
+    </div>
+  </div>
+</div>
+<footer class="lp-footer">
+  <div><a href="/">トップ</a><a href="/makoto/services/">提供サービス</a><a href="/tokushoho.html">特定商取引法に基づく表記</a><a href="/privacy-policy.html">プライバシーポリシー</a></div>
+  <p>© 2026 AkariLab</p>
+</footer>
+
+<script>
+/*
+  デモ用サンプルデータ。すべて架空。
+  外部通信は一切行わない（fetch / XMLHttpRequest 不使用）。状態はメモリ上のみ。
+*/
+(function(){
+  // 読み取り結果。flag が空でなければ要確認。
+  var ROWS = [
+    ["山田 花子","04-01(月)","08:58","18:02","60","8:04","",""],
+    ["山田 花子","04-02(火)","09:01","17:45","60","7:44","",""],
+    ["山田 花子","04-03(水)","08:55","","60","—","片打刻","退勤の打刻が読み取れません"],
+    ["山田 花子","04-04(木)","","","","—","","公休（空欄）"],
+    ["佐藤 健一","04-01(月)","13:02","22:10","45","8:23","",""],
+    ["佐藤 健一","04-02(火)","22:00","06:15","60","—","時刻逆転","日跨ぎか誤読かの判断が必要です"],
+    ["佐藤 健一","04-03(水)","13:00","21:58","45","8:13","",""],
+    ["鈴木 みなみ","04-01(月)","10:00","25:70","60","—","時刻不正","存在しない時刻として読み取られました"],
+    ["鈴木 みなみ","04-02(火)","10:03","19:00","60","7:57","",""],
+    ["田代 ？？","04-01(月)","09:00","18:00","60","8:00","氏名不明","従業員名簿と一致しませんでした"],
+    ["高橋 大輔","04-01(月)","08:30","17:30","60","8:00","",""],
+    ["高橋 大輔","04-01(月)","08:31","17:30","60","8:00","重複打刻","同じ日に2件読み取られました"]
+  ];
+
+  var PANELS = [
+    {
+      title:"届いた勤怠（サンプル）",
+      lead:"店舗から写真で届いたタイムカードを想定しています。枠のゆがみ、かすれ、手書きの追記が混ざった状態です。",
+      render:function(){
+        var w=document.createElement("div");
+        var c=document.createElement("div");
+        c.className="oc-card";
+        var t=document.createElement("div");
+        t.className="t";
+        t.textContent="2026年4月  勤務表  みらい商店 本店";
+        c.appendChild(t);
+        var tb=document.createElement("table");
+        [["日","出勤","退勤","休憩","氏名"],
+         ["4/1","8:58","18:02","60","山田"],
+         ["4/2","9:01","17:45","60","山田"],
+         ["4/3","8:55","（かすれ）","60","山田"],
+         ["4/4","","","","（公休）"],
+         ["4/1","13:02","22:10","45","佐藤"],
+         ["4/2","22:00","6:15","60","佐藤"],
+         ["4/1","10:00","2570","60","鈴木"],
+         ["4/1","9:00","18:00","60","田代?"]
+        ].forEach(function(r,i){
+          var tr=document.createElement("tr");
+          r.forEach(function(v){
+            var td=document.createElement("td");
+            td.textContent=v;
+            if(i===0) td.style.fontWeight="700";
+            if(v.indexOf("かすれ")>=0||v.indexOf("公休")>=0||v==="田代?") td.className="faint";
+            tr.appendChild(td);
+          });
+          tb.appendChild(tr);
+        });
+        c.appendChild(tb);
+        w.appendChild(c);
+        var cap=document.createElement("p");
+        cap.className="oc-cap";
+        cap.textContent="※ 実際の運用では、この画像・PDFをそのままアップロードします。撮影状態が悪いものは、読み取り前に差し戻す判断もできます。";
+        w.appendChild(cap);
+        return w;
+      }
+    },
+    {
+      title:"読み取り結果と要確認",
+      lead:"全12件を読み取り、5件に要確認を付けました。空欄の公休日は件数に数えるだけで、警告にはしていません。",
+      render:function(){
+        var w=document.createElement("div");
+        var sc=document.createElement("div"); sc.className="oc-scroll";
+        var tb=document.createElement("table"); tb.className="oc-table";
+        var thead=document.createElement("thead"); var htr=document.createElement("tr");
+        ["氏名","日付","出勤","退勤","休憩","実働","確認"].forEach(function(h){
+          var th=document.createElement("th"); th.textContent=h; htr.appendChild(th);
+        });
+        thead.appendChild(htr); tb.appendChild(thead);
+        var body=document.createElement("tbody");
+        ROWS.forEach(function(r){
+          var tr=document.createElement("tr");
+          if(r[6]) tr.className="flag";
+          for(var i=0;i<6;i++){
+            var td=document.createElement("td");
+            td.textContent=r[i]||"—";
+            tr.appendChild(td);
+          }
+          var last=document.createElement("td");
+          if(r[6]){
+            var tag=document.createElement("span"); tag.className="oc-tag"; tag.textContent=r[6];
+            var why=document.createElement("span"); why.className="why"; why.textContent=r[7];
+            last.appendChild(tag); last.appendChild(why);
+          } else if(r[7]){
+            var q=document.createElement("span"); q.className="oc-tag quiet"; q.textContent=r[7];
+            last.appendChild(q);
+          } else {
+            var okd=document.createElement("span"); okd.className="ok"; okd.textContent="—";
+            last.appendChild(okd);
+          }
+          tr.appendChild(last);
+          body.appendChild(tr);
+        });
+        tb.appendChild(body); sc.appendChild(tb); w.appendChild(sc);
+
+        var sum=document.createElement("div"); sum.className="oc-sum";
+        [["読み取り件数","12",""],["要確認","5","warn"],["そのまま使える","6","good"],["公休など","1",""]]
+        .forEach(function(s){
+          var d=document.createElement("div");
+          var k=document.createElement("div"); k.className="k"; k.textContent=s[0];
+          var v=document.createElement("div"); v.className="v"+(s[2]?" "+s[2]:""); v.textContent=s[1];
+          d.appendChild(k); d.appendChild(v); sum.appendChild(d);
+        });
+        w.appendChild(sum);
+
+        var cap=document.createElement("p");
+        cap.className="oc-cap";
+        cap.textContent="※ 実際の画面では、この表を直接その場で修正できます。修正した内容は次回以降の読み取りの手がかりにも使います。";
+        w.appendChild(cap);
+        return w;
+      }
+    },
+    {
+      title:"出力",
+      lead:"要確認を片づけたあと、既存のExcelや給与ソフトの取り込み形式に合わせて出します。列の並びと項目名は事業所ごとに設計します。",
+      render:function(){
+        var w=document.createElement("div");
+        var pre=document.createElement("div"); pre.className="oc-csv";
+        pre.textContent =
+          "社員コード,氏名,日付,出勤,退勤,休憩分,実働時間,備考\n"+
+          "1001,山田 花子,2026-04-01,08:58,18:02,60,8.07,\n"+
+          "1001,山田 花子,2026-04-02,09:01,17:45,60,7.73,\n"+
+          "1001,山田 花子,2026-04-03,08:55,17:55,60,8.00,退勤を手入力で補正\n"+
+          "1001,山田 花子,2026-04-04,,,,0.00,公休\n"+
+          "1002,佐藤 健一,2026-04-01,13:02,22:10,45,8.38,\n"+
+          "1002,佐藤 健一,2026-04-02,22:00,06:15,60,7.25,日跨ぎとして確定\n"+
+          "1003,鈴木 みなみ,2026-04-01,10:00,19:00,60,8.00,退勤を手入力で補正";
+        w.appendChild(pre);
+        var cap=document.createElement("p");
+        cap.className="oc-cap";
+        cap.textContent="※ CSVのほか、既存のExcelブックへの書き込みにも対応できます。丸めや端数の扱いは、事業所のルールに合わせて設定します（自動では決めません）。";
+        w.appendChild(cap);
+        return w;
+      }
+    }
+  ];
+
+  function render(i){
+    var p = PANELS[i];
+    document.getElementById("oc-title").textContent = p.title;
+    document.getElementById("oc-lead").textContent = p.lead;
+    var body = document.getElementById("oc-body");
+    body.textContent = "";
+    body.appendChild(p.render());
+  }
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".oc-step"));
+  steps.forEach(function(s){
+    s.addEventListener("click", function(){
+      steps.forEach(function(x){ x.setAttribute("aria-selected", x === s ? "true" : "false"); });
+      render(parseInt(s.getAttribute("data-i"), 10));
+    });
+  });
+
+  render(0);
+})();
+</script>
+</body>
+</html>
