@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勤怠OCR βテスト｜社労士向けテスター専用入口（AkariLab）</title>
+<meta name="description" content="社労士向けの勤怠OCR βテスト専用入口。1〜2名分程度の勤怠資料で、読み取り精度、修正しやすさ、実務適合性、不足機能を確認します。">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://akarilab.org/makoto/services/attendance-ocr/beta-sharoushi/">
+<meta property="og:title" content="勤怠OCR βテスト｜社労士向けテスター専用入口">
+<meta property="og:description" content="1〜2名分程度の勤怠資料で、OCR読み取り、確認・修正、CSV出力までを試す社労士向けβテスト入口です。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://akarilab.org/makoto/services/attendance-ocr/beta-sharoushi/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="/assets/css/lp.css">
+<style>
+.beta-panel{background:linear-gradient(180deg,rgba(30,34,31,.88),rgba(21,24,22,.88));border:1px solid var(--border);border-radius:8px;padding:20px;margin:18px 0}
+.beta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+.beta-step{border:1px solid var(--border);border-radius:8px;padding:14px;background:rgba(255,255,255,.02)}
+.beta-step b{display:block;color:var(--text);font-size:15px;margin-bottom:4px}
+.beta-note{border-left:3px solid var(--accent-green);padding-left:14px;color:var(--text-dim)}
+.memo-text{white-space:pre-wrap;font-family:var(--font-sans);font-size:13px;line-height:1.9;color:var(--text-dim);background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-wrap:anywhere}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"勤怠OCR βテスト 社労士向けテスター専用入口","url":"https://akarilab.org/makoto/services/attendance-ocr/beta-sharoushi/","isPartOf":{"@type":"Service","name":"勤怠OCRシステム","url":"https://akarilab.org/makoto/services/attendance-ocr/"}}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="/">AkariLab</a> ／ <a href="/makoto/services/attendance-ocr/">勤怠OCRシステム</a> ／ 社労士向けβテスト</p>
+
+  <div class="lp-hero">
+    <p class="eyebrow">Private Beta ・ Timecard OCR</p>
+    <h1>勤怠OCR βテスト</h1>
+    <p class="lede">
+      社労士業務で実際に使えるかを確認するための、テスター専用入口です。
+      紙のタイムカード、勤怠表、画像・PDFの勤怠資料を読み取り、確認・修正してCSV等に出す流れを試します。
+      今回はまず、1〜2名分程度の小さな資料から始めてください。
+    </p>
+    <span class="badge">対象テスター：kurosharousi@gmail.com</span>
+    <p class="price">確認したいこと：読み取り精度、修正しやすさ、実務で使えるか、不足している機能。</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://timecard-ocr-819216544827.asia-northeast1.run.app/" target="_blank" rel="noopener noreferrer">テストを開始する</a>
+      <a class="btn" href="/makoto/services/attendance-ocr/">本運用の案内を見る</a>
+      <a class="btn" href="mailto:akarilab0922@gmail.com?subject=%E5%8B%A4%E6%80%A0OCR%20%CE%B2%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF&body=%E3%80%90%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A%E7%B2%BE%E5%BA%A6%E3%80%91%0A%0A%E3%80%90%E4%BF%AE%E6%AD%A3%E3%81%97%E3%82%84%E3%81%99%E3%81%95%E3%80%91%0A%0A%E3%80%90%E5%AE%9F%E5%8B%99%E3%81%A7%E4%BD%BF%E3%81%88%E3%81%9D%E3%81%86%E3%81%8B%E3%80%91%0A%0A%E3%80%90%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%E6%A9%9F%E8%83%BD%E3%80%91%0A%0A%E3%80%90%E3%81%9D%E3%81%AE%E4%BB%96%E3%83%A1%E3%83%A2%E3%80%91">使用後フィードバックを送る</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>このβテストでできること</h2>
+    <p>
+      勤怠資料をアップロードし、OCRで読み取った結果を画面上で確認・修正し、CSV等の出力まで試せます。
+      本番導入前に、社労士事務所の実務で詰まりやすい帳票のばらつき、修正作業の負担、出力形式の使いやすさを確認します。
+    </p>
+    <div class="beta-grid">
+      <div class="beta-step"><b>読み取り</b>タイムカード、勤怠表、画像、PDFの読み取りを確認します。</div>
+      <div class="beta-step"><b>確認・修正</b>氏名、日付、出退勤、休憩、備考などの直しやすさを見ます。</div>
+      <div class="beta-step"><b>例外確認</b>片打刻、時刻不正、氏名不明などの気づきやすさを見ます。</div>
+      <div class="beta-step"><b>出力</b>CSV等に出して、給与ソフト前段のデータとして扱えるか確認します。</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>利用手順</h2>
+    <ol>
+      <li>アップロード：1〜2名分程度のタイムカード、勤怠表、画像、PDFを用意します。</li>
+      <li>OCR：勤怠OCR画面に資料を登録し、読み取り処理を行います。</li>
+      <li>確認・修正：読み取り結果を見て、氏名、日付、出退勤、休憩、備考を修正します。</li>
+      <li>出力：CSV等で出力し、実務上そのまま使えるか、追加加工が必要かを確認します。</li>
+    </ol>
+  </div>
+
+  <div class="sec">
+    <h2>注意事項</h2>
+    <div class="beta-panel">
+      <p class="beta-note">
+        β版のため、OCRの読み取り誤り、画面表示の不具合、出力項目の不足が起きる可能性があります。
+        このテストは読み取り・確認・出力の実務適合性を確認するもので、給与計算、労務判断、法的適合性を自動保証するものではありません。
+      </p>
+      <ul>
+        <li>最初は1〜2名分程度の小さな資料で試してください。</li>
+        <li>個人情報を含む場合は、可能な範囲で氏名や識別情報を伏せた資料を推奨します。</li>
+        <li>顧問先の実データを使う場合は、社内・顧問先側の取り扱いルールを確認してください。</li>
+        <li>読み取り結果は必ず人が確認し、必要に応じて修正してください。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>契約判断のために見てほしいこと</h2>
+    <p>
+      今回のβテストは、機能の感想をもらうだけではなく、社労士事務所として本当に契約して使えるかを判断してもらうための確認です。
+      操作感と合わせて、顧問先への説明しやすさ、月額費用に見合う業務削減、責任範囲の明確さを見てください。
+    </p>
+    <ul>
+      <li>顧問先から届く勤怠資料で、読み取り後の修正量が許容範囲に収まるか</li>
+      <li>CSV等の出力が、給与ソフト前段や既存Excelに渡しやすい形になっているか</li>
+      <li>月額費用に対して、転記・確認・差し戻しの時間を減らせそうか</li>
+      <li>OCR誤読、最終確認責任、給与計算・労務判断を保証しない範囲が顧問先へ説明できるか</li>
+      <li>社労士事務所側で、顧問先ごとの資料受付・確認・出力フローに組み込めるか</li>
+    </ul>
+    <p>
+      契約判断に必要な公開ページは以下です。βテスト後、ここを見たうえで「この条件なら使える／ここが詰まる」を返してもらう想定です。
+    </p>
+    <div class="beta-grid">
+      <a class="beta-step" href="/makoto/services/attendance-ocr/"><b>本運用の案内ページ</b>できること、価格、対象、やらないこと、よくある質問を確認します。</a>
+      <a class="beta-step" href="/tokushoho.html"><b>特定商取引法に基づく表記</b>販売URL、価格、解約、注意事項の見せ方を確認します。</a>
+      <a class="beta-step" href="/terms-of-service.html"><b>利用規約</b>OCR誤読、最終確認責任、給与計算・労務判断を保証しない範囲を確認します。</a>
+      <a class="beta-step" href="/privacy-policy.html"><b>プライバシーポリシー</b>勤怠画像、従業員情報、保存期間、削除手順の考え方を確認します。</a>
+    </div>
+  </div>
+
+  <div class="cta-block" id="feedback">
+    <h2>使ったあとに見たいポイント</h2>
+    <p>
+操作後は、読み取り精度、修正しやすさ、実務で使えるか、不足している機能を中心にフィードバックしてください。
+      契約するかを判断するうえで不安な点も、ここで送ってください。
+      短いメモで十分です。
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="mailto:akarilab0922@gmail.com?subject=%E5%8B%A4%E6%80%A0OCR%20%CE%B2%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF&body=%E3%80%90%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A%E7%B2%BE%E5%BA%A6%E3%80%91%0A%0A%E3%80%90%E4%BF%AE%E6%AD%A3%E3%81%97%E3%82%84%E3%81%99%E3%81%95%E3%80%91%0A%0A%E3%80%90%E5%AE%9F%E5%8B%99%E3%81%A7%E4%BD%BF%E3%81%88%E3%81%9D%E3%81%86%E3%81%8B%E3%80%91%0A%0A%E3%80%90%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%E6%A9%9F%E8%83%BD%E3%80%91%0A%0A%E3%80%90%E3%81%9D%E3%81%AE%E4%BB%96%E3%83%A1%E3%83%A2%E3%80%91">フィードバックメールを開く</a>
+      <a class="btn" href="/makoto/services/attendance-ocr/">勤怠OCRの説明に戻る</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>案内メール文</h2>
+    <p>テスターへ送る案内文の運用メモです。必要に応じてURLだけ差し替えて使います。</p>
+    <div class="memo-text">件名：勤怠OCRシステム βテスト運用のお願い
+宛先：kurosharousi@gmail.com
+
+お世話になっております。
+
+勤怠OCRシステムの社労士向けβテスト入口を用意しました。
+まずは1〜2名分程度のタイムカード、勤怠表、画像、PDFなどで、読み取りから確認・修正、CSV等の出力までをお試しください。
+
+テストページ：
+https://akarilab.org/makoto/services/attendance-ocr/beta-sharoushi/
+
+本運用時の案内ページ：
+https://akarilab.org/makoto/services/attendance-ocr/
+
+確認したい点は、読み取り精度、修正しやすさ、実務で使えそうか、不足している機能です。
+あわせて、社労士事務所として契約する場合に、料金、責任範囲、顧問先への説明、運用フローで不安な点があれば教えてください。
+個人情報を含む資料を使う場合は、可能な範囲で氏名等を伏せた資料をご利用ください。
+
+β版のため、OCRの読み取り誤りや画面上の不具合が起きる可能性があります。
+給与計算や労務判断を自動保証するものではなく、最終確認前の読み取り・整理補助として見ていただけると助かります。
+
+使ってみて気になった点を、短いメモで構いませんのでお知らせください。
+よろしくお願いいたします。</div>
+  </div>
+
+  <div class="related">
+    <h2>Related</h2>
+    <div class="related-grid">
+      <a href="/makoto/services/attendance-ocr/"><p class="r-title">勤怠OCRシステム</p><p class="r-meta">公開サービス説明</p></a>
+      <a href="https://timecard-ocr-819216544827.asia-northeast1.run.app/admin" target="_blank" rel="noopener noreferrer"><p class="r-title">利用者招待</p><p class="r-meta">管理画面</p></a>
+      <a href="https://timecard-ocr-819216544827.asia-northeast1.run.app/settings" target="_blank" rel="noopener noreferrer"><p class="r-title">事業所設定</p><p class="r-meta">テスト前の設定</p></a>
+    </div>
+  </div>
+</div>
+<footer class="lp-footer">
+  <div><a href="/">トップ</a><a href="/makoto/services/">提供サービス</a><a href="/tokushoho.html">特定商取引法に基づく表記</a><a href="/privacy-policy.html">プライバシーポリシー</a></div>
+  <p>© 2026 AkariLab</p>
+</footer>
+</body>
+</html>
