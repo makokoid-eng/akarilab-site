@@ -137,6 +137,43 @@
 .gp-steps li.lock{border:1px solid rgba(200,90,70,0.38);background:rgba(200,90,70,0.07);border-radius:10px;padding:12px 14px;margin:6px 0;}
 .gp-risk{display:block;font-size:12.5px;color:#e79b8c;margin-top:6px;line-height:1.8;}
 .gp-lockmark{font-family:var(--font-mono);font-size:10px;font-weight:700;color:#e79b8c;margin-left:8px;}
+
+/* 設置プレビュー。事務所名を入れると、その場で自分の事務所の画面になる */
+.gp-brandbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 16px;}
+.gp-brandbar label{font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);}
+.gp-brandbar input{
+  font:inherit;font-size:14px;color:var(--text);background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);border-radius:8px;padding:9px 14px;min-width:280px;
+}
+.gp-brandbar input:focus{outline:2px solid var(--accent-green);outline-offset:1px;}
+.gp-site{
+  border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(30,34,31,0.85),rgba(21,24,22,0.85));
+}
+.gp-sitebar{
+  display:flex;gap:7px;align-items:center;padding:10px 14px;
+  background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);
+}
+.gp-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.16);flex:none;}
+.gp-url{
+  font-family:var(--font-mono);font-size:11px;color:var(--text-muted);
+  background:rgba(0,0,0,0.25);border-radius:6px;padding:4px 12px;margin-left:8px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.gp-sitebody{padding:26px 24px;}
+.gp-siteoffice{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:0 0 4px;}
+.gp-sitelead{font-size:13.5px;color:var(--text-dim);line-height:1.9;margin:0 0 18px;}
+.gp-sitecta{
+  display:inline-block;margin-top:18px;padding:12px 22px;border-radius:999px;
+  background:rgba(76,175,125,0.16);border:1px solid rgba(76,175,125,0.45);
+  color:#8fe0b8;font-size:13.5px;font-weight:700;
+}
+.gp-hit{
+  display:grid;gap:2px;padding:14px 16px;margin-top:14px;border-radius:10px;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+}
+.gp-hit b{font-size:14px;color:var(--text);font-weight:600;}
+.gp-hit span{font-size:12.5px;color:var(--text-muted);line-height:1.8;}
 </style>
 </head>
 <body>
@@ -225,6 +262,79 @@
     <p class="gp-notice">
       <strong>赤い工程は、事業所側の操作では先に進めません。</strong>
       交付決定の前に設備を買ってしまう、紹介を受ける前に採用してしまう。こうした事故は後から取り返せないため、システムが止めて社労士の確認を待ちます。
+    </p>
+  </div>
+
+  <div class="sec">
+    <h2>この画面は、先生のサイトにも置けます</h2>
+    <p>
+      顧問先が助成金を思いつくのは、社労士に相談する前です。求人を出す前、設備を買う前に「まず先生に聞く」導線を、事務所のサイト側に置けます。
+      <strong>事務所名を入れてみてください。</strong>そのまま先生のサイトの画面になります。
+    </p>
+
+    <div class="gp-brandbar">
+      <label for="gp-office">事務所名</label>
+      <input id="gp-office" type="text" value="みさき社会保険労務士事務所" maxlength="30" aria-label="事務所名を入力すると、下のプレビューに反映されます">
+    </div>
+
+    <div class="gp-site">
+      <div class="gp-sitebar">
+        <span class="gp-dot"></span><span class="gp-dot"></span><span class="gp-dot"></span>
+        <span class="gp-url" id="gp-siteurl">https://（先生の事務所サイト）/josei/</span>
+      </div>
+      <div class="gp-sitebody">
+        <p class="gp-siteoffice" id="gp-siteoffice">みさき社会保険労務士事務所</p>
+        <p class="gp-sitelead">やりたいことから、使える助成金を辿る。<br>助成金は制度名で調べても、自社が対象か分かりません。いま考えていることを選んでください。</p>
+        <div class="gp-goals" id="gp-site-goals" role="group" aria-label="顧問先向けのやりたいこと"></div>
+        <div class="gp-hit">
+          <b id="gp-site-course">—</b>
+          <span id="gp-site-note">—</span>
+        </div>
+        <span class="gp-sitecta" id="gp-site-cta">みさき社会保険労務士事務所に相談する</span>
+      </div>
+    </div>
+
+    <p style="margin-top:16px">
+      上は要点だけを抜き出したプレビューです。<strong>実際に事務所サイトへ組み込んだ状態</strong>は、制作サンプルでそのまま触れます。
+      目的から制度へ辿る4階層のナビゲーション、つまずきやすい点、料金の見せ方まで含めた1サイト分です。
+    </p>
+    <div class="btn-row" style="margin:14px 0 0">
+      <a class="btn" href="https://sharoushi-demo.vercel.app/josei.html" target="_blank" rel="noopener">設置した状態のサンプルサイトを見る</a>
+      <a class="btn" href="https://sharoushi-demo.vercel.app/" target="_blank" rel="noopener">サイト全体を見る</a>
+    </div>
+    <p class="gp-meta" style="margin-top:10px">サンプルサイトの事務所名・料金・実績はすべて架空です。</p>
+
+    <div class="gp-cols three" style="margin-top:18px">
+      <div class="gp-card">
+        <h3>設置は1行</h3>
+        <ul>
+          <li>既存の事務所サイトにタグを1行貼るだけ</li>
+          <li>WordPress・Wix・自作サイトのいずれでも置けます</li>
+          <li>サイトを作り直す必要はありません</li>
+        </ul>
+      </div>
+      <div class="gp-card">
+        <h3>制度改正はこちらで</h3>
+        <ul>
+          <li>要件や金額が変わったら、AkariLab側で更新します</li>
+          <li>設置済みのサイトにはそのまま反映されます</li>
+          <li>古い金額が残り続けることを防ぎます</li>
+        </ul>
+        <p class="gp-close">掲載は厚生労働省の一次情報で確認できた範囲に限り、受給の可否は断定しません。</p>
+      </div>
+      <div class="gp-card">
+        <h3>相談先は先生の窓口</h3>
+        <ul>
+          <li>「相談する」の遷移先は事務所の問い合わせ先です</li>
+          <li>AkariLabへ送客する導線は入れません</li>
+          <li>顧問先が触った内容は事務所の資産です</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="gp-notice">
+      <strong>相談が来たあとは、ポータルで受けられます。</strong>
+      顧問先が押した「やりたいこと」は、ポータルの案件作成と同じ言葉でそろえてあります。相談を受けた社労士は、その制度の工程をそのまま開いて進められます。
     </p>
   </div>
 
@@ -592,6 +702,55 @@
     goalBox.appendChild(b);
   });
   renderGoal(0);
+
+  /*
+    設置プレビュー。事務所名を入力すると、その場で先生の事務所の画面になる。
+    社労士に「自分のサイトに置いた状態」を想像させることが目的で、
+    ここも外部通信は行わない。掲載する制度と文言は上の GOALS を使い回す。
+  */
+  (function(){
+    var officeInput = document.getElementById("gp-office");
+    var officeName  = document.getElementById("gp-siteoffice");
+    var siteCta     = document.getElementById("gp-site-cta");
+    var siteUrl     = document.getElementById("gp-siteurl");
+    var siteCourse  = document.getElementById("gp-site-course");
+    var siteNote    = document.getElementById("gp-site-note");
+    var siteGoals   = document.getElementById("gp-site-goals");
+    if (!officeInput || !siteGoals) return;
+
+    var DEFAULT_OFFICE = "（先生の事務所）";
+
+    function applyOffice(){
+      var name = officeInput.value.trim() || DEFAULT_OFFICE;
+      officeName.textContent = name;
+      siteCta.textContent = name + "に相談する";
+      siteUrl.textContent = "https://（" + name + "のサイト）/josei/";
+    }
+
+    function showCourse(i){
+      siteCourse.textContent = GOALS[i].course;
+      siteNote.textContent = GOALS[i].note;
+    }
+
+    var btns = [];
+    GOALS.forEach(function(g, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "gp-goal";
+      b.setAttribute("aria-pressed", i === 1 ? "true" : "false");
+      b.textContent = g.goal;
+      b.addEventListener("click", function(){
+        btns.forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        showCourse(i);
+      });
+      btns.push(b);
+      siteGoals.appendChild(b);
+    });
+
+    officeInput.addEventListener("input", applyOffice);
+    applyOffice();
+    showCourse(1);
+  })();
 })();
 </script>
 </body>
