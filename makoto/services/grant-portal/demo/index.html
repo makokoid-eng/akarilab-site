@@ -174,6 +174,35 @@
 }
 .gp-hit b{font-size:14px;color:var(--text);font-weight:600;}
 .gp-hit span{font-size:12.5px;color:var(--text-muted);line-height:1.8;}
+
+/* 事業者が答える5問。判定はせず、相談の下書きを作るだけ */
+.gp-q{padding:16px 0;border-top:1px solid rgba(42,48,44,0.6);}
+.gp-q:first-child{border-top:none;padding-top:0;}
+.gp-q > p{font-size:14px;color:var(--text);margin:0 0 10px;font-weight:600;}
+.gp-opts{display:flex;flex-wrap:wrap;gap:8px;}
+.gp-opt{
+  appearance:none;font:inherit;font-size:13px;cursor:pointer;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  color:var(--text-muted);padding:9px 16px;border-radius:999px;
+}
+.gp-opt[aria-pressed="true"]{background:rgba(76,175,125,0.14);border-color:rgba(76,175,125,0.45);color:#8fe0b8;font-weight:700;}
+.gp-opt:focus-visible{outline:2px solid var(--accent-green);outline-offset:2px;}
+.gp-result{
+  margin-top:18px;padding:18px 20px;border-radius:12px;
+  border:1px solid var(--border);background:rgba(255,255,255,0.03);
+}
+.gp-result.ok{border-color:rgba(76,175,125,0.45);background:rgba(76,175,125,0.08);}
+.gp-result.ng{border-color:rgba(200,90,70,0.42);background:rgba(200,90,70,0.08);}
+.gp-result h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:0 0 8px;letter-spacing:0;text-transform:none;}
+.gp-result p{font-size:13.5px;color:var(--text-dim);line-height:1.9;margin:0 0 8px;}
+.gp-result ul{margin:8px 0 0;}
+.gp-result li{font-size:13px;color:var(--text-dim);line-height:1.85;}
+.gp-stop{color:#e79b8c;font-weight:700;}
+.gp-draft{
+  font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.9;
+  background:rgba(0,0,0,0.28);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;margin-top:14px;white-space:pre-wrap;
+}
 </style>
 </head>
 <body>
@@ -348,6 +377,26 @@
     </div>
     <p class="gp-meta" style="margin-top:10px">
       既存サイトへの設置か、サイトごと作るかで費用が変わるため、こちらは個別のお見積もりです。ポータル単体のお申し込みは下のボタンから、この節と関係なく進められます。
+    </p>
+  </div>
+
+  <div class="sec">
+    <h2>顧問先が答えるのは、5問だけ</h2>
+    <p>
+      「相談したいが、何を伝えればいいか分からない」——これが顧問先側のいちばんの壁です。
+      判断は求めず、<strong>事実だけを5問</strong>選んでもらいます。答えた内容がそのまま相談の下書きになります。
+      特定求職者雇用開発助成金を例に、実際に触ってみてください。
+    </p>
+
+    <div class="gp-screen" style="border-radius:14px">
+      <div id="gp-quiz"></div>
+      <div class="gp-result" id="gp-result" hidden></div>
+    </div>
+
+    <p class="gp-notice">
+      <strong>このデモは判定をしません。</strong>
+      画面に出るのは「確認対象になり得ます」までで、受給の可否は社労士と労働局が確認します。
+      氏名や生年月日は聞かず、該当するかどうかだけを選ぶ作りにしています。入力内容はこのページの中だけで処理され、送信も保存もされません。
     </p>
   </div>
 
@@ -763,6 +812,128 @@
     officeInput.addEventListener("input", applyOffice);
     applyOffice();
     showCourse(1);
+  })();
+
+  /*
+    顧問先が答える5問。
+    設計の要点:
+      - 判定しない。出力は「確認対象になり得ます」までで、受給可否は断定しない
+      - 氏名・生年月日は聞かない。該当するかどうかだけを選ばせ、個人情報を持たない
+      - 「もう採用した」「求人サイト経由」を選んだ場合も突き放さず、社労士へ繋ぐ
+      - 送信も保存もしない。すべてこのページの中で完結する
+    質問と要件は app/courses/specific-jobseeker.ts（助成金ポータル側）に対応する。
+  */
+  (function(){
+    var mount = document.getElementById("gp-quiz");
+    var out = document.getElementById("gp-result");
+    if (!mount || !out) return;
+
+    var QUESTIONS = [
+      { key:"timing", q:"採用の状況を教えてください",
+        opts:[["before","これから採用する"],["after","もう採用した"]] },
+      { key:"route", q:"どの経路で採用しますか（しましたか）",
+        opts:[["hw","ハローワークの紹介"],["agent","職業紹介事業者の紹介"],["site","求人サイト・自社募集"],["unknown","まだ決めていない"]] },
+      { key:"target", q:"雇う方（雇った方）は次のどれかに当てはまりますか",
+        opts:[["senior","60歳以上"],["disability","障害者手帳をお持ち"],["single","ひとり親"],["none","いずれでもない・分からない"]] },
+        { key:"hours", q:"週の所定労働時間はどのくらいですか",
+        opts:[["full","30時間以上"],["short","20〜30時間"],["under","20時間未満"]] },
+      { key:"insurance", q:"雇用保険に加入しますか（していますか）",
+        opts:[["yes","加入する"],["no","加入しない"],["unknown","分からない"]] }
+    ];
+
+    var answers = {};
+
+    QUESTIONS.forEach(function(item){
+      var box = document.createElement("div");
+      box.className = "gp-q";
+      var label = document.createElement("p");
+      label.textContent = item.q;
+      box.appendChild(label);
+      var opts = document.createElement("div");
+      opts.className = "gp-opts";
+      var btns = [];
+      item.opts.forEach(function(o){
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "gp-opt";
+        b.setAttribute("aria-pressed", "false");
+        b.textContent = o[1];
+        b.addEventListener("click", function(){
+          btns.forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+          answers[item.key] = { code:o[0], label:o[1] };
+          judge();
+        });
+        btns.push(b);
+        opts.appendChild(b);
+      });
+      box.appendChild(opts);
+      mount.appendChild(box);
+    });
+
+    /*
+      入力から「相談の下書き」を組み立てる。
+      確認対象から外れる可能性が高い場合も、そこで終わらせず社労士へ繋ぐ。
+    */
+    function judge(){
+      if (Object.keys(answers).length < QUESTIONS.length) { out.hidden = true; return; }
+      out.hidden = false;
+
+      var route = answers.route.code;
+      var timing = answers.timing.code;
+      var target = answers.target.code;
+      var hours = answers.hours.code;
+      var insurance = answers.insurance.code;
+
+      var hard = [];
+      var checks = [];
+
+      if (route === "site") hard.push("求人サイト・自社募集での採用は、この制度の対象になりません（ハローワーク等の紹介が要件です）");
+      if (timing === "after" && route !== "site") hard.push("すでに採用済みの場合、紹介より前に選考を始めていたかどうかで扱いが変わります");
+      if (hours === "under") hard.push("週の所定労働時間が20時間未満の場合、この制度の対象になりません");
+      if (insurance === "no") hard.push("雇用保険に加入しない場合、この制度の対象になりません");
+
+      if (target === "none") checks.push("対象となる区分に当てはまるかどうか（他の区分に該当する可能性があります）");
+      if (target === "senior") checks.push("60歳以上の方は、紹介日にハローワーク等の個別支援を受けている必要があります");
+      if (route === "unknown") checks.push("ハローワークまたは職業紹介事業者の紹介として求人を出す必要があります");
+      if (route === "agent") checks.push("その紹介事業者が制度の対象事業者に含まれるかの確認");
+      checks.push("雇入れ日の前後6か月に、事業主都合の解雇等がないこと");
+      checks.push("65歳に達するまで継続して雇用する見込みがあること");
+
+      var draft = "【助成金のご相談】\n";
+      QUESTIONS.forEach(function(item){
+        draft += "・" + item.q + "：" + answers[item.key].label + "\n";
+      });
+
+      out.className = "gp-result " + (hard.length ? "ng" : "ok");
+      out.textContent = "";
+
+      var h = document.createElement("h4");
+      h.textContent = hard.length
+        ? "この制度は難しいかもしれません。ただし他の制度が該当する可能性があります"
+        : "特定求職者雇用開発助成金の、確認対象になり得ます";
+      out.appendChild(h);
+
+      var lead = document.createElement("p");
+      if (hard.length) {
+        lead.textContent = "次の点が要件と合っていない可能性があります。判断は社労士が行いますので、そのままご相談ください。";
+      } else {
+        lead.innerHTML = "受給できると決まったわけではありません。次の点を社労士が確認します。<br><span class=\"gp-stop\">確認が済むまで、採用の手続きは進めないでください。</span>";
+      }
+      out.appendChild(lead);
+
+      var ul = document.createElement("ul");
+      (hard.length ? hard : checks).forEach(function(t){
+        var li = document.createElement("li");
+        li.textContent = t;
+        ul.appendChild(li);
+      });
+      out.appendChild(ul);
+
+      var pre = document.createElement("div");
+      pre.className = "gp-draft";
+      pre.textContent = draft + "\n（この内容がそのまま社労士への相談文になります）";
+      out.appendChild(pre);
+    }
   })();
 })();
 </script>
