@@ -75,6 +75,15 @@ stripe_links:
     site_links:
       - makoto/services/grant-portal/pricing/index.html
       - makoto/services/grant-portal/demo/index.html
+  - url: https://buy.stripe.com/dRmbJ03Vv0zocxhbkX5Ne09
+    plan: 助成金ポータル スタンダード 月額10,000円
+    site_links:
+      - makoto/services/grant-portal/pricing/index.html
+  - url: https://buy.stripe.com/14A9ASdw56XM68T0Gj5Ne0a
+    plan: 社労士向けセット スタンダード 月額13,500円
+    site_links:
+      - makoto/services/grant-portal/pricing/index.html
+      - makoto/services/attendance-ocr/index.html
   - url: https://buy.stripe.com/6oU6oGgIhci654P88L5Ne01
     plan: 勤怠OCR 小規模事業所 月額1,980円
     site_links:
