@@ -1,0 +1,28 @@
+# 改行コードを LF に固定する。
+#
+# 2026-09-01 に、中身が1文字も変わっていないのに 202 ファイルが「変更あり」になっていた。
+# 全ファイルを HEAD と1つずつ突き合わせた結果、**すべて改行コード（CRLF/LF）だけの差分**で、
+# 中身が違うものは 0 件だった（追加24,955行・削除24,955行で完全に同数）。
+# .gitattributes が無く core.autocrlf も未設定だったため、Windows 側で開いたファイルが
+# CRLF に書き換わり、そのまま差分として出ていた。
+#
+# このまま commit すると 24,955 行の無意味な差分が履歴に入り、
+# 「いつ何を変えたか」が追えなくなる。**リポジトリ側で固定する。**
+# core.autocrlf は環境ごとの設定なので、別のPCや別のツールが触ると再発する。
+* text=auto eol=lf
+
+# 中身がテキストではないもの。改行の変換をしない。
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.mp4 binary
+*.webm binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.zip binary
