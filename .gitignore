@@ -9,3 +9,10 @@ scripts/.sales_tracker_id.txt
 scripts/__pycache__/
 __pycache__/
 *.pyc
+
+# 営業・運用の作業メモ（このリポジトリは public のため、中身を出さない）
+# 2026-09-01: akarilab-1man-schedule-filler.md が未追跡のまま置かれていた。
+# 営業手法・単価・送信本数の上限が書かれており、公開すると営業先に読まれる。
+# リポジトリ直下の作業メモは、原則ここで除外する。
+/akarilab-*-schedule-*.md
+/*-task.md
