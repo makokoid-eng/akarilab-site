@@ -277,9 +277,21 @@ jobs:
           }
           warnings: list[str] = []
 
+          # リダイレクト用スタブ（<meta http-equiv="refresh"> で即転送するだけのページ）は
+          # 検査対象から外す。/r/** の計測用リダイレクトなど 53 ページがこれに当たり、
+          # いずれも noindex で本文を持たない。OGP・canonical・description を付けても
+          # 誰の目にも触れないため、警告として出す意味がない。
+          # 2026-09-05 追加：この除外が無いと警告 385 件のうち 318 件がスタブ由来のノイズになり、
+          # Phase 2 で fail に昇格させることが事実上できなかった。
+          skipped_redirects = 0
+
           for path in html_files:
               soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
               rel = path.relative_to(REPO_ROOT)
+
+              if soup.find("meta", attrs={"http-equiv": "refresh"}):
+                  skipped_redirects += 1
+                  continue
 
               for label, (tag, attrs) in REQUIRED_META.items():
                   if not soup.find(tag, attrs=attrs):
@@ -296,11 +308,15 @@ jobs:
               if not has_favicon:
                   warnings.append(f"{rel}: favicon 未設定")
 
+          print(f"リダイレクトスタブを除外: {skipped_redirects} ページ")
           if warnings:
               print("::group::og/twitter/canonical/description/favicon warnings")
               for w in warnings:
                   print(f"::warning::{w}")
               print("::endgroup::")
+              # GitHub の注釈表示は上限があり、::warning:: が全部は出ない。
+              # 総数はこの行で必ず読めるようにしておく（2026-09-05：10件しか見えず
+              # 実際は385件だった、という取り違えが起きたため）。
               print(f"meta 未設定: {len(warnings)} 件（Phase 1 は warning）")
           else:
               print("og/twitter/canonical/description/favicon: 全ページ設定済み")
