@@ -919,7 +919,11 @@
 
     <div class="svc-list">
 
-      <div class="product-card">
+      <!-- このカードは「まず相談する」ボタン（href の #soudan）のフォールバック先。
+           通常は下部の script が SOUDAN_FORM_URL（Googleフォーム）へ href を差し替えるが、
+           JS が動かない環境ではこのカードへスクロールして相談導線に辿り着けるようにする。
+           2026-09-05 追加：飛び先が実在せず lychee の fragment チェックが 8件エラーになっていたため。 -->
+      <div class="product-card" id="soudan">
         <div class="pc-head"><h3>業務の自動化、現場目線で相談</h3><span class="badge badge-live">相談・30分</span></div>
         <p class="desc">「技術的にできるか」ではなく「うちの現場で本当に回るか」を切り分ける30分。落とし穴まで正直に伝えます。</p>
         <p class="pc-meta">初回無料／有料相談は直接3,500円（ココナラ参考4,000円）</p>
