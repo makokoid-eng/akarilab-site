@@ -1,0 +1,61 @@
+name: setup-ga4-key-events
+
+# GA4 の「キーイベント」（旧コンバージョン）を登録するワンショット workflow。
+#
+# 【なぜ必要か】
+#   2026-09-07 の実測時点で、akarilab.org のキーイベントは GA4 既定の purchase 1件のみ。
+#   redirect_click（Brain・ココナラ・LINE Bot への外部リンククリック）は毎日飛んでいるのに
+#   キーイベントになっておらず、GA4 上は「キーイベント 0」のままだった。
+#   どの記事から申し込みに近い行動が起きたのかが、これでは追えない。
+#
+# 【前提】
+#   - Secrets に GA4_PROPERTY_ID と GA4_SERVICE_ACCOUNT_KEY を登録済み
+#     （setup-ga4-dimensions.yml と同じものを使う）
+#   - サービスアカウントを GA4 プロパティに「編集者」で参加させている
+#     （実行後に「閲覧者」へ降格して構わない）
+#
+# 【実行方法】
+#   GitHub UI → Actions → setup-ga4-key-events → Run workflow
+#   apply を false のまま実行すると dry-run（何も変更せず差分だけ表示）。
+#   内容を確認してから apply=true で実行する。
+#   冪等なので何度実行しても安全（既存はスキップ）。
+#
+# 【注意】
+#   キーイベントは登録した時点以降のデータにしか適用されない。さかのぼらない。
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: '実際に登録する（false なら dry-run）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install Google Analytics Admin SDK
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-analytics-admin
+
+      - name: Create key events
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_SERVICE_ACCOUNT_KEY: ${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}
+        run: |
+          if [ "${{ inputs.apply }}" = "true" ]; then
+            python scripts/setup_ga4_key_events.py --apply
+          else
+            python scripts/setup_ga4_key_events.py
+          fi

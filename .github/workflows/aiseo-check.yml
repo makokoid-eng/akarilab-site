@@ -61,6 +61,15 @@ jobs:
         # 台帳: data/external_refs.yml
         run: python scripts/check_external_refs.py
 
+      - name: "[fail] GA4 タグの網羅チェック"
+        # 2026-09-07 の実測で、166 HTML のうち 25 HTML に GA4 タグが入っていなかった。
+        # 抜けていたのは /kokora/ /hidamari/ /moyalog/ /repimemo/ と /makoto/services/**
+        # ── 「見る → 申し込む」の導線がまるごと未計測だった。
+        # head-common.html を include したページには入るが、手書きページには誰も貼らない、
+        # という構造的な穴なので、人の注意ではなく CI で止める。
+        # タグの欠落・二重・測定IDの取り違え・</head> より後ろへの混入を見る。
+        run: python scripts/check_ga4_tag.py
+
       - name: "[fail] build_pages.py --check (partial include 整合)"
         # 並列エージェントBが scripts/build_pages.py を作成中。
         # --check で現状ファイルが build 結果と一致しなければ non-zero exit。
