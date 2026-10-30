@@ -136,6 +136,15 @@ redirects:
   category: coconala
   dest_domain: coconala.com
   active: true
+# 2026-10-30 追加。遷移先は単一サービスページではなく出品者プロフィール（評価が全件一覧される）。
+# dest_url にアンカー（#reviews）は付けない。meta refresh と location.replace で
+# フラグメントの扱いが揺れるため、既存エントリと同じくパスのみにする。
+- slug: coconala-profile
+  dest_url: https://coconala.com/users/102148
+  label: AkariLab 出品者プロフィール（評価の全件一覧・掲載数字の裏取り用）
+  category: coconala
+  dest_domain: coconala.com
+  active: true
 - slug: stripe-consult
   dest_url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
   label: 業務の自動化 現場目線相談（30分）をカードで直接申し込み
