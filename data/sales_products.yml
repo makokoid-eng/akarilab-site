@@ -26,8 +26,9 @@ products:
     standard_price: 4980
 
   # ココナラ（2026-06-26 出品刷新）
+  # 2026-10-30 提供終了（売上履歴 JOIN のため slug は残す）
   - slug: coconala-line-shindan
-    name: ココナラ 30分相談：業務自動化の現場目線相談
+    name: ココナラ 30分相談：業務自動化の現場目線相談（提供終了）
     standard_price: 4000
 
   - slug: coconala-excel
