@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>給料王へのCSV取り込みは、何が入って何が入らないのか — AkariLab</title>
+<meta name="description" content="ソリマチ給料王の勤怠データCSV取り込みの仕様を整理した。1レコード30項目・ヘッダー無し・60進法・AD列に0。30項目はすべて月の集計値で、日ごとの打刻と通勤費は入らない。">
+<link rel="canonical" href="https://akarilab.org/articles/2026/10/%E7%B5%A6%E6%96%99%E7%8E%8B%E3%81%B8%E3%81%AECSV%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E4%BD%95%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%8C%E5%85%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B/">
+<meta property="og:title" content="給料王へのCSV取り込みは、何が入って何が入らないのか — AkariLab">
+<meta property="og:description" content="ソリマチ給料王の勤怠データCSV取り込みの仕様を整理した。1レコード30項目・ヘッダー無し・60進法・AD列に0。30項目はすべて月の集計値で、日ごとの打刻と通勤費は入らない。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/10/%E7%B5%A6%E6%96%99%E7%8E%8B%E3%81%B8%E3%81%AECSV%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E4%BD%95%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%8C%E5%85%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/10/%E7%B5%A6%E6%96%99%E7%8E%8B%E3%81%B8%E3%81%AECSV%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E4%BD%95%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%8C%E5%85%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B/img/cover-plain.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E6%96%99%E7%8E%8B%E3%81%B8%E3%81%AECSV%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E4%BD%95%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%8C%E5%85%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B/#article",
+  "headline": "給料王へのCSV取り込みは、何が入って何が入らないのか",
+  "datePublished": "2026-10-30T09:00:00+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E6%96%99%E7%8E%8B%E3%81%B8%E3%81%AECSV%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E4%BD%95%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%8C%E5%85%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B/",
+  "sameAs": [],
+  "abstract": "ソリマチ給料王の勤怠データCSV取り込みの仕様を整理した。1レコード30項目・ヘッダー無し・60進法・AD列に0。30項目はすべて月の集計値で、日ごとの打刻と通勤費は入らない。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "給料王へのCSV取り込みは、何が入って何が入らないのか", "item": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E6%96%99%E7%8E%8B%E3%81%B8%E3%81%AECSV%E5%8F%96%E3%82%8A%E8%BE%BC%E3%81%BF%E3%81%AF%E4%BD%95%E3%81%8C%E5%85%A5%E3%81%A3%E3%81%A6%E4%BD%95%E3%81%8C%E5%85%A5%E3%82%89%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>給料王へのCSV取り込みは、何が入って何が入らないのか</h1>
+<p class="article-meta">2026-10-30</p>
+
+<figure><img alt="給料王へのCSV取り込みは、何が入って何が入らないのか" src="img/cover-plain.png"><figcaption></figcaption></figure>
+<p>給与ソフトのソリマチ「給料王」は、Excelなどで作った勤怠データをCSVで取り込める。公式のQ&Aに仕様が書かれているが、実際に作ろうとすると制約が細かい。読み取り側（タイムカードや出勤簿）の設計に関わる部分だけを、順番に整理しておく。対象は給料王18以降。</p>
+<h2>1レコード30項目、項目名の行は入れない</h2>
+<ul>
+<li>1レコード（社員1人分の勤怠）は30項目で固定。1行にカンマが29個必要</li>
+<li>項目名の行（ヘッダー）は入れない。1行目から数字が並ぶ</li>
+<li>有効な文字は半角数字とピリオドだけ。全角文字は取り込めない</li>
+<li>時間は60進法。1時間30分なら「1.3」「1.30」「01.30」のいずれかで書く</li>
+<li>30項目目（AD列）に「0」を入れる。データの最後を示す値で、省略できない</li>
+<li>レイアウト1・2・3で取り込める項目範囲が違う（1は1〜15番、2は20番まで、3は24番まで）。残りは予備項目で、データを入れてはいけない</li>
+<li>20番目の「早出残業時間」は給料王にあらかじめ用意された項目ではないため、使うなら先に項目を作る</li>
+<li>24時間を超える時間はExcelが「165:30:00」と秒まで表示する。表示形式を直してから保存しないと取り込めない</li>
+</ul>
+<h2>30項目はすべて「月の集計値」</h2>
+<p>項目名は、就業日数・出勤日数・欠勤日数・有休日数・出勤時間・普通残業時間・深夜残業時間といった並びになる。どれも1か月を合計した値で、日ごとの打刻を入れる欄はない。</p>
+<p>これは読み取り側の設計に直接響く。タイムカードを1日ずつ読み取ったとしても、給料王へ渡す直前には月単位に畳む必要がある。逆に言えば、日々の記録は給料王の外に置いたままになる。どの日の打刻が怪しかったのかを後から追いたいなら、畳む前のデータを別に残しておくしかない。</p>
+<h2>通勤費はこの30項目に入らない</h2>
+<p>30項目に通勤費の欄はない。勤怠データの取り込みで通勤費が一緒に入ることはない、ということになる。通勤費を毎月手で計算している現場では、ここだけ別の経路として残る。給料王側で通勤費をどう持つのが実務上きれいかは設定次第で、一般解としては確認できていない。</p>
+<h2>間違えたときの挙動</h2>
+<p>不正な項目があると取り込みは止まり、エラーの内容がメモ帳で表示される。エラー行を飛ばして正しい行だけ取り込む選択もできるが、飛ばした行は後からやり直すか手入力になる。だから、取り込む前の確認のほうが安い。</p>
+<p>出典：<a href="https://qa.sorimachi.co.jp/hc/ja/articles/220489207" target="_blank" rel="noopener">Excel等で作成した勤怠データを給料王に取り込む方法（ソリマチ製品Q&A）</a></p>
+<p>紙や画像のタイムカードを読み取って、この形まで整える作業については<a href="/makoto/services/attendance-ocr/" target="_blank" rel="noopener">勤怠OCRのサービスページ</a>に書いています。</p>
+
+<!-- include: assets/partials/article-nav-common.html -->
+<!--
+  記事ページ共通「サイト内のほかのページ」パーシャル（2026-10-30 サイト内回遊）
+
+  目的:
+    検索から記事に直接入ってきた読者が、1ページ読んで離脱せずに
+    サイト内（記事一覧・制作実績・提供サービス）へ辿れる出口を置く。
+    点検時点で記事71ページからサービスページへの本文リンクは0本だった。
+
+  方針:
+    - 装飾は既存 .card（assets/css/site.css）のみ。新規CSSは持ち込まない。
+    - 相談フォームの URL は既存の 1 本のみを使う（新規 URL を作らない）。
+      https://forms.gle/WZC6qUJq1pkP4WXp6
+    - ブランド分離ルールに従い、個別プロダクト LP（もやログ/りぴメモ/ひだまり）は含めない。
+
+  置き場所:
+    各記事 HTML の </article> 直前。記事本文は書き換えない。
+-->
+<aside class="card">
+  <h3>サイト内のほかのページ</h3>
+  <ul>
+    <li><a href="/articles/">記事の一覧</a> — 連載と単発記事のまとめ</li>
+    <li><a href="/articles/ai-9months/">連載「触り始めて9ヶ月の記録」</a> — 44歳でほぼ未経験から開発を始めた9ヶ月の記録</li>
+    <li><a href="/works/">制作実績・デモ</a> — 実際に作って動いているものの一覧</li>
+    <li><a href="/makoto/services/">提供サービス</a> — 業務の自動化・Excel/VBA・LINE Bot・勤怠OCR・アプリ開発</li>
+  </ul>
+  <p>現場の「これ手作業でやってる」を相談したい方は、<a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">無料相談フォーム</a>からどうぞ。</p>
+</aside>
+
+<!-- include-end: assets/partials/article-nav-common.html -->
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">ご相談はこちら（無料）</a>
+  </div>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

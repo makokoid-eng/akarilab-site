@@ -134,6 +134,12 @@ TARGETS: list[str] = [
     "articles/2026/05/走れる人には休め歩けない人には歩けと返した夜-8/index.html",
     "articles/2026/05/方向転換という言葉が焦りの逃げ場として出てきた昼-9/index.html",
     "articles/2026/05/野菜食べられないと書きながらほうれん草を2束茹でていた夜-10/index.html",
+    "articles/2026/10/給料王へのCSV取り込みは何が入って何が入らないのか/index.html",
+    "articles/2026/10/タイムカードの集計を自動にしたいと言われたときに自動になる範囲/index.html",
+    "articles/2026/10/出勤簿をデータ化する前に決めておくこと/index.html",
+    "articles/2026/10/給与ソフトは勤怠データのCSVを何で受け取るか/index.html",
+    "articles/2026/10/給与データの並べ替えが毎月発生する理由/index.html",
+    "articles/2026/10/紙の勤怠を給与ソフトに入れるまで手入力は何回あるか/index.html",
 ]
 
 # <!-- include: foo/bar.html --> ... <!-- include-end: foo/bar.html -->

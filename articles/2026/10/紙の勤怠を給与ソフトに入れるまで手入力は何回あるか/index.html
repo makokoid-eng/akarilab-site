@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>紙の勤怠を給与ソフトに入れるまで、手入力は何回あるか — AkariLab</title>
+<meta name="description" content="紙や写真の勤怠を給与ソフトに入れるまでの段を数えると、手入力は3回ある。どの段から手をつけると効くのかの切り分けと、管理表を1本に統一したときに起きるトレードオフ。">
+<link rel="canonical" href="https://akarilab.org/articles/2026/10/%E7%B4%99%E3%81%AE%E5%8B%A4%E6%80%A0%E3%82%92%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%BE%E3%81%A7%E6%89%8B%E5%85%A5%E5%8A%9B%E3%81%AF%E4%BD%95%E5%9B%9E%E3%81%82%E3%82%8B%E3%81%8B/">
+<meta property="og:title" content="紙の勤怠を給与ソフトに入れるまで、手入力は何回あるか — AkariLab">
+<meta property="og:description" content="紙や写真の勤怠を給与ソフトに入れるまでの段を数えると、手入力は3回ある。どの段から手をつけると効くのかの切り分けと、管理表を1本に統一したときに起きるトレードオフ。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/10/%E7%B4%99%E3%81%AE%E5%8B%A4%E6%80%A0%E3%82%92%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%BE%E3%81%A7%E6%89%8B%E5%85%A5%E5%8A%9B%E3%81%AF%E4%BD%95%E5%9B%9E%E3%81%82%E3%82%8B%E3%81%8B/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/10/%E7%B4%99%E3%81%AE%E5%8B%A4%E6%80%A0%E3%82%92%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%BE%E3%81%A7%E6%89%8B%E5%85%A5%E5%8A%9B%E3%81%AF%E4%BD%95%E5%9B%9E%E3%81%82%E3%82%8B%E3%81%8B/img/cover-plain.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/10/%E7%B4%99%E3%81%AE%E5%8B%A4%E6%80%A0%E3%82%92%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%BE%E3%81%A7%E6%89%8B%E5%85%A5%E5%8A%9B%E3%81%AF%E4%BD%95%E5%9B%9E%E3%81%82%E3%82%8B%E3%81%8B/#article",
+  "headline": "紙の勤怠を給与ソフトに入れるまで、手入力は何回あるか",
+  "datePublished": "2026-10-30T09:00:00+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/10/%E7%B4%99%E3%81%AE%E5%8B%A4%E6%80%A0%E3%82%92%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%BE%E3%81%A7%E6%89%8B%E5%85%A5%E5%8A%9B%E3%81%AF%E4%BD%95%E5%9B%9E%E3%81%82%E3%82%8B%E3%81%8B/",
+  "sameAs": [],
+  "abstract": "紙や写真の勤怠を給与ソフトに入れるまでの段を数えると、手入力は3回ある。どの段から手をつけると効くのかの切り分けと、管理表を1本に統一したときに起きるトレードオフ。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "紙の勤怠を給与ソフトに入れるまで、手入力は何回あるか", "item": "https://akarilab.org/articles/2026/10/%E7%B4%99%E3%81%AE%E5%8B%A4%E6%80%A0%E3%82%92%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%BE%E3%81%A7%E6%89%8B%E5%85%A5%E5%8A%9B%E3%81%AF%E4%BD%95%E5%9B%9E%E3%81%82%E3%82%8B%E3%81%8B/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>紙の勤怠を給与ソフトに入れるまで、手入力は何回あるか</h1>
+<p class="article-meta">2026-10-30</p>
+
+<figure><img alt="紙の勤怠を給与ソフトに入れるまで、手入力は何回あるか" src="img/cover-plain.png"><figcaption></figcaption></figure>
+<p>「手入力が面倒なので自動化したい」という相談を受けて工程を聞いていくと、手入力が1回ではないことが多い。本人の体感では1回だ。紙を見ながら打つ、という作業が1つに感じられる。実際には、間に別の段が挟まっている。段を数えるところから始める。</p>
+<h2>数えると3回ある</h2>
+<ol>
+<li>紙や写真の勤怠を見ながら、出勤・退勤・休憩の時刻を読み取って打つ</li>
+<li>読み取った時刻から、日ごとの労働時間と残業を計算し、月の合計を別の表に打つ</li>
+<li>月の合計を、給与ソフトの画面に打つ</li>
+</ol>
+<p>ここに、手入力ではないが人の手が必要な段がもう2つ入る。雇用区分ごとに項目や名称が違う場合に、どの項目へ寄せるかを決める段。そして、給与ソフトが受け取れる形に整える段だ。後者は製品ごとに求める形が違うので、<a href="/articles/2026/10/給与ソフトは勤怠データのCSVを何で受け取るか/" target="_blank" rel="noopener">別記事</a>に仕様を整理した。</p>
+<p>段を数える意味は、どこから手をつけると効くかが変わるからだ。1だけを機械化しても、2と3が人の手に残っていれば、月末の作業時間はあまり減らない。同じ数字が段をまたぐたびに打ち直されている箇所を見つけるのが先になる。</p>
+<h2>統一すると使えなくなることがある</h2>
+<p>段を減らそうとすると、まず「表を1本にまとめる」という発想になる。部門ごと、雇用区分ごとに分かれている管理表を統一すれば、転記が減るように見える。</p>
+<p>ところが、全部を1つのファイルに集めて計算式を敷くと、重くなって開くのに時間がかかる、スクロールしているうちにどこを見ていたか分からなくなる、という状態になりやすい。善意の統一が、誰も触りたくないファイルを生む。作りかけで止まるのは、たいていこの段だ。</p>
+<p>分けて考えると落ち着く。統一すべきなのは、項目の定義と、最後に出す形。分けたままでよいのは、入力する単位のファイルだ。入力は部門ごと・月ごとに小さく分かれていてよく、それを機械が読んで1つに束ねる。人が1枚の巨大な表を触る必要はない。</p>
+<p>逆に、項目の定義を統一しないまま入力だけ1本にすると、同じ列に意味の違う数字が混ざる。これは重さより厄介で、後から分離できない。</p>
+<h2>どの段から手をつけるか</h2>
+<ul>
+<li>1が重い（枚数が多い、読み取りに時間がかかる）なら、読み取りの機械化が効く</li>
+<li>2が重い（計算と検算に時間がかかる）なら、計算と突き合わせの自動化が効く</li>
+<li>3が重い（打ち直しと取り込みエラーで止まる）なら、出力形式を先に確定させるのが効く</li>
+</ul>
+<p>どれが重いかは現場で違うので、先に段を数えて、各段に何分かかっているかを見るのが早い。読み取りの部分は<a href="/makoto/services/attendance-ocr/" target="_blank" rel="noopener">勤怠OCRのサービスページ</a>、計算と検算、Excelでの束ね方は<a href="/makoto/services/excel-vba/" target="_blank" rel="noopener">Excel（VBA）自動化のサービスページ</a>に書いています。</p>
+
+<!-- include: assets/partials/article-nav-common.html -->
+<!--
+  記事ページ共通「サイト内のほかのページ」パーシャル（2026-10-30 サイト内回遊）
+
+  目的:
+    検索から記事に直接入ってきた読者が、1ページ読んで離脱せずに
+    サイト内（記事一覧・制作実績・提供サービス）へ辿れる出口を置く。
+    点検時点で記事71ページからサービスページへの本文リンクは0本だった。
+
+  方針:
+    - 装飾は既存 .card（assets/css/site.css）のみ。新規CSSは持ち込まない。
+    - 相談フォームの URL は既存の 1 本のみを使う（新規 URL を作らない）。
+      https://forms.gle/WZC6qUJq1pkP4WXp6
+    - ブランド分離ルールに従い、個別プロダクト LP（もやログ/りぴメモ/ひだまり）は含めない。
+
+  置き場所:
+    各記事 HTML の </article> 直前。記事本文は書き換えない。
+-->
+<aside class="card">
+  <h3>サイト内のほかのページ</h3>
+  <ul>
+    <li><a href="/articles/">記事の一覧</a> — 連載と単発記事のまとめ</li>
+    <li><a href="/articles/ai-9months/">連載「触り始めて9ヶ月の記録」</a> — 44歳でほぼ未経験から開発を始めた9ヶ月の記録</li>
+    <li><a href="/works/">制作実績・デモ</a> — 実際に作って動いているものの一覧</li>
+    <li><a href="/makoto/services/">提供サービス</a> — 業務の自動化・Excel/VBA・LINE Bot・勤怠OCR・アプリ開発</li>
+  </ul>
+  <p>現場の「これ手作業でやってる」を相談したい方は、<a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">無料相談フォーム</a>からどうぞ。</p>
+</aside>
+
+<!-- include-end: assets/partials/article-nav-common.html -->
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">ご相談はこちら（無料）</a>
+  </div>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

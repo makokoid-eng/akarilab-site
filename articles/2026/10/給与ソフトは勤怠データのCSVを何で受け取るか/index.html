@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>給与ソフトは勤怠データのCSVを何で受け取るか｜給料王・弥生給与・マネーフォワード・freee・PCA給与を比べる — AkariLab</title>
+<meta name="description" content="勤怠データのCSV取り込みは、給与ソフトごとに求める形が違う。項目名の行の要否、時間の進法、月次集計値という前提を、給料王・弥生給与Next・マネーフォワード クラウド給与・freee人事労務・PCA給与の公式資料から整理した。">
+<link rel="canonical" href="https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AF%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AECSV%E3%82%92%E4%BD%95%E3%81%A7%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B%E3%81%8B/">
+<meta property="og:title" content="給与ソフトは勤怠データのCSVを何で受け取るか｜給料王・弥生給与・マネーフォワード・freee・PCA給与を比べる — AkariLab">
+<meta property="og:description" content="勤怠データのCSV取り込みは、給与ソフトごとに求める形が違う。項目名の行の要否、時間の進法、月次集計値という前提を、給料王・弥生給与Next・マネーフォワード クラウド給与・freee人事労務・PCA給与の公式資料から整理した。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AF%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AECSV%E3%82%92%E4%BD%95%E3%81%A7%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B%E3%81%8B/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AF%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AECSV%E3%82%92%E4%BD%95%E3%81%A7%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B%E3%81%8B/img/cover-plain.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AF%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AECSV%E3%82%92%E4%BD%95%E3%81%A7%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B%E3%81%8B/#article",
+  "headline": "給与ソフトは勤怠データのCSVを何で受け取るか｜給料王・弥生給与・マネーフォワード・freee・PCA給与を比べる",
+  "datePublished": "2026-10-30T09:00:00+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AF%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AECSV%E3%82%92%E4%BD%95%E3%81%A7%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B%E3%81%8B/",
+  "sameAs": [],
+  "abstract": "勤怠データのCSV取り込みは、給与ソフトごとに求める形が違う。項目名の行の要否、時間の進法、月次集計値という前提を、給料王・弥生給与Next・マネーフォワード クラウド給与・freee人事労務・PCA給与の公式資料から整理した。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "給与ソフトは勤怠データのCSVを何で受け取るか｜給料王・弥生給与・マネーフォワード・freee・PCA給与を比べる", "item": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%82%BD%E3%83%95%E3%83%88%E3%81%AF%E5%8B%A4%E6%80%A0%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AECSV%E3%82%92%E4%BD%95%E3%81%A7%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B%E3%81%8B/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>給与ソフトは勤怠データのCSVを何で受け取るか｜給料王・弥生給与・マネーフォワード・freee・PCA給与を比べる</h1>
+<p class="article-meta">2026-10-30</p>
+
+<figure><img alt="給与ソフトは勤怠データのCSVを何で受け取るか｜給料王・弥生給与・マネーフォワード・freee・PCA給与を比べる" src="img/cover-plain.png"><figcaption></figcaption></figure>
+<p>勤怠を読み取ってCSVにすれば給与ソフトに入る、とは言えない。同じ「勤怠データのCSV取り込み」でも、求める形が製品ごとに違う。しかも、違いが出るのは細部ではなく、項目名の行を入れるかどうか、時間を何進法で書くか、といった根本の部分だ。公式の資料で確認できた範囲を、製品ごとに並べる。</p>
+<h2>給料王（ソリマチ）</h2>
+<p>1レコード（社員1人分）は30項目で固定。項目名の行は入れない。有効な文字は半角数字とピリオドだけで、全角は取り込めない。時間は60進法で、1時間30分は「1.30」と書く。30項目目のAD列に「0」を入れる必要がある。30項目はすべて月の集計値で、日ごとの打刻を入れる欄はない。詳細は<a href="/articles/2026/10/給料王へのCSV取り込みは何が入って何が入らないのか/" target="_blank" rel="noopener">別記事</a>にまとめた。</p>
+<h2>弥生給与 Next</h2>
+<p>自社で作ったCSVや、他社の勤怠管理サービスから出力したCSVを取り込める。ヘルプには「出勤日数や労働時間などの勤怠項目を、1か月分合計したデータを取り込んで」と書かれている。ここも月の集計値が単位になる。</p>
+<p>注意点として、時間単位を「分」で出力した勤怠データはインポートできないと明記されている。勤怠側の出力設定で分を選べる製品があるため、そこで引っかかる。取り込む勤怠データの従業員コードと氏名が、登録済みのデータと一致している必要もある。すでに勤怠データが入っている従業員に取り込むと上書きになる。</p>
+<h2>マネーフォワード クラウド給与</h2>
+<p>他社サービスから出したCSVを取り込めるが、条件が明確で、CSVのタイトル行（1行目）の勤怠項目名が、クラウド給与側の勤怠項目名と完全に一致している必要がある。給料王が項目名の行を入れてはいけないのに対して、こちらは項目名の行が主役になる。従業員の紐づけは従業員番号で行う。</p>
+<p>取り込みに失敗したときの確認点として、項目名の完全一致、「Version」列に「2」が入っているか、従業員コードの列があるかの3点が案内されている。</p>
+<h2>freee人事労務</h2>
+<p>対応している勤怠管理サービスが一覧で公開されていて、一覧にない製品は「freee形式」に加工して取り込む。freee形式の項目は公開されており、所定労働時間、法定内残業時間、時間外労働時間、深夜労働時間、法定休日労働時間、総労働時間、総労働日数などが必須項目になっている。</p>
+<p>ここは時間の単位が特徴的で、労働時間はすべて分単位で入力する。実績がない場合は空欄にせず「0」を入れる。締め日と社員番号を勤怠側と揃えておくことが前提で、勤怠をインポートした月は、freee上で勤怠の入力ができなくなる。インポートした勤怠データの一括削除はできず、修正したCSVを再度インポートすると上書きされる。</p>
+<h2>PCA給与</h2>
+<p>「随時」の「汎用データの受入」から取り込む。受入フォーマットに2種類あり、分散データはPCAがあらかじめ用意した固定レイアウトで、給与勤怠データなら90項目のレイアウトどおりに作る。汎用データは自分で作った任意のレイアウトで、取り込むときにどの項目へ入れるかの割り当てをする（社員コードと支給回は必須）。</p>
+<p>時間の書き方にも決まりがあり、15時間45分の残業時間を60進法で受け入れる場合は「15:45」と書く必要がある。「15:45:00」では受け入れられないとFAQに例示されている。</p>
+<h2>公式ページでは確認できなかったもの</h2>
+<p>給与奉行クラウド（OBC）は、製品ページに「ご利用の勤怠管理システムの勤怠情報をCSVファイルによって連携することができます」と書かれており、同社の勤怠管理クラウドを使えばCSV連携の作業自体が不要になるとされている。ただしCSVの列構成や項目数は、公開されているページでは確認できなかった。</p>
+<p>ジョブカン給与計算も、ジョブカン勤怠管理からはCSVを介さずに連携できる旨が案内されていて、勤怠情報のCSV取り込み自体も機能一覧に記載がある。こちらもCSVの項目仕様は公式ヘルプで確認できなかった。</p>
+<h2>比べて見えること</h2>
+<p>共通しているのは、どの製品も受け取るのは月の集計値だということ。日ごとの打刻をそのまま流し込む想定にはなっていない。違うのは、項目名の行の要否と、時間を60進法で書くか分で書くか。つまり読み取り側は、どの給与ソフトへ渡すかが決まっていないと、最後の整形を作れない。</p>
+<p>出典：<a href="https://qa.sorimachi.co.jp/hc/ja/articles/220489207" target="_blank" rel="noopener">ソリマチQ&A</a> / <a href="https://support.yayoi-kk.co.jp/subcontents.html?page_id=28107" target="_blank" rel="noopener">弥生</a> / <a href="https://biz.moneyforward.com/support/payroll/guide/integrations/in09.html" target="_blank" rel="noopener">マネーフォワード</a> / <a href="https://support.freee.co.jp/hc/ja/articles/204922194" target="_blank" rel="noopener">freee</a> / <a href="https://faq.pca.jp/faq/show/8900?category_id=2&site_domain=default" target="_blank" rel="noopener">PCA</a> / <a href="https://www.obc.co.jp/bugyo-cloud/kyuyo/function/tukiji" target="_blank" rel="noopener">OBC</a> / <a href="https://payroll.jobcan.ne.jp/function/" target="_blank" rel="noopener">ジョブカン給与計算</a>（いずれも2026年10月時点）</p>
+<p>読み取りから整形までの流れは<a href="/makoto/services/attendance-ocr/" target="_blank" rel="noopener">勤怠OCRのサービスページ</a>に書いています。</p>
+
+<!-- include: assets/partials/article-nav-common.html -->
+<!--
+  記事ページ共通「サイト内のほかのページ」パーシャル（2026-10-30 サイト内回遊）
+
+  目的:
+    検索から記事に直接入ってきた読者が、1ページ読んで離脱せずに
+    サイト内（記事一覧・制作実績・提供サービス）へ辿れる出口を置く。
+    点検時点で記事71ページからサービスページへの本文リンクは0本だった。
+
+  方針:
+    - 装飾は既存 .card（assets/css/site.css）のみ。新規CSSは持ち込まない。
+    - 相談フォームの URL は既存の 1 本のみを使う（新規 URL を作らない）。
+      https://forms.gle/WZC6qUJq1pkP4WXp6
+    - ブランド分離ルールに従い、個別プロダクト LP（もやログ/りぴメモ/ひだまり）は含めない。
+
+  置き場所:
+    各記事 HTML の </article> 直前。記事本文は書き換えない。
+-->
+<aside class="card">
+  <h3>サイト内のほかのページ</h3>
+  <ul>
+    <li><a href="/articles/">記事の一覧</a> — 連載と単発記事のまとめ</li>
+    <li><a href="/articles/ai-9months/">連載「触り始めて9ヶ月の記録」</a> — 44歳でほぼ未経験から開発を始めた9ヶ月の記録</li>
+    <li><a href="/works/">制作実績・デモ</a> — 実際に作って動いているものの一覧</li>
+    <li><a href="/makoto/services/">提供サービス</a> — 業務の自動化・Excel/VBA・LINE Bot・勤怠OCR・アプリ開発</li>
+  </ul>
+  <p>現場の「これ手作業でやってる」を相談したい方は、<a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">無料相談フォーム</a>からどうぞ。</p>
+</aside>
+
+<!-- include-end: assets/partials/article-nav-common.html -->
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">ご相談はこちら（無料）</a>
+  </div>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>給与データの並べ替えが毎月発生する理由 — AkariLab</title>
+<meta name="description" content="給与計算の前にExcelで社員の行を並べ替える作業は、人が読むための並びとソフトが読むための並びが別物だから毎月発生する。並べ替えのミスは見た目が壊れないので気づきにくい。だから検算を工程として持つ。">
+<link rel="canonical" href="https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%B8%A6%E3%81%B9%E6%9B%BF%E3%81%88%E3%81%8C%E6%AF%8E%E6%9C%88%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/">
+<meta property="og:title" content="給与データの並べ替えが毎月発生する理由 — AkariLab">
+<meta property="og:description" content="給与計算の前にExcelで社員の行を並べ替える作業は、人が読むための並びとソフトが読むための並びが別物だから毎月発生する。並べ替えのミスは見た目が壊れないので気づきにくい。だから検算を工程として持つ。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%B8%A6%E3%81%B9%E6%9B%BF%E3%81%88%E3%81%8C%E6%AF%8E%E6%9C%88%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%B8%A6%E3%81%B9%E6%9B%BF%E3%81%88%E3%81%8C%E6%AF%8E%E6%9C%88%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/img/cover-plain.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%B8%A6%E3%81%B9%E6%9B%BF%E3%81%88%E3%81%8C%E6%AF%8E%E6%9C%88%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/#article",
+  "headline": "給与データの並べ替えが毎月発生する理由",
+  "datePublished": "2026-10-30T09:00:00+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%B8%A6%E3%81%B9%E6%9B%BF%E3%81%88%E3%81%8C%E6%AF%8E%E6%9C%88%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/",
+  "sameAs": [],
+  "abstract": "給与計算の前にExcelで社員の行を並べ替える作業は、人が読むための並びとソフトが読むための並びが別物だから毎月発生する。並べ替えのミスは見た目が壊れないので気づきにくい。だから検算を工程として持つ。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "給与データの並べ替えが毎月発生する理由", "item": "https://akarilab.org/articles/2026/10/%E7%B5%A6%E4%B8%8E%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%B8%A6%E3%81%B9%E6%9B%BF%E3%81%88%E3%81%8C%E6%AF%8E%E6%9C%88%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>給与データの並べ替えが毎月発生する理由</h1>
+<p class="article-meta">2026-10-30</p>
+
+<figure><img alt="給与データの並べ替えが毎月発生する理由" src="img/cover-plain.png"><figcaption></figcaption></figure>
+<p>給与計算の前に、Excelで社員の行を並べ替える作業が入っている職場は多い。手元の勤怠データの並び順と、給与ソフトが求める並び順が違うからだ。これは1回やれば済む整理ではなく、毎月発生する。理由を分けて書く。</p>
+<h2>並び順は「誰のために並んでいるか」で変わる</h2>
+<p>現場で使っている管理表は、人が見て分かるように並んでいる。拠点ごと、雇用区分ごと、入社順、シフトの組みやすい順。拠点ごとに別の表を使っていれば、拠点の中の並びはそれぞれの都合で決まる。確認するときは、この並びのほうが速い。</p>
+<p>一方、給与ソフトは社員コードで人を特定し、決まった項目の順番でデータを受け取る。項目名の行を入れてはいけない製品もあり、その場合は列の位置そのものが意味を持つ。つまり、人が読むための並びと、ソフトが読むための並びは、もともと別物だ。どちらかに統一できるものではなく、変換が必要になる。</p>
+<p>毎月発生するのは、人が入って辞めるからだ。入社した人を表のどこに足すか、退職した人の行を残すか消すかで、並びは毎月少しずつ変わる。項目側も、名称が変わればその月から変換規則が変わる。</p>
+<h2>手でやると間違えるが、間違いに気づきにくい</h2>
+<p>並べ替えのミスは、見た目が壊れない。列を1つ挿し忘れただけでも、残業時間の列に深夜時間の値が入って、表としては成立してしまう。行がずれた場合も、全員分の数字が1人ずつ隣にずれるだけで、合計は近い値になる。目視では見つけにくく、本人の明細を見て初めて分かる。</p>
+<p>だから、並べ替え自体を自動化するだけでは足りない。変換したあとの値が、元のデータと合っているかを別の計算で突き合わせる工程を持たせる。並べ替えと検算を同じ仕組みの中で続けて実行すると、ずれが出た時点で止まる。</p>
+<h2>通勤費のように、同じ経路に乗らないものがある</h2>
+<p>手当の一部は、勤怠データの取り込みでは入らないことがある。たとえば給料王の勤怠データ取り込みは30項目の固定レイアウトで、そこに通勤費の欄はない。こういう項目は別の経路として設計する。並べ替えの対象に無理に混ぜると、毎月どちらで入れたか分からなくなる。</p>
+<p>AkariLabでは、運送業の点呼データから残業と割増を計算して、給与ソフトに渡せる形へ整えるツールを作り、有償で導入いただいています。計算ロジックは案件ごとに違うので公開していませんが、Pythonで独立に再実装した結果とExcel側の出力を1分・1円単位で突き合わせる検算を、納品前の工程として必ず入れています。</p>
+<p>Excelでの集計・変換・検算の作り方は<a href="/makoto/services/excel-vba/" target="_blank" rel="noopener">Excel（VBA）自動化のサービスページ</a>に、給与ソフトごとの取り込み形式の違いは<a href="/articles/2026/10/給与ソフトは勤怠データのCSVを何で受け取るか/" target="_blank" rel="noopener">別記事</a>に書いています。</p>
+
+<!-- include: assets/partials/article-nav-common.html -->
+<!--
+  記事ページ共通「サイト内のほかのページ」パーシャル（2026-10-30 サイト内回遊）
+
+  目的:
+    検索から記事に直接入ってきた読者が、1ページ読んで離脱せずに
+    サイト内（記事一覧・制作実績・提供サービス）へ辿れる出口を置く。
+    点検時点で記事71ページからサービスページへの本文リンクは0本だった。
+
+  方針:
+    - 装飾は既存 .card（assets/css/site.css）のみ。新規CSSは持ち込まない。
+    - 相談フォームの URL は既存の 1 本のみを使う（新規 URL を作らない）。
+      https://forms.gle/WZC6qUJq1pkP4WXp6
+    - ブランド分離ルールに従い、個別プロダクト LP（もやログ/りぴメモ/ひだまり）は含めない。
+
+  置き場所:
+    各記事 HTML の </article> 直前。記事本文は書き換えない。
+-->
+<aside class="card">
+  <h3>サイト内のほかのページ</h3>
+  <ul>
+    <li><a href="/articles/">記事の一覧</a> — 連載と単発記事のまとめ</li>
+    <li><a href="/articles/ai-9months/">連載「触り始めて9ヶ月の記録」</a> — 44歳でほぼ未経験から開発を始めた9ヶ月の記録</li>
+    <li><a href="/works/">制作実績・デモ</a> — 実際に作って動いているものの一覧</li>
+    <li><a href="/makoto/services/">提供サービス</a> — 業務の自動化・Excel/VBA・LINE Bot・勤怠OCR・アプリ開発</li>
+  </ul>
+  <p>現場の「これ手作業でやってる」を相談したい方は、<a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">無料相談フォーム</a>からどうぞ。</p>
+</aside>
+
+<!-- include-end: assets/partials/article-nav-common.html -->
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">ご相談はこちら（無料）</a>
+  </div>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>

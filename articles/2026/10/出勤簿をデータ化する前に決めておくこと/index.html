@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- include: assets/partials/head-common.html -->
+<!--
+  共通 head パーシャル（新規ページ用、Phase 2 以降に使用）
+  ページ固有の <title> / <meta name="description"> / og:* / canonical は
+  include 外で各ページが個別に書く。
+  既存 index.html では Google Fonts は使われていない（system font 指定）ため
+  preconnect / Google Fonts は本 partial に含めない。導入時に追記する。
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="akarilab-site (build_pages.py)">
+<link rel="stylesheet" href="/assets/css/site.css">
+<!-- Google tag (gtag.js) — GA4 計測 (Phase 9) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6N7W00YYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K6N7W00YYP');
+</script>
+
+<!-- include-end: assets/partials/head-common.html -->
+<title>出勤簿をデータ化する前に決めておくこと — AkariLab</title>
+<meta name="description" content="出勤簿や勤怠表をExcelへ転記する作業をやめる前に決めておくこと。社員番号、締め日、項目名の3つ。給与ソフトの公式仕様が「一致していること」を求めている箇所を拾って整理した。">
+<link rel="canonical" href="https://akarilab.org/articles/2026/10/%E5%87%BA%E5%8B%A4%E7%B0%BF%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%93%E3%81%A8/">
+<meta property="og:title" content="出勤簿をデータ化する前に決めておくこと — AkariLab">
+<meta property="og:description" content="出勤簿や勤怠表をExcelへ転記する作業をやめる前に決めておくこと。社員番号、締め日、項目名の3つ。給与ソフトの公式仕様が「一致していること」を求めている箇所を拾って整理した。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://akarilab.org/articles/2026/10/%E5%87%BA%E5%8B%A4%E7%B0%BF%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%93%E3%81%A8/">
+<meta property="og:image" content="https://akarilab.org/articles/2026/10/%E5%87%BA%E5%8B%A4%E7%B0%BF%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%93%E3%81%A8/img/cover-plain.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/hidamari_icon_32.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/assets/logo/hidamari_icon_256.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://akarilab.org/articles/2026/10/%E5%87%BA%E5%8B%A4%E7%B0%BF%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%93%E3%81%A8/#article",
+  "headline": "出勤簿をデータ化する前に決めておくこと",
+  "datePublished": "2026-10-30T09:00:00+09:00",
+  "author": { "@id": "https://akarilab.org/#org" },
+  "publisher": { "@id": "https://akarilab.org/#org" },
+  "mainEntityOfPage": "https://akarilab.org/articles/2026/10/%E5%87%BA%E5%8B%A4%E7%B0%BF%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%93%E3%81%A8/",
+  "sameAs": [],
+  "abstract": "出勤簿や勤怠表をExcelへ転記する作業をやめる前に決めておくこと。社員番号、締め日、項目名の3つ。給与ソフトの公式仕様が「一致していること」を求めている箇所を拾って整理した。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://akarilab.org/" },
+    { "@type": "ListItem", "position": 2, "name": "記事", "item": "https://akarilab.org/articles/" },
+    { "@type": "ListItem", "position": 3, "name": "出勤簿をデータ化する前に決めておくこと", "item": "https://akarilab.org/articles/2026/10/%E5%87%BA%E5%8B%A4%E7%B0%BF%E3%82%92%E3%83%87%E3%83%BC%E3%82%BF%E5%8C%96%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E6%B1%BA%E3%82%81%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%93%E3%81%A8/" }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="header"><a href="https://akarilab.org/articles/">← 記事へ</a></nav>
+
+<article class="article-body">
+<h1>出勤簿をデータ化する前に決めておくこと</h1>
+<p class="article-meta">2026-10-30</p>
+
+<figure><img alt="出勤簿をデータ化する前に決めておくこと" src="img/cover-plain.png"><figcaption></figcaption></figure>
+<p>出勤簿や勤怠表をExcelへ転記する作業をやめたい、という相談を受けたとき、先に決めておかないと後で必ず戻ってくる項目が3つある。読み取りの精度の話ではなく、読み取ったデータを給与ソフトへ渡せるかどうかを決める部分だ。公式の仕様に「一致していること」と書かれているものを拾うと、ここに集まる。</p>
+<h2>1. 誰のデータかを示す番号</h2>
+<p>給与ソフトは氏名ではなく番号で人を特定する。マネーフォワード クラウド給与は従業員番号で紐づけると明記していて、番号が一致していないと取り込めない。freee人事労務も、勤怠側と人事労務側の社員番号を先に揃えることを前提としている。弥生給与 Nextは、取り込む勤怠データの従業員コードと氏名が登録済みのデータと一致しているかを確認するよう書いている。</p>
+<p>紙の出勤簿に番号が書かれていないことは多い。その場合、氏名から番号へ変換する対応表をどこに持つかを決める必要がある。同姓の人がいる職場では、氏名だけで突き合わせると静かに入れ替わる。</p>
+<h2>2. いつからいつまでを1か月とするか</h2>
+<p>勤怠側の集計期間と、給与ソフト側の締め日が合っていないと、取り込んだ時点で金額が変わる。freee人事労務は、設定した締日と勤怠管理サービスの勤怠の集計終了日が一致している必要があると書いている。月末締めと20日締めが部署ごとに違う、というだけで、読み取りの設計は変わる。</p>
+<p>弥生給与 Nextでは、すでに勤怠データが入力されている従業員に取り込むと、インポートしたデータで上書きされる。やり直しが効くのは助かるが、上書きなので「前に入れた分に足される」わけではない。</p>
+<h2>3. 項目を何という名前で呼ぶか</h2>
+<p>ここが雇用区分で崩れる。正社員とパート・アルバイトで、集計する項目も呼び名も違っていることがある。片方だけ名前が変わって、そのまま運用が続いている場合もある。</p>
+<p>マネーフォワード クラウド給与は、CSVの1行目の勤怠項目名が給与側の項目名と完全に一致していることを求める。完全一致なので、「普通残業」と「所定外残業」のどちらで呼ぶかを決めていない状態では渡せない。freee人事労務は逆に、所定労働時間・法定内残業時間・時間外労働時間といった項目名が先に決まっていて、こちらが合わせる側になる。</p>
+<p>出典：<a href="https://support.freee.co.jp/hc/ja/articles/204922194" target="_blank" rel="noopener">freee人事労務ヘルプ</a> / <a href="https://support.yayoi-kk.co.jp/subcontents.html?page_id=28107" target="_blank" rel="noopener">弥生給与 Next サポート</a> / <a href="https://biz.moneyforward.com/support/payroll/guide/integrations/in09.html" target="_blank" rel="noopener">マネーフォワード クラウド給与サポート</a></p>
+<p>この3つを決めてから読み取りの設計に入ると手戻りが少ない。読み取りから確認、CSV出力までの流れは<a href="/makoto/services/attendance-ocr/" target="_blank" rel="noopener">勤怠OCRのサービスページ</a>に書いています。</p>
+
+<!-- include: assets/partials/article-nav-common.html -->
+<!--
+  記事ページ共通「サイト内のほかのページ」パーシャル（2026-10-30 サイト内回遊）
+
+  目的:
+    検索から記事に直接入ってきた読者が、1ページ読んで離脱せずに
+    サイト内（記事一覧・制作実績・提供サービス）へ辿れる出口を置く。
+    点検時点で記事71ページからサービスページへの本文リンクは0本だった。
+
+  方針:
+    - 装飾は既存 .card（assets/css/site.css）のみ。新規CSSは持ち込まない。
+    - 相談フォームの URL は既存の 1 本のみを使う（新規 URL を作らない）。
+      https://forms.gle/WZC6qUJq1pkP4WXp6
+    - ブランド分離ルールに従い、個別プロダクト LP（もやログ/りぴメモ/ひだまり）は含めない。
+
+  置き場所:
+    各記事 HTML の </article> 直前。記事本文は書き換えない。
+-->
+<aside class="card">
+  <h3>サイト内のほかのページ</h3>
+  <ul>
+    <li><a href="/articles/">記事の一覧</a> — 連載と単発記事のまとめ</li>
+    <li><a href="/articles/ai-9months/">連載「触り始めて9ヶ月の記録」</a> — 44歳でほぼ未経験から開発を始めた9ヶ月の記録</li>
+    <li><a href="/works/">制作実績・デモ</a> — 実際に作って動いているものの一覧</li>
+    <li><a href="/makoto/services/">提供サービス</a> — 業務の自動化・Excel/VBA・LINE Bot・勤怠OCR・アプリ開発</li>
+  </ul>
+  <p>現場の「これ手作業でやってる」を相談したい方は、<a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">無料相談フォーム</a>からどうぞ。</p>
+</aside>
+
+<!-- include-end: assets/partials/article-nav-common.html -->
+</article>
+
+<!-- include: assets/partials/footer-common.html -->
+<!--
+  共通 footer パーシャル（新規ページ用、Phase 2 以降に使用）
+
+  方針（CODEX コードレビュー指摘2点目反映）:
+    AkariLab サイト全体で使える中立フッター。ブランド横断リンク（個別プロダクト LP への可視リンク）は
+    含めない。各プロダクト LP（Phase 4 の moyalog/repimemo/hidamari 等）は必要に応じて専用フッターを
+    別途用意する。これによりブランド分離ルール（feedback_brand_isolation_moyalog_repimemo）に
+    抵触しない。
+-->
+<footer>
+  <div class="links">
+    <a href="https://forms.gle/WZC6qUJq1pkP4WXp6" target="_blank" rel="noopener noreferrer">ご相談はこちら（無料）</a>
+  </div>
+  <div class="links">
+    <a href="https://www.instagram.com/akarilab_jp/">Instagram</a>
+    <a href="https://note.com/akarilab">note</a>
+  </div>
+  <div class="links" style="margin-bottom: 8px;">
+    <a href="/terms-of-service.html">利用規約</a>
+    <a href="/privacy-policy.html">プライバシーポリシー</a>
+    <a href="/billing-policy.html">課金・解約ポリシー</a>
+    <a href="/tokushoho.html">特定商取引法に基づく表記</a>
+  </div>
+  <p>&copy; 2026 AkariLab</p>
+</footer>
+
+<!-- include-end: assets/partials/footer-common.html -->
+</body>
+</html>
