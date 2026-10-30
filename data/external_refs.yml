@@ -105,11 +105,11 @@ stripe_links:
       - makoto/services/attendance-ocr/index.html
       - makoto/services/attendance-ocr/demo/index.html
 
-  # 業務相談（30分）3,500円。決済後は hosted_confirmation で、サイトへは戻さない。
+  # 業務相談（30分）4,000円（税抜）／4,400円（税込）。決済後は hosted_confirmation で、サイトへは戻さない。
   # サイト上の実体は data/redirects.yml から生成される中継ページ。
   # URLを変えるときは data/redirects.yml 側を直し、build_redirects.py を通すこと。
   - url: https://buy.stripe.com/9B6dR82Rreqebtd4Wz5Ne00
-    plan: 業務相談（30分）3,500円
+    plan: 業務相談（30分）4,400円（税込）
     site_links:
       - r/stripe-consult/index.html
 
