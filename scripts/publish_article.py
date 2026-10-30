@@ -16,6 +16,15 @@ akarilab.org/articles/ 配下に 1 記事 HTML として公開するスクリプ
 - `<strong>` `<em>` 混入時の警告（feedback_akarilab_no_bold_marker §2）
 
 冪等性は build_pages.py 側に任せる。本スクリプトは「未掲載なら追加、既存なら警告のみ」。
+
+サイト内回遊（2026-10-30 追加）:
+- 新規記事には `assets/partials/article-nav-common.html` の include マーカーを
+  自動で入れる（記事一覧・連載ハブ・制作実績・提供サービス・無料相談フォームへの出口）。
+- 「前後の記事」ブロックは本スクリプトでは生成していない。未対応。
+  既存57本は /articles/index.html の時系列順から一括生成した（前後リンクは
+  各記事HTMLに直書き）。新記事を足した場合、その記事には前後ブロックが入らず、
+  直前に最新だった記事の「新しい記事」リンクも張られない。手動または別途
+  一括再生成スクリプトで対応する必要がある。
 """
 from __future__ import annotations
 
@@ -245,6 +254,8 @@ TEMPLATE = '''<!DOCTYPE html>
 <figure><img alt="{title_attr}" src="img/{cover_filename}"><figcaption></figcaption></figure>
 {body_html}
 
+<!-- include: assets/partials/article-nav-common.html -->
+<!-- include-end: assets/partials/article-nav-common.html -->
 </article>
 
 <!-- include: assets/partials/footer-common.html -->
